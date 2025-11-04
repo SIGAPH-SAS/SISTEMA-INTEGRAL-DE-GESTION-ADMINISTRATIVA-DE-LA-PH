@@ -1,0 +1,439 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SIGAPH SAS — Gestión Integral de Propiedad Horizontal</title>
+  <meta name="description" content="SIGAPH SAS - Soluciones integrales para la administración de copropiedades. Servicios: administración, mantenimiento, convivencia, tecnología e IA." />
+  <link rel="icon" href="#" />
+  <style>
+    :root{
+      --coffee:#5b3a29;
+      --beige:#f5efe6;
+      --darkblue:#0f2b3d;
+      --muted:#7a7a7a;
+      --accent:#2b6f77;
+      --card:#ffffff;
+      --glass: rgba(255,255,255,0.85);
+      --radius:14px;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--beige),#fff);color:var(--darkblue);}
+    header{background:linear-gradient(90deg,var(--coffee),var(--darkblue));color:var(--beige);padding:28px 20px;border-bottom:4px solid rgba(0,0,0,0.06)}
+    .container{max-width:1100px;margin:28px auto;padding:0 18px}
+    .brand{display:flex;gap:18px;align-items:center}
+    .brand h1{margin:0;font-size:20px;letter-spacing:0.6px}
+    nav{margin-top:14px}
+    .navlist{display:flex;gap:12px;flex-wrap:wrap}
+    .navlist a{background:var(--glass);color:var(--beige);padding:8px 12px;border-radius:10px;text-decoration:none;font-weight:600}
+    main{display:grid;grid-template-columns:1fr;gap:18px}
+    .hero{display:flex;gap:20px;align-items:center;padding:22px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,250,0.9));box-shadow:0 8px 30px rgba(0,0,0,0.06)}
+    .hero .left{flex:1}
+    .hero h2{margin:0 0 8px 0;color:var(--darkblue)}
+    .hero p{margin:0;color:var(--muted)}
+    .actions{margin-top:14px;display:flex;gap:12px}
+    .btn{padding:10px 16px;border-radius:12px;border:0;font-weight:700;cursor:pointer}
+    .btn-primary{background:var(--coffee);color:var(--beige)}
+    .btn-outline{background:transparent;border:2px solid var(--coffee);color:var(--coffee)}
+    section.card{background:var(--card);padding:18px;border-radius:14px;box-shadow:0 6px 18px rgba(16,24,40,0.06)}
+    .tabs{display:flex;gap:8px;border-bottom:1px solid #eee;padding-bottom:8px;margin-bottom:12px}
+    .tabs button{background:transparent;border:0;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:600}
+    .tabs button.active{background:var(--beige);color:var(--coffee);box-shadow:inset 0 -3px 0 rgba(0,0,0,0.04)}
+    .tabcontent{display:none}
+    .tabcontent.active{display:block}
+    .service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .service{padding:12px;border-radius:12px;background:linear-gradient(180deg,var(--beige),#fff);}
+    footer{margin-top:18px;padding:18px 0;color:var(--muted);text-align:center}
+    .contacts{display:flex;gap:8px;justify-content:center;align-items:center}
+    .social a{display:inline-block;padding:8px 10px;border-radius:10px;background:var(--glass);text-decoration:none;color:var(--darkblue);font-weight:700}
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(8,12,16,0.45);display:none;align-items:center;justify-content:center;padding:18px}
+    .modal{width:100%;max-width:720px;background:#fff;border-radius:16px;padding:20px;box-shadow:0 20px 60px rgba(2,8,23,0.4)}
+    .modal header{display:flex;justify-content:space-between;align-items:center}
+    .field{display:flex;flex-direction:column;margin-bottom:10px}
+    label{font-size:13px;margin-bottom:6px;color:var(--muted)}
+    input[type=text], input[type=email], input[type=tel], input[type=date], textarea, select{padding:10px;border-radius:10px;border:1px solid #e6e6e6;font-size:14px}
+    textarea{min-height:80px}
+    .row{display:flex;gap:8px}
+    .row .col{flex:1}
+    .msg{padding:10px;border-radius:8px;margin-top:10px}
+    .msg.success{background:#e6ffef;border:1px solid #bdeac8;color:#0b6a3a}
+    .msg.error{background:#fff0f0;border:1px solid #f3b3b3;color:#8a1d1d}
+    /* Floating whatsapp */
+    .whatsapp{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#fff;padding:14px;border-radius:50px;box-shadow:0 10px 30px rgba(43,111,119,0.2);display:flex;gap:10px;align-items:center;text-decoration:none;font-weight:700}
+    .footer-links{font-size:13px;color:var(--muted)}
+    @media (max-width:720px){.hero{flex-direction:column;align-items:flex-start}.navlist{gap:8px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <div style="width:64px;height:64px;background:rgba(255,255,255,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800">SIG</div>
+        <div>
+          <h1>SIGAPH SAS</h1>
+          <div style="font-size:13px;color:var(--beige)">Sistema Integral de Gestión Administrativa</div>
+        </div>
+      </div>
+      <nav style="margin-top:12px">
+        <div class="navlist">
+          <a href="#about">Perfil</a>
+          <a href="#services">Servicios</a>
+          <a href="#tech">Tecnología</a>
+          <a href="#allies">Aliados</a>
+          <a href="#contact">Contacto</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero card">
+      <div class="left">
+        <h2>Soluciones integrales para la administración de copropiedades</h2>
+        <p>Brindamos gestión administrativa, mantenimiento, cumplimiento normativo y herramientas tecnológicas para construir comunidades organizadas, sostenibles y valorizadas.</p>
+        <div class="actions">
+          <button class="btn btn-primary" id="open-diagnostico">Diagnóstico Exprés</button>
+          <button class="btn btn-outline" id="open-visita">Solicitar Visita</button>
+        </div>
+      </div>
+      <div style="width:320px;">
+        <div style="background:linear-gradient(180deg,var(--beige),#fff);padding:16px;border-radius:12px;">
+          <strong>¿Por qué elegir a SIGAPH?</strong>
+          <ul style="margin:6px 0 0 18px;color:var(--muted)">
+            <li>Experiencia y profesionalismo.</li>
+            <li>Compromiso y dedicación.</li>
+            <li>Tecnología e innovación.</li>
+            <li>Ética y transparencia.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="card">
+      <h3>Perfil profesional</h3>
+      <p style="color:var(--muted)">SIGAPH SAS brinda soluciones integrales, personalizadas y eficientes para la administración de inmuebles y la propiedad horizontal. Nuestro enfoque combina gestión administrativa, mantenimiento, cumplimiento normativo (Ley 675 de 2001), y acompañamiento en convivencia.</p>
+      <p style="color:var(--muted);font-size:13px">Contenido tomado de su brochure corporativo para mantener coherencia en el mensaje y tono institucional. (Fuente: Brochure SIGAPH).</p>
+    </section>
+
+    <section id="services" class="card">
+      <div class="tabs" role="tablist">
+        <button class="active" data-tab="principal">Servicios Principales</button>
+        <button data-tab="complementarios">Servicios Complementarios</button>
+        <button data-tab="tecnologicos">Servicios Tecnológicos</button>
+      </div>
+      <div class="tabcontent active" id="principal">
+        <div class="service-grid">
+          <div class="service">
+            <h4>Gestión Financiera Transparente</h4>
+            <p style="color:var(--muted)">Elaboración y control de presupuestos, recaudo y conciliación de cuotas, informes financieros claros.</p>
+          </div>
+          <div class="service">
+            <h4>Mantenimiento Preventivo y Correctivo</h4>
+            <p style="color:var(--muted)">Programación de mantenimientos, respuesta a emergencias y seguimiento post-servicio.</p>
+          </div>
+          <div class="service">
+            <h4>Promoción de la Convivencia</h4>
+            <p style="color:var(--muted)">Mediación, talleres y manuales de convivencia para fortalecer el sentido de pertenencia.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabcontent" id="complementarios">
+        <div class="service-grid">
+          <div class="service"><h4>Reparaciones hidráulicas</h4><p style="color:var(--muted)">Servicios de plomería y aprovechamiento de aguas subterráneas.</p></div>
+          <div class="service"><h4>Redes contra incendio</h4><p style="color:var(--muted)">Mantenimiento especializado y atención 24/7.</p></div>
+          <div class="service"><h4>Mantenimiento eléctrico</h4><p style="color:var(--muted)">Plantas, tableros y transformadores con respaldo profesional.</p></div>
+        </div>
+      </div>
+
+      <div class="tabcontent" id="tecnologicos">
+        <div class="service-grid">
+          <div class="service"><h4>CCTV y control de acceso</h4><p style="color:var(--muted)">Instalación, configuración y mantenimiento de sistemas de seguridad.</p></div>
+          <div class="service"><h4>Vigilancia híbrida remota</h4><p style="color:var(--muted)">Modelos que optimizan costos y seguridad.</p></div>
+          <div class="service"><h4>Energía fotovoltaica</h4><p style="color:var(--muted)">Proyectos de sustitución energética para sostenimiento de zonas comunes.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tech" class="card">
+      <h3>Tecnología y enfoque</h3>
+      <p style="color:var(--muted)">Integración de plataformas digitales, portales de usuarios y herramientas IA para diagnósticos y trazabilidad de mantenimientos.</p>
+    </section>
+
+    <section id="allies" class="card">
+      <h3>Aliados estratégicos</h3>
+      <p style="color:var(--muted)">Trabajamos con proveedores técnicos, legales y operativos para ofrecer un respaldo integral a cada proyecto.</p>
+    </section>
+
+    <section id="contact" class="card">
+      <h3>Contacto</h3>
+      <p class="footer-links">Tel: (placeholder) • Email: (placeholder) • Instagram: (placeholder)</p>
+      <div class="contacts social" style="margin-top:12px">
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="Email">Email</a>
+        <a href="#" aria-label="WhatsApp">WhatsApp</a>
+      </div>
+    </section>
+
+    <footer>
+      <div>© SIGAPH SAS — Sistema Integral de Gestión Administrativa</div>
+      <div style="margin-top:8px;color:var(--muted);font-size:13px">Diseño: página demostrativa. Reemplace los enlaces y el logo por los suyos.</div>
+    </footer>
+  </main>
+
+  <!-- Modals -->
+  <div id="modal-diagnostico" class="modal-backdrop" role="dialog" aria-hidden="true">
+    <div class="modal" role="document">
+      <header>
+        <h3>Diagnóstico Exprés (10 preguntas)</h3>
+        <button onclick="closeModal('modal-diagnostico')">✕</button>
+      </header>
+      <form id="form-diagnostico">
+        <p style="color:var(--muted);font-size:13px">Responda 10 preguntas rápidas. Cada pregunta vale hasta 10 puntos. El resultado final nunca mostrará 100 puntos; en caso de puntaje perfecto, se mostrará 90 para motivar la consulta personalizada.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <!-- Generate 10 questions (4 operativa,3 norma,3 convivencia) -->
+          <div class="field">
+            <label>1. ¿Se cumple el cronograma de mantenimientos?</label>
+            <select name="q1" required>
+              <option value="0">No</option>
+              <option value="5">Parcialmente</option>
+              <option value="10">Sí</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>2. ¿La copropiedad tiene reservas financieras suficientes?</label>
+            <select name="q2" required>
+              <option value="0">No</option>
+              <option value="5">En proceso</option>
+              <option value="10">Sí</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>3. ¿Se realizan auditorías o informes financieros periódicos?</label>
+            <select name="q3" required>
+              <option value="0">No</option>
+              <option value="5">Ocasionalmente</option>
+              <option value="10">Sí</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>4. ¿Hay seguimiento a contratistas y mantenimientos?</label>
+            <select name="q4" required>
+              <option value="0">No</option>
+              <option value="5">Parcial</option>
+              <option value="10">Sí</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>5. ¿La documentación legal está al día (actas, reglamentos)?</label>
+            <select name="q5" required>
+              <option value="0">No</option>
+              <option value="5">En proceso</option>
+              <option value="10">Sí</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>6. ¿Se cumple con la Ley 675 y normas vigentes?</label>
+            <select name="q6" required>
+              <option value="0">No</option>
+              <option value="5">Parcialmente</option>
+              <option value="10">Sí</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>7. ¿Existen procedimientos para manejo de sanciones y quejas?</label>
+            <select name="q7" required>
+              <option value="0">No</option>
+              <option value="5">En desarrollo</option>
+              <option value="10">Sí</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>8. ¿Se promueven campañas de convivencia y participación?</label>
+            <select name="q8" required>
+              <option value="0">No</option>
+              <option value="5">Ocasionalmente</option>
+              <option value="10">Sí</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>9. ¿Se gestionan conflictos con mediación profesional?</label>
+            <select name="q9" required>
+              <option value="0">No</option>
+              <option value="5">A veces</option>
+              <option value="10">Sí</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>10. ¿La comunidad participa activamente en decisiones?</label>
+            <select name="q10" required>
+              <option value="0">No</option>
+              <option value="5">Parcialmente</option>
+              <option value="10">Sí</option>
+            </select>
+          </div>
+        </div>
+
+        <hr style="margin:12px 0" />
+        <h4>Datos de contacto</h4>
+        <div class="field"><label>Nombre completo *</label><input type="text" name="nombre" required /></div>
+        <div class="field"><label>Unidad residencial (opcional)</label><input type="text" name="unidad" /></div>
+        <div class="row">
+          <div class="col field"><label>Correo electrónico *</label><input type="email" name="email" required /></div>
+          <div class="col field"><label>Celular *</label><input type="tel" name="celular" required /></div>
+        </div>
+        <div class="field"><label>Fecha de envío</label><input type="date" name="fecha" id="fecha-diagnostico" readonly /></div>
+
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+          <button type="button" class="btn btn-outline" onclick="closeModal('modal-diagnostico')">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Enviar diagnóstico</button>
+        </div>
+        <div id="diagnostico-msg" style="display:none" class="msg"></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="modal-visita" class="modal-backdrop" role="dialog" aria-hidden="true">
+    <div class="modal" role="document">
+      <header>
+        <h3>Solicitud de Visita</h3>
+        <button onclick="closeModal('modal-visita')">✕</button>
+      </header>
+      <form id="form-visita">
+        <p style="color:var(--muted);font-size:13px">Complete los datos para coordinar una visita. Seleccione 3 opciones de fecha/hora aproximadas; nosotros confirmaremos la que quede disponible.</p>
+        <div class="field"><label>Nombre completo *</label><input type="text" name="nombre" required /></div>
+        <div class="field"><label>Unidad residencial (opcional)</label><input type="text" name="unidad" /></div>
+        <div class="row">
+          <div class="col field"><label>Correo electrónico *</label><input type="email" name="email" required /></div>
+          <div class="col field"><label>Celular *</label><input type="tel" name="celular" required /></div>
+        </div>
+        <div class="field"><label>Fecha de envío</label><input type="date" name="fecha" id="fecha-visita" readonly /></div>
+
+        <div class="row">
+          <div class="col field"><label>Opción 1 (fecha y hora)</label><input type="datetime-local" name="opt1" required /></div>
+          <div class="col field"><label>Opción 2 (fecha y hora)</label><input type="datetime-local" name="opt2" required /></div>
+        </div>
+        <div class="row"><div class="col field"><label>Opción 3 (fecha y hora)</label><input type="datetime-local" name="opt3" required /></div></div>
+
+        <div class="field"><label>¿Qué servicio busca?</label><textarea name="servicio" placeholder="Describa brevemente el servicio solicitado" required></textarea></div>
+
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+          <button type="button" class="btn btn-outline" onclick="closeModal('modal-visita')">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Enviar solicitud</button>
+        </div>
+        <div id="visita-msg" style="display:none" class="msg"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp -->
+  <a id="whatsapp-btn" class="whatsapp" href="#" target="_blank" aria-label="WhatsApp">
+    💬 WhatsApp
+  </a>
+
+  <script>
+    // Tabs
+    document.querySelectorAll('.tabs button').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'))
+        document.querySelectorAll('.tabcontent').forEach(t=>t.classList.remove('active'))
+        btn.classList.add('active')
+        document.getElementById(btn.dataset.tab).classList.add('active')
+      })
+    })
+
+    // Open modals
+    document.getElementById('open-diagnostico').addEventListener('click', ()=>openModal('modal-diagnostico'))
+    document.getElementById('open-visita').addEventListener('click', ()=>openModal('modal-visita'))
+
+    function openModal(id){
+      const el = document.getElementById(id)
+      if(!el) return
+      el.style.display = 'flex'
+      el.setAttribute('aria-hidden','false')
+      // set current date for readonly fields
+      const today = new Date().toISOString().slice(0,10)
+      const fd = el.querySelector('input[name="fecha"]')
+      if(fd){
+        // set both if multiple
+        el.querySelectorAll('input[name="fecha"]').forEach(i=>i.value = today)
+      }
+      // also specific ids
+      if(document.getElementById('fecha-diagnostico')) document.getElementById('fecha-diagnostico').value = today
+      if(document.getElementById('fecha-visita')) document.getElementById('fecha-visita').value = today
+    }
+    function closeModal(id){
+      const el = document.getElementById(id)
+      if(!el) return
+      el.style.display = 'none'
+      el.setAttribute('aria-hidden','true')
+    }
+
+    // Diagnostic form logic
+    document.getElementById('form-diagnostico').addEventListener('submit', function(e){
+      e.preventDefault()
+      const form = e.target
+      const data = new FormData(form)
+      // validate required fields (browser also does), but show friendly errors
+      const required = ['nombre','email','celular']
+      for(const r of required){ if(!data.get(r)) return showMsg('diagnostico-msg', 'error', 'Por favor complete los campos obligatorios.') }
+
+      // sum scores of q1..q10
+      let total = 0
+      for(let i=1;i<=10;i++){
+        total += Number(data.get('q'+i) || 0)
+      }
+      // If perfect 100, lower to 90 to encourage consulta
+      let note = ''
+      if(total === 100){ total = 90; note = ' (Resultado ajustado para invitación a consulta especializada)'}
+
+      // Build a short response
+      const nombre = data.get('nombre')
+      showMsg('diagnostico-msg','success', `Gracias ${nombre}. Puntaje del diagnóstico: ${total}/100${note}. Nuestro equipo se comunicará para ofrecer un análisis detallado.`)
+
+      // Here you would send the data to your servidor via fetch to save lead
+      // Example: fetch('/api/diagnostico', {method:'POST', body: data})
+      form.reset()
+    })
+
+    // Visit form
+    document.getElementById('form-visita').addEventListener('submit',(e)=>{
+      e.preventDefault()
+      const form = e.target
+      const data = new FormData(form)
+      const required = ['nombre','email','celular','opt1','opt2','opt3','servicio']
+      for(const r of required){ if(!data.get(r)) return showMsg('visita-msg','error','Complete los campos obligatorios.') }
+
+      // basic check: ensure options are distinct
+      const o1 = data.get('opt1'), o2 = data.get('opt2'), o3 = data.get('opt3')
+      if(o1 === o2 || o1 === o3 || o2 === o3) return showMsg('visita-msg','error','Por favor seleccione tres fechas/hora distintas.')
+
+      showMsg('visita-msg','success','Solicitud enviada. Le confirmaremos la visita al contacto proporcionado. Gracias.')
+      form.reset()
+    })
+
+    function showMsg(id,type,text){
+      const el = document.getElementById(id)
+      el.style.display = 'block'
+      el.className = 'msg '+(type==='success'?'success':'error')
+      el.textContent = text
+      setTimeout(()=>{ el.style.opacity = '1' },10)
+    }
+
+    // WhatsApp button link placeholder
+    document.getElementById('whatsapp-btn').href = '#'
+
+    // Close modals on backdrop click
+    document.querySelectorAll('.modal-backdrop').forEach(back=>{
+      back.addEventListener('click',(e)=>{ if(e.target === back) closeModal(back.id) })
+    })
+
+    // Accessibility: close on escape
+    document.addEventListener('keydown',(e)=>{ if(e.key === 'Escape'){ document.querySelectorAll('.modal-backdrop').forEach(m=>m.style.display='none') } })
+  </script>
+</body>
+</html>

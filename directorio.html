@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Directorio | SIGAPH S.A.S.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f0f0;
+      color: #002b5c;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255,255,255,0.95);
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5%;
+    }
+    nav img {
+      height: 50px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #002b5c;
+      font-weight: 600;
+    }
+    nav ul li a:hover {
+      color: #2e6b2e;
+    }
+
+    .directorio {
+      padding: 60px 10%;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-top: 100px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 15px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #002b5c;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    .actions {
+      text-align: center;
+      margin-top: 30px;
+    }
+    .btn {
+      background-color: #2e6b2e;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .btn:hover {
+      background-color: #215021;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #002b5c;
+      color: #fff;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <img src="logo_sigaph.png" alt="Logo SIGAPH" />
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="tecnologia.html">Tecnología</a></li>
+      <li><a href="aliados.html">Aliados</a></li>
+      <li><a href="directorio.html">Directorio</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="directorio">
+  <h2 style="text-align:center; color:#002b5c;">Directorio de Servicios Profesionales</h2>
+  <p style="text-align:center; color:#555;">Encuentre aquí el contacto directo de profesionales y aliados de confianza para su copropiedad.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Servicio / Oficio</th>
+        <th>Nombre</th>
+        <th>Teléfono</th>
+      </tr>
+    </thead>
+    <tbody id="tablaDirectorio">
+      <!-- Aquí se cargará automáticamente la información desde Excel -->
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <a href="index.html" class="btn">Volver al inicio</a>
+  </div>
+</section>
+
+<footer>
+  <p>Teléfonos: 317-634-4778 / 311-402-2283 / 315-891-0674</p>
+  <p>&copy; 2025 SIGAPH S.A.S. — Todos los derechos reservados</p>
+</footer>
+
+<!-- Librería para leer Excel -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+<script>
+  async function cargarDirectorio() {
+    const response = await fetch('directorio.xlsx');
+    const data = await response.arrayBuffer();
+    const workbook = XLSX.read(data, { type: 'array' });
+    const hoja = workbook.Sheets[workbook.SheetNames[0]];
+    const json = XLSX.utils.sheet_to_json(hoja, { header: 1 });
+
+    const tbody = document.getElementById('tablaDirectorio');
+    tbody.innerHTML = '';
+
+    for (let i = 1; i < json.length; i++) { // Salta la primera fila (encabezados)
+      const fila = json[i];
+      if (fila.length >= 3) {
+        const [oficio, nombre, telefono] = fila;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${oficio}</td><td>${nombre}</td><td>${telefono}</td>`;
+        tbody.appendChild(tr);
+      }
+    }
+  }
+
+  cargarDirectorio().catch(err => {
+    console.error('Error al cargar el directorio:', err);
+    document.getElementById('tablaDirectorio').innerHTML =
+      '<tr><td colspan="3">No se pudo cargar el directorio</td></tr>';
+  });
+</script>
+
+</body>
+</html>

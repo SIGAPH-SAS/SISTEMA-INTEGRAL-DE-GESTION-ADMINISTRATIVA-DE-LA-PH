@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIGAPH S.A.S. | Sistema Integral de Gestión Administrativa en Propiedad Horizontal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --azul: #002b5c;
+      --verde: #2e6b2e;
+      --gris: #f0f0f0;
+      --blanco: #fff;
+      --muted: #666;
+      font-family: 'Poppins', sans-serif;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:var(--gris);color:var(--azul);overflow-x:hidden}
+    header{position:fixed;top:0;width:100%;background:rgba(255,255,255,0.95);z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+    nav{display:flex;justify-content:space-between;align-items:center;padding:10px 5%}
+    nav img{height:50px}
+    nav ul{list-style:none;display:flex;gap:15px}
+    nav ul li a{text-decoration:none;color:var(--azul);font-weight:600}
+    nav ul li a:hover{color:var(--verde)}
+    .hero{margin-top:80px;position:relative;height:80vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+    .hero video{position:absolute;width:100%;height:100%;object-fit:cover;z-index:0}
+    .overlay{position:absolute;width:100%;height:100%;background:rgba(0,0,0,0.4);z-index:1}
+    .hero-content{position:relative;z-index:2;color:var(--blanco);text-align:center;padding:20px}
+    .hero-content h1{font-size:22px;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+    .hero-content p{font-size:16px;margin-bottom:20px}
+    .hero-content button{margin:5px;padding:10px 20px;border:none;border-radius:10px;cursor:pointer;font-weight:600}
+    .primary{background:var(--verde);color:var(--blanco)}
+    .secondary{background:transparent;border:2px solid var(--blanco);color:var(--blanco)}
+    .section{padding:50px 10%;background:var(--blanco);margin-bottom:20px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1)}
+    .section h2{text-align:center;margin-bottom:15px;color:var(--azul)}
+    .section p{text-align:center;color:var(--muted)}
+    .service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:20px}
+    .card{background:#fafafa;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.05);overflow:hidden;text-align:center;padding-bottom:10px}
+    .card img{width:100%;height:180px;object-fit:cover}
+    .card h3{margin:10px 0;color:var(--azul)}
+    .card p{padding:0 10px 10px;font-size:14px;color:var(--muted)}
+    footer{text-align:center;padding:20px;background:var(--azul);color:var(--blanco)}
+    .whatsapp-float{position:fixed;bottom:20px;right:20px;z-index:150}
+    .whatsapp-float img{width:50px;height:50px}
+    .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;align-items:center;justify-content:center;padding:10px}
+    .modal{background:var(--blanco);border-radius:12px;max-width:700px;width:100%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column}
+    .modal-header{padding:15px;background:var(--azul);color:var(--blanco);display:flex;justify-content:space-between;align-items:center}
+    .modal-body{padding:15px;overflow-y:auto}
+    label{display:block;margin-top:10px;color:var(--azul);font-weight:500}
+    select,input,textarea{width:100%;padding:8px;margin-top:5px;border:1px solid #ccc;border-radius:8px}
+    .actions{display:flex;justify-content:center;gap:10px;margin-top:15px;flex-wrap:wrap}
+    .actions .btn{background:var(--verde);color:#fff;padding:8px 14px;border:none;border-radius:8px;cursor:pointer;font-weight:600}
+    .actions .btn.secondary{background:var(--azul)}
+    .result-box{margin-top:15px;padding:10px;background:#f3f3f3;border-left:4px solid var(--verde);border-radius:8px;display:none}
+    @media(max-width:700px){
+      .hero-content h1{font-size:18px}
+      .hero-content p{font-size:14px}
+      nav ul{flex-direction:column;background:#fff;position:absolute;top:60px;right:0;display:none}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <img src="logo_sigaph.png" alt="Logo SIGAPH" />
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="tecnologia.html">Tecnología</a></li>
+      <li><a href="aliados.html">Aliados</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="videosigaph1.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <h1>Sistema Integral de Gestión Administrativa en Propiedad Horizontal</h1>
+    <p>Gestión, cumplimiento y convivencia al servicio de la propiedad horizontal.</p>
+    <button class="primary" onclick="openModal('modal-diagnostico')">Diagnóstico del Estado de tu Copropiedad</button>
+    <button class="secondary" onclick="openModal('modal-visita')">Solicitar Visita</button>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Sobre SIGAPH</h2>
+  <p>Somos una empresa especializada en la gestión administrativa, técnica y social de copropiedades bajo el marco de la Ley 675 de 2001, brindando soluciones que fortalecen la convivencia, el cumplimiento normativo y la sostenibilidad financiera.</p>
+  <div class="service-grid">
+    <div class="card">
+      <img src="imagensigaph1.jpg" alt="">
+      <h3>Gestión Administrativa</h3>
+      <p>Planeación, control y ejecución eficiente de los recursos de la copropiedad con total transparencia.</p>
+    </div>
+    <div class="card">
+      <img src="imagensigaph2.jpg" alt="">
+      <h3>Mantenimiento Integral</h3>
+      <p>Supervisión de las áreas comunes, equipos y servicios con planes preventivos adaptados.</p>
+    </div>
+    <div class="card">
+      <img src="imagensigaph3.jpg" alt="">
+      <h3>Convivencia y Normatividad</h3>
+      <p>Fortalecemos la cultura ciudadana, el cumplimiento de la Ley 675 y la resolución de conflictos.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Teléfonos: 317-634-4778 / 311-402-2283 / 315-891-0674</p>
+  <p>&copy; 2025 SIGAPH S.A.S. — Todos los derechos reservados</p>
+</footer>
+
+<a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="whatsapp-float">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
+</a>
+
+<!-- Modal Diagnóstico -->
+<div id="modal-diagnostico" class="modal-backdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Diagnóstico del Estado de tu Copropiedad</h3>
+      <button onclick="closeModal('modal-diagnostico')">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="diagnosticoForm" onsubmit="calcularDiagnostico(event)">
+        <p>Responde 10 preguntas para conocer el estado actual de tu copropiedad.</p>
+        <div id="preguntas">
+          <label>1. ¿Cumplen cronogramas de mantenimiento?</label><select><option value="0">No</option><option value="5">Parcial</option><option value="10">Sí</option></select>
+          <label>2. ¿Tienen reservas financieras adecuadas?</label><select><option value="0">No</option><option value="5">En proceso</option><option value="10">Sí</option></select>
+          <label>3. ¿Se realizan auditorías periódicas?</label><select><option value="0">No</option><option value="5">Ocasional</option><option value="10">Sí</option></select>
+          <label>4. ¿Cumplen la Ley 675 de 2001?</label><select><option value="0">No</option><option value="5">Parcial</option><option value="10">Sí</option></select>
+          <label>5. ¿Se fomenta la convivencia comunitaria?</label><select><option value="0">No</option><option value="5">A veces</option><option value="10">Sí</option></select>
+          <label>6. ¿Hay comunicación transparente?</label><select><option value="0">No</option><option value="5">Parcial</option><option value="10">Sí</option></select>
+          <label>7. ¿El consejo de administración es activo?</label><select><option value="0">No</option><option value="5">Regular</option><option value="10">Sí</option></select>
+          <label>8. ¿Los contratos están actualizados?</label><select><option value="0">No</option><option value="5">En proceso</option><option value="10">Sí</option></select>
+          <label>9. ¿Los residentes participan en decisiones?</label><select><option value="0">No</option><option value="5">Poco</option><option value="10">Sí</option></select>
+          <label>10. ¿Hay control sobre gastos comunes?</label><select><option value="0">No</option><option value="5">Parcial</option><option value="10">Sí</option></select>
+        </div>
+        <label>Nombre completo *</label><input type="text" required>
+        <label>Unidad residencial (opcional)</label><input type="text">
+        <label>Correo *</label><input type="email" required>
+        <label>Celular *</label><input type="tel" required>
+        <label>Fecha de consulta</label><input type="date" readonly id="fechaConsulta">
+        <div class="actions">
+          <button type="submit" class="btn">Ver resultado</button>
+          <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="btn secondary">Más consultas</a>
+          <button type="button" class="btn" onclick="scrollToTopAndClose('modal-diagnostico')">Volver al inicio</button>
+        </div>
+        <div class="result-box" id="resultado"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Visita -->
+<div id="modal-visita" class="modal-backdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Solicitud de Visita</h3>
+      <button onclick="closeModal('modal-visita')">✕</button>
+    </div>
+    <div class="modal-body">
+      <form onsubmit="confirmarVisita(event)">
+        <label>Nombre completo *</label><input type="text" required>
+        <label>Unidad residencial (opcional)</label><input type="text">
+        <label>Correo *</label><input type="email" required>
+        <label>Celular *</label><input type="tel" required>
+        <label>Fecha de solicitud</label><input type="date" readonly id="fechaSolicitud">
+        <label>Seleccione 3 fechas posibles</label>
+        <input type="date"><input type="date"><input type="date">
+        <label>Hora preferida</label><input type="time">
+        <label>Servicio solicitado</label><textarea></textarea>
+        <div class="actions">
+          <button type="submit" class="btn">Enviar solicitud</button>
+          <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="btn secondary">Más consultas</a>
+          <button type="button" class="btn" onclick="scrollToTopAndClose('modal-visita')">Volver al inicio</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openModal(id){document.getElementById(id).style.display='flex';}
+  function closeModal(id){document.getElementById(id).style.display='none';}
+  function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});closeModal(id);}
+  document.getElementById('fechaConsulta').value = new Date().toISOString().split('T')[0];
+  document.getElementById('fechaSolicitud').value = new Date().toISOString().split('T')[0];
+
+  function calcularDiagnostico(e){
+    e.preventDefault();
+    let selects = document.querySelectorAll('#preguntas select');
+    let total = 0;
+    selects.forEach(s => total += parseInt(s.value));
+    if(total == 100) total = 95;
+    let mensaje = "";
+    if(total >= 80) mensaje = "Excelente gestión. ¡Felicidades! SIGAPH puede ayudarte a mantener este nivel.";
+    else if(total >= 60) mensaje = "Gestión en proceso de fortalecimiento. SIGAPH puede acompañarte en tu mejora continua.";
+    else mensaje = "Gestión con áreas críticas. Recomendamos una evaluación profesional de SIGAPH.";
+    document.getElementById('resultado').style.display = 'block';
+    document.getElementById('resultado').innerHTML = `<strong>Resultado:</strong> ${total}/100<br>${mensaje}`;
+  }
+
+  function confirmarVisita(e){
+    e.preventDefault();
+    alert("✅ Solicitud enviada correctamente. Nos comunicaremos pronto.");
+  }
+</script>
+</body>
+</html>
