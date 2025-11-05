@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -14,27 +13,29 @@
 <header>
   <nav class="navbar">
     <div class="logo-nav">
-      <img src="logo_sigaph.png" alt="Logo SIGAPH">
+      <a href="index.html" aria-label="SIGAPH inicio"><img src="logo_sigaph.png" alt="Logo SIGAPH"></a>
     </div>
 
-```
-<!-- Menú hamburguesa -->
-<button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
-  <span></span><span></span><span></span>
-</button>
+    <!-- Botón menú hamburguesa -->
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
 
-<ul class="nav-links" id="nav-links">
-  <li><a href="index.html">Inicio</a></li>
-  <li><a href="nosotros.html">Nosotros</a></li>
-  <li><a href="servicios.html">Servicios</a></li>
-  <li><a href="tecnologia.html">Tecnología</a></li>
-  <li><a href="aliados.html">Aliados</a></li>
-  <li><a href="directorio.html">Directorio</a></li>
-  <li><a href="contacto.html">Contacto</a></li>
-  <li><a href="ayuda.html" class="boton-verde">AYUDA DE GESTIÓN</a></li>
-</ul>
-```
-
+    <!-- Enlaces de navegación -->
+    <ul class="nav-links" id="nav-links" aria-hidden="true">
+      <li class="nav-logo-mobile">
+        <!-- pequeña versión del logo dentro del menú (se muestra en móvil) -->
+        <img src="logo_sigaph.png" alt="SIGAPH" />
+      </li>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="tecnologia.html">Tecnología</a></li>
+      <li><a href="aliados.html">Aliados</a></li>
+      <li><a href="directorio.html">Directorio</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="ayuda.html" class="boton-verde">AYUDA DE GESTIÓN</a></li>
+    </ul>
   </nav>
 </header>
 
@@ -52,39 +53,44 @@
     </div>
     <h1>Sistema Integral de Gestión Administrativa en Propiedad Horizontal</h1>
     <p>Gestión, cumplimiento y convivencia al servicio de la propiedad horizontal.</p>
-    <button class="primary" onclick="openModal('modal-diagnostico')">Diagnóstico del Estado de tu Copropiedad</button>
-    <button class="secondary" onclick="openModal('modal-visita')">Solicitar Visita</button>
-  </div>
-</section>
 
-<section class="section">
-  <h2>Sobre SIGAPH</h2>
-  <p>Somos una empresa especializada en la gestión administrativa, técnica y social de copropiedades bajo el marco de la Ley 675 de 2001, brindando soluciones que fortalecen la convivencia, el cumplimiento normativo y la sostenibilidad financiera.</p>
-
-  <div class="service-grid">
-    <div class="card">
-      <img src="imagensigaph1.jpg" alt="">
-      <h3>Gestión Administrativa</h3>
-      <p>Planeación, control y ejecución eficiente de los recursos de la copropiedad con total transparencia.</p>
-    </div>
-    <div class="card">
-      <img src="imagensigaph2.jpg" alt="">
-      <h3>Mantenimiento Integral</h3>
-      <p>Supervisión de las áreas comunes, equipos y servicios con planes preventivos adaptados.</p>
-    </div>
-    <div class="card">
-      <img src="imagensigaph3.jpg" alt="">
-      <h3>Convivencia y Normatividad</h3>
-      <p>Fortalecemos la cultura ciudadana, el cumplimiento de la Ley 675 y la resolución de conflictos.</p>
+    <div class="hero-buttons">
+      <button class="primary" onclick="openModal('modal-diagnostico')">Diagnóstico del Estado de tu Copropiedad</button>
+      <button class="secondary" onclick="openModal('modal-visita')">Solicitar Visita</button>
     </div>
   </div>
 </section>
 
-<section class="aliados-section">
-  <h3>Nuestros Aliados Estratégicos</h3>
-  <p>La fortaleza de <strong>SIGAPH S.A.S.</strong> radica en la cooperación con aliados que comparten nuestros valores de calidad, cumplimiento y sostenibilidad.</p>
-  <img src="imagensigaph5.jpg" alt="Aliados Estratégicos SIGAPH" class="fade-in">
-</section>
+<main class="contenedor">
+  <section class="section">
+    <h2>Sobre SIGAPH</h2>
+    <p>Somos una empresa especializada en la gestión administrativa, técnica y social de copropiedades bajo el marco de la Ley 675 de 2001, brindando soluciones que fortalecen la convivencia, el cumplimiento normativo y la sostenibilidad financiera.</p>
+
+    <div class="service-grid">
+      <div class="card">
+        <img src="imagensigaph1.jpg" alt="">
+        <h3>Gestión Administrativa</h3>
+        <p>Planeación, control y ejecución eficiente de los recursos de la copropiedad con total transparencia.</p>
+      </div>
+      <div class="card">
+        <img src="imagensigaph2.jpg" alt="">
+        <h3>Mantenimiento Integral</h3>
+        <p>Supervisión de las áreas comunes, equipos y servicios con planes preventivos adaptados.</p>
+      </div>
+      <div class="card">
+        <img src="imagensigaph3.jpg" alt="">
+        <h3>Convivencia y Normatividad</h3>
+        <p>Fortalecemos la cultura ciudadana, el cumplimiento de la Ley 675 y la resolución de conflictos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="aliados-section">
+    <h3>Nuestros Aliados Estratégicos</h3>
+    <p>La fortaleza de <strong>SIGAPH S.A.S.</strong> radica en la cooperación con aliados que comparten nuestros valores de calidad, cumplimiento y sostenibilidad.</p>
+    <img src="imagensigaph5.jpg" alt="Aliados Estratégicos SIGAPH" class="fade-in">
+  </section>
+</main>
 
 <footer>
   <div class="footer-icons">
@@ -103,6 +109,7 @@
   <p>&copy; 2025 SIGAPH S.A.S. — Todos los derechos reservados</p>
 </footer>
 
+<!-- Botón flotante de WhatsApp -->
 <a href="https://wa.me/message/IX7AF6TMTLDVI1" target="_blank" class="whatsapp-float" title="¿Necesitas ayuda? ¡Chatea con nosotros!">
   <div class="tooltip">¿Necesitas ayuda? ¡Chatea con nosotros!</div>
   <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
@@ -114,16 +121,24 @@
   const navLinks = document.getElementById('nav-links');
 
   menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
+    const open = navLinks.classList.toggle('active');
     menuToggle.classList.toggle('open');
+    // accesibilidad: anunciar estado
+    navLinks.setAttribute('aria-hidden', !open);
   });
 
+  // Cerrar menú al hacer clic en un enlace
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
       navLinks.classList.remove('active');
       menuToggle.classList.remove('open');
+      navLinks.setAttribute('aria-hidden', 'true');
     });
   });
+
+  // Modales placeholder (si existen en tu página)
+  function openModal(id){ const el = document.getElementById(id); if(el) el.style.display='flex'; }
+  function closeModal(id){ const el = document.getElementById(id); if(el) el.style.display='none'; }
 </script>
 
 </body>
