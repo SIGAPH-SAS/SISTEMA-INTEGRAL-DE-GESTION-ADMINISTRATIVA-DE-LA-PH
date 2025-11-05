@@ -741,17 +741,6 @@ max-height: 38px;
 }
 }
 
-/* Mantener el margen superior del contenido igual que la página principal */
-main, section.contenido, .contenido-principal {
-margin-top: 90px; /* evita que el header fijo tape el contenido */
-}
-
-/* En pantallas pequeñas, ajustar suavemente el espacio */
-@media (max-width: 768px) {
-main, section.contenido, .contenido-principal {
-margin-top: 70px;
-}
-}
 
 
 /* ============================================
