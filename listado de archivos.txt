@@ -5,6 +5,7 @@
 ├── servicios.html
 ├── tecnologia.html
 ├── aliados.html
+└── directorio.html
 ├── contacto.html
 ├── style.css   ← AQUÍ VA EL ARCHIVO DE ESTILOS
 ├── logo_sigaph.png
@@ -14,6 +15,6 @@
 ├── imagensigaph3.jpg
 └── imagensigaph4.jpg
 └── imagensigaph5.jpg
-servicios_principales.jpg
-servicios_complementarios.jpg
-servicios_tecnologicos_ia.jpg
+└── servicios_principales.jpg
+└── servicios_complementarios.jpg
+└── servicios_tecnologicos_ia.jpg
