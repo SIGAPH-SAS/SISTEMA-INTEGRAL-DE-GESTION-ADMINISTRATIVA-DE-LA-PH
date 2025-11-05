@@ -4,76 +4,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SIGAPH S.A.S. | Sistema Integral de Gestión Administrativa en Propiedad Horizontal</title>
+  <title>SIGAPH S.A.S. | Sistema Integral de Gestión Administrativa</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
-  <style>
-    /* 🔹 Logo efecto vidrio sin fondo visible */
-    .logo-overlay {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      margin-bottom: 15px;
-    }
-
-    .logo-vidrio {
-      background: rgba(255, 255, 255, 0.02); /* casi invisible */
-      border-radius: 25px;
-      padding: 10px 16px;
-      backdrop-filter: blur(6px) saturate(150%);
-      -webkit-backdrop-filter: blur(6px) saturate(150%);
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.15), 0 6px 20px rgba(0, 0, 0, 0.4);
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-    }
-
-    .logo-vidrio img {
-      width: 180px;
-      height: auto;
-      display: block;
-      object-fit: contain;
-      opacity: 0.98;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .logo-vidrio:hover img {
-      transform: scale(1.05);
-      opacity: 1;
-    }
-
-    /* 🔹 Botón verde permanente del menú */
-    nav ul li a.boton-verde {
-      background-color: var(--verde);
-      color: var(--blanco);
-      padding: 6px 12px;
-      border-radius: 8px;
-      transition: 0.3s;
-    }
-
-    nav ul li a.boton-verde:hover {
-      background-color: #1f5c1f;
-    }
-  </style>
-
 </head>
+
 <body>
 
 <header>
-  <nav>
-    <img src="logo_sigaph.png" alt="Logo SIGAPH" />
-    <ul>
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="nosotros.html">Nosotros</a></li>
-      <li><a href="servicios.html">Servicios</a></li>
-      <li><a href="tecnologia.html">Tecnología</a></li>
-      <li><a href="aliados.html">Aliados</a></li>
-      <li><a href="directorio.html">Directorio</a></li>
-      <li><a href="contacto.html">Contacto</a></li>
-      <li><a href="ayuda.html" class="boton-verde">AYUDA DE GESTIÓN</a></li>
-    </ul>
+  <nav class="navbar">
+    <div class="logo-nav">
+      <img src="logo_sigaph.png" alt="Logo SIGAPH">
+    </div>
+
+```
+<!-- Menú hamburguesa -->
+<button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+  <span></span><span></span><span></span>
+</button>
+
+<ul class="nav-links" id="nav-links">
+  <li><a href="index.html">Inicio</a></li>
+  <li><a href="nosotros.html">Nosotros</a></li>
+  <li><a href="servicios.html">Servicios</a></li>
+  <li><a href="tecnologia.html">Tecnología</a></li>
+  <li><a href="aliados.html">Aliados</a></li>
+  <li><a href="directorio.html">Directorio</a></li>
+  <li><a href="contacto.html">Contacto</a></li>
+  <li><a href="ayuda.html" class="boton-verde">AYUDA DE GESTIÓN</a></li>
+</ul>
+```
+
   </nav>
 </header>
 
@@ -82,6 +43,7 @@
     <source src="videosigaph1.mp4" type="video/mp4">
   </video>
   <div class="overlay"></div>
+
   <div class="hero-content">
     <div class="logo-overlay">
       <div class="logo-vidrio">
@@ -98,6 +60,7 @@
 <section class="section">
   <h2>Sobre SIGAPH</h2>
   <p>Somos una empresa especializada en la gestión administrativa, técnica y social de copropiedades bajo el marco de la Ley 675 de 2001, brindando soluciones que fortalecen la convivencia, el cumplimiento normativo y la sostenibilidad financiera.</p>
+
   <div class="service-grid">
     <div class="card">
       <img src="imagensigaph1.jpg" alt="">
@@ -117,18 +80,11 @@
   </div>
 </section>
 
-<!-- IMAGEN FINAL DE ALIADOS -->
-
-<div style="text-align:center; margin:50px 0;">
+<section class="aliados-section">
   <h3>Nuestros Aliados Estratégicos</h3>
-  <p>
-    La fortaleza de <strong>SIGAPH S.A.S.</strong> radica en la cooperación con aliados que comparten nuestros valores de calidad, cumplimiento y sostenibilidad.
-    Juntos construimos comunidades más seguras, eficientes y organizadas.
-  </p>
-  <img src="imagensigaph5.jpg" alt="Aliados Estratégicos SIGAPH"
-       class="fade-in"
-       style="max-width:100%; height:auto; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.15); margin-top:15px;">
-</div>
+  <p>La fortaleza de <strong>SIGAPH S.A.S.</strong> radica en la cooperación con aliados que comparten nuestros valores de calidad, cumplimiento y sostenibilidad.</p>
+  <img src="imagensigaph5.jpg" alt="Aliados Estratégicos SIGAPH" class="fade-in">
+</section>
 
 <footer>
   <div class="footer-icons">
@@ -138,7 +94,7 @@
     <a href="https://www.instagram.com/sigaph" target="_blank" class="icono">
       <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
     </a>
-    <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="icono">
+    <a href="https://wa.me/message/IX7AF6TMTLDVI1" target="_blank" class="icono">
       <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
     </a>
   </div>
@@ -147,115 +103,27 @@
   <p>&copy; 2025 SIGAPH S.A.S. — Todos los derechos reservados</p>
 </footer>
 
-
 <a href="https://wa.me/message/IX7AF6TMTLDVI1" target="_blank" class="whatsapp-float" title="¿Necesitas ayuda? ¡Chatea con nosotros!">
   <div class="tooltip">¿Necesitas ayuda? ¡Chatea con nosotros!</div>
   <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
 </a>
 
-
-
-<!-- 🔹 Modal Diagnóstico -->
-
-<div id="modal-diagnostico" class="modal-backdrop">
-  <div class="modal">
-    <div class="modal-header">
-      <h3>Diagnóstico del Estado de tu Copropiedad</h3>
-      <button onclick="closeModal('modal-diagnostico')">✕</button>
-    </div>
-    <div class="modal-body">
-      <form id="diagnosticoForm" onsubmit="calcularDiagnostico(event)">
-        <p>Responde 10 preguntas para conocer el estado actual de tu copropiedad.</p>
-        <div id="preguntas">
-          <label>1. ¿Cumplen cronogramas de mantenimiento?</label><select><option value="0">No</option><option value="5">Parcial</option><option value="10">Sí</option></select>
-          <label>2. ¿Tienen reservas financieras adecuadas?</label><select><option value="0">No</option><option value="5">En proceso</option><option value="10">Sí</option></select>
-          <label>3. ¿Se realizan auditorías periódicas?</label><select><option value="0">No</option><option value="5">Ocasional</option><option value="10">Sí</option></select>
-          <label>4. ¿Cumplen la Ley 675 de 2001?</label><select><option value="0">No</option><option value="5">Parcial</option><option value="10">Sí</option></select>
-          <label>5. ¿Se fomenta la convivencia comunitaria?</label><select><option value="0">No</option><option value="5">A veces</option><option value="10">Sí</option></select>
-          <label>6. ¿Hay comunicación transparente?</label><select><option value="0">No</option><option value="5">Parcial</option><option value="10">Sí</option></select>
-          <label>7. ¿El consejo de administración es activo?</label><select><option value="0">No</option><option value="5">Regular</option><option value="10">Sí</option></select>
-          <label>8. ¿Los contratos están actualizados?</label><select><option value="0">No</option><option value="5">En proceso</option><option value="10">Sí</option></select>
-          <label>9. ¿Los residentes participan en decisiones?</label><select><option value="0">No</option><option value="5">Poco</option><option value="10">Sí</option></select>
-          <label>10. ¿Hay control sobre gastos comunes?</label><select><option value="0">No</option><option value="5">Parcial</option><option value="10">Sí</option></select>
-        </div>
-        <label>Nombre completo *</label><input type="text" required>
-        <label>Unidad residencial (opcional)</label><input type="text">
-        <label>Correo *</label><input type="email" required>
-        <label>Celular *</label><input type="tel" required>
-        <label>Fecha de consulta</label><input type="date" readonly id="fechaConsulta">
-        <div class="actions">
-          <button type="submit" class="btn">Ver resultado</button>
-          <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="btn secondary">Más consultas</a>
-          <button type="button" class="btn" onclick="scrollToTopAndClose('modal-diagnostico')">Volver al inicio</button>
-        </div>
-        <div class="result-box" id="resultado"></div>
-      </form>
-    </div>
-  </div>
-</div>
-
-<!-- 🔹 Modal Solicitud de Visita -->
-
-<div id="modal-visita" class="modal-backdrop">
-  <div class="modal">
-    <div class="modal-header">
-      <h3>Solicitud de Visita</h3>
-      <button onclick="closeModal('modal-visita')">✕</button>
-    </div>
-    <div class="modal-body">
-      <form onsubmit="confirmarVisita(event)">
-        <label>Nombre completo *</label><input type="text" required>
-        <label>Unidad residencial (opcional)</label><input type="text">
-        <label>Correo *</label><input type="email" required>
-        <label>Celular *</label><input type="tel" required>
-        <label>Fecha de solicitud</label><input type="date" readonly id="fechaSolicitud">
-        <label>Seleccione 3 fechas posibles</label>
-        <input type="date"><input type="date"><input type="date">
-        <label>Hora preferida</label><input type="time">
-        <label>Servicio solicitado</label><textarea></textarea>
-        <div class="actions">
-          <button type="submit" class="btn">Enviar solicitud</button>
-          <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="btn secondary">Más consultas</a>
-          <button type="button" class="btn" onclick="scrollToTopAndClose('modal-visita')">Volver al inicio</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
 <script>
-  function openModal(id){document.getElementById(id).style.display='flex';}
-  function closeModal(id){document.getElementById(id).style.display='none';}
-  function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});closeModal(id);}
-  document.getElementById('fechaConsulta').value = new Date().toISOString().split('T')[0];
-  document.getElementById('fechaSolicitud').value = new Date().toISOString().split('T')[0];
+  // Menú hamburguesa
+  const menuToggle = document.getElementById('menu-toggle');
+  const navLinks = document.getElementById('nav-links');
 
-  function calcularDiagnostico(e){
-    e.preventDefault();
-    let selects = document.querySelectorAll('#preguntas select');
-    let total = 0;
-    selects.forEach(s => total += parseInt(s.value));
-    if(total == 100) total = 95;
-    let mensaje = "";
-    if(total >= 80) mensaje = "Excelente gestión. ¡Felicidades! SIGAPH puede ayudarte a mantener este nivel.";
-    else if(total >= 60) mensaje = "Gestión en proceso de fortalecimiento. SIGAPH puede acompañarte en tu mejora continua.";
-    else mensaje = "Gestión con áreas críticas. Recomendamos una evaluación profesional de SIGAPH.";
-    document.getElementById('resultado').style.display = 'block';
-    document.getElementById('resultado').innerHTML = `<strong>Resultado:</strong> ${total}/100<br>${mensaje}`;
-  }
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    menuToggle.classList.toggle('open');
+  });
 
-  function confirmarVisita(e){
-    e.preventDefault();
-    alert("✅ Solicitud enviada correctamente. Nos comunicaremos pronto.");
-  }
-
-  // 🔹 Abrir modal de visita automáticamente si viene desde ayuda.html
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('abrir') === 'visita') {
-    window.addEventListener('load', () => {
-      openModal('modal-visita');
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      menuToggle.classList.remove('open');
     });
-  }
+  });
 </script>
 
 </body>
