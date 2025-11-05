@@ -1,96 +1,81 @@
-:root {
-  --verde: #2d7a2d;
-  --azul: #003366;
-  --blanco: #ffffff;
-  --muted: #666;
-  --radius: 10px;
-  font-family: 'Poppins', sans-serif;
+﻿:root {
+--verde: #2d7a2d;
+--azul: #003366;
+--blanco: #ffffff;
+--muted: #666;
+--radius: 10px;
+font-family: 'Poppins', sans-serif;
 }
 
 body {
-  margin: 0;
-  background: var(--blanco);
-  color: var(--azul);
-  overflow-x: hidden;
+margin: 0;
+background: var(--blanco);
+color: var(--azul);
+overflow-x: hidden;
 }
 
 /* NAVBAR */
 .navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px clamp(10px, 4vw, 30px);
-  background: rgba(255,255,255,0.8);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  z-index: 100;
+position: fixed;
+top: 0;
+width: 100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px clamp(10px, 4vw, 30px);
+background: rgba(255,255,255,0.8);
+backdrop-filter: blur(6px);
+box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+z-index: 100;
 }
 
 .logo-nav img {
-  height: clamp(40px, 6vw, 55px);
-  display: block;
+height: clamp(40px, 6vw, 55px);
 }
 
-/* NAV LINKS - base */
 .nav-links {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: clamp(10px, 2vw, 18px);
-  margin: 0;
-  padding: 0;
+list-style: none;
+display: flex;
+flex-wrap: wrap;
+gap: clamp(10px, 2vw, 18px);
+margin: 0;
+padding: 0;
 }
 
-/* remove default list bullets (safeguard) */
-.nav-links, .nav-links li {
-  list-style: none !important;
-}
-
-/* links style */
 .nav-links li a {
-  text-decoration: none;
-  color: var(--azul);
-  font-weight: 500;
-  transition: 0.3s;
-  font-size: clamp(0.8rem, 1.5vw, 1rem);
-  display: inline-block;
-  padding: 6px 8px;
-  white-space: nowrap;
+text-decoration: none;
+color: var(--azul);
+font-weight: 500;
+transition: 0.3s;
+font-size: clamp(0.8rem, 1.5vw, 1rem);
 }
 
-/* ensure visited links keep color (prevent purple) */
-.nav-links li a:visited { color: var(--azul); }
-
-/* hover */
 .nav-links li a:hover {
-  color: var(--verde);
+color: var(--verde);
 }
 
 .boton-verde {
-  background: var(--verde);
-  color: var(--blanco) !important;
-  padding: 6px 12px;
-  border-radius: 8px;
+background: var(--verde);
+color: var(--blanco) !important;
+padding: 6px 12px;
+border-radius: 8px;
 }
 
 /* HAMBURGUESA */
 .menu-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
+display: none;
+flex-direction: column;
+gap: 5px;
+border: none;
+background: transparent;
+cursor: pointer;
 }
 
 .menu-toggle span {
-  width: 25px;
-  height: 3px;
-  background: var(--azul);
-  transition: 0.4s;
+width: 25px;
+height: 3px;
+background: var(--azul);
+transition: 0.4s;
 }
 
 .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
@@ -99,200 +84,220 @@ body {
 
 /* HERO */
 .hero {
-  position: relative;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--blanco);
-  text-align: center;
+position: relative;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+color: var(--blanco);
+text-align: center;
 }
 
 .hero video {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -2;
-  top: 0;
-  left: 0;
+position: absolute;
+width: 100%;
+height: 100%;
+object-fit: cover;
+z-index: -2;
+top: 0;
+left: 0;
 }
 
 .overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
-  z-index: -1;
+position: absolute;
+width: 100%;
+height: 100%;
+background: rgba(0,0,0,0.4);
+z-index: -1;
 }
 
 .hero-content {
-  max-width: 800px;
-  padding: clamp(10px, 3vw, 20px);
+max-width: 800px;
+padding: clamp(10px, 3vw, 20px);
 }
 
 .logo-vidrio {
-  background: rgba(255,255,255,0.1);
-  border-radius: 25px;
-  padding: 10px 18px;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+background: rgba(255,255,255,0.1);
+border-radius: 25px;
+padding: 10px 18px;
+backdrop-filter: blur(8px);
+box-shadow: 0 0 20px rgba(0,0,0,0.3);
+display: inline-flex;
+justify-content: center;
+align-items: center;
 }
 
 .logo-vidrio img {
-  width: clamp(120px, 20vw, 180px);
+width: clamp(120px, 20vw, 180px);
 }
 
 .hero-content h1 {
-  font-size: clamp(1.2rem, 3vw, 2rem);
-  color: var(--blanco);
+font-size: clamp(1.2rem, 3vw, 2rem);
+color: var(--blanco);
 }
 
 .hero-content p {
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
-  color: var(--blanco);
+font-size: clamp(0.9rem, 2vw, 1.1rem);
+color: var(--blanco);
 }
 
 button.primary, button.secondary {
-  margin-top: 10px;
-  padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 24px);
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: clamp(0.8rem, 2vw, 1rem);
+margin-top: 10px;
+padding: clamp(8px, 2vw, 12px) clamp(16px, 4vw, 24px);
+border-radius: 8px;
+font-weight: 600;
+cursor: pointer;
+transition: 0.3s;
+font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
 button.primary {
-  background: var(--verde);
-  color: var(--blanco);
-  border: none;
+background: var(--verde);
+color: var(--blanco);
+border: none;
 }
 
 button.secondary {
-  background: transparent;
-  color: var(--blanco);
-  border: 2px solid var(--blanco);
+background: transparent;
+color: var(--blanco);
+border: 2px solid var(--blanco);
 }
 
 /* SECCIONES */
 .section {
-  padding: clamp(40px, 8vw, 80px) 20px;
-  text-align: center;
+padding: clamp(40px, 8vw, 80px) 20px;
+text-align: center;
 }
 
 .service-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: clamp(15px, 3vw, 25px);
-  margin-top: 40px;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+gap: clamp(15px, 3vw, 25px);
+margin-top: 40px;
 }
 
 .card {
-  background: var(--blanco);
-  border-radius: var(--radius);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  padding: clamp(15px, 3vw, 20px);
+background: var(--blanco);
+border-radius: var(--radius);
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+padding: clamp(15px, 3vw, 20px);
 }
 
 .card img {
-  width: 100%;
-  border-radius: var(--radius);
-  margin-bottom: 10px;
-  object-fit: cover;
+width: 100%;
+border-radius: var(--radius);
+margin-bottom: 10px;
+object-fit: cover;
 }
 
 /* FOOTER */
 footer {
-  background: var(--azul);
-  color: var(--blanco);
-  text-align: center;
-  padding: clamp(15px, 3vw, 25px);
+background: var(--azul);
+color: var(--blanco);
+text-align: center;
+padding: clamp(15px, 3vw, 25px);
 }
 
 /* ICONOS FOOTER */
 .footer-icons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: clamp(15px, 3vw, 30px);
-  margin-bottom: 15px;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: clamp(15px, 3vw, 30px);
+margin-bottom: 15px;
 }
 
 .footer-icons .icono {
-  width: clamp(40px, 5vw, 48px);
-  height: clamp(40px, 5vw, 48px);
-  background: rgba(255,255,255,0.15);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.4s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.3);
+width: clamp(40px, 5vw, 48px);
+height: clamp(40px, 5vw, 48px);
+background: rgba(255,255,255,0.15);
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+transition: all 0.4s ease;
+box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+backdrop-filter: blur(6px);
+border: 1px solid rgba(255,255,255,0.3);
 }
 
 .footer-icons .icono:hover {
-  transform: scale(1.15);
-  background: rgba(45,122,45,0.9);
-  box-shadow: 0 0 15px rgba(45,122,45,0.6);
+transform: scale(1.15);
+background: rgba(45,122,45,0.9);
+box-shadow: 0 0 15px rgba(45,122,45,0.6);
 }
 
 .footer-icons img {
-  width: clamp(20px, 3vw, 24px);
-  height: auto;
-  filter: brightness(0) invert(1);
-  transition: transform 0.3s ease, filter 0.3s ease;
+width: clamp(20px, 3vw, 24px);
+height: auto;
+filter: brightness(0) invert(1);
+transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .footer-icons .icono:hover img {
-  filter: brightness(1) invert(0);
-  transform: scale(1.1);
+filter: brightness(1) invert(0);
+transform: scale(1.1);
 }
 
 /* WHATSAPP FLOAT */
 .whatsapp-float {
-  position: fixed;
-  bottom: clamp(15px, 3vw, 25px);
-  right: clamp(15px, 3vw, 25px);
-  width: clamp(50px, 6vw, 65px);
-  height: clamp(50px, 6vw, 65px);
-  border-radius: 50%;
-  z-index: 99;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+position: fixed;
+bottom: clamp(15px, 3vw, 25px);
+right: clamp(15px, 3vw, 25px);
+width: clamp(50px, 6vw, 65px);
+height: clamp(50px, 6vw, 65px);
+border-radius: 50%;
+z-index: 99;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
 .whatsapp-float img {
-  width: 100%;
-  height: 100%;
+width: 100%;
+height: 100%;
 }
 
 .whatsapp-float .tooltip {
-  position: absolute;
-  bottom: 70px;
-  right: 70px;
-  background: rgba(45,122,45,0.95);
-  color: white;
-  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
-  padding: 8px 12px;
-  border-radius: 8px;
-  opacity: 0;
-  transform: translateY(5px);
-  transition: all 0.4s ease;
-  pointer-events: none;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-  white-space: nowrap;
+position: absolute;
+bottom: 70px;
+right: 70px;
+background: rgba(45,122,45,0.95);
+color: white;
+font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+padding: 8px 12px;
+border-radius: 8px;
+opacity: 0;
+transform: translateY(5px);
+transition: all 0.4s ease;
+pointer-events: none;
+box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+white-space: nowrap;
 }
 
 .whatsapp-float:hover .tooltip {
-  opacity: 1;
-  transform: translateY(0);
+opacity: 1;
+transform: translateY(0);
+}
+
+/* RESPONSIVE NAV */
+@media (max-width: 900px) {
+.menu-toggle { display: flex; }
+.nav-links {
+position: absolute;
+top: 70px;
+right: 0;
+background: rgba(255,255,255,0.95);
+flex-direction: column;
+width: 220px;
+text-align: right;
+padding: 20px;
+transform: translateX(100%);
+transition: transform 0.4s ease-in-out;
+box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.nav-links.active { transform: translateX(0); }
+.nav-links li { margin: 10px 0; }
 }
 
 /* ======================================================
@@ -309,8 +314,8 @@ img {
 /* Tarjetas: limitar altura máxima y mantener object-fit para recorte limpio */
 .card img {
   width: 100%;
-  max-height: clamp(140px, 25vh, 260px);
-  object-fit: cover;
+  max-height: clamp(140px, 25vh, 260px); /* pequeño en móvil, mayor en desktop */
+  object-fit: cover;   /* evita deformación; recorta proporcionalmente */
   border-radius: var(--radius);
 }
 
@@ -324,7 +329,7 @@ img {
 /* Hero: en pantallas muy pequeñas no forzar 100vh completo (evita que todo luzca enorme) */
 @media (max-width: 520px) {
   .hero {
-    height: auto;
+    height: auto;           /* deja que el contenido determine altura */
     padding: 3rem 1rem 2rem;
   }
   .hero video {
@@ -332,14 +337,15 @@ img {
     top: 0;
     left: 0;
     width: 100%;
-    height: 50vh;
+    height: 50vh;           /* limita altura del video en móvil */
     object-fit: cover;
     z-index: -2;
   }
   .hero-content {
-    padding-top: calc(50vh + 12px);
+    padding-top: calc(50vh + 12px); /* empuja el contenido para no quedar tapado por video */
     margin-bottom: 1rem;
   }
+  /* reducir tamaño de botones y texto para móviles muy pequeños */
   .hero-content h1 { font-size: clamp(1rem, 5.5vw, 1.25rem); }
   .hero-content p  { font-size: clamp(0.8rem, 3.8vw, 1rem); }
   button.primary, button.secondary {
@@ -350,167 +356,425 @@ img {
 
 /* Para tablets y pantallas medianas: limitar tamaño de imagenes */
 @media (min-width: 521px) and (max-width: 900px) {
-  .card img { max-height: clamp(160px, 20vh, 220px); }
-  .hero video { height: 60vh; }
+  .card img {
+    max-height: clamp(160px, 20vh, 220px);
+  }
+  .hero video {
+    height: 60vh;
+  }
   .hero-content { padding-top: calc(60vh + 14px); }
 }
 
-/* ======================================================
-   AJUSTES DE NAVBAR Y MENÚ MÓVIL (REPARACIÓN ESPECÍFICA)
-   ====================================================== */
+/* Footer icons: asegurar tamaño moderado en móviles */
+.footer-icons .icono {
+  width: clamp(36px, 8vw, 48px);
+  height: clamp(36px, 8vw, 48px);
+}
 
-/* Responsive rules show hamburger and overlay */
-@media (max-width: 900px) {
-  .menu-toggle { display: flex; }
-
-  /* overlay/menu panel */
-  .nav-links {
-    position: fixed;
-    top: 70px;
-    right: 0;
-    background: rgba(255,255,255,0.95);
-    flex-direction: column;
-    width: 70%;
-    max-width: 320px;
-    height: auto;
-    max-height: 82vh;
-    text-align: left;
-    padding: 18px 16px;
-    transform: translateX(100%);
-    transition: transform 0.35s ease-in-out;
-    box-shadow: -6px 0 18px rgba(0,0,0,0.12);
-    overflow-y: auto;
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
-    z-index: 1200;
-  }
-
-  /* when active, slide in */
-  .nav-links.active { transform: translateX(0); }
-
-  /* make sure nav items are block-level and readable */
-  .nav-links li {
-    margin: 8px 0;
-  }
-  .nav-links li a {
-    display: block;
-    color: var(--azul);
-    padding: 10px 6px;
-    font-size: clamp(0.95rem, 3.2vw, 1.05rem);
-    text-decoration: none;
-    line-height: 1.4;
-    white-space: normal; /* allow wrap */
-  }
-
-  /* small logo at top of menu - keep it small */
-  .nav-logo-mobile {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-  }
-  .nav-logo-mobile img {
-    height: 42px;
-    width: auto;
-    object-fit: contain;
-  }
-
-  /* boton verde full width */
-  .nav-links .boton-verde {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    margin-top: 8px;
-    font-weight: 600;
+/* Opcional: evitar que imágenes SVG/íconos se apliquen filtros extra en móviles */
+@media (max-width: 520px) {
+  .footer-icons img, .whatsapp-float img {
+    filter: none;
   }
 }
 
-/* small screens adjustments/fallback */
+/* ======================================================
+   AJUSTES DE NAVBAR Y LOGO PARA DISPOSITIVOS PEQUEÑOS
+   ====================================================== */
+
+/* General para pantallas menores a 768px */
+@media (max-width: 768px) {
+
+  /* Reducir altura y padding del encabezado */
+  .navbar {
+    padding: 8px 16px;
+  }
+
+  /* Logo más pequeño y centrado */
+  .logo-nav img {
+    height: clamp(35px, 8vw, 45px);
+  }
+
+  /* Evitar que el menú de enlaces se corte */
+  .nav-links li a {
+    font-size: clamp(0.9rem, 3.5vw, 1rem);
+    line-height: 1.4;
+    white-space: normal; /* permite salto de línea si la palabra es larga */
+  }
+
+  /* Menú hamburguesa más grande para facilitar clic */
+  .menu-toggle span {
+    width: 28px;
+    height: 3px;
+  }
+
+  /* Menú desplegable ocupa más espacio vertical */
+  .nav-links {
+    width: 100%;
+    right: 0;
+    padding: 1.2rem 1rem;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.97);
+  }
+
+  .nav-links li {
+    margin: 12px 0;
+  }
+
+  /* Asegurar visibilidad del botón AYUDA DE GESTIÓN */
+  .nav-links .boton-verde {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+}
+
+/* Ajustes extra para pantallas muy pequeñas (máx. 480px) */
 @media (max-width: 480px) {
-  .nav-links { width: 82%; max-width: 300px; padding: 14px; }
-  .nav-logo-mobile img { height: 36px; }
-  .nav-links li a { font-size: 0.95rem; padding: 8px 6px; }
+
+  .navbar {
+    padding: 6px 12px;
+  }
+
+  .logo-nav img {
+    height: clamp(30px, 10vw, 40px);
+  }
+
+  .nav-links {
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  .menu-toggle span {
+    width: 26px;
+    height: 3px;
+  }
 }
 
 /* ============================================
-   AJUSTES GENERALES INTERNOS (logo y volver inicio)
-   ============================================ */
+AJUSTE RESPONSIVO: LOGO, MENÚ Y HERO
+============================================ */
+@media (max-width: 768px) {
 
+/* ----- Encabezado ----- */
+header, .navbar {
+height: auto;
+padding: 8px 14px;
+}
+
+.logo-nav img {
+height: clamp(30px, 7vw, 42px);
+max-width: 100%;
+object-fit: contain;
+}
+
+/* Menú hamburguesa visible y funcional */
+.menu-toggle {
+top: 20px;
+right: 18px;
+z-index: 1000;
+}
+
+.nav-links {
+position: fixed;
+top: 70px;
+right: 0;
+width: 70%;
+height: auto;
+max-height: 80vh;
+overflow-y: auto;
+background-color: rgba(255,255,255,0.98);
+box-shadow: -2px 0 6px rgba(0,0,0,0.1);
+padding: 1.5rem;
+border-top-left-radius: 12px;
+border-bottom-left-radius: 12px;
+backdrop-filter: blur(5px);
+}
+
+.nav-links li {
+margin: 0.8rem 0;
+}
+
+.nav-links li a {
+font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+line-height: 1.5;
+white-space: normal;
+}
+
+.boton-verde {
+display: block;
+margin-top: 1rem;
+text-align: center;
+padding: 10px;
+font-size: 1rem;
+font-weight: 600;
+}
+
+/* ----- Hero (video + logo central) ----- */
+.hero {
+height: auto;
+padding: 4rem 1rem 3rem;
+}
+
+.hero video {
+height: 60vh;
+width: 100%;
+object-fit: cover;
+}
+
+.hero-content {
+margin-top: 2rem;
+}
+
+.hero-content h1 {
+font-size: clamp(1rem, 5.2vw, 1.4rem);
+}
+
+.hero-content p {
+font-size: clamp(0.9rem, 3.5vw, 1rem);
+}
+
+.logo-vidrio img {
+width: clamp(120px, 40vw, 160px);
+height: auto;
+border-radius: 18px;
+background: rgba(255,255,255,0.15);
+backdrop-filter: blur(6px);
+padding: 8px;
+}
+
+/* ----- Botones hero ----- */
+.hero-buttons {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 10px;
+margin-top: 1.2rem;
+}
+
+.hero-buttons button,
+.hero-buttons a {
+width: 90%;
+max-width: 300px;
+text-align: center;
+}
+}
+
+/* Extra ajuste para móviles muy pequeños */
+@media (max-width: 480px) {
+.nav-links {
+width: 85%;
+font-size: 0.9rem;
+}
+.logo-nav img {
+height: clamp(28px, 9vw, 38px);
+}
+}
+
+/* ============================================
+AJUSTE: LOGO INTERNO Y BOTÓN VOLVER AL INICIO
+============================================ */
+
+/* Corrige el tamaño del logo en las páginas internas */
 header img {
-  max-height: 55px;
-  width: auto;
-  object-fit: contain;
-  transition: all 0.25s ease-in-out;
-}
-@media (max-width: 768px) {
-  header img { max-height: 40px; }
+max-height: 55px;
+width: auto;
+object-fit: contain;
+transition: all 0.3s ease-in-out;
 }
 
-/* boton volver al inicio (selector por href se mantiene) */
+@media (max-width: 768px) {
+header img {
+max-height: 40px;
+}
+}
+
+/* Ajuste del botón “Volver al inicio” */
 a[href*="index.html"], a.volver-inicio {
-  display: inline-block;
-  background-color: var(--verde);
-  color: var(--blanco);
-  padding: 10px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s;
-  margin-top: 20px;
+display: inline-block;
+background-color: var(--verde);
+color: var(--blanco);
+padding: 10px 20px;
+border-radius: 8px;
+text-decoration: none;
+font-weight: 600;
+transition: 0.3s;
+margin-top: 20px;
 }
-a[href*="index.html"]:hover, a.volver-inicio:hover { background-color: #1f5c1f; }
 
-/* DIRECTORIO: asegurar que no salga del contenedor */
+a[href*="index.html"]:hover,
+a.volver-inicio:hover {
+background-color: #1f5c1f;
+}
+
+/* Centrar el botón y dar espacio */
+footer a[href*="index.html"],
+footer a.volver-inicio {
+display: inline-block;
+margin: 10px auto;
+text-align: center;
+}
+
+/* ============================================
+AJUSTE: SECCIÓN DIRECTORIO RESPONSIVA
+============================================ */
+
+/* Asegurar que toda la tabla o listado del directorio sea fluido */
 .directorio-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  overflow-x: auto;
-  padding: 1rem;
-  box-sizing: border-box;
+width: 100%;
+max-width: 1200px;
+margin: 0 auto;
+overflow-x: auto; /* Permite desplazamiento horizontal solo si es necesario */
+padding: 1rem;
+box-sizing: border-box;
 }
+
+/* Ajustar la tabla para pantallas pequeñas */
 .directorio-container table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  font-size: clamp(0.9rem, 2.5vw, 1rem);
-  border-radius: 10px;
-  overflow: hidden;
-}
-.directorio-container th, .directorio-container td {
-  padding: 10px 12px;
-  border-bottom: 1px solid #e0e0e0;
-  white-space: nowrap;
+width: 100%;
+border-collapse: collapse;
+text-align: left;
+font-size: clamp(0.9rem, 2.5vw, 1rem);
+border-radius: 10px;
+overflow: hidden;
 }
 
-/* ESCALADO CON PROPORCIÓN EN PÁGINAS INTERNAS */
-main, section.contenido, .contenido-principal {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  line-height: 1.6;
+.directorio-container th,
+.directorio-container td {
+padding: 10px 12px;
+border-bottom: 1px solid #e0e0e0;
+white-space: nowrap;
 }
-h1,h2,h3 {
-  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-  text-align: center;
-  margin-bottom: 1rem;
+
+.directorio-container th {
+background-color: var(--verde);
+color: var(--blanco);
+text-align: center;
+font-weight: 600;
 }
+
+.directorio-container tr:nth-child(even) {
+background-color: #f8f8f8;
+}
+
+.directorio-container tr:hover {
+background-color: rgba(0, 128, 0, 0.08);
+}
+
+/* Adaptación total para pantallas pequeñas */
 @media (max-width: 768px) {
-  main, section.contenido, .contenido-principal { padding: 1.2rem 0.8rem; font-size: clamp(0.85rem, 3vw, 0.95rem); }
-  h1,h2,h3 { font-size: clamp(1rem, 4vw, 1.3rem); }
+.directorio-container table {
+font-size: clamp(0.8rem, 3vw, 0.9rem);
 }
 
-/* Alineación: evitar que header tape contenido */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
-  position: sticky;
-  top: 0;
-  background-color: var(--blanco);
-  z-index: 1000;
+.directorio-container th,
+.directorio-container td {
+padding: 8px 10px;
 }
-main, section.contenido, .contenido-principal { margin-top: 90px; }
-@media (max-width: 768px) { main, section.contenido, .contenido-principal { margin-top: 70px; } }
+
+.directorio-container {
+padding: 0.5rem;
+}
+}
+
+/* ============================================
+AJUSTE DE ESCALA EN PÁGINAS INTERNAS
+============================================ */
+
+/* Reduce el tamaño general del contenido de las secciones internas */
+main, section.contenido, .contenido-principal {
+max-width: 1100px;
+margin: 0 auto;
+padding: 2rem 1rem;
+font-size: clamp(0.9rem, 2vw, 1rem);
+line-height: 1.6;
+}
+
+/* Títulos más proporcionados (igual que inicio) */
+h1, h2, h3 {
+font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+text-align: center;
+margin-bottom: 1rem;
+}
+
+/* Ajuste especial para páginas pequeñas */
+@media (max-width: 768px) {
+main, section.contenido, .contenido-principal {
+padding: 1.2rem 0.8rem;
+font-size: clamp(0.85rem, 3vw, 0.95rem);
+}
+
+h1, h2, h3 {
+font-size: clamp(1rem, 4vw, 1.3rem);
+}
+}
+
+/* ============================================
+ALINEACIÓN DE LOGO Y CONTENIDO EN PÁGINAS INTERNAS
+============================================ */
+
+/* Alinear el logo en las páginas internas al mismo nivel del header */
+header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 12px 20px;
+position: sticky;
+top: 0;
+background-color: var(--blanco);
+z-index: 1000;
+}
+
+/* Ajustar el logo interno al tamaño proporcional del diseño principal */
+header img {
+max-height: 48px;
+width: auto;
+object-fit: contain;
+transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+header img {
+max-height: 38px;
+}
+}
+
+
+
+/* ============================================
+AJUSTE DEL MENÚ EN PÁGINAS INTERNAS
+============================================ */
+
+/* Menú principal interno (mismo estilo pero más proporcionado) */
+header nav ul li a {
+font-size: clamp(0.85rem, 1.8vw, 1rem);
+padding: 8px 14px;
+font-weight: 500;
+}
+
+/* Ajuste del botón verde */
+header nav ul li a.boton-verde {
+font-size: clamp(0.85rem, 1.8vw, 1rem);
+padding: 8px 16px;
+border-radius: 8px;
+}
+
+/* Menú responsive (modo hamburguesa o vista móvil) */
+@media (max-width: 768px) {
+header nav ul {
+flex-direction: column;
+align-items: center;
+gap: 10px;
+}
+
+header nav ul li a {
+font-size: clamp(0.9rem, 4vw, 1rem);
+padding: 6px 10px;
+}
+
+header nav ul li a.boton-verde {
+padding: 6px 12px;
+}
+}
