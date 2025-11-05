@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIGAPH S.A.S. | Sistema Integral de Gestión Administrativa en Propiedad Horizontal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* 🔹 Estilo del logo sobre el video */
+    .logo-overlay {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .logo-overlay img {
+      width: 180px;
+      max-width: 80%;
+      height: auto;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+    }
+
+    /* 🔹 Botón verde permanente del menú */
+    nav ul li a.boton-verde {
+      background-color: var(--verde);
+      color: var(--blanco);
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    nav ul li a.boton-verde:hover {
+      background-color: #1f5c1f;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<header>
+  <nav>
+    <img src="logo_sigaph.png" alt="Logo SIGAPH" />
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="tecnologia.html">Tecnología</a></li>
+      <li><a href="aliados.html">Aliados</a></li>
+      <li><a href="directorio.html">Directorio</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="ayuda.html" class="boton-verde">AYUDA DE GESTIÓN</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="videosigaph1.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <div class="logo-overlay">
+      <img src="logo_sigaph.png" alt="Logo SIGAPH Central">
+    </div>
+    <h1>Sistema Integral de Gestión Administrativa en Propiedad Horizontal</h1>
+    <p>Gestión, cumplimiento y convivencia al servicio de la propiedad horizontal.</p>
+    <button class="p

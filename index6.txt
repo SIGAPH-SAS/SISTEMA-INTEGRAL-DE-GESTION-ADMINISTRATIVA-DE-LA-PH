@@ -84,7 +84,7 @@
   <div class="hero-content">
     <div class="logo-overlay">
       <div class="logo-vidrio">
-        <img src="logo_sigaph1.png" alt="Logo SIGAPH Central" style="object-fit: contain; background: transparent;">
+        <img src="logo_sigaph.png" alt="Logo SIGAPH Central">
       </div>
     </div>
     <h1>Sistema Integral de Gestión Administrativa en Propiedad Horizontal</h1>

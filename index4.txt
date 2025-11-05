@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIGAPH S.A.S. | Sistema Integral de Gestión Administrativa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <nav class="navbar">
+    <div class="logo-nav">
+      <img src="logo_sigaph.png" alt="Logo SIGAPH">
+    </div>
+
+```
+<!-- Menú hamburguesa -->
+<button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+  <span></span><span></span><span></span>
+</button>
+
+<ul class="nav-links" id="nav-links">
+  <li><a href="index.html">Inicio</a></li>
+  <li><a href="nosotros.html">Nosotros</a></li>
+  <li><a href="servicios.html">Servicios</a></li>
+  <li><a href="tecnologia.html">Tecnología</a></li>
+  <li><a href="aliados.html">Aliados</a></li>
+  <li><a href="directorio.html">Directorio</a></li>
+  <li><a href="contacto.html">Contacto</a></li>
+  <li><a href="ayuda.html" class="boton-verde">AYUDA DE GESTIÓN</a></li>
+</ul>
+```
+
+  </nav>
+</header>
+
+<section class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="videosigaph1.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+
+  <div class="hero-content">
+    <div class="logo-overlay">
+      <div class="logo-vidrio">
+        <img src="logo_sigaph1.png" alt="Logo SIGAPH Central">
+      </div>
+    </div>
+    <h1>Sistema Integral de Gestión Administrativa en Propiedad Horizontal</h1>
+    <p>Gestión, cumplimiento y convivencia al servicio de la propiedad horizontal.</p>
+    <button class="primary" onclick="openModal('modal-diagnostico')">Diagnóstico del Estado de tu Copropiedad</button>
+    <button class="secondary" onclick="openModal('modal-visita')">Solicitar Visita</button>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Sobre SIGAPH</h2>
+  <p>Somos una empresa especializada en la gestión administrativa, técnica y social de copropiedades bajo el marco de la Ley 675 de 2001, brindando soluciones que fortalecen la convivencia, el cumplimiento normativo y la sostenibilidad financiera.</p>
+
+  <div class="service-grid">
+    <div class="card">
+      <img src="imagensigaph1.jpg" alt="">
+      <h3>Gestión Administrativa</h3>
+      <p>Planeación, control y ejecución eficiente de los recursos de la copropiedad con total transparencia.</p>
+    </div>
+    <div class="card">
+      <img src="imagensigaph2.jpg" alt="">
+      <h3>Mantenimiento Integral</h3>
+      <p>Supervisión de las áreas comunes, equipos y servicios con planes preventivos adaptados.</p>
+    </div>
+    <div class="card">
+      <img src="imagensigaph3.jpg" alt="">
+      <h3>Convivencia y Normatividad</h3>
+      <p>Fortalecemos la cultura ciudadana, el cumplimiento de la Ley 675 y la resolución de conflictos.</p>
+    </div>
+  </div>
+</section>
+
+<section class="aliados-section">
+  <h3>Nuestros Aliados Estratégicos</h3>
+  <p>La fortaleza de <strong>SIGAPH S.A.S.</strong> radica en la cooperación con aliados que comparten nuestros valores de calidad, cumplimiento y sostenibilidad.</p>
+  <img src="imagensigaph5.jpg" alt="Aliados Estratégicos SIGAPH" class="fade-in">
+</section>
+
+<footer>
+  <div class="footer-icons">
+    <a href="mailto:info@sigaph.com" target="_blank" class="icono">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Correo">
+    </a>
+    <a href="https://www.instagram.com/sigaph" target="_blank" class="icono">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+    </a>
+    <a href="https://wa.me/message/IX7AF6TMTLDVI1" target="_blank" class="icono">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+    </a>
+  </div>
+
+  <p>Teléfonos: 321 851 1222 / 320 766 3189 / 314 731 8047</p>
+  <p>&copy; 2025 SIGAPH S.A.S. — Todos los derechos reservados</p>
+</footer>
+
+<a href="https://wa.me/message/IX7AF6TMTLDVI1" target="_blank" class="whatsapp-float" title="¿Necesitas ayuda? ¡Chatea con nosotros!">
+  <div class="tooltip">¿Necesitas ayuda? ¡Chatea con nosotros!</div>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
+</a>
+
+<script>
+  // Menú hamburguesa
+  const menuToggle = document.getElementById('menu-toggle');
+  const navLinks = document.getElementById('nav-links');
+
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    menuToggle.classList.toggle('open');
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      menuToggle.classList.remove('open');
+    });
+  });
+</script>
+
+</body>
+</html>
