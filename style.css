@@ -752,3 +752,40 @@ main, section.contenido, .contenido-principal {
 margin-top: 70px;
 }
 }
+
+
+/* ============================================
+AJUSTE DEL MENÚ EN PÁGINAS INTERNAS
+============================================ */
+
+/* Menú principal interno (mismo estilo pero más proporcionado) */
+header nav ul li a {
+font-size: clamp(0.85rem, 1.8vw, 1rem);
+padding: 8px 14px;
+font-weight: 500;
+}
+
+/* Ajuste del botón verde */
+header nav ul li a.boton-verde {
+font-size: clamp(0.85rem, 1.8vw, 1rem);
+padding: 8px 16px;
+border-radius: 8px;
+}
+
+/* Menú responsive (modo hamburguesa o vista móvil) */
+@media (max-width: 768px) {
+header nav ul {
+flex-direction: column;
+align-items: center;
+gap: 10px;
+}
+
+header nav ul li a {
+font-size: clamp(0.9rem, 4vw, 1rem);
+padding: 6px 10px;
+}
+
+header nav ul li a.boton-verde {
+padding: 6px 12px;
+}
+}
