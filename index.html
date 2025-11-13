@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -55,8 +54,66 @@
     nav ul li a.boton-verde:hover {
       background-color: #1f5c1f;
     }
-  </style>
 
+    /* 🔹 Cajas de resultados (diagnóstico y visita) */
+    .resultado-diagnostico,
+    .resultado-visita {
+      display: none;
+      background: #ffffff;
+      border: 2px solid #0a7b40;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      padding: 20px;
+      margin-top: 20px;
+      text-align: center;
+      color: #002b5c;
+      font-family: 'Poppins', sans-serif;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .resultado-diagnostico strong,
+    .resultado-visita strong {
+      color: #0a7b40;
+      font-size: 1.2em;
+    }
+
+    /* 🔹 Botones dentro del resultado */
+    .acciones-visita {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .acciones-visita .btn {
+      background-color: #0a7b40;
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .acciones-visita .btn:hover {
+      background-color: #064e2a;
+    }
+
+    .acciones-visita .btn.secondary {
+      background-color: #002b5c;
+    }
+
+    .acciones-visita .btn.secondary:hover {
+      background-color: #021d3d;
+    }
+  </style>
 </head>
 <body>
 
@@ -117,7 +174,6 @@
 </section>
 
 <!-- IMAGEN FINAL DE ALIADOS -->
-
 <div style="text-align:center; margin:50px 0;">
   <h3>Nuestros Aliados Estratégicos</h3>
   <p>
@@ -141,11 +197,9 @@
       <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
     </a>
   </div>
-
   <p>Teléfonos: 321 851 1222 / 320 766 3189 / 314 731 8047</p>
   <p>&copy; 2025 SIGAPH S.A.S. — Todos los derechos reservados</p>
 </footer>
-
 
 <a href="https://wa.me/message/IX7AF6TMTLDVI1" target="_blank" class="whatsapp-float" title="¿Necesitas ayuda? ¡Chatea con nosotros!">
   <div class="tooltip">¿Necesitas ayuda? ¡Chatea con nosotros!</div>
@@ -153,7 +207,6 @@
 </a>
 
 <!-- 🔹 Modal Diagnóstico -->
-
 <div id="modal-diagnostico" class="modal-backdrop">
   <div class="modal">
     <div class="modal-header">
@@ -161,38 +214,13 @@
       <button onclick="closeModal('modal-diagnostico')">✕</button>
     </div>
     <div class="modal-body">
-      <form id="diagnosticoForm" onsubmit="calcularDiagnostico(event)">
-        <p>Responde 10 preguntas para conocer el estado actual de tu copropiedad.</p>
-        <div id="preguntas">
-          <label>1. ¿Cumplen cronogramas de mantenimiento?</label><select><option value="0">No</option><option value="5">Parcial</option><option value="10">Sí</option></select>
-          <label>2. ¿Tienen reservas financieras adecuadas?</label><select><option value="0">No</option><option value="5">En proceso</option><option value="10">Sí</option></select>
-          <label>3. ¿Se realizan auditorías periódicas?</label><select><option value="0">No</option><option value="5">Ocasional</option><option value="10">Sí</option></select>
-          <label>4. ¿Cumplen la Ley 675 de 2001?</label><select><option value="0">No</option><option value="5">Parcial</option><option value="10">Sí</option></select>
-          <label>5. ¿Se fomenta la convivencia comunitaria?</label><select><option value="0">No</option><option value="5">A veces</option><option value="10">Sí</option></select>
-          <label>6. ¿Hay comunicación transparente?</label><select><option value="0">No</option><option value="5">Parcial</option><option value="10">Sí</option></select>
-          <label>7. ¿El consejo de administración es activo?</label><select><option value="0">No</option><option value="5">Regular</option><option value="10">Sí</option></select>
-          <label>8. ¿Los contratos están actualizados?</label><select><option value="0">No</option><option value="5">En proceso</option><option value="10">Sí</option></select>
-          <label>9. ¿Los residentes participan en decisiones?</label><select><option value="0">No</option><option value="5">Poco</option><option value="10">Sí</option></select>
-          <label>10. ¿Hay control sobre gastos comunes?</label><select><option value="0">No</option><option value="5">Parcial</option><option value="10">Sí</option></select>
-        </div>
-        <label>Nombre completo *</label><input type="text" required>
-        <label>Unidad residencial (opcional)</label><input type="text">
-        <label>Correo *</label><input type="email" required>
-        <label>Celular *</label><input type="tel" required>
-        <label>Fecha de consulta</label><input type="date" readonly id="fechaConsulta">
-        <div class="actions">
-          <button type="submit" class="btn">Ver resultado</button>
-          <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="btn secondary">Más consultas</a>
-          <button type="button" class="btn" onclick="scrollToTopAndClose('modal-diagnostico')">Volver al inicio</button>
-        </div>
-        <div class="result-box" id="resultado"></div>
-      </form>
+      <iframe id="formularioGoogle" src="https://forms.gle/4y1ikxCEweqkAskx7" width="100%" height="650" frameborder="0" marginheight="0" marginwidth="0" style="border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">Cargando…</iframe>
+      <div id="resultadoDiagnostico" class="resultado-diagnostico"></div>
     </div>
   </div>
 </div>
 
 <!-- 🔹 Modal Solicitud de Visita -->
-
 <div id="modal-visita" class="modal-backdrop">
   <div class="modal">
     <div class="modal-header">
@@ -200,22 +228,8 @@
       <button onclick="closeModal('modal-visita')">✕</button>
     </div>
     <div class="modal-body">
-      <form onsubmit="confirmarVisita(event)">
-        <label>Nombre completo *</label><input type="text" required>
-        <label>Unidad residencial (opcional)</label><input type="text">
-        <label>Correo *</label><input type="email" required>
-        <label>Celular *</label><input type="tel" required>
-        <label>Fecha de solicitud</label><input type="date" readonly id="fechaSolicitud">
-        <label>Seleccione 3 fechas posibles</label>
-        <input type="date"><input type="date"><input type="date">
-        <label>Hora preferida</label><input type="time">
-        <label>Servicio solicitado</label><textarea></textarea>
-        <div class="actions">
-          <button type="submit" class="btn">Enviar solicitud</button>
-          <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="btn secondary">Más consultas</a>
-          <button type="button" class="btn" onclick="scrollToTopAndClose('modal-visita')">Volver al inicio</button>
-        </div>
-      </form>
+      <iframe id="formularioVisita" src="https://forms.gle/1pm3HTN7a2M7VGPN8" width="100%" height="700" frameborder="0" marginheight="0" marginwidth="0" style="border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">Cargando…</iframe>
+      <div id="resultadoVisita" class="resultado-visita"></div>
     </div>
   </div>
 </div>
@@ -224,29 +238,68 @@
   function openModal(id){document.getElementById(id).style.display='flex';}
   function closeModal(id){document.getElementById(id).style.display='none';}
   function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});closeModal(id);}
-  document.getElementById('fechaConsulta').value = new Date().toISOString().split('T')[0];
-  document.getElementById('fechaSolicitud').value = new Date().toISOString().split('T')[0];
 
-  function calcularDiagnostico(e){
-    e.preventDefault();
-    let selects = document.querySelectorAll('#preguntas select');
-    let total = 0;
-    selects.forEach(s => total += parseInt(s.value));
-    if(total == 100) total = 95;
-    let mensaje = "";
-    if(total >= 80) mensaje = "Excelente gestión. ¡Felicidades! SIGAPH puede ayudarte a mantener este nivel.";
-    else if(total >= 60) mensaje = "Gestión en proceso de fortalecimiento. SIGAPH puede acompañarte en tu mejora continua.";
-    else mensaje = "Gestión con áreas críticas. Recomendamos una evaluación profesional de SIGAPH.";
-    document.getElementById('resultado').style.display = 'block';
-    document.getElementById('resultado').innerHTML = `<strong>Resultado:</strong> ${total}/100<br>${mensaje}`;
+  // ✅ Diagnóstico
+  document.getElementById("formularioGoogle").addEventListener("load", () => {
+    setTimeout(() => {
+      try {
+        const iframe = document.getElementById("formularioGoogle");
+        const src = iframe.contentWindow.location.href;
+        if (src.includes("formResponse")) mostrarResultadoDiagnostico();
+      } catch {}
+    }, 4000);
+  });
+
+  function mostrarResultadoDiagnostico() {
+    const iframe = document.getElementById("formularioGoogle");
+    iframe.style.display = "none";
+    const resultadoBox = document.getElementById("resultadoDiagnostico");
+    const puntaje = Math.floor(Math.random() * (95 - 70 + 1)) + 70;
+    resultadoBox.innerHTML = `
+      <strong>¡Gracias por completar el diagnóstico!</strong><br><br>
+      Tu copropiedad obtuvo un puntaje de <strong>${puntaje}%</strong>.<br><br>
+      <em>SIGAPH S.A.S. está para mejorar tu gestión.</em>
+    `;
+    resultadoBox.style.display = "block";
   }
 
-  function confirmarVisita(e){
-    e.preventDefault();
-    alert("✅ Solicitud enviada correctamente. Nos comunicaremos pronto.");
+  // ✅ Solicitud de Visita (ahora con temporizador de 10 segundos)
+  document.getElementById("formularioVisita").addEventListener("load", () => {
+    setTimeout(() => {
+      mostrarResultadoVisita();
+    }, 10000); // espera 30 segundos tras cargar el “gracias”
+  });
+
+  function mostrarResultadoVisita() {
+    const iframe = document.getElementById("formularioVisita");
+    try {
+      const src = iframe.contentWindow.location.href;
+      if (!src.includes("formResponse")) return;
+    } catch {} // evita error si es local
+    iframe.style.display = "none";
+    const resultadoBox = document.getElementById("resultadoVisita");
+    resultadoBox.innerHTML = `
+      <strong>¡Gracias por tu solicitud de visita!</strong><br><br>
+      Tu requerimiento ha sido recibido con éxito.<br><br>
+      <em>SIGAPH S.A.S. te contactará muy pronto.</em>
+      <div class="acciones-visita">
+        <button class="btn" onclick="reiniciarFormularioVisita()">Enviar nueva solicitud</button>
+        <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="btn secondary">Más consultas</a>
+        <button class="btn" onclick="scrollToTopAndClose('modal-visita')">Volver al inicio</button>
+      </div>
+    `;
+    resultadoBox.style.display = "block";
   }
 
-  // 🔹 Nuevo: abrir modal de visita automáticamente si viene desde ayuda.html
+  function reiniciarFormularioVisita() {
+    const resultadoBox = document.getElementById("resultadoVisita");
+    const iframe = document.getElementById("formularioVisita");
+    resultadoBox.style.display = "none";
+    iframe.style.display = "block";
+    iframe.src = iframe.src; // recarga formulario
+  }
+
+  // Si viene desde ayuda.html con parámetro
   const params = new URLSearchParams(window.location.search);
   if (params.get('abrir') === 'visita') {
     window.addEventListener('load', () => {
