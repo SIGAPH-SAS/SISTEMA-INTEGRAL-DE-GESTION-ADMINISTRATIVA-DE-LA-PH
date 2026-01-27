@@ -307,6 +307,558 @@
     });
   }
 </script>
+<!-- 
+═══════════════════════════════════════════════════════════════════════════════
+  POPUP PUBLICITARIO SIGAPH S.A.S.
+  Código para insertar ANTES de la etiqueta </body> en index.html
+═══════════════════════════════════════════════════════════════════════════════
+-->
 
+<!-- ESTILOS DEL POPUP -->
+<style>
+  /* Overlay de fondo oscuro */
+  .popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 9998;
+    animation: fadeInOverlay 0.4s ease-in-out;
+  }
+
+  @keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* Contenedor del popup */
+  .popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    overflow-y: auto;
+    animation: slideInPopup 0.5s ease-out;
+  }
+
+  @keyframes slideInPopup {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -48%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  /* Botón cerrar */
+  .popup-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .popup-close:hover {
+    background-color: #c82333;
+    transform: rotate(90deg);
+  }
+
+  /* Header del popup */
+  .popup-header {
+    background: linear-gradient(135deg, #0a7b40 0%, #064e2a 100%);
+    color: white;
+    padding: 30px 25px;
+    border-radius: 20px 20px 0 0;
+    text-align: center;
+    position: relative;
+  }
+
+  .popup-header h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.8em;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .popup-header p {
+    margin: 0;
+    font-size: 1.1em;
+    opacity: 0.95;
+    line-height: 1.5;
+  }
+
+  /* Contenido del popup */
+  .popup-content {
+    padding: 30px 25px;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .popup-section {
+    margin-bottom: 25px;
+  }
+
+  .popup-section h3 {
+    color: #0a7b40;
+    font-size: 1.4em;
+    margin-bottom: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .popup-section p,
+  .popup-section li {
+    color: #555;
+    line-height: 1.7;
+    font-size: 0.95em;
+  }
+
+  /* Tabla de costos */
+  .tabla-costos {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .tabla-costos thead {
+    background: linear-gradient(135deg, #002b5c 0%, #003d7a 100%);
+    color: white;
+  }
+
+  .tabla-costos th,
+  .tabla-costos td {
+    padding: 14px 12px;
+    text-align: left;
+    font-size: 0.9em;
+  }
+
+  .tabla-costos tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+
+  .tabla-costos tbody tr:hover {
+    background-color: #e9ecef;
+  }
+
+  .tabla-costos tfoot {
+    background-color: #0a7b40;
+    color: white;
+    font-weight: 600;
+  }
+
+  .tabla-costos .highlight {
+    font-weight: bold;
+    color: #dc3545;
+  }
+
+  /* Lista de beneficios */
+  .lista-beneficios {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+  }
+
+  .lista-beneficios li {
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+    color: #333;
+    font-size: 0.95em;
+  }
+
+  .lista-beneficios li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #0a7b40;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  /* Box destacado */
+  .box-destacado {
+    background: linear-gradient(135deg, #fff8dc 0%, #fffaed 100%);
+    border-left: 5px solid #ffc107;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .box-destacado strong {
+    color: #0a7b40;
+    font-size: 1.1em;
+  }
+
+  /* Botones de acción */
+  .popup-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 25px;
+    flex-wrap: wrap;
+  }
+
+  .btn-popup {
+    padding: 14px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-popup.primary {
+    background: linear-gradient(135deg, #0a7b40 0%, #064e2a 100%);
+    color: white;
+  }
+
+  .btn-popup.primary:hover {
+    background: linear-gradient(135deg, #064e2a 0%, #043820 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-popup.secondary {
+    background: linear-gradient(135deg, #002b5c 0%, #021d3d 100%);
+    color: white;
+  }
+
+  .btn-popup.secondary:hover {
+    background: linear-gradient(135deg, #021d3d 0%, #011428 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Badge de urgencia */
+  .urgencia-badge {
+    display: inline-block;
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-left: 10px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  /* Icono decorativo */
+  .icon-section {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: #0a7b40;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    font-size: 1.2em;
+  }
+
+  /* Footer del popup */
+  .popup-footer {
+    background-color: #f8f9fa;
+    padding: 20px 25px;
+    border-radius: 0 0 20px 20px;
+    text-align: center;
+    border-top: 2px solid #e9ecef;
+  }
+
+  .popup-footer p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9em;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .popup-container {
+      width: 95%;
+      max-height: 90vh;
+    }
+
+    .popup-header h2 {
+      font-size: 1.4em;
+    }
+
+    .popup-header p {
+      font-size: 0.95em;
+    }
+
+    .popup-content {
+      padding: 20px 15px;
+    }
+
+    .popup-section h3 {
+      font-size: 1.2em;
+    }
+
+    .tabla-costos {
+      font-size: 0.85em;
+    }
+
+    .tabla-costos th,
+    .tabla-costos td {
+      padding: 10px 8px;
+    }
+
+    .btn-popup {
+      padding: 12px 20px;
+      font-size: 0.9em;
+      width: 100%;
+    }
+
+    .popup-actions {
+      flex-direction: column;
+    }
+  }
+
+  /* Scrollbar personalizado */
+  .popup-container::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .popup-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .popup-container::-webkit-scrollbar-thumb {
+    background: #0a7b40;
+    border-radius: 10px;
+  }
+
+  .popup-container::-webkit-scrollbar-thumb:hover {
+    background: #064e2a;
+  }
+</style>
+
+<!-- HTML DEL POPUP -->
+<div class="popup-overlay" id="popupOverlay" onclick="cerrarPopup()"></div>
+
+<div class="popup-container" id="popupPublicitario">
+  <button class="popup-close" onclick="cerrarPopup()">✕</button>
+  
+  <!-- Header -->
+  <div class="popup-header">
+    <h2>Estimado Administrador <span class="urgencia-badge">URGENTE</span></h2>
+    <p>Hace 30 días entró en vigencia el nuevo salario mínimo.<br>
+    Desde entonces, cada proveedor en su copropiedad está recalculando tarifas.</p>
+  </div>
+
+  <!-- Contenido -->
+  <div class="popup-content">
+    
+    <!-- Sección: La cuenta que nadie quiere hacer -->
+    <div class="popup-section">
+      <h3>
+        <span class="icon-section">📊</span>
+        LA CUENTA QUE NADIE QUIERE HACER
+      </h3>
+      <p>La cuenta es simple. Si su copropiedad invierte mensualmente:</p>
+      
+      <table class="tabla-costos">
+        <thead>
+          <tr>
+            <th>Servicio</th>
+            <th>Costo 2025</th>
+            <th>Costo 2026 (+23%)</th>
+            <th>Diferencia Anual</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Vigilancia Portería (1x24/7)</td>
+            <td>$ 12.311.060</td>
+            <td>$ 15.988.389</td>
+            <td class="highlight">$ 44.127.954</td>
+          </tr>
+          <tr>
+            <td>Mantenimientos recurrentes</td>
+            <td>$ 2.500.000</td>
+            <td>$ 3.075.000</td>
+            <td class="highlight">$ 6.900.000</td>
+          </tr>
+          <tr>
+            <td>Aseo (2 Operarios)</td>
+            <td>$ 6.170.821</td>
+            <td>$ 7.590.110</td>
+            <td class="highlight">$ 17.031.466</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td><strong>TOTAL</strong></td>
+            <td><strong>$ 20.981.881</strong></td>
+            <td><strong>$ 26.653.499</strong></td>
+            <td><strong>$ 68.059.420</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="box-destacado">
+        <p><strong>En nuestro ejemplo, son más de $68 millones al año de incremento.</strong><br>
+        Y aún no contamos con servicios públicos, seguros, gastos administrativos y financieros.</p>
+      </div>
+    </div>
+
+    <!-- Sección: El costo oculto -->
+    <div class="popup-section">
+      <h3>
+        <span class="icon-section">⏰</span>
+        EL COSTO OCULTO: SU TIEMPO
+      </h3>
+      <p><strong>¿Cuántas horas invirtió el mes pasado coordinando con proveedores?</strong></p>
+      <ul style="margin: 15px 0; padding-left: 20px;">
+        <li>Llamadas sin respuesta</li>
+        <li>Cotizaciones que no llegan</li>
+        <li>Emergencias que "nadie puede atender hoy"</li>
+        <li>Consejos preguntando por qué no se resolvió algo que usted ya escaló tres veces</li>
+      </ul>
+      <div class="box-destacado">
+        <p><strong>21 horas al mes, en promedio.</strong><br>
+        Eso es más de una semana laboral completa cada mes... gestionando lo que debería funcionar solo.</p>
+        <p style="margin-top: 10px;"><strong>¿Cuánto vale su tiempo?</strong></p>
+      </div>
+    </div>
+
+    <!-- Sección: Lo que proponemos -->
+    <div class="popup-section">
+      <h3>
+        <span class="icon-section">✨</span>
+        LO QUE PROPONEMOS
+      </h3>
+      <p><strong>Un diagnóstico presencial gratuito de 60 minutos</strong> donde identificaremos:</p>
+      <ul class="lista-beneficios">
+        <li>Los 3 puntos críticos de gestión en su copropiedad</li>
+        <li>Cuánto tiempo está perdiendo en coordinación operativa</li>
+        <li>Qué procesos podemos sistematizar esta semana</li>
+        <li>Cómo construir un sistema integral que respete su autonomía profesional</li>
+      </ul>
+      <div class="box-destacado">
+        <p><strong>Sin compromiso. Sin presión comercial.</strong><br>
+        Solo una conversación entre profesionales que entienden lo que significa administrar una copropiedad en Colombia.</p>
+      </div>
+    </div>
+
+    <!-- Sección: Por qué nosotros -->
+    <div class="popup-section">
+      <h3>
+        <span class="icon-section">🏆</span>
+        POR QUÉ SIGAPH S.A.S.
+      </h3>
+      <p><strong>Porque fuimos administradores antes de ser consultores.</strong></p>
+      <p>Conocemos la Ley 675. Conocemos la presión del Consejo. Conocemos la frustración de un proveedor que no cumple.</p>
+      <p style="margin-top: 15px;"><strong>Y conocemos cómo resolverlo.</strong></p>
+      <p style="margin-top: 15px;">Vigilancia, mantenimiento técnico, plomería, electricidad, CCTV, sistemas contra incendio, gestión arbórea, impermeabilización...</p>
+      <div class="box-destacado">
+        <p><strong>Un solo aliado. Un solo cronograma. Un solo canal de soluciones.</strong></p>
+      </div>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="popup-actions">
+      <button class="btn-popup primary" onclick="abrirSolicitudVisita()">
+        📅 Solicitar Diagnóstico Gratuito
+      </button>
+      <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="btn-popup secondary">
+        💬 Contactar por WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="popup-footer">
+    <p><strong>SIGAPH S.A.S.</strong> | Teléfonos: 321 851 1222 / 320 766 3189 / 314 731 8047</p>
+  </div>
+</div>
+
+<!-- JAVASCRIPT DEL POPUP -->
+<script>
+  // Función para mostrar el popup después de 5 segundos
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      mostrarPopup();
+    }, 5000); // 5000 = 5 segundos
+  });
+
+  function mostrarPopup() {
+    document.getElementById('popupOverlay').style.display = 'block';
+    document.getElementById('popupPublicitario').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Evita scroll del body
+  }
+
+  function cerrarPopup() {
+    document.getElementById('popupOverlay').style.display = 'none';
+    document.getElementById('popupPublicitario').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Restaura scroll del body
+  }
+
+  function abrirSolicitudVisita() {
+    cerrarPopup();
+    // Abre el modal de solicitud de visita que ya existe en tu página
+    openModal('modal-visita');
+  }
+
+  // Cerrar popup con tecla ESC
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      cerrarPopup();
+    }
+  });
+</script>
+
+<!-- 
+═══════════════════════════════════════════════════════════════════════════════
+  FIN DEL CÓDIGO DEL POPUP
+  Recuerda: este código debe ir ANTES de la etiqueta </body> en tu index.html
+═══════════════════════════════════════════════════════════════════════════════
+-->
+
+  
 </body>
 </html>
+
