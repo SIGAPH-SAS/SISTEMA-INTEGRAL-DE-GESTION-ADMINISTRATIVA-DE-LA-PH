@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIVIENDA AL DÍA | SIGAPH S.A.S. - Noticias y Actualidad en Propiedad Horizontal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════════════════
+       ESTILOS ESPECÍFICOS PARA VIVIENDA AL DÍA
+       ═══════════════════════════════════════════════════════════════════════ */
+    
+    /* Variables de color (manteniendo la línea de SIGAPH) */
+    :root {
+      --verde-principal: #0a7b40;
+      --verde-oscuro: #064e2a;
+      --verde-claro: #A2C33F;
+      --azul-principal: #002b5c;
+      --azul-oscuro: #021d3d;
+      --gris-claro: #f8f9fa;
+      --gris-medio: #e9ecef;
+      --gris-texto: #555;
+      --amarillo-destacado: #ffc107;
+      --rojo-urgente: #dc3545;
+      --blanco: #ffffff;
+    }
+
+    /* Hero Section de Vivienda al Día */
+    .hero-vivienda {
+      background: linear-gradient(135deg, var(--verde-principal) 0%, var(--verde-oscuro) 50%, var(--azul-principal) 100%);
+      min-height: 450px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 20px 60px;
+    }
+
+    .hero-vivienda::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.03)" width="50" height="50"/></svg>');
+      background-size: 50px 50px;
+      opacity: 0.3;
+    }
+
+    .hero-vivienda-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-vivienda h1 {
+      font-size: 3.5em;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      letter-spacing: -1px;
+      line-height: 1.2;
+    }
+
+    .hero-vivienda .badge-nuevo {
+      display: inline-block;
+      background: var(--rojo-urgente);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 25px;
+      font-size: 0.9em;
+      font-weight: 700;
+      margin-bottom: 15px;
+      animation: pulse-badge 2s infinite;
+      box-shadow: 0 4px 15px rgba(220, 53, 69, 0.5);
+    }
+
+    .hero-vivienda .subtitulo {
+      font-size: 1.3em;
+      color: rgba(255, 255, 255, 0.95);
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .hero-vivienda .fecha-actualizacion {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 12px 24px;
+      border-radius: 30px;
+      color: white;
+      font-weight: 600;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Sección de Filtros */
+    .filtros-section {
+      background: var(--gris-claro);
+      padding: 30px 20px;
+      border-bottom: 3px solid var(--verde-principal);
+    }
+
+    .filtros-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .filtro-btn {
+      background: white;
+      color: var(--gris-texto);
+      padding: 12px 24px;
+      border-radius: 25px;
+      border: 2px solid var(--gris-medio);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .filtro-btn:hover,
+    .filtro-btn.active {
+      background: var(--verde-principal);
+      color: white;
+      border-color: var(--verde-principal);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(10, 123, 64, 0.3);
+    }
+
+    /* Grid de Contenido */
+    .contenido-section {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .contenido-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    /* Tarjeta de Noticia/Contenido */
+    .contenido-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .contenido-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .contenido-card .categoria-badge {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: var(--verde-principal);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8em;
+      font-weight: 700;
+      z-index: 2;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .contenido-card.tipo-video .categoria-badge {
+      background: var(--rojo-urgente);
+    }
+
+    .contenido-card.tipo-nota .categoria-badge {
+      background: var(--azul-principal);
+    }
+
+    .contenido-card.tipo-podcast .categoria-badge {
+      background: var(--verde-claro);
+      color: var(--azul-oscuro);
+    }
+
+    .contenido-card .imagen-container {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+      background: linear-gradient(135deg, var(--gris-medio) 0%, var(--gris-claro) 100%);
+      overflow: hidden;
+    }
+
+    .contenido-card .imagen-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .contenido-card:hover .imagen-container img {
+      transform: scale(1.08);
+    }
+
+    .contenido-card .play-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70px;
+      height: 70px;
+      background: rgba(220, 53, 69, 0.95);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .contenido-card:hover .play-overlay {
+      transform: translate(-50%, -50%) scale(1.1);
+      background: var(--rojo-urgente);
+    }
+
+    .contenido-card .play-overlay svg {
+      width: 32px;
+      height: 32px;
+      fill: white;
+      margin-left: 4px;
+    }
+
+    .contenido-card .card-body {
+      padding: 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contenido-card .fecha {
+      color: var(--gris-texto);
+      font-size: 0.85em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .contenido-card h3 {
+      color: var(--azul-principal);
+      font-size: 1.4em;
+      font-weight: 700;
+      margin-bottom: 12px;
+      line-height: 1.3;
+      flex-grow: 1;
+    }
+
+    .contenido-card .descripcion {
+      color: var(--gris-texto);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-size: 0.95em;
+    }
+
+    .contenido-card .btn-leer-mas {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--verde-principal);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      align-self: flex-start;
+      margin-top: auto;
+    }
+
+    .contenido-card .btn-leer-mas:hover {
+      background: var(--verde-oscuro);
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(10, 123, 64, 0.3);
+    }
+
+    /* Sección Destacada - Presupuesto 2026 */
+    .seccion-destacada {
+      background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-oscuro) 100%);
+      padding: 60px 20px;
+      margin: 60px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .seccion-destacada::before {
+      content: '💡';
+      font-size: 300px;
+      position: absolute;
+      right: -50px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.05;
+    }
+
+    .seccion-destacada-contenido {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .seccion-destacada h2 {
+      color: white;
+      font-size: 2.5em;
+      font-weight: 800;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .seccion-destacada .iframe-container {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      margin-top: 30px;
+    }
+
+    .seccion-destacada iframe {
+      width: 100%;
+      min-height: 600px;
+      border: none;
+      border-radius: 12px;
+    }
+
+    /* Sección de WhatsApp */
+    .whatsapp-section {
+      background: linear-gradient(135deg, var(--verde-claro) 0%, var(--verde-principal) 100%);
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .whatsapp-section h2 {
+      color: white;
+      font-size: 2.2em;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .whatsapp-section p {
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .whatsapp-btn-grande {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      background: white;
+      color: var(--verde-principal);
+      padding: 18px 40px;
+      border-radius: 50px;
+      font-size: 1.2em;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .whatsapp-btn-grande:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+      background: var(--azul-principal);
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-vivienda h1 {
+        font-size: 2.2em;
+      }
+
+      .hero-vivienda .subtitulo {
+        font-size: 1.1em;
+      }
+
+      .contenido-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .seccion-destacada h2 {
+        font-size: 1.8em;
+      }
+
+      .seccion-destacada iframe {
+        min-height: 500px;
+      }
+
+      .filtros-container {
+        gap: 10px;
+      }
+
+      .filtro-btn {
+        padding: 10px 18px;
+        font-size: 0.9em;
+      }
+    }
+
+    /* Animaciones */
+    @keyframes pulse-badge {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Estado vacío */
+    .no-content {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--gris-texto);
+    }
+
+    .no-content svg {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 20px;
+      opacity: 0.3;
+    }
+
+    .no-content h3 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      color: var(--azul-principal);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <img src="logo_sigaph1.png" alt="Logo SIGAPH" />
+    <ul>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="servicios.html">Servicios</a></li>
+      <li><a href="tecnologia.html">Tecnología</a></li>
+      <li><a href="aliados.html">Aliados</a></li>
+      <li><a href="directorio.html">Directorio</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="ayuda.html" class="boton-verde">AYUDA DE GESTIÓN</a></li>
+      <li><a href="vivienda-al-dia.html" class="boton-vivienda" style="background: linear-gradient(135deg, #A2C33F 0%, #2E6E3D 100%); color: white; padding: 8px 18px; border-radius: 10px; font-weight: 700;">📰 VIVIENDA AL DÍA</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero-vivienda">
+  <div class="hero-vivienda-content">
+    <span class="badge-nuevo">¡ACTUALIZADO!</span>
+    <h1>📰 VIVIENDA AL DÍA</h1>
+    <p class="subtitulo">
+      Mantente informado con las últimas noticias, normativas, consejos y análisis sobre 
+      <strong>Propiedad Horizontal</strong> en Colombia
+    </p>
+    <div class="fecha-actualizacion">
+      <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+      </svg>
+      <span>Última actualización: Enero 2026</span>
+    </div>
+  </div>
+</section>
+
+<!-- Filtros de Contenido -->
+<section class="filtros-section">
+  <div class="filtros-container">
+    <button class="filtro-btn active" onclick="filtrarContenido('todos')">📋 Todos</button>
+    <button class="filtro-btn" onclick="filtrarContenido('noticias')">📰 Noticias</button>
+    <button class="filtro-btn" onclick="filtrarContenido('notas')">📝 Notas</button>
+    <button class="filtro-btn" onclick="filtrarContenido('videos')">🎥 Videos</button>
+    <button class="filtro-btn" onclick="filtrarContenido('podcast')">🎙️ Podcast</button>
+    <button class="filtro-btn" onclick="filtrarContenido('normativas')">⚖️ Normativas</button>
+  </div>
+</section>
+
+<!-- Grid de Contenido -->
+<section class="contenido-section">
+  <div class="contenido-grid" id="contenidoGrid">
+    
+    <!-- TARJETA 1: PRESUPUESTO 2026 (Nota destacada) -->
+    <div class="contenido-card tipo-nota fade-in-up" data-categoria="notas">
+      <span class="categoria-badge">📝 NOTA DESTACADA</span>
+      <div class="imagen-container">
+        <img src="imagensigaph1.jpg" alt="Presupuesto PH 2026" onerror="this.src='https://via.placeholder.com/600x340/002b5c/ffffff?text=Presupuesto+2026'">
+      </div>
+      <div class="card-body">
+        <div class="fecha">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+          </svg>
+          Enero 27, 2026
+        </div>
+        <h3>Cómo preparar el Presupuesto de tu Copropiedad para 2026</h3>
+        <p class="descripcion">
+          Con el incremento del salario mínimo en un 23%, los costos de servicios en propiedad horizontal 
+          se han disparado. Descubre cómo calcular tu presupuesto y evitar sorpresas.
+        </p>
+        <a href="#presupuesto-2026" class="btn-leer-mas" onclick="scrollToPresupuesto(event)">
+          Ver análisis completo
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- TARJETA 2: NOTICIA - Nuevo Decreto -->
+    <div class="contenido-card tipo-noticia fade-in-up" data-categoria="noticias normativas" style="animation-delay: 0.1s">
+      <span class="categoria-badge">📰 NOTICIA</span>
+      <div class="imagen-container">
+        <img src="imagensigaph2.jpg" alt="Nueva normativa" onerror="this.src='https://via.placeholder.com/600x340/0a7b40/ffffff?text=Normativa+PH'">
+      </div>
+      <div class="card-body">
+        <div class="fecha">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+          </svg>
+          Enero 20, 2026
+        </div>
+        <h3>Nuevas modificaciones a la Ley 675 de 2001</h3>
+        <p class="descripcion">
+          El Ministerio de Vivienda anunció cambios importantes en la regulación de propiedad horizontal. 
+          Conoce qué afecta a tu copropiedad.
+        </p>
+        <a href="javascript:void(0)" class="btn-leer-mas" onclick="alert('Próximamente: contenido completo')">
+          Leer más
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- TARJETA 3: VIDEO - Tutorial -->
+    <div class="contenido-card tipo-video fade-in-up" data-categoria="videos" style="animation-delay: 0.2s">
+      <span class="categoria-badge">🎥 VIDEO</span>
+      <div class="imagen-container">
+        <img src="imagensigaph3.jpg" alt="Video tutorial" onerror="this.src='https://via.placeholder.com/600x340/dc3545/ffffff?text=Video+Tutorial'">
+        <div class="play-overlay">
+          <svg viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="fecha">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+          </svg>
+          Enero 15, 2026
+        </div>
+        <h3>Cómo organizar una Asamblea Virtual exitosa</h3>
+        <p class="descripcion">
+          Tutorial paso a paso para administradores: plataformas, requisitos legales, quórum y 
+          resolución de conflictos en asambleas virtuales.
+        </p>
+        <a href="javascript:void(0)" class="btn-leer-mas" onclick="alert('Próximamente: video completo')">
+          Ver video
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- TARJETA 4: PODCAST - Entrevista -->
+    <div class="contenido-card tipo-podcast fade-in-up" data-categoria="podcast" style="animation-delay: 0.3s">
+      <span class="categoria-badge">🎙️ PODCAST</span>
+      <div class="imagen-container">
+        <img src="imagensigaph5.jpg" alt="Podcast" onerror="this.src='https://via.placeholder.com/600x340/A2C33F/002b5c?text=Podcast'">
+        <div class="play-overlay">
+          <svg viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="fecha">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+          </svg>
+          Enero 10, 2026
+        </div>
+        <h3>Episodio 12: Manejo de conflictos entre copropietarios</h3>
+        <p class="descripcion">
+          Entrevista con el abogado Juan Pérez sobre mediación, conciliación y solución 
+          de controversias en propiedad horizontal. 45 minutos de contenido valioso.
+        </p>
+        <a href="javascript:void(0)" class="btn-leer-mas" onclick="alert('Próximamente: episodio completo')">
+          Escuchar ahora
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- TARJETA 5: NOTA - Consejos prácticos -->
+    <div class="contenido-card tipo-nota fade-in-up" data-categoria="notas" style="animation-delay: 0.4s">
+      <span class="categoria-badge">📝 NOTA</span>
+      <div class="imagen-container">
+        <img src="imagensigaph1.jpg" alt="Consejos" onerror="this.src='https://via.placeholder.com/600x340/002b5c/ffffff?text=Consejos+Practicos'">
+      </div>
+      <div class="card-body">
+        <div class="fecha">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+          </svg>
+          Enero 5, 2026
+        </div>
+        <h3>5 errores comunes en la administración de copropiedades</h3>
+        <p class="descripcion">
+          Desde problemas con proveedores hasta errores en actas de asamblea. 
+          Aprende a evitar estas situaciones que pueden traer consecuencias legales.
+        </p>
+        <a href="javascript:void(0)" class="btn-leer-mas" onclick="alert('Próximamente: nota completa')">
+          Leer más
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- TARJETA 6: NORMATIVA - Resolución -->
+    <div class="contenido-card tipo-nota fade-in-up" data-categoria="normativas" style="animation-delay: 0.5s">
+      <span class="categoria-badge">⚖️ NORMATIVA</span>
+      <div class="imagen-container">
+        <img src="imagensigaph2.jpg" alt="Normativa" onerror="this.src='https://via.placeholder.com/600x340/0a7b40/ffffff?text=Normativa'">
+      </div>
+      <div class="card-body">
+        <div class="fecha">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+          </svg>
+          Diciembre 28, 2025
+        </div>
+        <h3>Guía completa sobre el Reglamento de Propiedad Horizontal</h3>
+        <p class="descripcion">
+          Todo lo que necesitas saber sobre la elaboración, modificación y aplicación 
+          del reglamento interno de tu copropiedad según la Ley 675.
+        </p>
+        <a href="javascript:void(0)" class="btn-leer-mas" onclick="alert('Próximamente: guía completa')">
+          Descargar guía
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Estado vacío (se muestra cuando el filtro no encuentra resultados) -->
+  <div id="noContent" class="no-content" style="display: none;">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <h3>No hay contenido disponible</h3>
+    <p>Pronto agregaremos más noticias y contenido en esta categoría.</p>
+  </div>
+</section>
+
+<!-- Sección Destacada: Presupuesto 2026 -->
+<section class="seccion-destacada" id="presupuesto-2026">
+  <div class="seccion-destacada-contenido">
+    <h2>💰 Presupuesto PH 2026: Análisis Completo</h2>
+    <p style="text-align: center; color: rgba(255, 255, 255, 0.9); font-size: 1.2em; margin-bottom: 30px;">
+      Calculadora interactiva y análisis del impacto del incremento salarial en tu copropiedad
+    </p>
+    <div class="iframe-container">
+      <iframe src="index__viviendo_al_dia.html" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Sección de WhatsApp -->
+<section class="whatsapp-section">
+  <h2>💬 Únete a nuestra comunidad</h2>
+  <p>
+    Recibe notificaciones instantáneas sobre nuevas publicaciones, normativas y contenido exclusivo 
+    directamente en tu WhatsApp
+  </p>
+  <a href="https://chat.whatsapp.com/F4NTcukQKXKK9qJbvMlKby" target="_blank" class="whatsapp-btn-grande">
+    <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span>Unirme al Grupo de WhatsApp</span>
+    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+    </svg>
+  </a>
+</section>
+
+<footer>
+  <div class="footer-icons">
+    <a href="mailto:sigaph.s.a.s@gmail.com" target="_blank" class="icono">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Correo">
+    </a>
+    <a href="https://www.instagram.com/sigaph" target="_blank" class="icono">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+    </a>
+    <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="icono">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+    </a>
+  </div>
+  <p>Teléfonos: 321 851 1222 / 320 766 3189 / 314 731 8047</p>
+  <p>&copy; 2025 SIGAPH S.A.S. – Todos los derechos reservados</p>
+</footer>
+
+<a href="https://wa.me/message/IX7AF6TMTLDVI1" target="_blank" class="whatsapp-float" title="¿Necesitas ayuda? ¡Chatea con nosotros!">
+  <div class="tooltip">¿Necesitas ayuda? ¡Chatea con nosotros!</div>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp">
+</a>
+
+<script>
+  // Sistema de filtros
+  function filtrarContenido(categoria) {
+    const cards = document.querySelectorAll('.contenido-card');
+    const noContent = document.getElementById('noContent');
+    const filtros = document.querySelectorAll('.filtro-btn');
+    let hayResultados = false;
+
+    // Actualizar estado de botones
+    filtros.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // Filtrar tarjetas
+    cards.forEach(card => {
+      const categorias = card.getAttribute('data-categoria');
+      
+      if (categoria === 'todos') {
+        card.style.display = 'flex';
+        hayResultados = true;
+      } else if (categorias.includes(categoria)) {
+        card.style.display = 'flex';
+        hayResultados = true;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Mostrar/ocultar mensaje de "no hay contenido"
+    noContent.style.display = hayResultados ? 'none' : 'block';
+  }
+
+  // Scroll suave a la sección de presupuesto
+  function scrollToPresupuesto(event) {
+    event.preventDefault();
+    const section = document.getElementById('presupuesto-2026');
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Animación de entrada al hacer scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.contenido-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    card.style.transition = 'all 0.6s ease';
+    observer.observe(card);
+  });
+</script>
+
+</body>
+</html>
