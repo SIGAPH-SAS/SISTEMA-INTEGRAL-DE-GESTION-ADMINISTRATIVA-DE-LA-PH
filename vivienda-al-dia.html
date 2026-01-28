@@ -3,479 +3,526 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VIVIENDA AL DÍA | SIGAPH S.A.S. - Noticias y Actualidad en Propiedad Horizontal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <title>VIVIENDA AL DÍA | El Periódico de la Propiedad Horizontal - SIGAPH S.A.S.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
   <style>
     /* ═══════════════════════════════════════════════════════════════════════
-       ESTILOS ESPECÍFICOS PARA VIVIENDA AL DÍA
+       DISEÑO MODERNO INSPIRADO EN ASUNTOS LEGALES + ESTILO SIGAPH
        ═══════════════════════════════════════════════════════════════════════ */
     
-    /* Variables de color (manteniendo la línea de SIGAPH) */
     :root {
-      --verde-principal: #0a7b40;
+      --verde-sigaph: #0a7b40;
       --verde-oscuro: #064e2a;
       --verde-claro: #A2C33F;
-      --azul-principal: #002b5c;
-      --azul-oscuro: #021d3d;
-      --gris-claro: #f8f9fa;
-      --gris-medio: #e9ecef;
-      --gris-texto: #555;
-      --amarillo-destacado: #ffc107;
-      --rojo-urgente: #dc3545;
-      --blanco: #ffffff;
+      --azul-sigaph: #002b5c;
+      --gris-fondo: #f5f5f5;
+      --gris-claro: #e0e0e0;
+      --texto-oscuro: #2c2c2c;
+      --texto-medio: #666;
     }
 
-    /* Hero Section de Vivienda al Día */
-    .hero-vivienda {
-      background: linear-gradient(135deg, var(--verde-principal) 0%, var(--verde-oscuro) 50%, var(--azul-principal) 100%);
-      min-height: 450px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      padding: 80px 20px 60px;
-    }
-
-    .hero-vivienda::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect fill="rgba(255,255,255,0.03)" width="50" height="50"/></svg>');
-      background-size: 50px 50px;
-      opacity: 0.3;
-    }
-
-    .hero-vivienda-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .hero-vivienda h1 {
-      font-size: 3.5em;
-      font-weight: 800;
-      color: white;
-      margin-bottom: 20px;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      letter-spacing: -1px;
-      line-height: 1.2;
-    }
-
-    .hero-vivienda .badge-nuevo {
-      display: inline-block;
-      background: var(--rojo-urgente);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 25px;
-      font-size: 0.9em;
-      font-weight: 700;
-      margin-bottom: 15px;
-      animation: pulse-badge 2s infinite;
-      box-shadow: 0 4px 15px rgba(220, 53, 69, 0.5);
-    }
-
-    .hero-vivienda .subtitulo {
-      font-size: 1.3em;
-      color: rgba(255, 255, 255, 0.95);
-      margin-bottom: 25px;
-      line-height: 1.6;
-    }
-
-    .hero-vivienda .fecha-actualizacion {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
-      padding: 12px 24px;
-      border-radius: 30px;
-      color: white;
-      font-weight: 600;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-    }
-
-    /* Sección de Filtros */
-    .filtros-section {
-      background: var(--gris-claro);
-      padding: 30px 20px;
-      border-bottom: 3px solid var(--verde-principal);
-    }
-
-    .filtros-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .filtro-btn {
-      background: white;
-      color: var(--gris-texto);
-      padding: 12px 24px;
-      border-radius: 25px;
-      border: 2px solid var(--gris-medio);
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
+    body {
+      background: var(--gris-fondo);
       font-family: 'Poppins', sans-serif;
     }
 
-    .filtro-btn:hover,
-    .filtro-btn.active {
-      background: var(--verde-principal);
-      color: white;
-      border-color: var(--verde-principal);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(10, 123, 64, 0.3);
+    /* Header Moderno */
+    .header-periodico {
+      background: white;
+      border-bottom: 4px solid var(--verde-sigaph);
+      padding: 20px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
-    /* Grid de Contenido */
-    .contenido-section {
+    .header-content {
       max-width: 1200px;
-      margin: 60px auto;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .logo-vivienda {
+      font-family: 'Merriweather', serif;
+      font-size: 2.2em;
+      font-weight: 900;
+      color: var(--verde-sigaph);
+      letter-spacing: -1px;
+    }
+
+    .fecha-actual {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--texto-medio);
+      font-size: 0.9em;
+      background: var(--gris-fondo);
+      padding: 8px 16px;
+      border-radius: 20px;
+    }
+
+    .badge-actualizado {
+      background: var(--verde-claro);
+      color: var(--azul-sigaph);
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.75em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* Navegación de Tabs */
+    .tabs-nav {
+      background: white;
+      border-bottom: 2px solid var(--gris-claro);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .tabs-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 18px 30px;
+      border: none;
+      background: transparent;
+      color: var(--texto-medio);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .tab-btn:hover {
+      color: var(--verde-sigaph);
+      background: var(--gris-fondo);
+    }
+
+    .tab-btn.active {
+      color: var(--verde-sigaph);
+      border-bottom-color: var(--verde-sigaph);
+      background: white;
+    }
+
+    /* Container Principal */
+    .container-principal {
+      max-width: 1200px;
+      margin: 40px auto;
       padding: 0 20px;
     }
 
-    .contenido-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
+    /* ═══════════════════════════════════════════════════════════════════════
+       SECCIÓN DE NOTICIAS
+       ═══════════════════════════════════════════════════════════════════════ */
 
-    /* Tarjeta de Noticia/Contenido */
-    .contenido-card {
+    /* Noticia Destacada */
+    .noticia-destacada {
       background: white;
-      border-radius: 20px;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border-left: 5px solid var(--verde-sigaph);
     }
 
-    .contenido-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    .noticia-destacada-img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
     }
 
-    .contenido-card .categoria-badge {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: var(--verde-principal);
+    .noticia-destacada-contenido {
+      padding: 30px;
+    }
+
+    .tag-urgente {
+      display: inline-block;
+      background: #dc3545;
       color: white;
       padding: 6px 14px;
       border-radius: 20px;
-      font-size: 0.8em;
+      font-size: 0.75em;
       font-weight: 700;
-      z-index: 2;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      margin-bottom: 15px;
     }
 
-    .contenido-card.tipo-video .categoria-badge {
-      background: var(--rojo-urgente);
+    .noticia-destacada h2 {
+      font-family: 'Merriweather', serif;
+      font-size: 2.2em;
+      font-weight: 900;
+      color: var(--texto-oscuro);
+      line-height: 1.3;
+      margin-bottom: 15px;
     }
 
-    .contenido-card.tipo-nota .categoria-badge {
-      background: var(--azul-principal);
+    .noticia-destacada .resumen {
+      font-size: 1.1em;
+      color: var(--texto-medio);
+      line-height: 1.7;
+      margin-bottom: 20px;
     }
 
-    .contenido-card.tipo-podcast .categoria-badge {
-      background: var(--verde-claro);
-      color: var(--azul-oscuro);
-    }
-
-    .contenido-card .imagen-container {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%; /* 16:9 aspect ratio */
-      background: linear-gradient(135deg, var(--gris-medio) 0%, var(--gris-claro) 100%);
-      overflow: hidden;
-    }
-
-    .contenido-card .imagen-container img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .contenido-card:hover .imagen-container img {
-      transform: scale(1.08);
-    }
-
-    .contenido-card .play-overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 70px;
-      height: 70px;
-      background: rgba(220, 53, 69, 0.95);
-      border-radius: 50%;
+    .meta-noticia {
       display: flex;
       align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      gap: 20px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--gris-claro);
+      flex-wrap: wrap;
     }
 
-    .contenido-card:hover .play-overlay {
-      transform: translate(-50%, -50%) scale(1.1);
-      background: var(--rojo-urgente);
-    }
-
-    .contenido-card .play-overlay svg {
-      width: 32px;
-      height: 32px;
-      fill: white;
-      margin-left: 4px;
-    }
-
-    .contenido-card .card-body {
-      padding: 25px;
-      flex-grow: 1;
+    .meta-item {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      color: var(--texto-medio);
+      font-size: 0.9em;
     }
 
-    .contenido-card .fecha {
-      color: var(--gris-texto);
+    .btn-leer {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--verde-sigaph);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-leer:hover {
+      background: var(--verde-oscuro);
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(10,123,64,0.3);
+    }
+
+    /* Grid de Noticias */
+    .grid-noticias {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .tarjeta-noticia {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      transition: all 0.3s ease;
+      border-top: 3px solid var(--verde-claro);
+    }
+
+    .tarjeta-noticia:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    .tarjeta-noticia-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .tarjeta-noticia-contenido {
+      padding: 20px;
+    }
+
+    .tarjeta-fecha {
+      color: var(--texto-medio);
       font-size: 0.85em;
       margin-bottom: 10px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
-    .contenido-card h3 {
-      color: var(--azul-principal);
-      font-size: 1.4em;
+    .tarjeta-noticia h3 {
+      font-family: 'Merriweather', serif;
+      font-size: 1.3em;
       font-weight: 700;
+      color: var(--texto-oscuro);
       margin-bottom: 12px;
-      line-height: 1.3;
-      flex-grow: 1;
+      line-height: 1.4;
     }
 
-    .contenido-card .descripcion {
-      color: var(--gris-texto);
+    .tarjeta-noticia p {
+      color: var(--texto-medio);
       line-height: 1.7;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       font-size: 0.95em;
     }
 
-    .contenido-card .btn-leer-mas {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--verde-principal);
-      color: white;
-      padding: 12px 24px;
-      border-radius: 25px;
-      text-decoration: none;
+    .tarjeta-fuente {
+      color: var(--verde-sigaph);
+      font-size: 0.85em;
       font-weight: 600;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       SECCIÓN DE CLASIFICADOS
+       ═══════════════════════════════════════════════════════════════════════ */
+
+    .clasificados-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .clasificados-header h2 {
+      font-family: 'Merriweather', serif;
+      font-size: 2.5em;
+      font-weight: 900;
+      color: var(--texto-oscuro);
+      margin-bottom: 15px;
+    }
+
+    .clasificados-header p {
+      font-size: 1.1em;
+      color: var(--texto-medio);
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    .filtros-clasificados {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .filtro-btn {
+      background: white;
+      border: 2px solid var(--gris-claro);
+      padding: 10px 24px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
       transition: all 0.3s ease;
-      align-self: flex-start;
-      margin-top: auto;
     }
 
-    .contenido-card .btn-leer-mas:hover {
-      background: var(--verde-oscuro);
-      transform: translateX(5px);
-      box-shadow: 0 4px 15px rgba(10, 123, 64, 0.3);
+    .filtro-btn:hover,
+    .filtro-btn.active {
+      background: var(--azul-sigaph);
+      color: white;
+      border-color: var(--azul-sigaph);
     }
 
-    /* Sección Destacada - Presupuesto 2026 */
-    .seccion-destacada {
-      background: linear-gradient(135deg, var(--azul-principal) 0%, var(--azul-oscuro) 100%);
-      padding: 60px 20px;
-      margin: 60px 0;
-      position: relative;
+    .grid-clasificados {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .clasificado-card {
+      background: white;
+      border-radius: 12px;
       overflow: hidden;
-    }
-
-    .seccion-destacada::before {
-      content: '💡';
-      font-size: 300px;
-      position: absolute;
-      right: -50px;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.05;
-    }
-
-    .seccion-destacada-contenido {
-      max-width: 1200px;
-      margin: 0 auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      transition: all 0.3s ease;
       position: relative;
+    }
+
+    .clasificado-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    .clasificado-tipo {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: var(--verde-sigaph);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75em;
+      font-weight: 700;
+      text-transform: uppercase;
       z-index: 2;
     }
 
-    .seccion-destacada h2 {
-      color: white;
-      font-size: 2.5em;
-      font-weight: 800;
-      margin-bottom: 20px;
-      text-align: center;
+    .clasificado-card.alquiler .clasificado-tipo {
+      background: var(--azul-sigaph);
     }
 
-    .seccion-destacada .iframe-container {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-      margin-top: 30px;
-    }
-
-    .seccion-destacada iframe {
+    .clasificado-img {
       width: 100%;
-      min-height: 600px;
-      border: none;
-      border-radius: 12px;
+      height: 200px;
+      object-fit: cover;
     }
 
-    /* Sección de WhatsApp */
-    .whatsapp-section {
-      background: linear-gradient(135deg, var(--verde-claro) 0%, var(--verde-principal) 100%);
-      padding: 60px 20px;
-      text-align: center;
+    .clasificado-contenido {
+      padding: 20px;
     }
 
-    .whatsapp-section h2 {
-      color: white;
-      font-size: 2.2em;
-      font-weight: 800;
-      margin-bottom: 20px;
-    }
-
-    .whatsapp-section p {
-      color: rgba(255, 255, 255, 0.95);
-      font-size: 1.2em;
-      margin-bottom: 30px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .whatsapp-btn-grande {
-      display: inline-flex;
-      align-items: center;
-      gap: 15px;
-      background: white;
-      color: var(--verde-principal);
-      padding: 18px 40px;
-      border-radius: 50px;
+    .clasificado-titulo {
+      font-family: 'Merriweather', serif;
       font-size: 1.2em;
       font-weight: 700;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      color: var(--texto-oscuro);
+      margin-bottom: 10px;
+      line-height: 1.3;
     }
 
-    .whatsapp-btn-grande:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
-      background: var(--azul-principal);
+    .clasificado-ubicacion {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--texto-medio);
+      font-size: 0.9em;
+      margin-bottom: 12px;
+    }
+
+    .clasificado-specs {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--gris-claro);
+    }
+
+    .clasificado-spec {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.85em;
+      color: var(--texto-medio);
+    }
+
+    .clasificado-precio {
+      font-size: 1.5em;
+      font-weight: 700;
+      color: var(--verde-sigaph);
+      margin-bottom: 15px;
+    }
+
+    .clasificado-descripcion {
+      color: var(--texto-medio);
+      font-size: 0.9em;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .clasificado-contacto {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-contacto {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+      font-size: 0.9em;
+    }
+
+    .btn-contacto.whatsapp {
+      background: #25D366;
       color: white;
+    }
+
+    .btn-contacto.whatsapp:hover {
+      background: #128C7E;
+    }
+
+    .btn-contacto.info {
+      background: var(--azul-sigaph);
+      color: white;
+    }
+
+    .btn-contacto.info:hover {
+      background: #001a3d;
+    }
+
+    .btn-publicar {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--verde-claro);
+      color: var(--azul-sigaph);
+      padding: 15px 35px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1.1em;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(162,195,63,0.3);
+      margin: 30px auto;
+      display: inline-flex;
+    }
+
+    .btn-publicar:hover {
+      background: var(--verde-sigaph);
+      color: white;
+      transform: translateY(-3px);
     }
 
     /* Responsive */
     @media (max-width: 768px) {
-      .hero-vivienda h1 {
-        font-size: 2.2em;
+      .logo-vivienda {
+        font-size: 1.6em;
       }
 
-      .hero-vivienda .subtitulo {
-        font-size: 1.1em;
+      .header-content {
+        flex-direction: column;
+        text-align: center;
       }
 
-      .contenido-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
+      .tabs-container {
+        justify-content: flex-start;
       }
 
-      .seccion-destacada h2 {
-        font-size: 1.8em;
-      }
-
-      .seccion-destacada iframe {
-        min-height: 500px;
-      }
-
-      .filtros-container {
-        gap: 10px;
-      }
-
-      .filtro-btn {
-        padding: 10px 18px;
+      .tab-btn {
+        padding: 15px 20px;
         font-size: 0.9em;
       }
-    }
 
-    /* Animaciones */
-    @keyframes pulse-badge {
-      0%, 100% {
-        transform: scale(1);
-        opacity: 1;
+      .noticia-destacada h2 {
+        font-size: 1.6em;
       }
-      50% {
-        transform: scale(1.05);
-        opacity: 0.9;
-      }
-    }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
+      .grid-noticias,
+      .grid-clasificados {
+        grid-template-columns: 1fr;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+
+      .clasificados-header h2 {
+        font-size: 1.8em;
       }
     }
 
-    .fade-in-up {
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    /* Estado vacío */
-    .no-content {
-      text-align: center;
-      padding: 80px 20px;
-      color: var(--gris-texto);
-    }
-
-    .no-content svg {
-      width: 120px;
-      height: 120px;
-      margin-bottom: 20px;
-      opacity: 0.3;
-    }
-
-    .no-content h3 {
-      font-size: 1.5em;
-      margin-bottom: 10px;
-      color: var(--azul-principal);
+    /* Ocultar secciones */
+    .seccion-oculta {
+      display: none;
     }
   </style>
 </head>
@@ -498,350 +545,454 @@
   </nav>
 </header>
 
-<!-- Hero Section -->
-<section class="hero-vivienda">
-  <div class="hero-vivienda-content">
-    <span class="badge-nuevo">¡ACTUALIZADO!</span>
-    <h1>📰 VIVIENDA AL DÍA</h1>
-    <p class="subtitulo">
-      Mantente informado con las últimas noticias, normativas, consejos y análisis sobre 
-      <strong>Propiedad Horizontal</strong> en Colombia
-    </p>
-    <div class="fecha-actualizacion">
-      <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
-      </svg>
-      <span>Última actualización: Enero 2026</span>
+<!-- Header del Periódico -->
+<section class="header-periodico">
+  <div class="header-content">
+    <div>
+      <div class="logo-vivienda">📰 VIVIENDA AL DÍA</div>
+      <p style="margin: 5px 0 0; color: var(--texto-medio); font-size: 0.9em;">El Periódico de la Propiedad Horizontal en Colombia</p>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+      <div class="fecha-actual">
+        <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+        </svg>
+        <span>Enero 27, 2026</span>
+      </div>
+      <span class="badge-actualizado">✓ Actualizado</span>
     </div>
   </div>
 </section>
 
-<!-- Filtros de Contenido -->
-<section class="filtros-section">
-  <div class="filtros-container">
-    <button class="filtro-btn active" onclick="filtrarContenido('todos')">📋 Todos</button>
-    <button class="filtro-btn" onclick="filtrarContenido('noticias')">📰 Noticias</button>
-    <button class="filtro-btn" onclick="filtrarContenido('notas')">📝 Notas</button>
-    <button class="filtro-btn" onclick="filtrarContenido('videos')">🎥 Videos</button>
-    <button class="filtro-btn" onclick="filtrarContenido('podcast')">🎙️ Podcast</button>
-    <button class="filtro-btn" onclick="filtrarContenido('normativas')">⚖️ Normativas</button>
+<!-- Navegación por Tabs -->
+<nav class="tabs-nav">
+  <div class="tabs-container">
+    <button class="tab-btn active" onclick="cambiarTab('noticias')">📋 Noticias</button>
+    <button class="tab-btn" onclick="cambiarTab('clasificados')">🏠 Clasificados</button>
   </div>
-</section>
+</nav>
 
-<!-- Grid de Contenido -->
-<section class="contenido-section">
-  <div class="contenido-grid" id="contenidoGrid">
-    <!-- 
-═══════════════════════════════════════════════════════════════════════════════
-  TARJETA PARA VIVIENDA AL DÍA - ENLACE A PÁGINA EXTERNA
+<!-- SECCIÓN DE NOTICIAS -->
+<section class="container-principal" id="seccion-noticias">
   
-  📍 DÓNDE COLOCAR:
-  1. Abre: vivienda-al-dia.html en GitHub
-  2. Busca: <div class="contenido-grid" id="contenidoGrid">
-  3. Pega esta tarjeta como LA PRIMERA (línea siguiente)
-  4. Guarda
+  <!-- 
+  ═══════════════════════════════════════════════════════════════════════════════
+  🔥 NOTICIA DESTACADA PRINCIPAL (Tu enlace externo)
   
-  🔗 ENLACE: https://sigaph-sas.github.io/2026/
+  CÓMO ACTUALIZAR FÁCILMENTE:
+  1. Cambia la imagen: src="TU_IMAGEN.jpg"
+  2. Cambia la fecha: <span>Tu nueva fecha</span>
+  3. Cambia el título: <h2>Tu nuevo título</h2>
+  4. Cambia el resumen: <p class="resumen">Tu nuevo resumen...</p>
+  5. Cambia el enlace: href="TU_ENLACE_EXTERNO"
   
-  ✅ VENTAJA: Cambias el contenido en tu página 2026 y automáticamente 
-     se actualiza sin tocar Vivienda al Día
+  ⏱️ Tiempo de edición: 3 minutos
+  ═══════════════════════════════════════════════════════════════════════════════
+  -->
   
-═══════════════════════════════════════════════════════════════════════════════
--->
-
-    <!-- 🚨 NOTICIA URGENTE - INCREMENTO SALARIAL 2026 (ENLACE EXTERNO) -->
-    <div class="contenido-card tipo-noticia fade-in-up" data-categoria="noticias" style="animation-delay: 0s; border: 3px solid #dc3545;">
-      <span class="categoria-badge" style="background-color: #dc3545;">🚨 URGENTE</span>
-      
-      <div class="imagen-container">
-        <img src="imagensigaph1.jpg" alt="Incremento Salarial 2026" onerror="this.src='https://via.placeholder.com/600x340/dc3545/ffffff?text=URGENTE+Salario+2026'">
-      </div>
-      
-      <div class="card-body">
-        <div class="fecha">
+  <article class="noticia-destacada">
+    <img src="imagensigaph1.jpg" alt="Noticia Principal" class="noticia-destacada-img" onerror="this.src='https://via.placeholder.com/800x400/0a7b40/ffffff?text=Noticia+Principal'">
+    <div class="noticia-destacada-contenido">
+      <span class="tag-urgente">🚨 URGENTE</span>
+      <h2>Incremento Salarial 2026: Impacto de $68 Millones en tu Copropiedad</h2>
+      <p class="resumen">
+        Hace 30 días entró en vigencia el nuevo salario mínimo con incremento del 23%. 
+        Cada proveedor está recalculando tarifas. Vigilancia, mantenimiento y aseo aumentan drásticamente. 
+        Descubre el impacto real en tu presupuesto.
+      </p>
+      <div class="meta-noticia">
+        <div class="meta-item">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
           </svg>
-          Enero 27, 2026
+          <span>Enero 27, 2026</span>
         </div>
-        
-        <h3>💰 Incremento Salarial 2026: Impacto de $68 Millones en tu Copropiedad</h3>
-        
-        <p class="descripcion">
-          Hace 30 días entró en vigencia el nuevo salario mínimo con incremento del 23%. 
-          Cada proveedor está recalculando tarifas. Descubre el impacto real en vigilancia, 
-          mantenimiento y aseo de tu copropiedad.
-        </p>
-        
-        <div style="background: linear-gradient(135deg, #ffe6e6 0%, #fff0f0 100%); border-left: 5px solid #dc3545; padding: 15px; border-radius: 8px; margin: 15px 0;">
-          <p style="margin: 0; color: #dc3545; font-weight: 700; font-size: 0.95em;">
-            ⚠️ IMPORTANTE: Esta información afecta directamente tu presupuesto 2026
-          </p>
-        </div>
-        
-        <a href="https://sigaph-sas.github.io/2026/" target="_blank" class="btn-leer-mas" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);">
-          Ver análisis completo
-          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+        <div class="meta-item">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
           </svg>
-        </a>
+          <span>Equipo SIGAPH</span>
+        </div>
+        <div class="meta-item">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4l.707.707 3 3a1 1 0 001.414-1.414L11 9.586V6z" clip-rule="evenodd"></path>
+          </svg>
+          <span>8 min lectura</span>
+        </div>
       </div>
+      <a href="https://sigaph-sas.github.io/2026/" target="_blank" class="btn-leer">
+        Leer análisis completo
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+        </svg>
+      </a>
     </div>
+  </article>
 
-<!-- 
-═══════════════════════════════════════════════════════════════════════════════
-  ✅ LISTO - ASÍ DEBE QUEDAR EN vivienda-al-dia.html
-═══════════════════════════════════════════════════════════════════════════════
-
-<div class="contenido-grid" id="contenidoGrid">
+  <!-- 
+  ═══════════════════════════════════════════════════════════════════════════════
+  📰 NOTICIAS ADICIONALES (Enlaces externos de periódicos)
   
-  👇 PEGA LA TARJETA AQUÍ (LA DE ARRIBA) 👇
+  PARA AGREGAR UNA NOTICIA NUEVA:
+  1. Copia todo el bloque <article class="tarjeta-noticia">...</article>
+  2. Pega debajo de la última noticia
+  3. Cambia:
+     - src="IMAGEN" (opcional)
+     - Fecha
+     - Título
+     - Descripción breve
+     - Fuente
+     - href="ENLACE_AL_ARTICULO_ORIGINAL"
   
-  <!-- 🚨 NOTICIA URGENTE - INCREMENTO SALARIAL 2026 -->
-  <div class="contenido-card tipo-noticia...>
-    ...
-  </div>
-  
-  <!-- Luego continúan las demás tarjetas que ya existen -->
-  <div class="contenido-card tipo-nota...>
-    ...
-  </div>
-  
-</div>
+  ⏱️ Tiempo: 2 minutos por noticia
+  ═══════════════════════════════════════════════════════════════════════════════
+  -->
 
-═══════════════════════════════════════════════════════════════════════════════
-  📝 PARA ACTUALIZAR EL CONTENIDO EN EL FUTURO
-═══════════════════════════════════════════════════════════════════════════════
-
-OPCIÓN 1 - CAMBIAR TODO EL CONTENIDO:
-➡️ Editas tu página: https://sigaph-sas.github.io/2026/
-➡️ El enlace sigue funcionando automáticamente
-➡️ NO necesitas tocar vivienda-al-dia.html ✅
-
-OPCIÓN 2 - CAMBIAR SOLO TÍTULO/DESCRIPCIÓN DE LA TARJETA:
-➡️ Editas vivienda-al-dia.html
-➡️ Cambias el <h3> (título)
-➡️ Cambias el <p class="descripcion"> (descripción)
-➡️ Guardas
-
-OPCIÓN 3 - APUNTAR A OTRA PÁGINA:
-➡️ Editas vivienda-al-dia.html
-➡️ Cambias: href="https://sigaph-sas.github.io/2026/"
-➡️ Por: href="https://sigaph-sas.github.io/OTRA-PAGINA/"
-➡️ Guardas
-
-═══════════════════════════════════════════════════════════════════════════════
--->
+  <div class="grid-noticias">
     
-    <!-- TARJETA 1: PRESUPUESTO 2026 (Nota destacada) -->
-    <div class="contenido-card tipo-nota fade-in-up" data-categoria="notas">
-      <span class="categoria-badge">📝 NOTA DESTACADA</span>
-      <div class="imagen-container">
-        <img src="imagensigaph1.jpg" alt="Presupuesto PH 2026" onerror="this.src='https://via.placeholder.com/600x340/002b5c/ffffff?text=Presupuesto+2026'">
-      </div>
-      <div class="card-body">
-        <div class="fecha">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-          </svg>
-          Enero 27, 2026
-        </div>
-        <h3>Cómo preparar el Presupuesto de tu Copropiedad para 2026</h3>
-        <p class="descripcion">
-          Con el incremento del salario mínimo en un 23%, los costos de servicios en propiedad horizontal 
-          se han disparado. Descubre cómo calcular tu presupuesto y evitar sorpresas.
-        </p>
-        <a href="#presupuesto-2026" class="btn-leer-mas" onclick="scrollToPresupuesto(event)">
-          Ver análisis completo
-          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-          </svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- TARJETA 2: NOTICIA - Nuevo Decreto -->
-    <div class="contenido-card tipo-noticia fade-in-up" data-categoria="noticias normativas" style="animation-delay: 0.1s">
-      <span class="categoria-badge">📰 NOTICIA</span>
-      <div class="imagen-container">
-        <img src="imagensigaph2.jpg" alt="Nueva normativa" onerror="this.src='https://via.placeholder.com/600x340/0a7b40/ffffff?text=Normativa+PH'">
-      </div>
-      <div class="card-body">
-        <div class="fecha">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-          </svg>
-          Enero 20, 2026
-        </div>
-        <h3>Nuevas modificaciones a la Ley 675 de 2001</h3>
-        <p class="descripcion">
-          El Ministerio de Vivienda anunció cambios importantes en la regulación de propiedad horizontal. 
-          Conoce qué afecta a tu copropiedad.
-        </p>
-        <a href="javascript:void(0)" class="btn-leer-mas" onclick="alert('Próximamente: contenido completo')">
-          Leer más
-          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-          </svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- TARJETA 3: VIDEO - Tutorial -->
-    <div class="contenido-card tipo-video fade-in-up" data-categoria="videos" style="animation-delay: 0.2s">
-      <span class="categoria-badge">🎥 VIDEO</span>
-      <div class="imagen-container">
-        <img src="imagensigaph3.jpg" alt="Video tutorial" onerror="this.src='https://via.placeholder.com/600x340/dc3545/ffffff?text=Video+Tutorial'">
-        <div class="play-overlay">
-          <svg viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="fecha">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+    <!-- NOTICIA 1 -->
+    <article class="tarjeta-noticia">
+      <img src="imagensigaph2.jpg" alt="Asamblea Copropietarios" class="tarjeta-noticia-img" onerror="this.src='https://via.placeholder.com/400x220/0a7b40/ffffff?text=Noticia'">
+      <div class="tarjeta-noticia-contenido">
+        <div class="tarjeta-fecha">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
           </svg>
           Enero 15, 2026
         </div>
-        <h3>Cómo organizar una Asamblea Virtual exitosa</h3>
-        <p class="descripcion">
-          Tutorial paso a paso para administradores: plataformas, requisitos legales, quórum y 
-          resolución de conflictos en asambleas virtuales.
+        <h3>Por aumento del salario mínimo, usted no debe faltar a la asamblea de copropietarios en 2026</h3>
+        <p>
+          Fedelonjas advierte que el impacto del aumento salarial afectará directamente las cuotas de administración. 
+          Es crucial asistir a las asambleas para aprobar presupuestos realistas.
         </p>
-        <a href="javascript:void(0)" class="btn-leer-mas" onclick="alert('Próximamente: video completo')">
-          Ver video
+        <div class="tarjeta-fuente">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path>
+          </svg>
+          El Tiempo
+        </div>
+        <a href="https://www.eltiempo.com/economia/finanzas-personales/por-aumento-del-salario-minimo-usted-no-debe-faltar-en-2026-a-la-asamblea-de-copropietarios-fedelonjas-3526991" target="_blank" class="btn-leer">
+          Leer en El Tiempo
           <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
           </svg>
         </a>
       </div>
-    </div>
+    </article>
 
-    <!-- TARJETA 4: PODCAST - Entrevista -->
-    <div class="contenido-card tipo-podcast fade-in-up" data-categoria="podcast" style="animation-delay: 0.3s">
-      <span class="categoria-badge">🎙️ PODCAST</span>
-      <div class="imagen-container">
-        <img src="imagensigaph5.jpg" alt="Podcast" onerror="this.src='https://via.placeholder.com/600x340/A2C33F/002b5c?text=Podcast'">
-        <div class="play-overlay">
-          <svg viewBox="0 0 24 24">
-            <path d="M8 5v14l11-7z"/>
-          </svg>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="fecha">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+    <!-- NOTICIA 2 -->
+    <article class="tarjeta-noticia">
+      <img src="imagensigaph3.jpg" alt="Cuotas Administración" class="tarjeta-noticia-img" onerror="this.src='https://via.placeholder.com/400x220/002b5c/ffffff?text=Cuotas+2026'">
+      <div class="tarjeta-noticia-contenido">
+        <div class="tarjeta-fecha">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
           </svg>
-          Enero 10, 2026
+          Enero 12, 2026
         </div>
-        <h3>Episodio 12: Manejo de conflictos entre copropietarios</h3>
-        <p class="descripcion">
-          Entrevista con el abogado Juan Pérez sobre mediación, conciliación y solución 
-          de controversias en propiedad horizontal. 45 minutos de contenido valioso.
+        <h3>Cuotas de administración subirían hasta 20% en 2026 por alza del salario mínimo</h3>
+        <p>
+          La Lonja de Propiedad Horizontal del Atlántico advierte sobre el impacto en vigilancia, 
+          aseo y conserjería. Contratos podrían aumentar entre 18% y 25%.
         </p>
-        <a href="javascript:void(0)" class="btn-leer-mas" onclick="alert('Próximamente: episodio completo')">
-          Escuchar ahora
+        <div class="tarjeta-fuente">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path>
+          </svg>
+          El Tiempo
+        </div>
+        <a href="https://www.eltiempo.com/colombia/barranquilla/lonja-de-propiedad-horizontal-del-atlantico-advierte-que-cuotas-de-administracion-subirian-hasta-20-en-2026-por-alza-del-salario-minimo-3520686" target="_blank" class="btn-leer">
+          Leer en El Tiempo
           <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
           </svg>
         </a>
       </div>
-    </div>
+    </article>
 
-    <!-- TARJETA 5: NOTA - Consejos prácticos -->
-    <div class="contenido-card tipo-nota fade-in-up" data-categoria="notas" style="animation-delay: 0.4s">
-      <span class="categoria-badge">📝 NOTA</span>
-      <div class="imagen-container">
-        <img src="imagensigaph1.jpg" alt="Consejos" onerror="this.src='https://via.placeholder.com/600x340/002b5c/ffffff?text=Consejos+Practicos'">
-      </div>
-      <div class="card-body">
-        <div class="fecha">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+    <!-- NOTICIA 3 -->
+    <article class="tarjeta-noticia">
+      <img src="imagensigaph5.jpg" alt="Bogotá Propiedad Horizontal" class="tarjeta-noticia-img" onerror="this.src='https://via.placeholder.com/400x220/A2C33F/002b5c?text=Bogota+PH'">
+      <div class="tarjeta-noticia-contenido">
+        <div class="tarjeta-fecha">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
           </svg>
-          Enero 5, 2026
+          Enero 21, 2026
         </div>
-        <h3>5 errores comunes en la administración de copropiedades</h3>
-        <p class="descripcion">
-          Desde problemas con proveedores hasta errores en actas de asamblea. 
-          Aprende a evitar estas situaciones que pueden traer consecuencias legales.
+        <h3>Bogotá se verticaliza: 69,8% de los predios ya están en propiedad horizontal</h3>
+        <p>
+          Catastro Distrital revela que la capital tiene casi 3 millones de predios. 
+          El crecimiento se concentra en vivienda de clase media y media-baja.
         </p>
-        <a href="javascript:void(0)" class="btn-leer-mas" onclick="alert('Próximamente: nota completa')">
-          Leer más
+        <div class="tarjeta-fuente">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path>
+          </svg>
+          Infobae
+        </div>
+        <a href="https://www.infobae.com/colombia/2026/01/21/bogota-se-encarece-y-se-verticaliza-el-valor-catastral-llego-a-945-billones-y-revela-como-esta-cambiando-la-ciudad/" target="_blank" class="btn-leer">
+          Leer en Infobae
           <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
           </svg>
         </a>
       </div>
-    </div>
+    </article>
 
-    <!-- TARJETA 6: NORMATIVA - Resolución -->
-    <div class="contenido-card tipo-nota fade-in-up" data-categoria="normativas" style="animation-delay: 0.5s">
-      <span class="categoria-badge">⚖️ NORMATIVA</span>
-      <div class="imagen-container">
-        <img src="imagensigaph2.jpg" alt="Normativa" onerror="this.src='https://via.placeholder.com/600x340/0a7b40/ffffff?text=Normativa'">
-      </div>
-      <div class="card-body">
-        <div class="fecha">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+    <!-- NOTICIA 4 -->
+    <article class="tarjeta-noticia">
+      <img src="imagensigaph1.jpg" alt="Reforma Ley 675" class="tarjeta-noticia-img" onerror="this.src='https://via.placeholder.com/400x220/dc3545/ffffff?text=Reforma+Ley'">
+      <div class="tarjeta-noticia-contenido">
+        <div class="tarjeta-fecha">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
           </svg>
-          Diciembre 28, 2025
+          Diciembre 27, 2025
         </div>
-        <h3>Guía completa sobre el Reglamento de Propiedad Horizontal</h3>
-        <p class="descripcion">
-          Todo lo que necesitas saber sobre la elaboración, modificación y aplicación 
-          del reglamento interno de tu copropiedad según la Ley 675.
+        <h3>Propiedad horizontal: cuotas 2026, sanciones decembrinas y reforma a la Ley 675</h3>
+        <p>
+          El Congreso discute reforma que ajusta temas de mascotas, alquiler turístico y funcionamiento 
+          de asambleas. Cambios importantes para 2026.
         </p>
-        <a href="javascript:void(0)" class="btn-leer-mas" onclick="alert('Próximamente: guía completa')">
-          Descargar guía
+        <div class="tarjeta-fuente">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path>
+          </svg>
+          Portafolio
+        </div>
+        <a href="https://www.portafolio.co/mis-finanzas/vivienda/vive-en-apartamento-esto-es-lo-que-debe-prever-para-2026-ajustes-de-cuotas-y-sanciones-de-fin-de-ano-485414" target="_blank" class="btn-leer">
+          Leer en Portafolio
           <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
           </svg>
         </a>
       </div>
-    </div>
+    </article>
+
+    <!-- NOTICIA 5 -->
+    <article class="tarjeta-noticia">
+      <img src="imagensigaph2.jpg" alt="Ley 675" class="tarjeta-noticia-img" onerror="this.src='https://via.placeholder.com/400x220/0a7b40/ffffff?text=Ley+675'">
+      <div class="tarjeta-noticia-contenido">
+        <div class="tarjeta-fecha">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+          </svg>
+          Enero 8, 2026
+        </div>
+        <h3>¿Vive en conjunto? Conozca lo que dice la norma sobre el aumento de cuota en 2026</h3>
+        <p>
+          La Ley 675 de 2001 no fija un tope máximo para el incremento. El valor depende del presupuesto 
+          aprobado por la Asamblea General de Copropietarios.
+        </p>
+        <div class="tarjeta-fuente">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path>
+          </svg>
+          El País
+        </div>
+        <a href="https://www.elpais.com.co/colombia/vive-en-conjunto-conozca-el-aumento-maximo-que-puede-tener-la-cuota-de-administracion-en-2026-y-haga-calculos-0821.html" target="_blank" class="btn-leer">
+          Leer en El País
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- NOTICIA 6 -->
+    <article class="tarjeta-noticia">
+      <img src="imagensigaph3.jpg" alt="IPC 2026" class="tarjeta-noticia-img" onerror="this.src='https://via.placeholder.com/400x220/002b5c/ffffff?text=IPC+2026'">
+      <div class="tarjeta-noticia-contenido">
+        <div class="tarjeta-fecha">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+          </svg>
+          Enero 6, 2026
+        </div>
+        <h3>Así suben las administraciones de propiedad horizontal con el IPC 2026</h3>
+        <p>
+          Con un IPC anual de 5,10%, millones de hogares enfrentarán ajustes. La Ley 675 no establece 
+          porcentaje máximo, todo depende del presupuesto aprobado.
+        </p>
+        <div class="tarjeta-fuente">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path>
+          </svg>
+          360 Radio
+        </div>
+        <a href="https://360radio.com.co/asi-suben-las-administraciones-de-propiedad-horizontal-con-el-ipc-2026/206209/" target="_blank" class="btn-leer">
+          Leer en 360 Radio
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+      </div>
+    </article>
 
   </div>
 
-  <!-- Estado vacío (se muestra cuando el filtro no encuentra resultados) -->
-  <div id="noContent" class="no-content" style="display: none;">
-    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-    </svg>
-    <h3>No hay contenido disponible</h3>
-    <p>Pronto agregaremos más noticias y contenido en esta categoría.</p>
-  </div>
 </section>
 
-<!-- Sección Destacada: Presupuesto 2026 -->
-<section class="seccion-destacada" id="presupuesto-2026">
-  <div class="seccion-destacada-contenido">
-    <h2>💰 Presupuesto PH 2026: Análisis Completo</h2>
-    <p style="text-align: center; color: rgba(255, 255, 255, 0.9); font-size: 1.2em; margin-bottom: 30px;">
-      Calculadora interactiva y análisis del impacto del incremento salarial en tu copropiedad
+<!-- SECCIÓN DE CLASIFICADOS -->
+<section class="container-principal seccion-oculta" id="seccion-clasificados">
+  
+  <div class="clasificados-header">
+    <h2>🏠 CLASIFICADOS</h2>
+    <p>
+      Venta y alquiler de vivienda en propiedad horizontal. 
+      Encuentra tu próximo hogar o publica tu inmueble gratuitamente.
     </p>
-    <div class="iframe-container">
-      <iframe src="index__viviendo_al_dia.html" allowfullscreen></iframe>
+    
+    <div class="filtros-clasificados">
+      <button class="filtro-btn active" onclick="filtrarClasificados('todos')">📋 Todos</button>
+      <button class="filtro-btn" onclick="filtrarClasificados('venta')">💰 Venta</button>
+      <button class="filtro-btn" onclick="filtrarClasificados('alquiler')">📅 Alquiler</button>
     </div>
   </div>
+
+  <!-- 
+  ═══════════════════════════════════════════════════════════════════════════════
+  🏠 CLASIFICADOS
+  
+  PARA AGREGAR UN CLASIFICADO NUEVO:
+  1. Copia todo el bloque <article class="clasificado-card">...</article>
+  2. Pega debajo del último clasificado
+  3. Cambia data-tipo="venta" o "alquiler"
+  4. Cambia la clase: venta o alquiler
+  5. Actualiza: imagen, título, ubicación, specs, precio, descripción, WhatsApp
+  
+  ⏱️ Tiempo: 3 minutos por clasificado
+  ═══════════════════════════════════════════════════════════════════════════════
+  -->
+
+  <div class="grid-clasificados" id="gridClasificados">
+    
+    <!-- CLASIFICADO 1: VENTA -->
+    <article class="clasificado-card venta" data-tipo="venta">
+      <span class="clasificado-tipo">VENTA</span>
+      <img src="imagensigaph1.jpg" alt="Apartamento Venta" class="clasificado-img" onerror="this.src='https://via.placeholder.com/400x200/0a7b40/ffffff?text=Apartamento+Venta'">
+      <div class="clasificado-contenido">
+        <h3 class="clasificado-titulo">Apartamento 3 Habitaciones - Torre Granada</h3>
+        <div class="clasificado-ubicacion">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+          </svg>
+          Cali, Valle del Cauca
+        </div>
+        <div class="clasificado-specs">
+          <div class="clasificado-spec">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+            </svg>
+            3 hab
+          </div>
+          <div class="clasificado-spec">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"></path>
+            </svg>
+            2 baños
+          </div>
+          <div class="clasificado-spec">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+              <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path>
+            </svg>
+            85 m²
+          </div>
+        </div>
+        <div class="clasificado-precio">$380.000.000</div>
+        <p class="clasificado-descripcion">
+          Hermoso apartamento en torre con excelente ubicación. Cocina integral, balcón con vista, 
+          parqueadero cubierto. Conjunto cerrado con vigilancia 24/7, piscina, salón social.
+        </p>
+        <div class="clasificado-contacto">
+          <a href="https://wa.me/573218511222?text=Hola, me interesa el apartamento en Torre Granada" target="_blank" class="btn-contacto whatsapp">
+            WhatsApp
+          </a>
+          <a href="javascript:void(0)" onclick="alert('Contacto: 321 851 1222')" class="btn-contacto info">
+            Más info
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- CLASIFICADO 2: ALQUILER -->
+    <article class="clasificado-card alquiler" data-tipo="alquiler">
+      <span class="clasificado-tipo">ALQUILER</span>
+      <img src="imagensigaph2.jpg" alt="Apartamento Alquiler" class="clasificado-img" onerror="this.src='https://via.placeholder.com/400x200/002b5c/ffffff?text=Apartamento+Alquiler'">
+      <div class="clasificado-contenido">
+        <h3 class="clasificado-titulo">Apartamento 2 Habitaciones - Edificio San Martín</h3>
+        <div class="clasificado-ubicacion">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+          </svg>
+          Bogotá, Cundinamarca
+        </div>
+        <div class="clasificado-specs">
+          <div class="clasificado-spec">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+            </svg>
+            2 hab
+          </div>
+          <div class="clasificado-spec">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z" clip-rule="evenodd"></path>
+            </svg>
+            1 baño
+          </div>
+          <div class="clasificado-spec">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+              <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path>
+            </svg>
+            60 m²
+          </div>
+        </div>
+        <div class="clasificado-precio">$1.800.000/mes</div>
+        <p class="clasificado-descripcion">
+          Apartamento completamente amoblado, excelente iluminación natural. Incluye servicios de 
+          administración. Cerca de TransMilenio y zona comercial.
+        </p>
+        <div class="clasificado-contacto">
+          <a href="https://wa.me/573207663189?text=Hola, me interesa el apartamento en Edificio San Martín" target="_blank" class="btn-contacto whatsapp">
+            WhatsApp
+          </a>
+          <a href="javascript:void(0)" onclick="alert('Contacto: 320 766 3189')" class="btn-contacto info">
+            Más info
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <div style="text-align: center; margin-top: 50px;">
+    <a href="https://wa.me/573218511222?text=Hola, quiero publicar un clasificado en Vivienda al Día" target="_blank" class="btn-publicar">
+      <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
+      </svg>
+      Publicar mi Clasificado GRATIS
+    </a>
+    <p style="margin-top: 15px; color: var(--texto-medio); font-size: 0.9em;">
+      Contáctanos por WhatsApp y publica tu inmueble sin costo
+    </p>
+  </div>
+
 </section>
 
-<!-- Sección de WhatsApp -->
-<section class="whatsapp-section">
-  <h2>💬 Únete a nuestra comunidad</h2>
-  <p>
-    Recibe notificaciones instantáneas sobre nuevas publicaciones, normativas y contenido exclusivo 
-    directamente en tu WhatsApp
+<!-- WhatsApp CTA -->
+<section style="background: linear-gradient(135deg, var(--verde-claro) 0%, var(--verde-sigaph) 100%); padding: 60px 20px; text-align: center; margin-top: 60px;">
+  <h2 style="color: white; font-size: 2.2em; font-weight: 800; margin-bottom: 20px;">💬 Únete a nuestra comunidad</h2>
+  <p style="color: rgba(255, 255, 255, 0.95); font-size: 1.2em; margin-bottom: 30px; max-width: 700px; margin-left: auto; margin-right: auto;">
+    Recibe notificaciones sobre nuevas noticias y clasificados directamente en WhatsApp
   </p>
-  <a href="https://chat.whatsapp.com/F4NTcukQKXKK9qJbvMlKby" target="_blank" class="whatsapp-btn-grande">
+  <a href="https://chat.whatsapp.com/F4NTcukQKXKK9qJbvMlKby" target="_blank" style="display: inline-flex; align-items: center; gap: 15px; background: white; color: var(--verde-sigaph); padding: 18px 40px; border-radius: 50px; font-size: 1.2em; font-weight: 700; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);">
     <svg width="32" height="32" fill="currentColor" viewBox="0 0 24 24">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
-    <span>Unirme al Grupo de WhatsApp</span>
+    <span>Unirme al Grupo</span>
     <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
     </svg>
@@ -870,64 +1021,43 @@ OPCIÓN 3 - APUNTAR A OTRA PÁGINA:
 </a>
 
 <script>
-  // Sistema de filtros
-  function filtrarContenido(categoria) {
-    const cards = document.querySelectorAll('.contenido-card');
-    const noContent = document.getElementById('noContent');
-    const filtros = document.querySelectorAll('.filtro-btn');
-    let hayResultados = false;
+  // Sistema de Tabs
+  function cambiarTab(tab) {
+    // Ocultar todas las secciones
+    document.getElementById('seccion-noticias').classList.add('seccion-oculta');
+    document.getElementById('seccion-clasificados').classList.add('seccion-oculta');
+    
+    // Remover active de todos los tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    
+    // Mostrar sección seleccionada y activar tab
+    if (tab === 'noticias') {
+      document.getElementById('seccion-noticias').classList.remove('seccion-oculta');
+      document.querySelectorAll('.tab-btn')[0].classList.add('active');
+    } else if (tab === 'clasificados') {
+      document.getElementById('seccion-clasificados').classList.remove('seccion-oculta');
+      document.querySelectorAll('.tab-btn')[1].classList.add('active');
+    }
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-    // Actualizar estado de botones
+  // Filtros de Clasificados
+  function filtrarClasificados(tipo) {
+    const cards = document.querySelectorAll('.clasificado-card');
+    const filtros = document.querySelectorAll('.filtro-btn');
+    
     filtros.forEach(btn => btn.classList.remove('active'));
     event.target.classList.add('active');
-
-    // Filtrar tarjetas
+    
     cards.forEach(card => {
-      const categorias = card.getAttribute('data-categoria');
-      
-      if (categoria === 'todos') {
-        card.style.display = 'flex';
-        hayResultados = true;
-      } else if (categorias.includes(categoria)) {
-        card.style.display = 'flex';
-        hayResultados = true;
+      if (tipo === 'todos') {
+        card.style.display = 'block';
       } else {
-        card.style.display = 'none';
+        card.style.display = card.getAttribute('data-tipo') === tipo ? 'block' : 'none';
       }
     });
-
-    // Mostrar/ocultar mensaje de "no hay contenido"
-    noContent.style.display = hayResultados ? 'none' : 'block';
   }
-
-  // Scroll suave a la sección de presupuesto
-  function scrollToPresupuesto(event) {
-    event.preventDefault();
-    const section = document.getElementById('presupuesto-2026');
-    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  // Animación de entrada al hacer scroll
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.contenido-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'all 0.6s ease';
-    observer.observe(card);
-  });
 </script>
 
 </body>
