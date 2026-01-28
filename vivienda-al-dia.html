@@ -135,7 +135,7 @@
       gap: 8px;
     }
 
-    /* Navegación de Tabs - MEJORADA PARA MÓVIL */
+    /* Navegación de Tabs - MEJORADA PARA TODOS LOS DISPOSITIVOS */
     .tabs-nav {
       background: white;
       border-bottom: 2px solid var(--gris-claro);
@@ -143,40 +143,35 @@
       top: 0;
       z-index: 100;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      width: 100%;
     }
 
     .tabs-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 0;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none; /* IE/Edge */
-    }
-
-    /* Ocultar scrollbar pero mantener funcionalidad */
-    .tabs-container::-webkit-scrollbar {
-      display: none;
+      width: 100%;
     }
 
     .tab-btn {
-      flex: 1;
-      min-width: 50%;
       padding: 18px 20px;
       border: none;
-      background: transparent;
+      background: white;
       color: var(--texto-medio);
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
       border-bottom: 3px solid transparent;
-      white-space: nowrap;
       font-family: 'Poppins', sans-serif;
       font-size: 1em;
       text-align: center;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     .tab-btn:hover {
@@ -588,42 +583,61 @@
         font-size: 2.5em;
       }
 
+      .header-periodico {
+        padding: 30px 20px;
+      }
+
       .header-content {
         flex-direction: column;
         text-align: center;
+        gap: 20px;
       }
 
       .info-section {
         align-items: center;
+        width: 100%;
+      }
+
+      .fecha-grande {
+        width: 100%;
+        max-width: 280px;
       }
 
       .mes-actual {
-        font-size: 1.6em;
+        font-size: 1.8em;
+      }
+
+      .dia-anio {
+        font-size: 1em;
       }
 
       .noticia-destacada h2 {
         font-size: 1.8em;
       }
 
+      .noticia-destacada-img {
+        height: 250px;
+      }
+
+      .noticia-destacada-contenido {
+        padding: 25px;
+      }
+
       .grid-noticias,
       .grid-clasificados {
         grid-template-columns: 1fr;
+        gap: 20px;
       }
 
-      /* PESTAÑAS MEJORADAS PARA MÓVIL */
+      /* PESTAÑAS OPTIMIZADAS PARA MÓVIL */
       .tabs-container {
-        padding: 0;
-        justify-content: stretch;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
       }
 
       .tab-btn {
-        flex: 1;
-        min-width: 50%;
-        padding: 16px 15px;
-        font-size: 0.95em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        padding: 16px 12px;
+        font-size: 0.9em;
       }
 
       .tab-btn.active {
@@ -633,9 +647,41 @@
 
     /* Tablets y pantallas medianas */
     @media (min-width: 769px) and (max-width: 1024px) {
+      .logo-vivienda {
+        font-size: 3em;
+      }
+
+      .tabs-container {
+        grid-template-columns: 1fr 1fr;
+      }
+
       .tab-btn {
-        padding: 18px 30px;
+        padding: 18px 25px;
         font-size: 1em;
+      }
+
+      .grid-noticias {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Pantallas pequeñas adicionales (menos de 480px) */
+    @media (max-width: 480px) {
+      .logo-vivienda {
+        font-size: 2em;
+      }
+
+      .subtitulo-header {
+        font-size: 0.9em;
+      }
+
+      .mes-actual {
+        font-size: 1.5em;
+      }
+
+      .tab-btn {
+        padding: 14px 10px;
+        font-size: 0.85em;
       }
     }
 
@@ -673,8 +719,8 @@
     </div>
     <div class="info-section">
       <div class="fecha-grande">
-        <div class="mes-actual">ENERO</div>
-        <div class="dia-anio">27 | 2026</div>
+        <div class="mes-actual" id="mesActual">ENERO</div>
+        <div class="dia-anio"><span id="diaActual">27</span> | <span id="anioActual">2026</span></div>
       </div>
       <span class="badge-actualizado-grande">
         <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
@@ -1130,7 +1176,41 @@
 </a>
 
 <script>
-  // Sistema de Tabs
+  // ═══════════════════════════════════════════════════════════════
+  // ACTUALIZAR FECHA AUTOMÁTICAMENTE (HORA DE COLOMBIA)
+  // ═══════════════════════════════════════════════════════════════
+  function actualizarFecha() {
+    // Crear fecha en zona horaria de Colombia (America/Bogota)
+    const fecha = new Date();
+    const opciones = { 
+      timeZone: 'America/Bogota',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    };
+    
+    const fechaColombia = new Date(fecha.toLocaleString('en-US', { timeZone: 'America/Bogota' }));
+    
+    // Obtener mes, día y año
+    const meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 
+                   'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+    
+    const mes = meses[fechaColombia.getMonth()];
+    const dia = fechaColombia.getDate();
+    const anio = fechaColombia.getFullYear();
+    
+    // Actualizar elementos en la página
+    document.getElementById('mesActual').textContent = mes;
+    document.getElementById('diaActual').textContent = dia;
+    document.getElementById('anioActual').textContent = anio;
+  }
+  
+  // Ejecutar al cargar la página
+  actualizarFecha();
+
+  // ═══════════════════════════════════════════════════════════════
+  // SISTEMA DE TABS
+  // ═══════════════════════════════════════════════════════════════
   function cambiarTab(tab) {
     document.getElementById('seccion-noticias').classList.add('seccion-oculta');
     document.getElementById('seccion-clasificados').classList.add('seccion-oculta');
@@ -1148,7 +1228,9 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Filtros de Clasificados
+  // ═══════════════════════════════════════════════════════════════
+  // FILTROS DE CLASIFICADOS
+  // ═══════════════════════════════════════════════════════════════
   function filtrarClasificados(tipo) {
     const cards = document.querySelectorAll('.clasificado-card');
     const filtros = document.querySelectorAll('.filtro-btn');
