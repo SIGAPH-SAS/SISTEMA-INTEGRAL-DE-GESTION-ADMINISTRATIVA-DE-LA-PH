@@ -401,7 +401,7 @@
 
 <footer>
   <div class="footer-icons" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
-    <a href="mailto:sigaph.s.a.s@gmail.com" target="_blank" style="color: white;">
+    <a href="/cdn-cgi/l/email-protection#84f7ede3e5f4ecaaf7aae5aaf7c4e3e9e5ede8aae7ebe9" target="_blank" style="color: white;">
       <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Correo" style="width: 30px; height: 30px;">
     </a>
     <a href="https://www.instagram.com/sigaph" target="_blank">
@@ -416,7 +416,7 @@
 </footer>
 
 <!-- Librería para leer Excel -->
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
 <script>
   // ═══════════════════════════════════════════════════════════════
@@ -430,19 +430,34 @@
   // ═══════════════════════════════════════════════════════════════
   async function cargarDirectorio() {
     try {
+      console.log('🔄 Cargando Excel desde GitHub...');
       const response = await fetch('Pagina_WEB_-_Relación_de_Proveedores_e_Influencer_de_la_PH.xlsx');
+      
+      if (!response.ok) {
+        throw new Error('No se pudo cargar el Excel (Error ' + response.status + ')');
+      }
+      
       const data = await response.arrayBuffer();
       const workbook = XLSX.read(data, { type: 'array' });
       const hoja = workbook.Sheets[workbook.SheetNames[0]];
       const json = XLSX.utils.sheet_to_json(hoja);
 
       datosDirectorio = json;
+      console.log('✅ Excel cargado:', json.length, 'registros');
+      console.log('📋 Datos de ejemplo:', json[0]);
       
-      // Extraer categorías únicas
-      categorias = [...new Set(json.map(item => item.CATEGORIA))].sort();
+      // Extraer categorías únicas (filtrando vacías)
+      categorias = [...new Set(json.map(item => item.CATEGORIA))]
+        .filter(cat => cat && cat.trim() !== '')
+        .sort();
       
-      // Cargar categorías en el select
+      console.log('📂 Categorías encontradas:', categorias);
+      
+      // IMPORTANTE: Limpiar el select primero
       const selectCategoria = document.getElementById('categoria');
+      selectCategoria.innerHTML = '<option value="">-- Seleccione una categoría --</option>';
+      
+      // Agregar todas las categorías
       categorias.forEach(cat => {
         const option = document.createElement('option');
         option.value = cat;
@@ -450,11 +465,14 @@
         selectCategoria.appendChild(option);
       });
 
-      console.log('✅ Directorio cargado:', datosDirectorio.length, 'registros');
+      console.log('✅ Categorías cargadas en el dropdown:', categorias.length);
       
     } catch (error) {
       console.error('❌ Error al cargar directorio:', error);
-      alert('Error al cargar el directorio. Por favor recargue la página.');
+      console.error('Detalles:', error.message);
+      
+      // Mostrar mensaje más informativo
+      alert('⚠️ No se pudo cargar el Excel.\n\nVerifica que el archivo esté en GitHub y espera 3 minutos después de subirlo.\n\nError: ' + error.message);
     }
   }
 
@@ -675,12 +693,4 @@
 
   // ═══════════════════════════════════════════════════════════════
   // INICIALIZAR AL CARGAR LA PÁGINA
-  // ═══════════════════════════════════════════════════════════════
-  window.addEventListener('DOMContentLoaded', () => {
-    cargarDirectorio();
-  });
-
-</script>
-
-</body>
-</html>
+  // ════════════════════════════════════════════════════
