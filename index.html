@@ -54,7 +54,77 @@
     nav ul li a.boton-verde:hover {
       background-color: #1f5c1f;
     }
+/* 🔹 Botón VIVIENDA AL DÍA */
+    nav ul li a.boton-vivienda {
+      background: linear-gradient(135deg, #A2C33F 0%, #2E6E3D 100%);
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95em;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(162, 195, 63, 0.4);
+      text-transform: uppercase;
+    }
 
+    nav ul li a.boton-vivienda::before {
+      content: "NUEVO";
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #dc3545;
+      color: white;
+      font-size: 0.6em;
+      padding: 2px 6px;
+      border-radius: 8px;
+      font-weight: 900;
+      animation: pulse-badge-vivienda 2s infinite;
+      box-shadow: 0 2px 8px rgba(220, 53, 69, 0.6);
+    }
+
+    @keyframes pulse-badge-vivienda {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    nav ul li a.boton-vivienda::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transform: rotate(45deg);
+      animation: shine-vivienda 3s infinite;
+    }
+
+    @keyframes shine-vivienda {
+      0% { left: -200%; }
+      100% { left: 200%; }
+    }
+
+    nav ul li a.boton-vivienda:hover {
+      background: linear-gradient(135deg, #2E6E3D 0%, #1e4620 100%);
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(162, 195, 63, 0.6);
+    }
+
+    nav ul li a.boton-vivienda:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    @media (max-width: 768px) {
+      nav ul li a.boton-vivienda::before {
+        top: -6px;
+        right: -6px;
+        font-size: 0.55em;
+        padding: 2px 5px;
+      }
+    }
     /* 🔹 Cajas de resultados (diagnóstico y visita) */
     .resultado-diagnostico,
     .resultado-visita {
@@ -129,6 +199,7 @@
       <li><a href="directorio.html">Directorio</a></li>
       <li><a href="contacto.html">Contacto</a></li>
       <li><a href="ayuda.html" class="boton-verde">AYUDA DE GESTIÓN</a></li>
+      <li><a href="vivienda-al-dia.html" class="boton-vivienda">📰 VIVIENDA AL DÍA</a></li>
     </ul>
   </nav>
 </header>
@@ -861,6 +932,7 @@
   
 </body>
 </html>
+
 
 
 
