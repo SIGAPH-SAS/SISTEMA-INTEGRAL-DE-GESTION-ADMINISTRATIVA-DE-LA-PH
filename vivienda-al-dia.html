@@ -135,7 +135,7 @@
       gap: 8px;
     }
 
-    /* Navegación de Tabs */
+    /* Navegación de Tabs - MEJORADA PARA MÓVIL */
     .tabs-nav {
       background: white;
       border-bottom: 2px solid var(--gris-claro);
@@ -148,14 +148,24 @@
     .tabs-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0;
       display: flex;
       gap: 0;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE/Edge */
+    }
+
+    /* Ocultar scrollbar pero mantener funcionalidad */
+    .tabs-container::-webkit-scrollbar {
+      display: none;
     }
 
     .tab-btn {
-      padding: 20px 35px;
+      flex: 1;
+      min-width: 50%;
+      padding: 18px 20px;
       border: none;
       background: transparent;
       color: var(--texto-medio);
@@ -165,7 +175,8 @@
       border-bottom: 3px solid transparent;
       white-space: nowrap;
       font-family: 'Poppins', sans-serif;
-      font-size: 1.05em;
+      font-size: 1em;
+      text-align: center;
     }
 
     .tab-btn:hover {
@@ -177,6 +188,7 @@
       color: var(--verde-sigaph);
       border-bottom-color: var(--verde-sigaph);
       background: white;
+      font-weight: 700;
     }
 
     /* Container Principal */
@@ -598,13 +610,32 @@
         grid-template-columns: 1fr;
       }
 
+      /* PESTAÑAS MEJORADAS PARA MÓVIL */
       .tabs-container {
-        justify-content: flex-start;
+        padding: 0;
+        justify-content: stretch;
       }
 
       .tab-btn {
-        padding: 16px 25px;
+        flex: 1;
+        min-width: 50%;
+        padding: 16px 15px;
         font-size: 0.95em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .tab-btn.active {
+        font-weight: 700;
+      }
+    }
+
+    /* Tablets y pantallas medianas */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .tab-btn {
+        padding: 18px 30px;
+        font-size: 1em;
       }
     }
 
@@ -1051,7 +1082,7 @@
       <svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20">
         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
       </svg>
-      Publicar mi Clasificado XXXXX
+      Publicar mi Clasificado GRATIS
     </a>
     <p style="margin-top: 20px; color: var(--texto-medio); font-size: 1em;">
       Contáctanos por WhatsApp y publica tu inmueble sin costo
