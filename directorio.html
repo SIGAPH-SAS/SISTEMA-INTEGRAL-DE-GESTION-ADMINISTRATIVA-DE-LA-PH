@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Directorio | SIGAPH S.A.S.</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -95,13 +95,200 @@
       color: #fff;
       margin-top: 50px;
     }
+
+    /* ═══════════════════════════════════════════════════════════
+       POPUP MODAL - CAPTURA DE DATOS
+       ═══════════════════════════════════════════════════════════ */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+      position: relative;
+      animation: slideDown 0.4s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .modal-header h2 {
+      color: #002b5c;
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+
+    .modal-header p {
+      color: #666;
+      font-size: 0.95em;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      color: #002b5c;
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.95em;
+    }
+
+    .form-group label .required {
+      color: #dc3545;
+      margin-left: 3px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1em;
+      font-family: 'Poppins', sans-serif;
+      transition: border-color 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #2e6b2e;
+    }
+
+    .form-group input.error,
+    .form-group select.error {
+      border-color: #dc3545;
+    }
+
+    .error-message {
+      color: #dc3545;
+      font-size: 0.85em;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .error-message.active {
+      display: block;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #2e6b2e 0%, #1a4d1a 100%);
+      color: white;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1em;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 20px;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(46, 107, 46, 0.4);
+    }
+
+    .btn-submit:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .loading-spinner {
+      display: none;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .loading-spinner.active {
+      display: block;
+    }
+
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      background: #d4edda;
+      border: 2px solid #c3e6cb;
+      border-radius: 10px;
+      color: #155724;
+      margin-top: 20px;
+    }
+
+    .success-message.active {
+      display: block;
+    }
+
+    /* Números de teléfono ocultos */
+    .telefono-oculto {
+      color: #666;
+      font-style: italic;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .modal-content {
+        padding: 25px;
+        margin: 20px;
+      }
+
+      .modal-header h2 {
+        font-size: 1.4em;
+      }
+
+      table {
+        font-size: 13px;
+      }
+
+      th, td {
+        padding: 8px 5px;
+      }
+    }
   </style>
 </head>
 <body>
 
 <header>
   <nav>
-    <img src="logo_sigaph.png" alt="Logo SIGAPH" />
+    <img src="logo_sigaph1.png" alt="Logo SIGAPH" />
     <ul>
       <li><a href="index.html">Inicio</a></li>
       <li><a href="nosotros.html">Nosotros</a></li>
@@ -115,63 +302,384 @@
 </header>
 
 <section class="directorio">
-  <h2 style="text-align:center; color:#002b5c;">Directorio de Servicios Profesionales</h2>
+  <h2 style="text-align:center; color:#002b5c;">📋 Directorio de Servicios Profesionales</h2>
   <p style="text-align:center; color:#555;">Encuentre aquí el contacto directo de profesionales y aliados de confianza para su copropiedad.</p>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Servicio / Oficio</th>
-        <th>Aliado</th>
-        <th>Nombre</th>
-        <th>Teléfono</th>
-      </tr>
-    </thead>
-    <tbody id="tablaDirectorio">
-      <!-- Aquí se cargará automáticamente la información desde Excel -->
-    </tbody>
-  </table>
+  <div id="mensajeBienvenida" style="text-align: center; padding: 40px; color: #666;">
+    <p style="font-size: 1.2em; margin-bottom: 20px;">🔒 Para acceder al directorio completo, por favor complete el formulario</p>
+    <button onclick="mostrarModal()" class="btn" style="padding: 15px 30px; font-size: 1.1em;">
+      Ver Directorio Completo
+    </button>
+  </div>
+
+  <div id="contenidoDirectorio" style="display: none;">
+    <div style="background: #f0f9ff; padding: 15px; border-radius: 10px; margin-bottom: 20px; border-left: 4px solid #2e6b2e;">
+      <p style="margin: 0; color: #002b5c; font-weight: 600;">
+        📞 Mostrando resultados para: <span id="categoriaSeleccionada"></span>
+      </p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Categoría</th>
+          <th>Servicio</th>
+          <th>Nombre del Proveedor</th>
+          <th>Contacto</th>
+        </tr>
+      </thead>
+      <tbody id="tablaDirectorio">
+        <!-- Se carga dinámicamente -->
+      </tbody>
+    </table>
+  </div>
 
   <div class="actions">
     <a href="index.html" class="btn">Volver al inicio</a>
   </div>
 </section>
 
+<!-- POPUP MODAL -->
+<div class="modal-overlay" id="modalFormulario">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>🔐 Acceso al Directorio</h2>
+      <p>Complete sus datos para acceder a la información de contacto de nuestros proveedores</p>
+    </div>
+
+    <form id="formularioAcceso" onsubmit="return false;">
+      
+      <div class="form-group">
+        <label>Nombre <span class="required">*</span></label>
+        <input type="text" id="nombre" placeholder="Ej: Juan" required>
+        <div class="error-message" id="errorNombre">Por favor ingrese un nombre válido</div>
+      </div>
+
+      <div class="form-group">
+        <label>Apellido <span class="required">*</span></label>
+        <input type="text" id="apellido" placeholder="Ej: Pérez" required>
+        <div class="error-message" id="errorApellido">Por favor ingrese un apellido válido</div>
+      </div>
+
+      <div class="form-group">
+        <label>Correo Electrónico <span class="required">*</span></label>
+        <input type="email" id="email" placeholder="Ej: juan.perez@email.com" required>
+        <div class="error-message" id="errorEmail">Por favor ingrese un correo válido</div>
+      </div>
+
+      <div class="form-group">
+        <label>Celular <span class="required">*</span></label>
+        <input type="tel" id="celular" placeholder="Ej: 3001234567" required maxlength="10">
+        <div class="error-message" id="errorCelular">Por favor ingrese un celular válido (10 dígitos)</div>
+      </div>
+
+      <div class="form-group">
+        <label>¿Qué servicio desea consultar? <span class="required">*</span></label>
+        <select id="categoria" required>
+          <option value="">-- Seleccione una categoría --</option>
+          <!-- Se cargan dinámicamente las categorías del Excel -->
+        </select>
+        <div class="error-message" id="errorCategoria">Por favor seleccione una categoría</div>
+      </div>
+
+      <button type="submit" class="btn-submit" onclick="validarYEnviar()">
+        Acceder al Directorio
+      </button>
+
+      <div class="loading-spinner" id="loadingSpinner">
+        <p>⏳ Enviando información...</p>
+      </div>
+
+      <div class="success-message" id="successMessage">
+        <p>✅ ¡Datos enviados correctamente!</p>
+        <p>Cargando directorio...</p>
+      </div>
+
+    </form>
+  </div>
+</div>
+
 <footer>
-  <p>Teléfonos: 317-634-4778 / 311-402-2283 / 315-891-0674</p>
-  <p>&copy; 2025 SIGAPH S.A.S. — Todos los derechos reservados</p>
+  <div class="footer-icons" style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
+    <a href="mailto:sigaph.s.a.s@gmail.com" target="_blank" style="color: white;">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Correo" style="width: 30px; height: 30px;">
+    </a>
+    <a href="https://www.instagram.com/sigaph" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width: 30px; height: 30px;">
+    </a>
+    <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" style="width: 30px; height: 30px;">
+    </a>
+  </div>
+  <p>Teléfonos: 321 851 1222 / 320 766 3189 / 314 731 8047</p>
+  <p>&copy; 2025 SIGAPH S.A.S. – Todos los derechos reservados</p>
 </footer>
 
 <!-- Librería para leer Excel -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
 <script>
+  // ═══════════════════════════════════════════════════════════════
+  // VARIABLES GLOBALES
+  // ═══════════════════════════════════════════════════════════════
+  let datosDirectorio = [];
+  let categorias = [];
+
+  // ═══════════════════════════════════════════════════════════════
+  // CARGAR DATOS DEL EXCEL
+  // ═══════════════════════════════════════════════════════════════
   async function cargarDirectorio() {
-    const response = await fetch('directorio.xlsx');
-    const data = await response.arrayBuffer();
-    const workbook = XLSX.read(data, { type: 'array' });
-    const hoja = workbook.Sheets[workbook.SheetNames[0]];
-    const json = XLSX.utils.sheet_to_json(hoja, { header: 1 });
+    try {
+      const response = await fetch('Pagina_WEB_-_Relación_de_Proveedores_e_Influencer_de_la_PH.xlsx');
+      const data = await response.arrayBuffer();
+      const workbook = XLSX.read(data, { type: 'array' });
+      const hoja = workbook.Sheets[workbook.SheetNames[0]];
+      const json = XLSX.utils.sheet_to_json(hoja);
+
+      datosDirectorio = json;
+      
+      // Extraer categorías únicas
+      categorias = [...new Set(json.map(item => item.CATEGORIA))].sort();
+      
+      // Cargar categorías en el select
+      const selectCategoria = document.getElementById('categoria');
+      categorias.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat;
+        option.textContent = cat;
+        selectCategoria.appendChild(option);
+      });
+
+      console.log('✅ Directorio cargado:', datosDirectorio.length, 'registros');
+      
+    } catch (error) {
+      console.error('❌ Error al cargar directorio:', error);
+      alert('Error al cargar el directorio. Por favor recargue la página.');
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // MOSTRAR/OCULTAR MODAL
+  // ═══════════════════════════════════════════════════════════════
+  function mostrarModal() {
+    document.getElementById('modalFormulario').classList.add('active');
+  }
+
+  function ocultarModal() {
+    document.getElementById('modalFormulario').classList.remove('active');
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // VALIDACIONES
+  // ═══════════════════════════════════════════════════════════════
+  
+  function validarNombre(texto) {
+    // Solo letras, espacios, tildes y ñ. Mínimo 2 caracteres
+    const regex = /^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]{2,}$/;
+    return regex.test(texto.trim());
+  }
+
+  function validarEmail(email) {
+    // Formato de email válido
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email.trim());
+  }
+
+  function validarCelular(celular) {
+    // Exactamente 10 dígitos que empiecen con 3
+    const regex = /^3[0-9]{9}$/;
+    return regex.test(celular.trim());
+  }
+
+  function esTextoGenerico(texto) {
+    // Detectar si es texto genérico (xxx, aaa, 111, test, etc)
+    const textoLimpio = texto.toLowerCase().trim();
+    const patronesGenericos = [
+      /^[x]+$/,           // xxx, xxxx
+      /^[a]+$/,           // aaa, aaaa
+      /^[1]+$/,           // 111, 1111
+      /^test$/,           // test
+      /^prueba$/,         // prueba
+      /^asdf$/,           // asdf
+      /^qwerty$/,         // qwerty
+      /^(.)\1{2,}$/       // Letras repetidas (aaa, bbb)
+    ];
+    
+    return patronesGenericos.some(patron => patron.test(textoLimpio));
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // VALIDAR Y ENVIAR FORMULARIO
+  // ═══════════════════════════════════════════════════════════════
+  async function validarYEnviar() {
+    // Obtener valores
+    const nombre = document.getElementById('nombre').value;
+    const apellido = document.getElementById('apellido').value;
+    const email = document.getElementById('email').value;
+    const celular = document.getElementById('celular').value;
+    const categoria = document.getElementById('categoria').value;
+
+    let esValido = true;
+
+    // Limpiar errores previos
+    document.querySelectorAll('.error-message').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('input, select').forEach(el => el.classList.remove('error'));
+
+    // Validar Nombre
+    if (!validarNombre(nombre) || esTextoGenerico(nombre)) {
+      document.getElementById('errorNombre').classList.add('active');
+      document.getElementById('nombre').classList.add('error');
+      esValido = false;
+    }
+
+    // Validar Apellido
+    if (!validarNombre(apellido) || esTextoGenerico(apellido)) {
+      document.getElementById('errorApellido').classList.add('active');
+      document.getElementById('apellido').classList.add('error');
+      esValido = false;
+    }
+
+    // Validar Email
+    if (!validarEmail(email)) {
+      document.getElementById('errorEmail').classList.add('active');
+      document.getElementById('email').classList.add('error');
+      esValido = false;
+    }
+
+    // Validar Celular
+    if (!validarCelular(celular)) {
+      document.getElementById('errorCelular').classList.add('active');
+      document.getElementById('celular').classList.add('error');
+      esValido = false;
+    }
+
+    // Validar Categoría
+    if (!categoria) {
+      document.getElementById('errorCategoria').classList.add('active');
+      document.getElementById('categoria').classList.add('error');
+      esValido = false;
+    }
+
+    if (!esValido) {
+      return;
+    }
+
+    // Mostrar loading
+    document.querySelector('.btn-submit').disabled = true;
+    document.getElementById('loadingSpinner').classList.add('active');
+
+    // Enviar a Google Sheets
+    const exito = await enviarAGoogleSheets({
+      nombre,
+      apellido,
+      email,
+      celular,
+      categoria,
+      fecha: new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' })
+    });
+
+    if (exito) {
+      document.getElementById('loadingSpinner').classList.remove('active');
+      document.getElementById('successMessage').classList.add('active');
+      
+      // Esperar 2 segundos y mostrar directorio
+      setTimeout(() => {
+        ocultarModal();
+        mostrarDirectorio(categoria);
+      }, 2000);
+    } else {
+      alert('Hubo un error al enviar los datos. Por favor intente nuevamente.');
+      document.querySelector('.btn-submit').disabled = false;
+      document.getElementById('loadingSpinner').classList.remove('active');
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // ENVIAR A GOOGLE SHEETS
+  // ═══════════════════════════════════════════════════════════════
+  async function enviarAGoogleSheets(datos) {
+    // URL del Google Apps Script Web App
+    const URL_GOOGLE_SCRIPT = 'https://script.google.com/macros/s/AKfycbwwkaxQxCazVBecNTxDOQsce7g5CL1RSvycGi9qU2xoMsUyaIT0uDkXbe_s5DVQ1s7y/exec';
+    
+    try {
+      const response = await fetch(URL_GOOGLE_SCRIPT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datos)
+      });
+      
+      // Con mode: 'no-cors' no podemos leer la respuesta, pero si no hay error, asumimos éxito
+      console.log('✅ Datos enviados a Google Sheets');
+      return true;
+      
+    } catch (error) {
+      console.error('❌ Error al enviar a Google Sheets:', error);
+      return false;
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // MOSTRAR DIRECTORIO FILTRADO
+  // ═══════════════════════════════════════════════════════════════
+  function mostrarDirectorio(categoriaSeleccionada) {
+    document.getElementById('mensajeBienvenida').style.display = 'none';
+    document.getElementById('contenidoDirectorio').style.display = 'block';
+    document.getElementById('categoriaSeleccionada').textContent = categoriaSeleccionada;
 
     const tbody = document.getElementById('tablaDirectorio');
     tbody.innerHTML = '';
 
-    for (let i = 1; i < json.length; i++) { // Salta la primera fila (encabezados)
-      const fila = json[i];
-      if (fila.length >= 3) {
-        const [oficio, nombre, telefono] = fila;
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${oficio}</td><td>${nombre}</td><td>${telefono}</td>`;
-        tbody.appendChild(tr);
-      }
+    // Filtrar por categoría
+    const proveedoresFiltrados = datosDirectorio.filter(
+      item => item.CATEGORIA === categoriaSeleccionada
+    );
+
+    if (proveedoresFiltrados.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="4">No se encontraron proveedores en esta categoría</td></tr>';
+      return;
     }
+
+    // Crear filas
+    proveedoresFiltrados.forEach(proveedor => {
+      const tr = document.createElement('tr');
+      
+      // Ocultar parte del número de teléfono
+      const celular = proveedor.CELULAR ? proveedor.CELULAR.toString() : '';
+      const celularOculto = celular ? 
+        `${celular.substring(0, 3)} *** ${celular.substring(celular.length - 2)}` : 
+        'No disponible';
+
+      tr.innerHTML = `
+        <td>${proveedor.CATEGORIA || ''}</td>
+        <td>${proveedor.SERVICIO || ''}</td>
+        <td><strong>${proveedor.NOMBRE || 'Sin nombre'}</strong></td>
+        <td>
+          <span class="telefono-oculto">${celularOculto}</span><br>
+          <small style="color: #2e6b2e; font-weight: 600;">
+            Contacto completo: Solicitar a SIGAPH
+          </small>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    // Scroll suave al contenido
+    document.getElementById('contenidoDirectorio').scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'start' 
+    });
   }
 
-  cargarDirectorio().catch(err => {
-    console.error('Error al cargar el directorio:', err);
-    document.getElementById('tablaDirectorio').innerHTML =
-      '<tr><td colspan="3">No se pudo cargar el directorio</td></tr>';
+  // ═══════════════════════════════════════════════════════════════
+  // INICIALIZAR AL CARGAR LA PÁGINA
+  // ═══════════════════════════════════════════════════════════════
+  window.addEventListener('DOMContentLoaded', () => {
+    cargarDirectorio();
   });
+
 </script>
 
 </body>
