@@ -323,8 +323,9 @@
       <thead>
         <tr>
           <th>Categoría</th>
+          <th>Aliado</th>
           <th>Servicio</th>
-          <th>Nombre del Proveedor</th>
+          <th>Nombre</th>
           <th>Contacto</th>
         </tr>
       </thead>
@@ -664,21 +665,21 @@
     proveedoresFiltrados.forEach(proveedor => {
       const tr = document.createElement('tr');
       
-      // Ocultar parte del número de teléfono
-      const celular = proveedor.CELULAR ? proveedor.CELULAR.toString() : '';
-      const celularOculto = celular ? 
-        `${celular.substring(0, 3)} *** ${celular.substring(celular.length - 2)}` : 
-        'No disponible';
+      // Mostrar número completo (usuario ya llenó el formulario)
+      const celular = proveedor.CELULAR ? proveedor.CELULAR.toString() : 'No disponible';
+      
+      // Formatear número para mejor lectura: 300 123 4567
+      const celularFormateado = celular.length === 10 ? 
+        `${celular.substring(0, 3)} ${celular.substring(3, 6)} ${celular.substring(6)}` : 
+        celular;
 
       tr.innerHTML = `
         <td>${proveedor.CATEGORIA || ''}</td>
+        <td><strong style="color: #2e6b2e;">${proveedor.ALIADO || 'N/A'}</strong></td>
         <td>${proveedor.SERVICIO || ''}</td>
-        <td><strong>${proveedor.NOMBRE || 'Sin nombre'}</strong></td>
-        <td>
-          <span class="telefono-oculto">${celularOculto}</span><br>
-          <small style="color: #2e6b2e; font-weight: 600;">
-            Contacto completo: Solicitar a SIGAPH
-          </small>
+        <td>${proveedor.NOMBRE || 'Sin nombre'}</td>
+        <td style="font-size: 1.05em; font-weight: 600; color: #002b5c;">
+          📱 ${celularFormateado}
         </td>
       `;
       tbody.appendChild(tr);
