@@ -689,473 +689,7 @@
     .seccion-oculta {
       display: none;
     }
-
-    /* ═══════════════════════════════════════════════════════════════════════
-       BANNER PUBLICITARIO CON ANIMACIÓN TIPO CORTINA
-       ═══════════════════════════════════════════════════════════════════════ */
-
-    /* Contenedor principal: noticia + banner lateral */
-    .contenedor-noticia-banner {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 25px;
-      margin-bottom: 60px;
-    }
-
-    /* Contenedor de banners apilados - SIN STICKY PROBLEMÁTICO */
-    .banners-laterales {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      /* REMOVIDO: position: sticky que causaba problemas de scroll */
-    }
-
-    /* BANNER 1: ASESORÍA P.H. (VERDE) */
-    .banner-asesoria-ph {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(10,123,64,0.15);
-      height: fit-content;
-      border: 3px solid var(--verde-claro);
-      animation: pulseGlow 3s ease-in-out infinite;
-    }
-
-    /* BANNER 2: TRANSCRIPCIÓN (AZUL) CON ANIMACIÓN CORTINA */
-    .banner-transcripcion {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,43,92,0.15);
-      border: 3px solid var(--azul-sigaph);
-      transition: all 0.3s ease;
-      position: relative;
-      min-height: 400px;
-    }
-
-    .banner-transcripcion:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(0,43,92,0.3);
-    }
-
-    /* ANIMACIÓN TIPO CORTINA/POPUP */
-    .banner-cortina-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .banner-cortina-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transform: translateX(100%);
-      transition: all 0.8s ease-in-out;
-    }
-
-    .banner-cortina-slide.active {
-      opacity: 1;
-      transform: translateX(0);
-      z-index: 2;
-    }
-
-    .banner-cortina-slide.exiting {
-      opacity: 0;
-      transform: translateX(-100%);
-      z-index: 1;
-    }
-
-    /* SLIDE 1: ¿Ya agendaste? */
-    .slide-agenda {
-      background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 30px;
-      color: white;
-      text-align: center;
-    }
-
-    .slide-agenda-icono {
-      font-size: 4em;
-      margin-bottom: 15px;
-      animation: bounce 2s ease infinite;
-    }
-
-    .slide-agenda-titulo {
-      font-size: 1.4em;
-      font-weight: 900;
-      margin-bottom: 10px;
-      line-height: 1.2;
-    }
-
-    .slide-agenda-texto {
-      font-size: 0.9em;
-      opacity: 0.95;
-      line-height: 1.4;
-    }
-
-    /* SLIDE 2: Transcripción de Actas */
-    .slide-transcripcion {
-      background: linear-gradient(135deg, var(--azul-sigaph) 0%, #001a3d 100%);
-      padding: 0;
-    }
-
-    /* SLIDE 3: Logo Francia */
-    .slide-logo {
-      background: linear-gradient(135deg, #4A148C 0%, #1A237E 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 30px;
-    }
-
-    .slide-logo-imagen {
-      width: 80%;
-      max-width: 200px;
-      height: auto;
-      border-radius: 15px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-      margin-bottom: 20px;
-      animation: fadeInScale 1s ease;
-    }
-
-    @keyframes fadeInScale {
-      from {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    .slide-logo-texto {
-      color: white;
-      text-align: center;
-      font-size: 1.2em;
-      font-weight: 800;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    }
-
-    /* Animación de pulso sutil */
-    @keyframes pulseGlow {
-      0%, 100% {
-        box-shadow: 0 4px 20px rgba(10,123,64,0.15);
-        transform: translateY(0);
-      }
-      50% {
-        box-shadow: 0 8px 30px rgba(162,195,63,0.4);
-        transform: translateY(-3px);
-      }
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    /* Etiquetas */
-    .banner-etiqueta {
-      background: var(--verde-claro);
-      color: var(--verde-oscuro);
-      text-align: center;
-      padding: 5px;
-      font-size: 0.7em;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .banner-etiqueta-azul {
-      background: var(--azul-sigaph);
-      color: white;
-      text-align: center;
-      padding: 5px;
-      font-size: 0.7em;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    /* Foto del asesor */
-    .banner-foto {
-      width: 100%;
-      height: 180px;
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .banner-foto:hover {
-      transform: scale(1.02);
-    }
-
-    .banner-foto img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      transition: all 0.4s ease;
-    }
-
-    .banner-foto:hover img {
-      transform: scale(1.1);
-    }
-
-    /* Badge flotante */
-    .banner-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: var(--verde-sigaph);
-      color: white;
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-size: 0.75em;
-      font-weight: 700;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      animation: bounce 2s ease infinite;
-    }
-
-    /* Contenido verde */
-    .banner-contenido-verde {
-      padding: 18px;
-      background: linear-gradient(135deg, var(--verde-sigaph) 0%, var(--verde-oscuro) 100%);
-      color: white;
-    }
-
-    /* Contenido azul para slide de transcripción */
-    .banner-contenido-azul {
-      padding: 20px;
-      background: transparent;
-      color: white;
-    }
-
-    .banner-titulo {
-      font-size: 1.05em;
-      font-weight: 800;
-      margin-bottom: 5px;
-      line-height: 1.2;
-      color: white;
-    }
-
-    .banner-subtitulo {
-      font-size: 0.8em;
-      opacity: 0.95;
-      color: var(--verde-claro);
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    .banner-subtitulo-azul {
-      font-size: 0.8em;
-      opacity: 0.95;
-      color: #64B5F6;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    /* Lista compacta */
-    .banner-lista-compacta {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 12px;
-    }
-
-    .banner-lista-compacta ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .banner-lista-compacta li {
-      padding: 5px 0;
-      padding-left: 18px;
-      position: relative;
-      font-size: 0.75em;
-      line-height: 1.2;
-    }
-
-    .banner-lista-compacta li:before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--verde-claro);
-      font-weight: bold;
-      font-size: 1.1em;
-    }
-
-    /* Botones */
-    .banner-btn-verde {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: var(--verde-claro);
-      color: var(--verde-oscuro);
-      padding: 12px 18px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 0.85em;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(162,195,63,0.4);
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    .banner-btn-azul {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: #64B5F6;
-      color: #001a3d;
-      padding: 14px 20px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 0.9em;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(100,181,246,0.4);
-      margin-bottom: 12px;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
-    }
-
-    .banner-btn-verde:hover,
-    .banner-btn-azul:hover {
-      background: white;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(162,195,63,0.6);
-      animation: none;
-    }
-
-    /* Teléfonos */
-    .banner-telefonos-compactos {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 0.7em;
-      line-height: 1.5;
-    }
-
-    .banner-telefonos-compactos a {
-      color: var(--verde-claro);
-      text-decoration: none;
-      font-weight: 700;
-      transition: all 0.2s ease;
-    }
-
-    .banner-telefonos-compactos a:hover {
-      color: white;
-    }
-
-    /* Descripción */
-    .banner-descripcion {
-      font-size: 0.8em;
-      line-height: 1.4;
-      margin-bottom: 15px;
-      opacity: 0.95;
-    }
-
-    .banner-destacado {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-
-    .banner-destacado-titulo {
-      font-size: 0.75em;
-      opacity: 0.9;
-      margin-bottom: 5px;
-    }
-
-    .banner-destacado-nombre {
-      font-size: 1.1em;
-      font-weight: 900;
-      color: #64B5F6;
-    }
-
-    /* Efecto de brillo */
-    .banner-asesoria-ph::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(255,255,255,0.1),
-        transparent
-      );
-      animation: shine 4s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    @keyframes shine {
-      0%, 100% {
-        transform: translateX(-100%) translateY(-100%) rotate(45deg);
-      }
-      50% {
-        transform: translateX(100%) translateY(100%) rotate(45deg);
-      }
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 1200px) and (min-width: 769px) {
-      .contenedor-noticia-banner {
-        grid-template-columns: 1fr 280px;
-        gap: 20px;
-      }
-
-      .banner-foto {
-        height: 160px;
-      }
-
-      .banner-lista-compacta li {
-        font-size: 0.7em;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .contenedor-noticia-banner {
-        grid-template-columns: 1fr;
-      }
-      
-      .banners-laterales {
-        max-width: 400px;
-        margin: 0 auto;
-      }
-
-      .banner-foto {
-        height: 200px;
-      }
-
-      .banner-lista-compacta li {
-        font-size: 0.75em;
-      }
-    }
+.contenedor-noticia-banner{display:grid;grid-template-columns:1fr 300px;gap:25px;margin-bottom:60px}.banners-laterales{display:flex;flex-direction:column;gap:20px}@media (max-width:768px){.contenedor-noticia-banner{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -1175,6 +709,7 @@
       <li><a href="vivienda-al-dia.html" class="boton-vivienda" style="background: linear-gradient(135deg, #A2C33F 0%, #2E6E3D 100%); color: white; padding: 8px 18px; border-radius: 10px; font-weight: 700;">📰 VIVIENDA AL DÍA</a></li>
     </ul>
   </nav>
+</header>
 
 <!-- Header Mejorado del Periódico -->
 <section class="header-periodico">
@@ -1185,8 +720,8 @@
     </div>
     <div class="info-section">
       <div class="fecha-grande">
-        <div class="mes-actual" id="mesActual">FEBRERO</div>
-        <div class="dia-anio"><span id="diaActual">03</span> | <span id="anioActual">2026</span></div>
+        <div class="mes-actual" id="mesActual">ENERO</div>
+        <div class="dia-anio"><span id="diaActual">27</span> | <span id="anioActual">2026</span></div>
       </div>
       <span class="badge-actualizado-grande">
         <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
@@ -1209,29 +744,42 @@
 <!-- SECCIÓN DE NOTICIAS -->
 <section class="container-principal" id="seccion-noticias">
   
-  <div class="contenedor-noticia-banner">
+  <!-- 
+  ═══════════════════════════════════════════════════════════════════════════════
+  🔥 NOTICIA DESTACADA PRINCIPAL
   
-  <!-- NOTICIA DESTACADA -->
+  PARA ACTUALIZAR:
+  1. Cambia la imagen src="..." (usa Unsplash o tu imagen)
+  2. Cambia la fecha
+  3. Cambia el título <h2>
+  4. Cambia el resumen
+  5. Cambia el enlace href="..."
+  ═══════════════════════════════════════════════════════════════════════════════
+  -->
+  
   <article class="noticia-destacada">
-    <img src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?w=1200&h=600&fit=crop" alt="Plataformas de Movilidad" class="noticia-destacada-img" onerror="this.src='imagensigaph1.jpg'">
+    <!-- Imagen de Unsplash: dinero/calculadora -->
+    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=600&fit=crop" alt="Incremento Salarial" class="noticia-destacada-img" onerror="this.src='imagensigaph1.jpg'">
     <div class="noticia-destacada-contenido">
       <span class="tag-urgente">🚨 URGENTE</span>
-      <h2>Gobierno retira temporalmente proyecto de ley que buscaba imponer más sanciones a las plataformas de movilidad</h2>
+      <h2>Incremento Salarial 2026: Impacto de $191 Millones en tu Copropiedad</h2>
       <p class="resumen">
-        El Gobierno Nacional decidió retirar temporalmente del Congreso de la República el Proyecto de Ley 347 que buscaba aplicar unas medidas sancionatorias a las plataformas de movilidad.
+        Hace 30 días entró en vigencia el nuevo salario mínimo con incremento del 23%. 
+        Cada proveedor está recalculando tarifas. Vigilancia, mantenimiento y aseo aumentan drásticamente. 
+        Descubre el impacto real y cómo preparar tu presupuesto 2026.
       </p>
       <div class="meta-noticia">
         <div class="meta-item">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
           </svg>
-          <span>Febrero 2, 2026</span>
+          <span>Enero 27, 2026</span>
         </div>
         <div class="meta-item">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
             <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
           </svg>
-          <span>Equipo PORTAFOLIO</span>
+          <span>Equipo SIGAPH</span>
         </div>
         <div class="meta-item">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
@@ -1240,7 +788,7 @@
           <span>8 min lectura</span>
         </div>
       </div>
-      <a href="https://www.portafolio.co/negocios/empresas/gobierno-retira-temporalmente-proyecto-de-ley-que-buscaba-imponer-mas-sanciones-a-las-plataformas-de-movilidad-487543" target="_blank" class="btn-leer">
+      <a href="https://sigaph-sas.github.io/2026/" target="_blank" class="btn-leer">
         Leer análisis completo
         <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -1249,123 +797,22 @@
     </div>
   </article>
 
-  <!-- BANNERS LATERALES -->
-  <div class="banners-laterales">
-
-    <!-- BANNER 1: ASESORÍA P.H. (VERDE) -->
-    <aside class="banner-asesoria-ph">
-      
-      <div class="banner-etiqueta">PUBLICIDAD</div>
-      
-      <div class="banner-foto">
-        <img src="asesoria_LFRM.jpeg" alt="Asesor SIGAPH">
-        <span class="banner-badge">✓ Certificado</span>
-      </div>
-
-      <div class="banner-contenido-verde">
-        
-        <div class="banner-titulo">¿Problemas con tu Copropiedad?</div>
-        <div class="banner-subtitulo">Luis Fernando Rodriguez M. - Asesor P.H.</div>
-
-        <div class="banner-lista-compacta">
-          <ul>
-            <li>Gestión administrativa integral</li>
-            <li>Cumplimiento Ley 675 de 2001</li>
-            <li>Presupuestos y asambleas</li>
-            <li>Mantenimiento preventivo</li>
-            <li>Resolución de conflictos</li>
-            <li>Asesoría legal permanente</li>
-          </ul>
-        </div>
-
-        <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="banner-btn-verde">
-          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-          Diagnóstico Gratis
-        </a>
-        
-        <div class="banner-telefonos-compactos">
-          📱 <a href="tel:3218511222">321 851 1222</a><br>
-          📱 <a href="tel:3207663189">320 766 3189</a><br>
-          📱 <a href="tel:3147318047">314 731 8047</a>
-        </div>
-
-      </div>
-
-    </aside>
-
-    <!-- BANNER 2: TRANSCRIPCIÓN CON ANIMACIÓN CORTINA -->
-    <aside class="banner-transcripcion">
-      
-      <div class="banner-etiqueta-azul">SERVICIO PROFESIONAL</div>
-
-      <!-- CONTENEDOR DE ANIMACIÓN CORTINA -->
-      <div class="banner-cortina-container">
-
-        <!-- SLIDE 1: ¿Ya agendaste? -->
-        <div class="banner-cortina-slide active" id="slide1">
-          <div class="slide-agenda">
-            <div class="slide-agenda-icono">📅</div>
-            <div class="slide-agenda-titulo">¿Ya agendaste tu asamblea?</div>
-            <div class="slide-agenda-texto">
-              No olvides programar tu asamblea anual.<br>
-              ¡Nosotros te ayudamos con la transcripción!
-            </div>
-          </div>
-        </div>
-
-        <!-- SLIDE 2: Transcripción de Actas -->
-        <div class="banner-cortina-slide" id="slide2">
-          <div class="slide-transcripcion">
-            <div class="banner-contenido-azul">
-              
-              <div class="banner-titulo">📝 Transcripción de Actas</div>
-              <div class="banner-descripcion">
-                Servicio profesional de transcripción de actas de asambleas y reuniones. 
-                Entrega rápida, confidencial y con formato legal.
-              </div>
-
-              <div class="banner-destacado">
-                <div class="banner-destacado-titulo">Especialista:</div>
-                <div class="banner-destacado-nombre">Francia Ramírez</div>
-              </div>
-
-              <a href="https://wa.me/qr/DVWVE2GBX22PD1" target="_blank" class="banner-btn-azul">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-                Cotizar Servicio
-              </a>
-
-              <div class="banner-descripcion" style="font-size: 0.7em; text-align: center; margin-top: 10px; opacity: 0.8;">
-                ✓ Asambleas ordinarias y extraordinarias<br>
-                ✓ Reuniones de consejo y comités<br>
-                ✓ Formato profesional con firma digital
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <!-- SLIDE 3: Logo Francia -->
-        <div class="banner-cortina-slide" id="slide3">
-          <div class="slide-logo">
-            <img src="logo_francia.jpg" alt="Francia Ramírez" class="slide-logo-imagen">
-            <div class="slide-logo-texto">
-              Francia Ramírez<br>
-              <span style="font-size: 0.8em; opacity: 0.9;">Transcripción Profesional</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </aside>
-
-  </div>
-
-</div>
+  <!-- 
+  ═══════════════════════════════════════════════════════════════════════════════
+  📰 NOTICIAS ADICIONALES
+  
+  PARA AGREGAR UNA NUEVA:
+  1. Copia todo <article class="tarjeta-noticia">...</article>
+  2. Pega al final del grid
+  3. Cambia: imagen, fecha, título, descripción, fuente, enlace
+  
+  IMÁGENES: Usa Unsplash para imágenes gratis profesionales:
+  - Edificios: https://unsplash.com/s/photos/apartment-building
+  - Dinero: https://unsplash.com/s/photos/money-calculator
+  - Asambleas: https://unsplash.com/s/photos/meeting-room
+  - Documentos: https://unsplash.com/s/photos/documents
+  ═══════════════════════════════════════════════════════════════════════════════
+  -->
 
   <div class="grid-noticias">
     
@@ -1637,147 +1084,17 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-content">
-    <div class="footer-columna">
-      <img src="logo_sigaph1.png" alt="Logo SIGAPH" class="footer-logo" />
-      <p>Administración Profesional de Propiedad Horizontal en Cali y Valle del Cauca</p>
-    </div>
-    <div class="footer-columna">
-      <h3>Contacto</h3>
-      <p>📍 Cali, Valle del Cauca, Colombia</p>
-      <p>📱 WhatsApp: +57 321 851 1222</p>
-      <p>📞 Oficina: +57 320 766 3189</p>
-      <p>✉️ info@sigaph.com</p>
-    </div>
-    <div class="footer-columna">
-      <h3>Servicios</h3>
-      <p>• Administración P.H.</p>
-      <p>• Gestión Financiera</p>
-      <p>• Asesoría Legal</p>
-      <p>• Mantenimiento</p>
-    </div>
-    <div class="footer-columna">
-      <h3>Enlaces</h3>
-      <p><a href="index.html">Inicio</a></p>
-      <p><a href="nosotros.html">Nosotros</a></p>
-      <p><a href="servicios.html">Servicios</a></p>
-      <p><a href="contacto.html">Contacto</a></p>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 SIGAPH S.A.S. - Todos los derechos reservados</p>
-  </div>
-</footer>
-
-<!-- JAVASCRIPT CON ANIMACIÓN CORTINA -->
-<script>
-  // ═══════════════════════════════════════════════════════════════════════
-  // FECHA AUTOMÁTICA ZONA HORARIA COLOMBIA
-  // ═══════════════════════════════════════════════════════════════════════
-  
-  function actualizarFecha() {
-    const opciones = { 
-      timeZone: 'America/Bogota',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    };
+  // ═══════════════════════════════════════════════════════════════
+  // FILTROS DE CLASIFICADOS
+  // ═══════════════════════════════════════════════════════════════
+  function filtrarClasificados(tipo) {
+    const cards = document.querySelectorAll('.clasificado-card');
+    const filtros = document.querySelectorAll('.filtro-btn');
     
-    const fecha = new Date();
-    const dia = fecha.toLocaleDateString('es-CO', { timeZone: 'America/Bogota', day: '2-digit' });
-    const mes = fecha.toLocaleDateString('es-CO', { timeZone: 'America/Bogota', month: 'long' }).toUpperCase();
-    const anio = fecha.toLocaleDateString('es-CO', { timeZone: 'America/Bogota', year: 'numeric' });
+    filtros.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
     
-    if (document.getElementById('mesActual')) {
-      document.getElementById('mesActual').textContent = mes;
-    }
-    if (document.getElementById('diaActual')) {
-      document.getElementById('diaActual').textContent = dia;
-    }
-    if (document.getElementById('anioActual')) {
-      document.getElementById('anioActual').textContent = anio;
-    }
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════
-  // ANIMACIÓN TIPO CORTINA/POPUP (3 SLIDES ROTATIVOS)
-  // ═══════════════════════════════════════════════════════════════════════
-  
-  let slideActual = 1;
-  const totalSlides = 3;
-  const tiempoMostrar = 5000; // 5 segundos por slide
-
-  function cambiarSlide() {
-    // Obtener slide actual y siguiente
-    const slideActualElement = document.getElementById(`slide${slideActual}`);
-    const siguienteSlide = (slideActual % totalSlides) + 1;
-    const siguienteElement = document.getElementById(`slide${siguienteSlide}`);
-    
-    if (!slideActualElement || !siguienteElement) return;
-    
-    // Animar salida del slide actual
-    slideActualElement.classList.remove('active');
-    slideActualElement.classList.add('exiting');
-    
-    // Animar entrada del siguiente slide
-    setTimeout(() => {
-      siguienteElement.classList.add('active');
-      
-      // Limpiar clases después de la transición
-      setTimeout(() => {
-        slideActualElement.classList.remove('exiting');
-      }, 800);
-    }, 100);
-    
-    // Actualizar índice
-    slideActual = siguienteSlide;
-  }
-
-  // Iniciar animación automática
-  function iniciarAnimacionCortina() {
-    setInterval(cambiarSlide, tiempoMostrar);
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════
-  // CAMBIAR TABS (NOTICIAS / CLASIFICADOS)
-  // ═══════════════════════════════════════════════════════════════════════
-  
-  function cambiarTab(seccion) {
-    const botones = document.querySelectorAll('.tab-btn');
-    botones.forEach(btn => btn.classList.remove('active'));
-    
-    document.getElementById('seccion-noticias').classList.add('seccion-oculta');
-    document.getElementById('seccion-clasificados').classList.add('seccion-oculta');
-    
-    if (seccion === 'noticias') {
-      document.getElementById('seccion-noticias').classList.remove('seccion-oculta');
-      botones[0].classList.add('active');
-    } else if (seccion === 'clasificados') {
-      document.getElementById('seccion-clasificados').classList.remove('seccion-oculta');
-      botones[1].classList.add('active');
-    }
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════
-  // EJECUTAR AL CARGAR LA PÁGINA
-  // ═══════════════════════════════════════════════════════════════════════
-  
-  window.addEventListener('DOMContentLoaded', function() {
-    // Actualizar fecha
-    actualizarFecha();
-    setInterval(actualizarFecha, 3600000);
-    
-    // Iniciar animación de cortina
-    iniciarAnimacionCortina();
-    
-    console.log('VIVIENDA AL DÍA - Cargado correctamente ✅');
-    console.log('Animación cortina activada 🎬');
-    console.log('Fecha: Colombia (America/Bogota) 🇨🇴');
-  });
-</script>
-
-</body>
-</html>
+    cards.forEach(card => {
+      if (tipo === 'todos') {
+        card.style.display = 'block';
+      } else {
