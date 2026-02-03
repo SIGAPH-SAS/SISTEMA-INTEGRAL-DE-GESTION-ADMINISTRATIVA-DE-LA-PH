@@ -691,7 +691,7 @@
     }
 
     /* ═══════════════════════════════════════════════════════════════════════
-       BANNER PUBLICITARIO ANIMADO - ESTILO PERIÓDICO DIGITAL
+       BANNER PUBLICITARIO CON ANIMACIÓN TIPO CORTINA
        ═══════════════════════════════════════════════════════════════════════ */
 
     /* Contenedor principal: noticia + banner lateral */
@@ -702,11 +702,12 @@
       margin-bottom: 60px;
     }
 
-    /* Contenedor de banners apilados */
+    /* Contenedor de banners apilados - SIN STICKY PROBLEMÁTICO */
     .banners-laterales {
       display: flex;
       flex-direction: column;
       gap: 20px;
+      /* REMOVIDO: position: sticky que causaba problemas de scroll */
     }
 
     /* BANNER 1: ASESORÍA P.H. (VERDE) */
@@ -715,14 +716,12 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 4px 20px rgba(10,123,64,0.15);
-      position: sticky;
-      top: 80px;
       height: fit-content;
       border: 3px solid var(--verde-claro);
       animation: pulseGlow 3s ease-in-out infinite;
     }
 
-    /* BANNER 2: TRANSCRIPCIÓN (AZUL) */
+    /* BANNER 2: TRANSCRIPCIÓN (AZUL) CON ANIMACIÓN CORTINA */
     .banner-transcripcion {
       background: white;
       border-radius: 12px;
@@ -730,11 +729,119 @@
       box-shadow: 0 4px 20px rgba(0,43,92,0.15);
       border: 3px solid var(--azul-sigaph);
       transition: all 0.3s ease;
+      position: relative;
+      min-height: 400px;
     }
 
     .banner-transcripcion:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 30px rgba(0,43,92,0.3);
+    }
+
+    /* ANIMACIÓN TIPO CORTINA/POPUP */
+    .banner-cortina-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .banner-cortina-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: all 0.8s ease-in-out;
+    }
+
+    .banner-cortina-slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      z-index: 2;
+    }
+
+    .banner-cortina-slide.exiting {
+      opacity: 0;
+      transform: translateX(-100%);
+      z-index: 1;
+    }
+
+    /* SLIDE 1: ¿Ya agendaste? */
+    .slide-agenda {
+      background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      color: white;
+      text-align: center;
+    }
+
+    .slide-agenda-icono {
+      font-size: 4em;
+      margin-bottom: 15px;
+      animation: bounce 2s ease infinite;
+    }
+
+    .slide-agenda-titulo {
+      font-size: 1.4em;
+      font-weight: 900;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .slide-agenda-texto {
+      font-size: 0.9em;
+      opacity: 0.95;
+      line-height: 1.4;
+    }
+
+    /* SLIDE 2: Transcripción de Actas */
+    .slide-transcripcion {
+      background: linear-gradient(135deg, var(--azul-sigaph) 0%, #001a3d 100%);
+      padding: 0;
+    }
+
+    /* SLIDE 3: Logo Francia */
+    .slide-logo {
+      background: linear-gradient(135deg, #4A148C 0%, #1A237E 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+
+    .slide-logo-imagen {
+      width: 80%;
+      max-width: 200px;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      margin-bottom: 20px;
+      animation: fadeInScale 1s ease;
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .slide-logo-texto {
+      color: white;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: 800;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
 
     /* Animación de pulso sutil */
@@ -749,7 +856,12 @@
       }
     }
 
-    /* Etiqueta "PUBLICIDAD" */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Etiquetas */
     .banner-etiqueta {
       background: var(--verde-claro);
       color: var(--verde-oscuro);
@@ -798,7 +910,7 @@
       transform: scale(1.1);
     }
 
-    /* Badge flotante sobre la foto */
+    /* Badge flotante */
     .banner-badge {
       position: absolute;
       top: 10px;
@@ -813,22 +925,17 @@
       animation: bounce 2s ease infinite;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-
-    /* Contenido compacto VERDE (P.H.) */
+    /* Contenido verde */
     .banner-contenido-verde {
       padding: 18px;
       background: linear-gradient(135deg, var(--verde-sigaph) 0%, var(--verde-oscuro) 100%);
       color: white;
     }
 
-    /* Contenido compacto AZUL (Transcripción) */
+    /* Contenido azul para slide de transcripción */
     .banner-contenido-azul {
       padding: 20px;
-      background: linear-gradient(135deg, var(--azul-sigaph) 0%, #001a3d 100%);
+      background: transparent;
       color: white;
     }
 
@@ -888,7 +995,7 @@
       font-size: 1.1em;
     }
 
-    /* Botón VERDE */
+    /* Botones */
     .banner-btn-verde {
       display: flex;
       align-items: center;
@@ -906,7 +1013,6 @@
       animation: pulse 2s ease-in-out infinite;
     }
 
-    /* Botón AZUL */
     .banner-btn-azul {
       display: flex;
       align-items: center;
@@ -941,7 +1047,7 @@
       animation: none;
     }
 
-    /* Teléfonos compactos */
+    /* Teléfonos */
     .banner-telefonos-compactos {
       text-align: center;
       margin-top: 10px;
@@ -960,7 +1066,7 @@
       color: white;
     }
 
-    /* Descripción del servicio de transcripción */
+    /* Descripción */
     .banner-descripcion {
       font-size: 0.8em;
       line-height: 1.4;
@@ -989,7 +1095,7 @@
       color: #64B5F6;
     }
 
-    /* Efecto de brillo periódico */
+    /* Efecto de brillo */
     .banner-asesoria-ph::before {
       content: '';
       position: absolute;
@@ -1016,7 +1122,7 @@
       }
     }
 
-    /* IMPORTANTE: Mantener el banner AL LADO incluso en tablets */
+    /* RESPONSIVE */
     @media (max-width: 1200px) and (min-width: 769px) {
       .contenedor-noticia-banner {
         grid-template-columns: 1fr 280px;
@@ -1032,7 +1138,6 @@
       }
     }
 
-    /* Solo en móviles REALES (menos de 768px) va abajo */
     @media (max-width: 768px) {
       .contenedor-noticia-banner {
         grid-template-columns: 1fr;
@@ -1041,11 +1146,6 @@
       .banners-laterales {
         max-width: 400px;
         margin: 0 auto;
-      }
-
-      .banner-asesoria-ph {
-        position: relative;
-        top: 0;
       }
 
       .banner-foto {
@@ -1149,24 +1249,19 @@
     </div>
   </article>
 
-  <!-- BANNERS LATERALES APILADOS -->
+  <!-- BANNERS LATERALES -->
   <div class="banners-laterales">
 
-    <!-- ═══════════════════════════════════════════════════════════════
-         BANNER 1: ASESORÍA PROPIEDAD HORIZONTAL (VERDE)
-         ═══════════════════════════════════════════════════════════════ -->
+    <!-- BANNER 1: ASESORÍA P.H. (VERDE) -->
     <aside class="banner-asesoria-ph">
       
-      <!-- Etiqueta PUBLICIDAD -->
       <div class="banner-etiqueta">PUBLICIDAD</div>
       
-      <!-- Foto del asesor -->
       <div class="banner-foto">
         <img src="asesoria_LFRM.jpeg" alt="Asesor SIGAPH">
         <span class="banner-badge">✓ Certificado</span>
       </div>
 
-      <!-- Contenido compacto VERDE -->
       <div class="banner-contenido-verde">
         
         <div class="banner-titulo">¿Problemas con tu Copropiedad?</div>
@@ -1200,39 +1295,68 @@
 
     </aside>
 
-    <!-- ═══════════════════════════════════════════════════════════════
-         BANNER 2: TRANSCRIPCIÓN DE ACTAS (AZUL)
-         ═══════════════════════════════════════════════════════════════ -->
+    <!-- BANNER 2: TRANSCRIPCIÓN CON ANIMACIÓN CORTINA -->
     <aside class="banner-transcripcion">
       
-      <!-- Etiqueta SERVICIO PROFESIONAL -->
       <div class="banner-etiqueta-azul">SERVICIO PROFESIONAL</div>
 
-      <!-- Contenido compacto AZUL -->
-      <div class="banner-contenido-azul">
-        
-        <div class="banner-titulo">📝 Transcripción de Actas</div>
-        <div class="banner-descripcion">
-          Servicio profesional de transcripción de actas de asambleas y reuniones. 
-          Entrega rápida, confidencial y con formato legal.
+      <!-- CONTENEDOR DE ANIMACIÓN CORTINA -->
+      <div class="banner-cortina-container">
+
+        <!-- SLIDE 1: ¿Ya agendaste? -->
+        <div class="banner-cortina-slide active" id="slide1">
+          <div class="slide-agenda">
+            <div class="slide-agenda-icono">📅</div>
+            <div class="slide-agenda-titulo">¿Ya agendaste tu asamblea?</div>
+            <div class="slide-agenda-texto">
+              No olvides programar tu asamblea anual.<br>
+              ¡Nosotros te ayudamos con la transcripción!
+            </div>
+          </div>
         </div>
 
-        <div class="banner-destacado">
-          <div class="banner-destacado-titulo">Especialista:</div>
-          <div class="banner-destacado-nombre">Francia Ramírez</div>
+        <!-- SLIDE 2: Transcripción de Actas -->
+        <div class="banner-cortina-slide" id="slide2">
+          <div class="slide-transcripcion">
+            <div class="banner-contenido-azul">
+              
+              <div class="banner-titulo">📝 Transcripción de Actas</div>
+              <div class="banner-descripcion">
+                Servicio profesional de transcripción de actas de asambleas y reuniones. 
+                Entrega rápida, confidencial y con formato legal.
+              </div>
+
+              <div class="banner-destacado">
+                <div class="banner-destacado-titulo">Especialista:</div>
+                <div class="banner-destacado-nombre">Francia Ramírez</div>
+              </div>
+
+              <a href="https://wa.me/qr/DVWVE2GBX22PD1" target="_blank" class="banner-btn-azul">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                Cotizar Servicio
+              </a>
+
+              <div class="banner-descripcion" style="font-size: 0.7em; text-align: center; margin-top: 10px; opacity: 0.8;">
+                ✓ Asambleas ordinarias y extraordinarias<br>
+                ✓ Reuniones de consejo y comités<br>
+                ✓ Formato profesional con firma digital
+              </div>
+
+            </div>
+          </div>
         </div>
 
-        <a href="https://wa.me/qr/DVWVE2GBX22PD1" target="_blank" class="banner-btn-azul">
-          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-          Cotizar Servicio
-        </a>
-
-        <div class="banner-descripcion" style="font-size: 0.7em; text-align: center; margin-top: 10px; opacity: 0.8;">
-          ✓ Asambleas ordinarias y extraordinarias<br>
-          ✓ Reuniones de consejo y comités<br>
-          ✓ Formato profesional con firma digital
+        <!-- SLIDE 3: Logo Francia -->
+        <div class="banner-cortina-slide" id="slide3">
+          <div class="slide-logo">
+            <img src="logo_francia.jpg" alt="Francia Ramírez" class="slide-logo-imagen">
+            <div class="slide-logo-texto">
+              Francia Ramírez<br>
+              <span style="font-size: 0.8em; opacity: 0.9;">Transcripción Profesional</span>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -1441,7 +1565,7 @@
 
 <footer>
   <div class="footer-icons">
-    <a href="/cdn-cgi/l/email-protection#f3809a9492839bdd80dd92dd80b3949e929a9fdd909c9e" target="_blank" class="icono">
+    <a href="/cdn-cgi/l/email-protection#c8bba1afa9b8a0e6bbe6a9e6bb88afa5a9a1a4e6aba7a5" target="_blank" class="icono">
       <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Correo">
     </a>
     <a href="https://www.instagram.com/sigaphsas?igsh=MWRkdjJoNXI4b2lhZA==" target="_blank" class="icono">
@@ -1548,9 +1672,12 @@
   </div>
 </footer>
 
-<!-- JAVASCRIPT -->
+<!-- JAVASCRIPT CON ANIMACIÓN CORTINA -->
 <script>
-  // Fecha automática zona horaria Colombia
+  // ═══════════════════════════════════════════════════════════════════════
+  // FECHA AUTOMÁTICA ZONA HORARIA COLOMBIA
+  // ═══════════════════════════════════════════════════════════════════════
+  
   function actualizarFecha() {
     const opciones = { 
       timeZone: 'America/Bogota',
@@ -1575,7 +1702,49 @@
     }
   }
 
-  // Cambiar tabs
+  // ═══════════════════════════════════════════════════════════════════════
+  // ANIMACIÓN TIPO CORTINA/POPUP (3 SLIDES ROTATIVOS)
+  // ═══════════════════════════════════════════════════════════════════════
+  
+  let slideActual = 1;
+  const totalSlides = 3;
+  const tiempoMostrar = 5000; // 5 segundos por slide
+
+  function cambiarSlide() {
+    // Obtener slide actual y siguiente
+    const slideActualElement = document.getElementById(`slide${slideActual}`);
+    const siguienteSlide = (slideActual % totalSlides) + 1;
+    const siguienteElement = document.getElementById(`slide${siguienteSlide}`);
+    
+    if (!slideActualElement || !siguienteElement) return;
+    
+    // Animar salida del slide actual
+    slideActualElement.classList.remove('active');
+    slideActualElement.classList.add('exiting');
+    
+    // Animar entrada del siguiente slide
+    setTimeout(() => {
+      siguienteElement.classList.add('active');
+      
+      // Limpiar clases después de la transición
+      setTimeout(() => {
+        slideActualElement.classList.remove('exiting');
+      }, 800);
+    }, 100);
+    
+    // Actualizar índice
+    slideActual = siguienteSlide;
+  }
+
+  // Iniciar animación automática
+  function iniciarAnimacionCortina() {
+    setInterval(cambiarSlide, tiempoMostrar);
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // CAMBIAR TABS (NOTICIAS / CLASIFICADOS)
+  // ═══════════════════════════════════════════════════════════════════════
+  
   function cambiarTab(seccion) {
     const botones = document.querySelectorAll('.tab-btn');
     botones.forEach(btn => btn.classList.remove('active'));
@@ -1592,14 +1761,23 @@
     }
   }
 
-  // Ejecutar al cargar
+  // ═══════════════════════════════════════════════════════════════════════
+  // EJECUTAR AL CARGAR LA PÁGINA
+  // ═══════════════════════════════════════════════════════════════════════
+  
   window.addEventListener('DOMContentLoaded', function() {
+    // Actualizar fecha
     actualizarFecha();
     setInterval(actualizarFecha, 3600000);
-    console.log('VIVIENDA AL DÍA - Cargado correctamente');
+    
+    // Iniciar animación de cortina
+    iniciarAnimacionCortina();
+    
+    console.log('VIVIENDA AL DÍA - Cargado correctamente ✅');
+    console.log('Animación cortina activada 🎬');
+    console.log('Fecha: Colombia (America/Bogota) 🇨🇴');
   });
 </script>
 
 </body>
 </html>
-
