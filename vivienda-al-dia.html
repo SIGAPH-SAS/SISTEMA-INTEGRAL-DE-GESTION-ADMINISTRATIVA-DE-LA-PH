@@ -684,7 +684,343 @@
         font-size: 0.85em;
       }
     }
+/* ═══════════════════════════════════════════════════════════════════
+   PASO 1: CSS PARA LOS BANNERS Y CARRUSEL
+   
+   DÓNDE: Copia todo esto y pégalo ANTES de </style> en tu HTML
+   BUSCA la línea que dice:    /* Ocultar secciones */
+   Y pega TODO esto ANTES de esa línea
+   ═══════════════════════════════════════════════════════════════════ */
 
+/* Scroll visible siempre */
+html, body {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  min-height: 100vh;
+}
+
+/* Contenedor noticia + banners laterales */
+.contenedor-noticia-banner {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 25px;
+  margin-bottom: 60px;
+}
+
+.banners-laterales {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* BANNER 1: Verde - Luis Fernando */
+.banner-asesoria-ph {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(10,123,64,0.15);
+  border: 3px solid var(--verde-claro);
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(10,123,64,0.15);
+  }
+  50% {
+    box-shadow: 0 8px 30px rgba(162,195,63,0.4);
+  }
+}
+
+/* BANNER 2: Azul - Francia con carrusel */
+.banner-transcripcion {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,43,92,0.15);
+  border: 3px solid var(--azul-sigaph);
+  min-height: 400px;
+  position: relative;
+}
+
+.banner-cortina-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+}
+
+.banner-cortina-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.8s ease-in-out;
+}
+
+.banner-cortina-slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  z-index: 2;
+}
+
+.banner-cortina-slide.exiting {
+  opacity: 0;
+  transform: translateX(-100%);
+  z-index: 1;
+}
+
+/* SLIDE 1: Rojo - ¿Ya agendaste? */
+.slide-agenda {
+  background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  color: white;
+  text-align: center;
+  height: 100%;
+}
+
+.slide-agenda-icono {
+  font-size: 4em;
+  margin-bottom: 15px;
+  animation: bounce 2s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.slide-agenda-titulo {
+  font-size: 1.4em;
+  font-weight: 900;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.slide-agenda-texto {
+  font-size: 0.9em;
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
+/* SLIDE 2: Azul - Transcripción */
+.slide-transcripcion {
+  background: linear-gradient(135deg, var(--azul-sigaph) 0%, #001a3d 100%);
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+/* SLIDE 3: Morado - Logo */
+.slide-logo {
+  background: linear-gradient(135deg, #4A148C 0%, #1A237E 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  height: 100%;
+}
+
+.slide-logo-imagen {
+  width: 80%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  margin-bottom: 20px;
+  animation: fadeInScale 1s ease;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.slide-logo-texto {
+  color: white;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Etiquetas */
+.banner-etiqueta {
+  background: var(--verde-claro);
+  color: var(--verde-oscuro);
+  text-align: center;
+  padding: 5px;
+  font-size: 0.7em;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.banner-etiqueta-azul {
+  background: var(--azul-sigaph);
+  color: white;
+  text-align: center;
+  padding: 5px;
+  font-size: 0.7em;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Foto */
+.banner-foto {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+}
+
+.banner-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.banner-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--verde-sigaph);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.75em;
+  font-weight: 700;
+}
+
+/* Contenido */
+.banner-contenido-verde {
+  padding: 18px;
+  background: linear-gradient(135deg, var(--verde-sigaph) 0%, var(--verde-oscuro) 100%);
+  color: white;
+}
+
+.banner-titulo {
+  font-size: 1.05em;
+  font-weight: 800;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.banner-subtitulo {
+  font-size: 0.8em;
+  color: var(--verde-claro);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.banner-lista-compacta {
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+.banner-lista-compacta ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.banner-lista-compacta li {
+  padding: 5px 0 5px 18px;
+  position: relative;
+  font-size: 0.75em;
+}
+
+.banner-lista-compacta li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--verde-claro);
+  font-weight: bold;
+}
+
+/* Botones */
+.banner-btn-verde, .banner-btn-azul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.85em;
+  margin-bottom: 10px;
+}
+
+.banner-btn-verde {
+  background: var(--verde-claro);
+  color: var(--verde-oscuro);
+}
+
+.banner-btn-azul {
+  background: #64B5F6;
+  color: #001a3d;
+}
+
+.banner-telefonos-compactos {
+  text-align: center;
+  font-size: 0.7em;
+  line-height: 1.5;
+}
+
+.banner-telefonos-compactos a {
+  color: var(--verde-claro);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.banner-descripcion {
+  font-size: 0.8em;
+  margin-bottom: 15px;
+}
+
+.banner-destacado {
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.banner-destacado-nombre {
+  font-size: 1.1em;
+  font-weight: 900;
+  color: #64B5F6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contenedor-noticia-banner {
+    grid-template-columns: 1fr;
+  }
+}
     /* Ocultar secciones */
     .seccion-oculta {
       display: none;
@@ -990,8 +1326,8 @@
     </div>
     <div class="info-section">
       <div class="fecha-grande">
-        <div class="mes-actual" id="mesActual">ENERO</div>
-        <div class="dia-anio"><span id="diaActual">27</span> | <span id="anioActual">2026</span></div>
+        <div class="mes-actual" id="mesActual"></div>
+        <div class="dia-anio"><span id="diaActual"></span> | <span id="anioActual">2026</span></div>
       </div>
       <span class="badge-actualizado-grande">
         <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
@@ -1031,37 +1367,31 @@
   <div class="contenedor-noticia-banner">
   
   <!-- NOTICIA DESTACADA -->
+ <div class="contenedor-noticia-banner">
+  
   <article class="noticia-destacada">
-    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=600&fit=crop" alt="Incremento Salarial" class="noticia-destacada-img" onerror="this.src='imagensigaph1.jpg'">
+    <img src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?w=1200&h=600&fit=crop" alt="Plataformas" class="noticia-destacada-img">
     <div class="noticia-destacada-contenido">
       <span class="tag-urgente">🚨 URGENTE</span>
-      <h2>Incremento Salarial 2026: Impacto de $191 Millones en tu Copropiedad</h2>
+      <h2>Gobierno retira temporalmente proyecto de ley que buscaba imponer más sanciones a las plataformas de movilidad</h2>
       <p class="resumen">
-        Hace 30 días entró en vigencia el nuevo salario mínimo con incremento del 23%. 
-        Cada proveedor está recalculando tarifas. Vigilancia, mantenimiento y aseo aumentan drásticamente. 
-        Descubre el impacto real y cómo preparar tu presupuesto 2026.
+        El Gobierno Nacional decidió retirar temporalmente del Congreso de la República el Proyecto de Ley 347.
       </p>
       <div class="meta-noticia">
         <div class="meta-item">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
           </svg>
-          <span>Enero 27, 2026</span>
+          <span>Febrero 2, 2026</span>
         </div>
         <div class="meta-item">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
             <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
           </svg>
-          <span>Equipo SIGAPH</span>
-        </div>
-        <div class="meta-item">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4l.707.707 3 3a1 1 0 001.414-1.414L11 9.586V6z" clip-rule="evenodd"></path>
-          </svg>
-          <span>8 min lectura</span>
+          <span>Equipo PORTAFOLIO</span>
         </div>
       </div>
-      <a href="https://sigaph-sas.github.io/2026/" target="_blank" class="btn-leer">
+      <a href="https://www.portafolio.co/negocios/empresas/gobierno-retira-temporalmente-proyecto-de-ley-que-buscaba-imponer-mas-sanciones-a-las-plataformas-de-movilidad-487543" target="_blank" class="btn-leer">
         Leer análisis completo
         <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -1069,6 +1399,87 @@
       </a>
     </div>
   </article>
+
+  <div class="banners-laterales">
+    
+    <!-- BANNER 1: VERDE - LUIS FERNANDO -->
+    <aside class="banner-asesoria-ph">
+      <div style="background:#A2C33F;color:#064e2a;text-align:center;padding:5px;font-size:0.7em;font-weight:800">PUBLICIDAD</div>
+      <div style="width:100%;height:180px;overflow:hidden;position:relative">
+        <img src="asesoria_LFRM.jpeg" alt="Luis Fernando" style="width:100%;height:100%;object-fit:cover">
+        <span style="position:absolute;top:10px;right:10px;background:#0a7b40;color:white;padding:8px 15px;border-radius:20px;font-size:0.75em;font-weight:700">Certificado</span>
+      </div>
+      <div style="padding:18px;background:linear-gradient(135deg,#0a7b40,#064e2a);color:white">
+        <div style="font-size:1.05em;font-weight:800;margin-bottom:5px">¿Problemas con tu Copropiedad?</div>
+        <div style="font-size:0.8em;color:#A2C33F;margin-bottom:12px;font-weight:600">Luis Fernando Ramírez</div>
+        <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:10px;margin-bottom:12px">
+          <ul style="list-style:none;padding:0;margin:0">
+            <li style="padding:5px 0 5px 18px;position:relative;font-size:0.75em"><span style="position:absolute;left:0;color:#A2C33F;font-weight:bold">✓</span> Gestión administrativa integral</li>
+            <li style="padding:5px 0 5px 18px;position:relative;font-size:0.75em"><span style="position:absolute;left:0;color:#A2C33F;font-weight:bold">✓</span> Cumplimiento Ley 675 de 2001</li>
+            <li style="padding:5px 0 5px 18px;position:relative;font-size:0.75em"><span style="position:absolute;left:0;color:#A2C33F;font-weight:bold">✓</span> Presupuestos y asambleas</li>
+            <li style="padding:5px 0 5px 18px;position:relative;font-size:0.75em"><span style="position:absolute;left:0;color:#A2C33F;font-weight:bold">✓</span> Mantenimiento preventivo</li>
+            <li style="padding:5px 0 5px 18px;position:relative;font-size:0.75em"><span style="position:absolute;left:0;color:#A2C33F;font-weight:bold">✓</span> Resolución de conflictos</li>
+            <li style="padding:5px 0 5px 18px;position:relative;font-size:0.75em"><span style="position:absolute;left:0;color:#A2C33F;font-weight:bold">✓</span> Asesoría legal permanente</li>
+          </ul>
+        </div>
+        <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" style="display:flex;align-items:center;justify-content:center;background:#A2C33F;color:#064e2a;padding:12px;border-radius:25px;text-decoration:none;font-weight:800;font-size:0.85em;margin-bottom:10px">Diagnóstico Gratis</a>
+        <div style="text-align:center;font-size:0.7em;line-height:1.5">
+          <a href="tel:3218511222" style="color:#A2C33F;text-decoration:none;font-weight:700">321 851 1222</a><br>
+          <a href="tel:3207663189" style="color:#A2C33F;text-decoration:none;font-weight:700">320 766 3189</a><br>
+          <a href="tel:3147318047" style="color:#A2C33F;text-decoration:none;font-weight:700">314 731 8047</a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- BANNER 2: AZUL - FRANCIA CON CARRUSEL -->
+    <aside class="banner-transcripcion">
+      <div style="background:#002b5c;color:white;text-align:center;padding:5px;font-size:0.7em;font-weight:800">SERVICIO PROFESIONAL</div>
+      <div class="banner-cortina-container">
+        
+        <!-- SLIDE 1: ROJO -->
+        <div class="banner-cortina-slide active" id="slide1">
+          <div class="slide-agenda">
+            <div style="font-size:4em;margin-bottom:15px">📅</div>
+            <div style="font-size:1.4em;font-weight:900;margin-bottom:10px">¿Ya agendaste tu asamblea?</div>
+            <div style="font-size:0.9em">No olvides programar tu asamblea anual.<br>¡Nosotros te ayudamos con la transcripción!</div>
+          </div>
+        </div>
+
+        <!-- SLIDE 2: AZUL -->
+        <div class="banner-cortina-slide" id="slide2">
+          <div class="slide-transcripcion">
+            <div style="font-size:1.05em;font-weight:800;margin-bottom:5px;color:white">📝 Transcripción de Actas</div>
+            <div style="font-size:0.8em;margin-bottom:15px">Servicio profesional de transcripción de actas de asambleas y reuniones.</div>
+            <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:12px;margin-bottom:15px;text-align:center">
+              <div style="font-size:0.75em">Especialista:</div>
+              <div style="font-size:1.1em;font-weight:900;color:#64B5F6">Francia Ramírez</div>
+            </div>
+            <a href="https://wa.me/qr/DVWVE2GBX22PD1" target="_blank" style="display:flex;align-items:center;justify-content:center;background:#64B5F6;color:#001a3d;padding:14px;border-radius:25px;text-decoration:none;font-weight:800;font-size:0.9em;margin-bottom:12px">Cotizar Servicio</a>
+            <div style="font-size:0.7em;text-align:center">
+              ✓ Asambleas ordinarias<br>
+              ✓ Reuniones de consejo<br>
+              ✓ Formato profesional
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 3: MORADO -->
+        <div class="banner-cortina-slide" id="slide3">
+          <div class="slide-logo">
+            <img src="logo_francia.jpg" alt="Francia" class="slide-logo-imagen">
+            <div style="color:white;text-align:center;font-size:1.2em;font-weight:800">
+              Francia Ramírez<br>
+              <span style="font-size:0.8em">Transcripción Profesional</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+  </div>
+
+</div>
 
   <!-- BANNER PUBLICITARIO LATERAL ANIMADO -->
   <aside class="banner-publicidad">
@@ -1420,3 +1831,4 @@
       if (tipo === 'todos') {
         card.style.display = 'block';
       } else {
+
