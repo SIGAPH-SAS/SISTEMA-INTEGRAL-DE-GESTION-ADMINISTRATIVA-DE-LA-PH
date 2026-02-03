@@ -689,208 +689,6 @@
     .seccion-oculta {
       display: none;
     }
-
-    /* Banners laterales */
-    .contenedor-noticia-banner {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 25px;
-      margin-bottom: 60px;
-    }
-
-    .banners-laterales {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .banner-asesoria-ph {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(10,123,64,0.15);
-      border: 3px solid var(--verde-claro);
-      animation: pulseGlow 3s ease-in-out infinite;
-    }
-
-    .banner-transcripcion {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,43,92,0.15);
-      border: 3px solid var(--azul-sigaph);
-      min-height: 400px;
-      position: relative;
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% {
-        box-shadow: 0 4px 20px rgba(10,123,64,0.15);
-      }
-      50% {
-        box-shadow: 0 8px 30px rgba(162,195,63,0.4);
-      }
-    }
-
-    .banner-etiqueta {
-      background: var(--verde-claro);
-      color: var(--verde-oscuro);
-      text-align: center;
-      padding: 5px;
-      font-size: 0.7em;
-      font-weight: 800;
-      letter-spacing: 2px;
-    }
-
-    .banner-etiqueta-azul {
-      background: var(--azul-sigaph);
-      color: white;
-      text-align: center;
-      padding: 5px;
-      font-size: 0.7em;
-      font-weight: 800;
-      letter-spacing: 2px;
-    }
-
-    .banner-foto {
-      width: 100%;
-      height: 180px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .banner-foto img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-
-    .banner-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: var(--verde-sigaph);
-      color: white;
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-size: 0.75em;
-      font-weight: 700;
-    }
-
-    .banner-contenido-verde {
-      padding: 18px;
-      background: linear-gradient(135deg, var(--verde-sigaph) 0%, var(--verde-oscuro) 100%);
-      color: white;
-    }
-
-    .banner-contenido-azul {
-      padding: 20px;
-      background: linear-gradient(135deg, var(--azul-sigaph) 0%, #001a3d 100%);
-      color: white;
-    }
-
-    .banner-titulo {
-      font-size: 1.05em;
-      font-weight: 800;
-      margin-bottom: 5px;
-      color: white;
-    }
-
-    .banner-subtitulo {
-      font-size: 0.8em;
-      color: var(--verde-claro);
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    .banner-lista-compacta {
-      background: rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 12px;
-    }
-
-    .banner-lista-compacta ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .banner-lista-compacta li {
-      padding: 5px 0 5px 18px;
-      position: relative;
-      font-size: 0.75em;
-    }
-
-    .banner-lista-compacta li:before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--verde-claro);
-      font-weight: bold;
-    }
-
-    .banner-btn-verde, .banner-btn-azul {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px 18px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 0.85em;
-      margin-bottom: 10px;
-    }
-
-    .banner-btn-verde {
-      background: var(--verde-claro);
-      color: var(--verde-oscuro);
-    }
-
-    .banner-btn-azul {
-      background: #64B5F6;
-      color: #001a3d;
-    }
-
-    .banner-telefonos-compactos {
-      text-align: center;
-      font-size: 0.7em;
-      line-height: 1.5;
-    }
-
-    .banner-telefonos-compactos a {
-      color: var(--verde-claro);
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .banner-descripcion {
-      font-size: 0.8em;
-      margin-bottom: 15px;
-    }
-
-    .banner-destacado {
-      background: rgba(255,255,255,0.1);
-      border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-
-    .banner-destacado-nombre {
-      font-size: 1.1em;
-      font-weight: 900;
-      color: #64B5F6;
-    }
-
-    @media (max-width: 768px) {
-      .contenedor-noticia-banner {
-        grid-template-columns: 1fr;
-      }
-    }
-
   </style>
 </head>
 <body>
@@ -958,28 +756,29 @@
   ═══════════════════════════════════════════════════════════════════════════════
   -->
   
-  <div class="contenedor-noticia-banner">
-  
   <article class="noticia-destacada">
-    <img src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?w=1200&h=600&fit=crop" alt="Plataformas Movilidad" class="noticia-destacada-img" onerror="this.src='imagensigaph1.jpg'">
+    <!-- Imagen de Unsplash: dinero/calculadora -->
+    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=600&fit=crop" alt="Incremento Salarial" class="noticia-destacada-img" onerror="this.src='imagensigaph1.jpg'">
     <div class="noticia-destacada-contenido">
       <span class="tag-urgente">🚨 URGENTE</span>
-      <h2>Gobierno retira temporalmente proyecto de ley que buscaba imponer más sanciones a las plataformas de movilidad</h2>
+      <h2>Incremento Salarial 2026: Impacto de $191 Millones en tu Copropiedad</h2>
       <p class="resumen">
-        El Gobierno Nacional decidió retirar temporalmente del Congreso de la República el Proyecto de Ley 347 que buscaba aplicar unas medidas sancionatorias a las plataformas de movilidad.
+        Hace 30 días entró en vigencia el nuevo salario mínimo con incremento del 23%. 
+        Cada proveedor está recalculando tarifas. Vigilancia, mantenimiento y aseo aumentan drásticamente. 
+        Descubre el impacto real y cómo preparar tu presupuesto 2026.
       </p>
       <div class="meta-noticia">
         <div class="meta-item">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
           </svg>
-          <span>Febrero 2, 2026</span>
+          <span>Enero 27, 2026</span>
         </div>
         <div class="meta-item">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
             <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
           </svg>
-          <span>Equipo PORTAFOLIO</span>
+          <span>Equipo SIGAPH</span>
         </div>
         <div class="meta-item">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
@@ -988,7 +787,7 @@
           <span>8 min lectura</span>
         </div>
       </div>
-      <a href="https://www.portafolio.co/negocios/empresas/gobierno-retira-temporalmente-proyecto-de-ley-que-buscaba-imponer-mas-sanciones-a-las-plataformas-de-movilidad-487543" target="_blank" class="btn-leer">
+      <a href="https://sigaph-sas.github.io/2026/" target="_blank" class="btn-leer">
         Leer análisis completo
         <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -996,65 +795,6 @@
       </a>
     </div>
   </article>
-
-  <div class="banners-laterales">
-
-    <aside class="banner-asesoria-ph">
-      <div class="banner-etiqueta">PUBLICIDAD</div>
-      <div class="banner-foto">
-        <img src="asesoria_LFRM.jpeg" alt="Asesor SIGAPH">
-        <span class="banner-badge">Certificado</span>
-      </div>
-      <div class="banner-contenido-verde">
-        <div class="banner-titulo">¿Problemas con tu Copropiedad?</div>
-        <div class="banner-subtitulo">Luis Fernando Ramírez - Asesor P.H.</div>
-        <div class="banner-lista-compacta">
-          <ul>
-            <li>Gestión administrativa integral</li>
-            <li>Cumplimiento Ley 675 de 2001</li>
-            <li>Presupuestos y asambleas</li>
-            <li>Mantenimiento preventivo</li>
-            <li>Resolución de conflictos</li>
-            <li>Asesoría legal permanente</li>
-          </ul>
-        </div>
-        <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="banner-btn-verde">
-          <span>Diagnóstico Gratis</span>
-        </a>
-        <div class="banner-telefonos-compactos">
-          <a href="tel:3218511222">321 851 1222</a><br>
-          <a href="tel:3207663189">320 766 3189</a><br>
-          <a href="tel:3147318047">314 731 8047</a>
-        </div>
-      </div>
-    </aside>
-
-    <aside class="banner-transcripcion">
-      <div class="banner-etiqueta-azul">SERVICIO PROFESIONAL</div>
-      <div class="banner-contenido-azul">
-        <div class="banner-titulo">📝 Transcripción de Actas</div>
-        <div class="banner-descripcion">
-          Servicio profesional de transcripción de actas de asambleas y reuniones. 
-          Entrega rápida, confidencial y con formato legal.
-        </div>
-        <div class="banner-destacado">
-          <div>Especialista:</div>
-          <div class="banner-destacado-nombre">Francia Ramírez</div>
-        </div>
-        <a href="https://wa.me/qr/DVWVE2GBX22PD1" target="_blank" class="banner-btn-azul">
-          <span>Cotizar Servicio</span>
-        </a>
-        <div class="banner-descripcion" style="font-size:0.7em;text-align:center;margin-top:10px">
-          ✓ Asambleas ordinarias y extraordinarias<br>
-          ✓ Reuniones de consejo y comités<br>
-          ✓ Formato profesional con firma digital
-        </div>
-      </div>
-    </aside>
-
-  </div>
-
-</div>
 
   <!-- 
   ═══════════════════════════════════════════════════════════════════════════════
@@ -1271,7 +1011,7 @@
 
 <footer>
   <div class="footer-icons">
-    <a href="/cdn-cgi/l/email-protection#c8bba1afa9b8a0e6bbe6a9e6bb88afa5a9a1a4e6aba7a5" target="_blank" class="icono">
+    <a href="/cdn-cgi/l/email-protection#186b717f796870366b3679366b587f75797174367b7775" target="_blank" class="icono">
       <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Correo">
     </a>
     <a href="https://www.instagram.com/sigaphsas?igsh=MWRkdjJoNXI4b2lhZA==" target="_blank" class="icono">
