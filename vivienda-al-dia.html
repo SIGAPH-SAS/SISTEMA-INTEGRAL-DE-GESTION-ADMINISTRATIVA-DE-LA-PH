@@ -1463,81 +1463,163 @@
       } else {
  
 
+
 <script>
+  // ═══════════════════════════════════════════════════════════════════════
   // FECHA AUTOMATICA COLOMBIA
+  // ═══════════════════════════════════════════════════════════════════════
   function actualizarFecha() {
     const fecha = new Date();
     const dia = fecha.toLocaleDateString("es-CO", { timeZone: "America/Bogota", day: "2-digit" });
     const mes = fecha.toLocaleDateString("es-CO", { timeZone: "America/Bogota", month: "long" }).toUpperCase();
     const anio = fecha.toLocaleDateString("es-CO", { timeZone: "America/Bogota", year: "numeric" });
     
-    if (document.getElementById("mesActual")) document.getElementById("mesActual").textContent = mes;
-    if (document.getElementById("diaActual")) document.getElementById("diaActual").textContent = dia;
-    if (document.getElementById("anioActual")) document.getElementById("anioActual").textContent = anio;
+    const mesEl = document.getElementById("mesActual");
+    const diaEl = document.getElementById("diaActual");
+    const anioEl = document.getElementById("anioActual");
+    
+    if (mesEl) mesEl.textContent = mes;
+    if (diaEl) diaEl.textContent = dia;
+    if (anioEl) anioEl.textContent = anio;
   }
 
-  // CARRUSEL FRANCIA
+  // ═══════════════════════════════════════════════════════════════════════
+  // CARRUSEL FRANCIA - VERSION MEJORADA
+  // ═══════════════════════════════════════════════════════════════════════
   let slideActual = 1;
+  let intervalCarrusel = null;
+
   function cambiarSlide() {
+    console.log("Cambiando slide desde:", slideActual);
+    
     const slideActualEl = document.getElementById("slide" + slideActual);
-    const siguienteSlide = (slideActual % 3) + 1;
-    const siguienteEl = document.getElementById("slide" + siguienteSlide);
+    const siguienteNum = (slideActual % 3) + 1;
+    const siguienteEl = document.getElementById("slide" + siguienteNum);
     
-    if (!slideActualEl || !siguienteEl) return;
+    if (!slideActualEl) {
+      console.error("No se encontró slide" + slideActual);
+      return;
+    }
+    if (!siguienteEl) {
+      console.error("No se encontró slide" + siguienteNum);
+      return;
+    }
     
+    console.log("Transición:", slideActual, "→", siguienteNum);
+    
+    // Quitar active del actual
     slideActualEl.classList.remove("active");
     slideActualEl.classList.add("exiting");
     
+    // Agregar active al siguiente después de un delay
     setTimeout(function() {
       siguienteEl.classList.add("active");
-      setTimeout(function() { slideActualEl.classList.remove("exiting"); }, 800);
+      
+      // Limpiar la clase exiting después de la animación
+      setTimeout(function() {
+        slideActualEl.classList.remove("exiting");
+      }, 800);
     }, 100);
     
-    slideActual = siguienteSlide;
+    // Actualizar índice
+    slideActual = siguienteNum;
+    console.log("Nuevo slide activo:", slideActual);
   }
 
+  function iniciarCarrusel() {
+    console.log("🎬 Iniciando carrusel...");
+    
+    // Verificar que existen los slides
+    const slide1 = document.getElementById("slide1");
+    const slide2 = document.getElementById("slide2");
+    const slide3 = document.getElementById("slide3");
+    
+    if (!slide1 || !slide2 || !slide3) {
+      console.error("❌ No se encontraron los slides del carrusel");
+      return;
+    }
+    
+    console.log("✅ Slides encontrados: slide1, slide2, slide3");
+    
+    // Asegurar que slide1 esté activo al inicio
+    slide1.classList.add("active");
+    slide2.classList.remove("active");
+    slide3.classList.remove("active");
+    
+    slideActual = 1;
+    
+    // Iniciar el intervalo (cambiar cada 5 segundos)
+    if (intervalCarrusel) {
+      clearInterval(intervalCarrusel);
+    }
+    
+    intervalCarrusel = setInterval(cambiarSlide, 5000);
+    console.log("✅ Carrusel iniciado - cambia cada 5 segundos");
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
   // TABS
+  // ═══════════════════════════════════════════════════════════════════════
   function cambiarTab(seccion) {
     const botones = document.querySelectorAll(".tab-btn");
     botones.forEach(function(btn) { btn.classList.remove("active"); });
     
-    document.getElementById("seccion-noticias").classList.add("seccion-oculta");
-    document.getElementById("seccion-clasificados").classList.add("seccion-oculta");
+    const noticiasEl = document.getElementById("seccion-noticias");
+    const clasificadosEl = document.getElementById("seccion-clasificados");
     
-    if (seccion === "noticias") {
-      document.getElementById("seccion-noticias").classList.remove("seccion-oculta");
-      botones[0].classList.add("active");
-    } else {
-      document.getElementById("seccion-clasificados").classList.remove("seccion-oculta");
-      botones[1].classList.add("active");
+    if (noticiasEl) noticiasEl.classList.add("seccion-oculta");
+    if (clasificadosEl) clasificadosEl.classList.add("seccion-oculta");
+    
+    if (seccion === "noticias" && noticiasEl) {
+      noticiasEl.classList.remove("seccion-oculta");
+      if (botones[0]) botones[0].classList.add("active");
+    } else if (seccion === "clasificados" && clasificadosEl) {
+      clasificadosEl.classList.remove("seccion-oculta");
+      if (botones[1]) botones[1].classList.add("active");
     }
   }
 
+  // ═══════════════════════════════════════════════════════════════════════
   // FILTRAR CLASIFICADOS
+  // ═══════════════════════════════════════════════════════════════════════
   function filtrarClasificados(tipo) {
     const cards = document.querySelectorAll(".clasificado-card");
     const filtros = document.querySelectorAll(".filtro-btn");
     
     filtros.forEach(function(btn) { btn.classList.remove("active"); });
-    event.target.classList.add("active");
+    if (event && event.target) {
+      event.target.classList.add("active");
+    }
     
     cards.forEach(function(card) {
       if (tipo === "todos") {
         card.style.display = "block";
       } else {
-        card.style.display = card.dataset.tipo === tipo ? "block" : "none";
+        const cardTipo = card.getAttribute("data-tipo");
+        card.style.display = cardTipo === tipo ? "block" : "none";
       }
     });
     
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  // INICIAR TODO
+  // ═══════════════════════════════════════════════════════════════════════
+  // INICIAR TODO AL CARGAR LA PÁGINA
+  // ═══════════════════════════════════════════════════════════════════════
   window.addEventListener("DOMContentLoaded", function() {
+    console.log("📄 Página cargada - Iniciando sistemas...");
+    
+    // Actualizar fecha
     actualizarFecha();
     setInterval(actualizarFecha, 3600000);
-    setInterval(cambiarSlide, 5000);
-    console.log("✅ Fecha Colombia + Carrusel: ACTIVOS");
+    console.log("✅ Fecha Colombia: ACTIVA");
+    
+    // Iniciar carrusel con un pequeño delay para asegurar que el DOM esté listo
+    setTimeout(function() {
+      iniciarCarrusel();
+    }, 500);
+    
+    console.log("✅ Sistema completo iniciado");
   });
 </script>
 
