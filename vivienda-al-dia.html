@@ -1298,6 +1298,128 @@ html, body {
     }
   </style>
 </head>
+  <!-- ═══════════════════════════════════════════════════════════════════
+     PASO 3: JAVASCRIPT CON FECHA DE COLOMBIA + CARRUSEL + TABS
+     
+     DÓNDE: Busca el FINAL del archivo, justo ANTES de </body>
+     Y pega TODO este script ahí
+     ═══════════════════════════════════════════════════════════════════ -->
+
+<script>
+  // ═══════════════════════════════════════════════════════════════════
+  // 1. FECHA AUTOMÁTICA - ZONA HORARIA COLOMBIA
+  // ═══════════════════════════════════════════════════════════════════
+  
+  function actualizarFecha() {
+    const fecha = new Date();
+    
+    // Obtener fecha en formato Colombia (America/Bogota)
+    const dia = fecha.toLocaleDateString("es-CO", { 
+      timeZone: "America/Bogota", 
+      day: "2-digit" 
+    });
+    
+    const mes = fecha.toLocaleDateString("es-CO", { 
+      timeZone: "America/Bogota", 
+      month: "long" 
+    }).toUpperCase();
+    
+    const anio = fecha.toLocaleDateString("es-CO", { 
+      timeZone: "America/Bogota", 
+      year: "numeric" 
+    });
+    
+    // Actualizar elementos del header
+    if (document.getElementById("mesActual")) {
+      document.getElementById("mesActual").textContent = mes;
+    }
+    if (document.getElementById("diaActual")) {
+      document.getElementById("diaActual").textContent = dia;
+    }
+    if (document.getElementById("anioActual")) {
+      document.getElementById("anioActual").textContent = anio;
+    }
+    
+    console.log("📅 Fecha actualizada: " + dia + " de " + mes + " de " + anio);
+  }
+
+  // ═══════════════════════════════════════════════════════════════════
+  // 2. CARRUSEL ANIMADO - BANNER FRANCIA (3 slides)
+  // ═══════════════════════════════════════════════════════════════════
+  
+  let slideActual = 1;
+  const totalSlides = 3;
+  const tiempoMostrar = 5000; // 5 segundos por slide
+
+  function cambiarSlide() {
+    const slideActualElement = document.getElementById("slide" + slideActual);
+    const siguienteSlide = (slideActual % totalSlides) + 1;
+    const siguienteElement = document.getElementById("slide" + siguienteSlide);
+    
+    if (!slideActualElement || !siguienteElement) return;
+    
+    // Animar salida del slide actual
+    slideActualElement.classList.remove("active");
+    slideActualElement.classList.add("exiting");
+    
+    // Animar entrada del siguiente slide
+    setTimeout(function() {
+      siguienteElement.classList.add("active");
+      
+      // Limpiar clases después de la transición
+      setTimeout(function() {
+        slideActualElement.classList.remove("exiting");
+      }, 800);
+    }, 100);
+    
+    // Actualizar índice
+    slideActual = siguienteSlide;
+    
+    console.log("🎬 Slide " + slideActual + " mostrado");
+  }
+
+  // ═══════════════════════════════════════════════════════════════════
+  // 3. TABS - CAMBIAR ENTRE NOTICIAS Y CLASIFICADOS
+  // ═══════════════════════════════════════════════════════════════════
+  
+  function cambiarTab(seccion) {
+    const botones = document.querySelectorAll(".tab-btn");
+    botones.forEach(function(btn) {
+      btn.classList.remove("active");
+    });
+    
+    document.getElementById("seccion-noticias").classList.add("seccion-oculta");
+    document.getElementById("seccion-clasificados").classList.add("seccion-oculta");
+    
+    if (seccion === "noticias") {
+      document.getElementById("seccion-noticias").classList.remove("seccion-oculta");
+      botones[0].classList.add("active");
+    } else if (seccion === "clasificados") {
+      document.getElementById("seccion-clasificados").classList.remove("seccion-oculta");
+      botones[1].classList.add("active");
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════
+  // 4. INICIAR TODO AL CARGAR LA PÁGINA
+  // ═══════════════════════════════════════════════════════════════════
+  
+  window.addEventListener("DOMContentLoaded", function() {
+    // Actualizar fecha inmediatamente
+    actualizarFecha();
+    
+    // Actualizar fecha cada hora (3600000 milisegundos)
+    setInterval(actualizarFecha, 3600000);
+    
+    // Iniciar carrusel (cambia cada 5 segundos)
+    setInterval(cambiarSlide, tiempoMostrar);
+    
+    console.log("✅ VIVIENDA AL DÍA - Sistema iniciado");
+    console.log("✅ Fecha Colombia: ACTIVA (se actualiza cada hora)");
+    console.log("✅ Carrusel Francia: ACTIVO (cambia cada 5 segundos)");
+    console.log("✅ Zona horaria: America/Bogota");
+  });
+</script>
 <body>
 
 <header>
@@ -1831,4 +1953,5 @@ html, body {
       if (tipo === 'todos') {
         card.style.display = 'block';
       } else {
+
 
