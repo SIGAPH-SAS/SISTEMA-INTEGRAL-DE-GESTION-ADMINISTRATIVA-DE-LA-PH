@@ -690,6 +690,10 @@
       display: none;
     }
 
+    /* ═══════════════════════════════════════════════════════════════════════
+       BANNERS LATERALES CON CARRUSEL - AGREGADO POR MODIFICACIÓN
+       ═══════════════════════════════════════════════════════════════════════ */
+    
     .contenedor-noticia-banner {
       display: grid;
       grid-template-columns: 1fr 300px;
@@ -724,8 +728,8 @@
     .banner-cortina-container {
       position: relative;
       width: 100%;
+      height: 100%;
       min-height: 400px;
-      overflow: hidden;
     }
 
     .banner-cortina-slide {
@@ -752,7 +756,7 @@
     }
 
     .slide-agenda {
-      background: linear-gradient(135deg, #FF6B6B, #C92A2A);
+      background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -766,6 +770,12 @@
     .slide-agenda-icono {
       font-size: 4em;
       margin-bottom: 15px;
+      animation: bounceIcon 2s ease infinite;
+    }
+
+    @keyframes bounceIcon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
     .slide-agenda-titulo {
@@ -776,10 +786,11 @@
 
     .slide-agenda-texto {
       font-size: 0.9em;
+      line-height: 1.4;
     }
 
     .slide-transcripcion {
-      background: linear-gradient(135deg, var(--azul-sigaph), #001a3d);
+      background: linear-gradient(135deg, var(--azul-sigaph) 0%, #001a3d 100%);
       padding: 20px;
       height: 100%;
       display: flex;
@@ -789,7 +800,7 @@
     }
 
     .slide-logo {
-      background: linear-gradient(135deg, #4A148C, #1A237E);
+      background: linear-gradient(135deg, #4A148C 0%, #1A237E 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -802,6 +813,7 @@
       width: 80%;
       max-width: 200px;
       border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
       margin-bottom: 20px;
     }
 
@@ -819,6 +831,7 @@
       padding: 5px;
       font-size: 0.7em;
       font-weight: 800;
+      letter-spacing: 2px;
     }
 
     .banner-etiqueta-azul {
@@ -828,6 +841,7 @@
       padding: 5px;
       font-size: 0.7em;
       font-weight: 800;
+      letter-spacing: 2px;
     }
 
     .banner-foto {
@@ -857,7 +871,7 @@
 
     .banner-contenido-verde {
       padding: 18px;
-      background: linear-gradient(135deg, var(--verde-sigaph), var(--verde-oscuro));
+      background: linear-gradient(135deg, var(--verde-sigaph) 0%, var(--verde-oscuro) 100%);
       color: white;
     }
 
@@ -906,6 +920,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 8px;
       padding: 12px 18px;
       border-radius: 25px;
       text-decoration: none;
@@ -991,8 +1006,8 @@
     </div>
     <div class="info-section">
       <div class="fecha-grande">
-        <div class="mes-actual" id="mesActual">ENERO</div>
-        <div class="dia-anio"><span id="diaActual">27</span> | <span id="anioActual">2026</span></div>
+        <div class="mes-actual" id="mesActual">FEBRERO</div>
+        <div class="dia-anio"><span id="diaActual">03</span> | <span id="anioActual">2026</span></div>
       </div>
       <span class="badge-actualizado-grande">
         <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
@@ -1031,23 +1046,38 @@
   <div class="contenedor-noticia-banner">
   
   <article class="noticia-destacada">
-    <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?w=1200&h=600&fit=crop" alt="Apps Movilidad" class="noticia-destacada-img">
+    <img src="https://images.unsplash.com/photo-1502570149819-b2260483d302?w=1200&h=600&fit=crop" alt="Plataformas" class="noticia-destacada-img" onerror="this.src='imagensigaph1.jpg'">
     <div class="noticia-destacada-contenido">
-      <span class="tag-urgente">URGENTE</span>
-      <h2>Gobierno retira temporalmente proyecto de ley que buscaba imponer mas sanciones a las plataformas de movilidad</h2>
+      <span class="tag-urgente">🚨 URGENTE</span>
+      <h2>Gobierno retira temporalmente proyecto de ley que buscaba imponer más sanciones a las plataformas de movilidad</h2>
       <p class="resumen">
-        El Gobierno Nacional decidio retirar temporalmente del Congreso de la Republica el Proyecto de Ley 347.
+        El Gobierno Nacional decidió retirar temporalmente del Congreso de la República el Proyecto de Ley 347 que buscaba aplicar medidas sancionatorias a las plataformas de movilidad.
       </p>
       <div class="meta-noticia">
         <div class="meta-item">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+          </svg>
           <span>Febrero 2, 2026</span>
         </div>
         <div class="meta-item">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+          </svg>
           <span>Equipo PORTAFOLIO</span>
+        </div>
+        <div class="meta-item">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4l.707.707 3 3a1 1 0 001.414-1.414L11 9.586V6z" clip-rule="evenodd"></path>
+          </svg>
+          <span>8 min lectura</span>
         </div>
       </div>
       <a href="https://www.portafolio.co/negocios/empresas/gobierno-retira-temporalmente-proyecto-de-ley-que-buscaba-imponer-mas-sanciones-a-las-plataformas-de-movilidad-487543" target="_blank" class="btn-leer">
-        Leer analisis completo
+        Leer análisis completo
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+        </svg>
       </a>
     </div>
   </article>
@@ -1061,25 +1091,241 @@
         <span class="banner-badge">Certificado</span>
       </div>
       <div class="banner-contenido-verde">
-        <div class="banner-titulo">Problemas con tu Copropiedad?</div>
-        <div class="banner-subtitulo">Luis Fernando Ramirez</div>
+        <div class="banner-titulo">¿Problemas con tu Copropiedad?</div>
+        <div class="banner-subtitulo">Luis Fernando Rodríguez M.</div>
         <div class="banner-lista-compacta">
           <ul>
-            <li>Gestion administrativa integral</li>
+            <li>Gestión administrativa integral</li>
             <li>Cumplimiento Ley 675 de 2001</li>
             <li>Presupuestos y asambleas</li>
             <li>Mantenimiento preventivo</li>
-            <li>Resolucion de conflictos</li>
-            <li>Asesoria legal permanente</li>
+            <li>Resolución de conflictos</li>
+            <li>Asesoría legal permanente</li>
           </ul>
         </div>
-        <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="banner-btn-verde">Diagnostico Gratis</a>
+        <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="banner-btn-verde">Diagnóstico Gratis</a>
         <div class="banner-telefonos-compactos">
           <a href="tel:3218511222">321 851 1222</a><br>
           <a href="tel:3207663189">320 766 3189</a><br>
           <a href="tel:3147318047">314 731 8047</a>
         </div>
       </div>
+/* ═══════════════════════════════════════════════════════════════════════
+   CSS SOLO PARA EL CARRUSEL DE TRANSCRIPCIÓN
+   
+   INSTRUCCIONES:
+   1. Busca en tu HTML donde está el CSS (entre <style> y </style>)
+   2. BUSCA si ya existe ".banner-transcripcion" 
+   3. Si NO existe, pega todo esto ANTES de </style>
+   4. Si YA existe, REEMPLAZA todo el bloque del carrusel
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Banner transcripción con carrusel */
+.banner-transcripcion {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,43,92,0.15);
+  border: 3px solid var(--azul-sigaph);
+  min-height: 400px;
+  position: relative;
+}
+
+/* Contenedor del carrusel */
+.banner-cortina-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+/* Slides del carrusel */
+.banner-cortina-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.8s ease-in-out;
+  pointer-events: none;
+}
+
+.banner-cortina-slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.banner-cortina-slide.exiting {
+  opacity: 0;
+  transform: translateX(-100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* SLIDE 1: Agenda (ROJO) */
+.slide-agenda {
+  background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  color: white;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.slide-agenda-icono {
+  font-size: 4em;
+  margin-bottom: 15px;
+  animation: bounceIcon 2s ease infinite;
+}
+
+@keyframes bounceIcon {
+  0%, 100% { 
+    transform: translateY(0); 
+  }
+  50% { 
+    transform: translateY(-10px); 
+  }
+}
+
+.slide-agenda-titulo {
+  font-size: 1.4em;
+  font-weight: 900;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.slide-agenda-texto {
+  font-size: 0.9em;
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
+/* SLIDE 2: Transcripción (AZUL) */
+.slide-transcripcion {
+  background: linear-gradient(135deg, var(--azul-sigaph) 0%, #001a3d 100%);
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+/* SLIDE 3: Logo (MORADO) */
+.slide-logo {
+  background: linear-gradient(135deg, #4A148C 0%, #1A237E 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  height: 100%;
+  width: 100%;
+}
+
+.slide-logo-imagen {
+  width: 80%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  margin-bottom: 20px;
+  animation: fadeInScale 1s ease;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.slide-logo-texto {
+  color: white;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Etiqueta azul */
+.banner-etiqueta-azul {
+  background: var(--azul-sigaph);
+  color: white;
+  text-align: center;
+  padding: 5px;
+  font-size: 0.7em;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Estilos dentro de los slides */
+.banner-titulo {
+  font-size: 1.05em;
+  font-weight: 800;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.banner-descripcion {
+  font-size: 0.8em;
+  margin-bottom: 15px;
+  opacity: 0.95;
+}
+
+.banner-destacado {
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.banner-destacado-nombre {
+  font-size: 1.1em;
+  font-weight: 900;
+  color: #64B5F6;
+  margin-top: 5px;
+}
+
+.banner-btn-azul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #64B5F6;
+  color: #001a3d;
+  padding: 14px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(100,181,246,0.4);
+  margin-bottom: 12px;
+}
+
+.banner-btn-azul:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(100,181,246,0.6);
+}
+    
     </aside>
 
     <aside class="banner-transcripcion">
@@ -1089,26 +1335,26 @@
         <div class="banner-cortina-slide active" id="slide1">
           <div class="slide-agenda">
             <div class="slide-agenda-icono">📅</div>
-            <div class="slide-agenda-titulo">Ya agendaste tu asamblea?</div>
+            <div class="slide-agenda-titulo">¿Ya agendaste tu asamblea?</div>
             <div class="slide-agenda-texto">
-              No olvides programar tu asamblea anual. Nosotros te ayudamos con la transcripcion!
+              No olvides programar tu asamblea anual.<br>¡Nosotros te ayudamos con la transcripción!
             </div>
           </div>
         </div>
 
         <div class="banner-cortina-slide" id="slide2">
           <div class="slide-transcripcion">
-            <div class="banner-titulo">Transcripcion de Actas</div>
+            <div class="banner-titulo">📝 Transcripción de Actas</div>
             <div class="banner-descripcion">
-              Servicio profesional de transcripcion de actas de asambleas y reuniones.
+              Servicio profesional de transcripción de actas de asambleas y reuniones.
             </div>
             <div class="banner-destacado">
               <div>Especialista:</div>
-              <div class="banner-destacado-nombre">Francia Ramirez</div>
+              <div class="banner-destacado-nombre">Francia Ramírez</div>
             </div>
             <a href="https://wa.me/qr/DVWVE2GBX22PD1" target="_blank" class="banner-btn-azul">Cotizar Servicio</a>
             <div class="banner-descripcion" style="font-size:0.7em;text-align:center">
-              Asambleas ordinarias - Reuniones de consejo - Formato profesional
+              ✓ Asambleas ordinarias<br>✓ Reuniones de consejo<br>✓ Formato profesional
             </div>
           </div>
         </div>
@@ -1117,7 +1363,8 @@
           <div class="slide-logo">
             <img src="logo_francia.jpg" alt="Francia Ramirez" class="slide-logo-imagen">
             <div class="slide-logo-texto">
-              Francia Ramirez - Transcripcion Profesional
+              Francia Ramírez<br>
+              <span style="font-size:0.8em">Transcripción Profesional</span>
             </div>
           </div>
         </div>
@@ -1150,7 +1397,7 @@
     
         <!-- NOTICIA 1 -->
     <article class="tarjeta-noticia">
-      <img src="https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=600&h=400&fit=crop" alt="Cuotas 2026" class="tarjeta-noticia-img" onerror="this.src='imagensigaph2.jpg'">
+      <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=500&fit=crop" alt="Cuotas 2026" class="tarjeta-noticia-img" onerror="this.src='imagensigaph2.jpg'">
       <div class="tarjeta-noticia-contenido">
         <div class="tarjeta-fecha">
           <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
@@ -1179,7 +1426,7 @@
 
     <!-- NOTICIA 2 -->
     <article class="tarjeta-noticia">
-      <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&h=400&fit=crop" alt="Arriendos 2026" class="tarjeta-noticia-img" onerror="this.src='imagensigaph3.jpg'">
+      <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=500&fit=crop" alt="Arriendos 2026" class="tarjeta-noticia-img" onerror="this.src='imagensigaph3.jpg'">
       <div class="tarjeta-noticia-contenido">
         <div class="tarjeta-fecha">
           <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
@@ -1208,7 +1455,7 @@
 
     <!-- NOTICIA 3 -->
     <article class="tarjeta-noticia">
-      <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=600&h=400&fit=crop" alt="Reforma Ley 675" class="tarjeta-noticia-img" onerror="this.src='imagensigaph1.jpg'">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop" alt="Reforma Ley 675" class="tarjeta-noticia-img" onerror="this.src='imagensigaph1.jpg'">
       <div class="tarjeta-noticia-contenido">
         <div class="tarjeta-fecha">
           <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
@@ -1237,7 +1484,7 @@
 
     <!-- NOTICIA 4 -->
     <article class="tarjeta-noticia">
-      <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=400&fit=crop" alt="Ley 675" class="tarjeta-noticia-img" onerror="this.src='imagensigaph2.jpg'">
+      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=500&fit=crop" alt="Ley 675" class="tarjeta-noticia-img" onerror="this.src='imagensigaph2.jpg'">
       <div class="tarjeta-noticia-contenido">
         <div class="tarjeta-fecha">
           <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
@@ -1266,7 +1513,7 @@
 
     <!-- NOTICIA 5 -->
     <article class="tarjeta-noticia">
-      <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=400&fit=crop" alt="MinHacienda 2026" class="tarjeta-noticia-img" onerror="this.src='imagensigaph3.jpg'">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop" alt="MinHacienda 2026" class="tarjeta-noticia-img" onerror="this.src='imagensigaph3.jpg'">
       <div class="tarjeta-noticia-contenido">
         <div class="tarjeta-fecha">
           <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
@@ -1295,7 +1542,7 @@
 
     <!-- NOTICIA 6 -->
     <article class="tarjeta-noticia">
-      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop" alt="Cuotas 2026" class="tarjeta-noticia-img" onerror="this.src='imagensigaph1.jpg'">
+      <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=500&fit=crop" alt="Cuotas 2026" class="tarjeta-noticia-img" onerror="this.src='imagensigaph1.jpg'">
       <div class="tarjeta-noticia-contenido">
         <div class="tarjeta-fecha">
           <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20">
@@ -1344,7 +1591,7 @@
 
 <footer>
   <div class="footer-icons">
-    <a href="/cdn-cgi/l/email-protection#47342e2026372f69346926693407202a262e2b6924282a" target="_blank" class="icono">
+    <a href="/cdn-cgi/l/email-protection#097a606e687961277a2768277a496e64686065276a6664" target="_blank" class="icono">
       <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Correo">
     </a>
     <a href="https://www.instagram.com/sigaphsas?igsh=MWRkdjJoNXI4b2lhZA==" target="_blank" class="icono">
@@ -1432,117 +1679,278 @@
       } else {
  
 
+
 <script>
-function actualizarFecha() {
-  var fecha = new Date();
-  var dia = fecha.toLocaleDateString("es-CO", { timeZone: "America/Bogota", day: "2-digit" });
-  var mes = fecha.toLocaleDateString("es-CO", { timeZone: "America/Bogota", month: "long" }).toUpperCase();
-  var anio = fecha.toLocaleDateString("es-CO", { timeZone: "America/Bogota", year: "numeric" });
-  
-  var mesEl = document.getElementById("mesActual");
-  var diaEl = document.getElementById("diaActual");
-  var anioEl = document.getElementById("anioActual");
-  
-  if (mesEl) mesEl.textContent = mes;
-  if (diaEl) diaEl.textContent = dia;
-  if (anioEl) anioEl.textContent = anio;
-}
+  // ═══════════════════════════════════════════════════════════════════════
+  // FECHA AUTOMATICA COLOMBIA
+  // ═══════════════════════════════════════════════════════════════════════
+  function actualizarFecha() {
+    const fecha = new Date();
+    const dia = fecha.toLocaleDateString("es-CO", { timeZone: "America/Bogota", day: "2-digit" });
+    const mes = fecha.toLocaleDateString("es-CO", { timeZone: "America/Bogota", month: "long" }).toUpperCase();
+    const anio = fecha.toLocaleDateString("es-CO", { timeZone: "America/Bogota", year: "numeric" });
+    
+    const mesEl = document.getElementById("mesActual");
+    const diaEl = document.getElementById("diaActual");
+    const anioEl = document.getElementById("anioActual");
+    
+    if (mesEl) mesEl.textContent = mes;
+    if (diaEl) diaEl.textContent = dia;
+    if (anioEl) anioEl.textContent = anio;
+  }
 
-var slideActual = 1;
-var intervalCarrusel = null;
+  // ═══════════════════════════════════════════════════════════════════════
+  // CARRUSEL FRANCIA - VERSION MEJORADA
+  // ═══════════════════════════════════════════════════════════════════════
+  let slideActual = 1;
+  let intervalCarrusel = null;
 
-function cambiarSlide() {
-  var slideActualEl = document.getElementById("slide" + slideActual);
-  var siguienteNum = (slideActual % 3) + 1;
-  var siguienteEl = document.getElementById("slide" + siguienteNum);
-  
-  if (!slideActualEl || !siguienteEl) return;
-  
-  slideActualEl.classList.remove("active");
-  slideActualEl.classList.add("exiting");
-  
-  setTimeout(function() {
-    siguienteEl.classList.add("active");
+  function cambiarSlide() {
+    console.log("Cambiando slide desde:", slideActual);
+    
+    const slideActualEl = document.getElementById("slide" + slideActual);
+    const siguienteNum = (slideActual % 3) + 1;
+    const siguienteEl = document.getElementById("slide" + siguienteNum);
+    
+    if (!slideActualEl) {
+      console.error("No se encontró slide" + slideActual);
+      return;
+    }
+    if (!siguienteEl) {
+      console.error("No se encontró slide" + siguienteNum);
+      return;
+    }
+    
+    console.log("Transición:", slideActual, "→", siguienteNum);
+    
+    // Quitar active del actual
+    slideActualEl.classList.remove("active");
+    slideActualEl.classList.add("exiting");
+    
+    // Agregar active al siguiente después de un delay
     setTimeout(function() {
-      slideActualEl.classList.remove("exiting");
-    }, 800);
-  }, 100);
-  
-  slideActual = siguienteNum;
-}
+      siguienteEl.classList.add("active");
+      
+      // Limpiar la clase exiting después de la animación
+      setTimeout(function() {
+        slideActualEl.classList.remove("exiting");
+      }, 800);
+    }, 100);
+    
+    // Actualizar índice
+    slideActual = siguienteNum;
+    console.log("Nuevo slide activo:", slideActual);
+  }
 
-function iniciarCarrusel() {
-  var slide1 = document.getElementById("slide1");
-  var slide2 = document.getElementById("slide2");
-  var slide3 = document.getElementById("slide3");
-  
-  if (!slide1 || !slide2 || !slide3) {
-    console.error("No se encontraron slides");
-    return;
+  function iniciarCarrusel() {
+    console.log("🎬 Iniciando carrusel...");
+    
+    // Verificar que existen los slides
+    const slide1 = document.getElementById("slide1");
+    const slide2 = document.getElementById("slide2");
+    const slide3 = document.getElementById("slide3");
+    
+    if (!slide1 || !slide2 || !slide3) {
+      console.error("❌ No se encontraron los slides del carrusel");
+      return;
+    }
+    
+    console.log("✅ Slides encontrados: slide1, slide2, slide3");
+    
+    // Asegurar que slide1 esté activo al inicio
+    slide1.classList.add("active");
+    slide2.classList.remove("active");
+    slide3.classList.remove("active");
+    
+    slideActual = 1;
+    
+    // Iniciar el intervalo (cambiar cada 5 segundos)
+    if (intervalCarrusel) {
+      clearInterval(intervalCarrusel);
+    }
+    
+    intervalCarrusel = setInterval(cambiarSlide, 5000);
+    console.log("✅ Carrusel iniciado - cambia cada 5 segundos");
   }
-  
-  slide1.classList.add("active");
-  slide2.classList.remove("active", "exiting");
-  slide3.classList.remove("active", "exiting");
-  
-  slideActual = 1;
-  
-  if (intervalCarrusel) clearInterval(intervalCarrusel);
-  intervalCarrusel = setInterval(cambiarSlide, 5000);
-  
-  console.log("Carrusel iniciado");
-}
 
-function cambiarTab(seccion) {
-  var botones = document.querySelectorAll(".tab-btn");
-  for (var i = 0; i < botones.length; i++) {
-    botones[i].classList.remove("active");
-  }
-  
-  var noticiasEl = document.getElementById("seccion-noticias");
-  var clasificadosEl = document.getElementById("seccion-clasificados");
-  
-  if (noticiasEl) noticiasEl.classList.add("seccion-oculta");
-  if (clasificadosEl) clasificadosEl.classList.add("seccion-oculta");
-  
-  if (seccion === "noticias" && noticiasEl) {
-    noticiasEl.classList.remove("seccion-oculta");
-    if (botones[0]) botones[0].classList.add("active");
-  } else if (seccion === "clasificados" && clasificadosEl) {
-    clasificadosEl.classList.remove("seccion-oculta");
-    if (botones[1]) botones[1].classList.add("active");
-  }
-}
-
-function filtrarClasificados(tipo) {
-  var cards = document.querySelectorAll(".clasificado-card");
-  var filtros = document.querySelectorAll(".filtro-btn");
-  
-  for (var i = 0; i < filtros.length; i++) {
-    filtros[i].classList.remove("active");
-  }
-  
-  if (event && event.target) {
-    event.target.classList.add("active");
-  }
-  
-  for (var j = 0; j < cards.length; j++) {
-    var card = cards[j];
-    if (tipo === "todos") {
-      card.style.display = "block";
-    } else {
-      var cardTipo = card.getAttribute("data-tipo");
-      card.style.display = cardTipo === tipo ? "block" : "none";
+  // ═══════════════════════════════════════════════════════════════════════
+  // TABS
+  // ═══════════════════════════════════════════════════════════════════════
+  function cambiarTab(seccion) {
+    const botones = document.querySelectorAll(".tab-btn");
+    botones.forEach(function(btn) { btn.classList.remove("active"); });
+    
+    const noticiasEl = document.getElementById("seccion-noticias");
+    const clasificadosEl = document.getElementById("seccion-clasificados");
+    
+    if (noticiasEl) noticiasEl.classList.add("seccion-oculta");
+    if (clasificadosEl) clasificadosEl.classList.add("seccion-oculta");
+    
+    if (seccion === "noticias" && noticiasEl) {
+      noticiasEl.classList.remove("seccion-oculta");
+      if (botones[0]) botones[0].classList.add("active");
+    } else if (seccion === "clasificados" && clasificadosEl) {
+      clasificadosEl.classList.remove("seccion-oculta");
+      if (botones[1]) botones[1].classList.add("active");
     }
   }
-}
 
-window.addEventListener("DOMContentLoaded", function() {
-  actualizarFecha();
-  setInterval(actualizarFecha, 3600000);
-  setTimeout(iniciarCarrusel, 1000);
-});
+  // ═══════════════════════════════════════════════════════════════════════
+  // FILTRAR CLASIFICADOS
+  // ═══════════════════════════════════════════════════════════════════════
+  function filtrarClasificados(tipo) {
+    const cards = document.querySelectorAll(".clasificado-card");
+    const filtros = document.querySelectorAll(".filtro-btn");
+    
+    filtros.forEach(function(btn) { btn.classList.remove("active"); });
+    if (event && event.target) {
+      event.target.classList.add("active");
+    }
+    
+    cards.forEach(function(card) {
+      if (tipo === "todos") {
+        card.style.display = "block";
+      } else {
+        const cardTipo = card.getAttribute("data-tipo");
+        card.style.display = cardTipo === tipo ? "block" : "none";
+      }
+    });
+    
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // INICIAR TODO AL CARGAR LA PÁGINA
+  // ═══════════════════════════════════════════════════════════════════════
+  window.addEventListener("DOMContentLoaded", function() {
+    console.log("📄 Página cargada - Iniciando sistemas...");
+    
+    // Actualizar fecha
+    actualizarFecha();
+    setInterval(actualizarFecha, 3600000);
+    console.log("✅ Fecha Colombia: ACTIVA");
+    
+    // Iniciar carrusel con un pequeño delay para asegurar que el DOM esté listo
+    setTimeout(function() {
+      iniciarCarrusel();
+    }, 500);
+    
+    console.log("✅ Sistema completo iniciado");
+  });
 </script>
 
+  <!-- ═══════════════════════════════════════════════════════════════════════
+     JAVASCRIPT SOLO PARA EL CARRUSEL
+     
+     INSTRUCCIONES:
+     1. Busca en tu HTML el <script> que tiene "cambiarSlide"
+     2. Reemplaza TODA la función cambiarSlide() y la función iniciarCarrusel()
+     3. O simplemente pega este código ANTES de </body>
+     ═══════════════════════════════════════════════════════════════════════ -->
+
+<script>
+  // ═══════════════════════════════════════════════════════════════════════
+  // CARRUSEL DE TRANSCRIPCIÓN - VERSIÓN DEFINITIVA
+  // ═══════════════════════════════════════════════════════════════════════
+  
+  (function() {
+    let slideActual = 1;
+    let intervalCarrusel = null;
+    const TIEMPO_CAMBIO = 5000; // 5 segundos
+
+    function cambiarSlide() {
+      console.log("🎬 Cambiando slide...");
+      console.log("   Slide actual:", slideActual);
+      
+      // Obtener elementos
+      const slideActualEl = document.getElementById("slide" + slideActual);
+      const siguienteNum = (slideActual % 3) + 1;
+      const siguienteEl = document.getElementById("slide" + siguienteNum);
+      
+      // Verificar que existen
+      if (!slideActualEl) {
+        console.error("❌ No se encontró slide" + slideActual);
+        return;
+      }
+      if (!siguienteEl) {
+        console.error("❌ No se encontró slide" + siguienteNum);
+        return;
+      }
+      
+      console.log("   ✅ Transición:", slideActual, "→", siguienteNum);
+      
+      // Hacer transición
+      slideActualEl.classList.remove("active");
+      slideActualEl.classList.add("exiting");
+      
+      setTimeout(function() {
+        siguienteEl.classList.add("active");
+        
+        setTimeout(function() {
+          slideActualEl.classList.remove("exiting");
+          console.log("   ✅ Slide", siguienteNum, "visible");
+        }, 800);
+      }, 100);
+      
+      slideActual = siguienteNum;
+    }
+
+    function iniciarCarrusel() {
+      console.log("🎬 INICIANDO CARRUSEL FRANCIA");
+      
+      // Verificar que los slides existen
+      const slide1 = document.getElementById("slide1");
+      const slide2 = document.getElementById("slide2");
+      const slide3 = document.getElementById("slide3");
+      
+      if (!slide1 || !slide2 || !slide3) {
+        console.error("❌ ERROR: No se encontraron los slides");
+        console.error("   slide1:", !!slide1);
+        console.error("   slide2:", !!slide2);
+        console.error("   slide3:", !!slide3);
+        return;
+      }
+      
+      console.log("✅ Slides encontrados correctamente");
+      
+      // Asegurar estado inicial
+      slide1.classList.add("active");
+      slide2.classList.remove("active", "exiting");
+      slide3.classList.remove("active", "exiting");
+      
+      slideActual = 1;
+      console.log("✅ Estado inicial: Slide 1 activo");
+      
+      // Limpiar intervalo previo si existe
+      if (intervalCarrusel) {
+        clearInterval(intervalCarrusel);
+        console.log("⚠️ Intervalo anterior limpiado");
+      }
+      
+      // Iniciar nuevo intervalo
+      intervalCarrusel = setInterval(cambiarSlide, TIEMPO_CAMBIO);
+      console.log("✅ Carrusel iniciado - cambia cada", TIEMPO_CAMBIO / 1000, "segundos");
+    }
+
+    // Iniciar cuando el DOM esté listo
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", function() {
+        console.log("📄 DOM cargado - iniciando carrusel...");
+        setTimeout(iniciarCarrusel, 1000);
+      });
+    } else {
+      console.log("📄 DOM ya estaba listo - iniciando carrusel...");
+      setTimeout(iniciarCarrusel, 1000);
+    }
+    
+    console.log("✅ Script de carrusel cargado");
+  })();
+</script>
+  
 </body>
 </html>
+
+
+
+
+
