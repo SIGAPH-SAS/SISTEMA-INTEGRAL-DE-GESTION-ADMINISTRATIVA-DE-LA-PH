@@ -1,0 +1,57 @@
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SOLO EL HTML DEL BANNER DE TRANSCRIPCIÓN CON CARRUSEL
+     REEMPLAZA DESDE <aside class="banner-transcripcion"> 
+     HASTA </aside> (el banner azul)
+     ═══════════════════════════════════════════════════════════════════════ -->
+
+<aside class="banner-transcripcion">
+  <div class="banner-etiqueta-azul">SERVICIO PROFESIONAL</div>
+  <div class="banner-cortina-container">
+    
+    <!-- SLIDE 1: ¿Ya agendaste? (ROJO) -->
+    <div class="banner-cortina-slide active" id="slide1">
+      <div class="slide-agenda">
+        <div class="slide-agenda-icono">📅</div>
+        <div class="slide-agenda-titulo">¿Ya agendaste tu asamblea?</div>
+        <div class="slide-agenda-texto">
+          No olvides programar tu asamblea anual.<br>
+          ¡Nosotros te ayudamos con la transcripción!
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: Transcripción (AZUL) -->
+    <div class="banner-cortina-slide" id="slide2">
+      <div class="slide-transcripcion">
+        <div class="banner-titulo">📝 Transcripción de Actas</div>
+        <div class="banner-descripcion">
+          Servicio profesional de transcripción de actas de asambleas y reuniones.
+        </div>
+        <div class="banner-destacado">
+          <div>Especialista:</div>
+          <div class="banner-destacado-nombre">Francia Ramírez</div>
+        </div>
+        <a href="https://wa.me/qr/DVWVE2GBX22PD1" target="_blank" class="banner-btn-azul">
+          Cotizar Servicio
+        </a>
+        <div class="banner-descripcion" style="font-size:0.7em;text-align:center">
+          ✓ Asambleas ordinarias<br>
+          ✓ Reuniones de consejo<br>
+          ✓ Formato profesional
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: Logo Francia (MORADO) -->
+    <div class="banner-cortina-slide" id="slide3">
+      <div class="slide-logo">
+        <img src="logo_francia.jpg" alt="Francia Ramirez" class="slide-logo-imagen">
+        <div class="slide-logo-texto">
+          Francia Ramírez<br>
+          <span style="font-size:0.8em">Transcripción Profesional</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</aside>

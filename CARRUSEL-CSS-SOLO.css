@@ -1,0 +1,215 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   CSS SOLO PARA EL CARRUSEL DE TRANSCRIPCIÓN
+   
+   INSTRUCCIONES:
+   1. Busca en tu HTML donde está el CSS (entre <style> y </style>)
+   2. BUSCA si ya existe ".banner-transcripcion" 
+   3. Si NO existe, pega todo esto ANTES de </style>
+   4. Si YA existe, REEMPLAZA todo el bloque del carrusel
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Banner transcripción con carrusel */
+.banner-transcripcion {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,43,92,0.15);
+  border: 3px solid var(--azul-sigaph);
+  min-height: 400px;
+  position: relative;
+}
+
+/* Contenedor del carrusel */
+.banner-cortina-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+/* Slides del carrusel */
+.banner-cortina-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.8s ease-in-out;
+  pointer-events: none;
+}
+
+.banner-cortina-slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.banner-cortina-slide.exiting {
+  opacity: 0;
+  transform: translateX(-100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* SLIDE 1: Agenda (ROJO) */
+.slide-agenda {
+  background: linear-gradient(135deg, #FF6B6B 0%, #C92A2A 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  color: white;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.slide-agenda-icono {
+  font-size: 4em;
+  margin-bottom: 15px;
+  animation: bounceIcon 2s ease infinite;
+}
+
+@keyframes bounceIcon {
+  0%, 100% { 
+    transform: translateY(0); 
+  }
+  50% { 
+    transform: translateY(-10px); 
+  }
+}
+
+.slide-agenda-titulo {
+  font-size: 1.4em;
+  font-weight: 900;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.slide-agenda-texto {
+  font-size: 0.9em;
+  opacity: 0.95;
+  line-height: 1.4;
+}
+
+/* SLIDE 2: Transcripción (AZUL) */
+.slide-transcripcion {
+  background: linear-gradient(135deg, var(--azul-sigaph) 0%, #001a3d 100%);
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+/* SLIDE 3: Logo (MORADO) */
+.slide-logo {
+  background: linear-gradient(135deg, #4A148C 0%, #1A237E 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  height: 100%;
+  width: 100%;
+}
+
+.slide-logo-imagen {
+  width: 80%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  margin-bottom: 20px;
+  animation: fadeInScale 1s ease;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.slide-logo-texto {
+  color: white;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Etiqueta azul */
+.banner-etiqueta-azul {
+  background: var(--azul-sigaph);
+  color: white;
+  text-align: center;
+  padding: 5px;
+  font-size: 0.7em;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Estilos dentro de los slides */
+.banner-titulo {
+  font-size: 1.05em;
+  font-weight: 800;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.banner-descripcion {
+  font-size: 0.8em;
+  margin-bottom: 15px;
+  opacity: 0.95;
+}
+
+.banner-destacado {
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.banner-destacado-nombre {
+  font-size: 1.1em;
+  font-weight: 900;
+  color: #64B5F6;
+  margin-top: 5px;
+}
+
+.banner-btn-azul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #64B5F6;
+  color: #001a3d;
+  padding: 14px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(100,181,246,0.4);
+  margin-bottom: 12px;
+}
+
+.banner-btn-azul:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(100,181,246,0.6);
+}
