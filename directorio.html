@@ -614,31 +614,31 @@
   // ENVIAR A GOOGLE SHEETS
   // ═══════════════════════════════════════════════════════════════
   async function enviarAGoogleSheets(datos) {
-    // ⚠️ IMPORTANTE: REEMPLAZA ESTA URL CON LA TUYA
-    // 1. Ve a Google Apps Script
-    // 2. Click en "Implementar" > "Nueva implementación"
-    // 3. Tipo: "Aplicación web"
-    // 4. Copia la URL que te da (termina en /exec)
-    // 5. Pégala aquí abajo reemplazando la URL de ejemplo
-    
     const URL_GOOGLE_SCRIPT = 'https://script.google.com/macros/s/AKfycbyJJTQi8QAZUHwEsmcp_R8IYMUJOZi3qZLOFLCbUHI7JUBsq6N7M6nwxbFsROwg5v-o/exec';
     
     try {
-      const response = await fetch(URL_GOOGLE_SCRIPT, {
+      console.log('📤 Enviando datos:', datos);
+      
+      var formData = new FormData();
+      formData.append('nombre', datos.nombre || '');
+      formData.append('apellido', datos.apellido || '');
+      formData.append('email', datos.email || '');
+      formData.append('celular', datos.celular || '');
+      formData.append('categoria', datos.categoria || '');
+      formData.append('fecha', new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }));
+      
+      var response = await fetch(URL_GOOGLE_SCRIPT, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(datos)
+        body: formData
       });
       
-      // Con mode: 'no-cors' no podemos leer la respuesta, pero si no hay error, asumimos éxito
-      console.log('✅ Datos enviados a Google Sheets');
+      var result = await response.text();
+      console.log('✅ Respuesta de Google:', result);
+      
       return true;
       
     } catch (error) {
-      console.error('❌ Error al enviar a Google Sheets:', error);
+      console.error('❌ Error al enviar:', error);
       return false;
     }
   }
