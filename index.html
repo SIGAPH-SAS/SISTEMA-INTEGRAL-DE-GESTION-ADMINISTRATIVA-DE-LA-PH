@@ -761,61 +761,41 @@
   </div>
 
   <!-- Contenido -->
-  <div class="popup-content">
-    
-    <!-- Sección: La cuenta que nadie quiere hacer -->
-    <div class="popup-section">
-      <h3>
-        <span class="icon-section">📊</span>
-        LA CUENTA QUE NADIE QUIERE HACER
-      </h3>
-      <p>La cuenta es simple. Si su copropiedad invierte mensualmente:</p>
-      
-      <table class="tabla-costos">
-        <thead>
-          <tr>
-            <th>Servicio</th>
-            <th>Costo 2025</th>
-            <th>Costo 2026</th>
-            <th>Diferencia Anual</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Vigilancia Portería (1x24/7)</td>
-            <td>$ 29.596.154</td>
-            <td>$ 39.120.775 (32.2%)	</td>
-            <td class="highlight">$114.295.452</td>
-          </tr>
-          <tr>
-            <td>Mantenimientos recurrentes</td>
-            <td>$22.500.000</td>
-            <td>$  26.550.000 (18%)</td>
-            <td class="highlight">$  48.600.000</td>
-          </tr>
-          <tr>
-            <td>Aseo (2 Operarios)</td>
-            <td>$10.441.914</td>
-            <td>$12.809.121 (23%)</td>
-            <td class="highlight">$  28.406.484</td>
-          </tr>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td><strong>TOTAL</strong></td>
-            <td><strong>$ 62.538.068</strong></td>
-            <td><strong>$ 78.479.896</strong></td>
-            <td><strong>$191.301.936</strong></td>
-          </tr>
-        </tfoot>
-      </table>
+ <!-- ══════════════════════════════════════════════════════════════════
+     CÓDIGO PARA PEGAR EN index.html
+     
+     INSTRUCCIONES:
+     1. Busca: <div class="popup-content">
+     2. Borra desde ahí hasta el </div> que cierra popup-content
+     3. Pega este código en ese lugar
+     ══════════════════════════════════════════════════════════════════ -->
 
-      <div class="box-destacado">
-        <p><strong>En nuestro ejemplo, son más de $191 millones al año de incremento.</strong><br>
-        Y aún no contamos con servicios públicos, seguros, gastos administrativos y financieros.</p>
-      </div>
+  <!-- Contenido -->
+  <div class="popup-content" id="contenidoDinamico">
+    <div style="text-align: center; padding: 40px;">
+      <p>Cargando información...</p>
     </div>
+  </div>
 
+  <script>
+  // Cargar contenido dinámico del popup
+  (function() {
+    const URL_CONTENIDO = 'https://sigaph-sas.github.io/2026/';
+    
+    fetch(URL_CONTENIDO)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(html) {
+        document.getElementById('contenidoDinamico').innerHTML = html;
+      })
+      .catch(function(error) {
+        console.error('Error al cargar contenido del popup:', error);
+        document.getElementById('contenidoDinamico').innerHTML = 
+          '<div style="text-align:center;padding:40px;color:#666;"><p><strong>No se pudo cargar el contenido</strong></p><p>Por favor, recarga la página</p></div>';
+      });
+  })();
+  </script>
     <!-- Sección: El costo oculto -->
     <div class="popup-section">
       <h3>
@@ -932,6 +912,7 @@
   
 </body>
 </html>
+
 
 
 
