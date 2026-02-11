@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Tratamiento de Datos Personales | SIGAPH S.A.S.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      background: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #002b5c 0%, #004080 100%);
+      color: white;
+      padding: 20px 5%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-section img {
+      height: 60px;
+    }
+
+    .logo-section h1 {
+      font-size: 1.3em;
+      font-weight: 700;
+    }
+
+    .btn-volver {
+      background: white;
+      color: #002b5c;
+      padding: 10px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .btn-volver:hover {
+      background: #2e6b2e;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+
+    .titulo-principal {
+      text-align: center;
+      color: #002b5c;
+      font-size: 2em;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .subtitulo {
+      text-align: center;
+      color: #2e6b2e;
+      font-size: 1.2em;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    .fecha-vigencia {
+      text-align: center;
+      background: #e8f5e9;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      border-left: 4px solid #2e6b2e;
+    }
+
+    .fecha-vigencia p {
+      margin: 5px 0;
+      color: #1b5e20;
+      font-weight: 600;
+    }
+
+    h2 {
+      color: #002b5c;
+      font-size: 1.4em;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #2e6b2e;
+    }
+
+    h3 {
+      color: #2e6b2e;
+      font-size: 1.1em;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      text-align: justify;
+    }
+
+    .dato-empresa {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+      border-left: 4px solid #002b5c;
+    }
+
+    .dato-empresa p {
+      margin: 8px 0;
+      font-weight: 500;
+    }
+
+    .dato-empresa strong {
+      color: #002b5c;
+    }
+
+    .contacto-box {
+      background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .contacto-box h3 {
+      color: #002b5c;
+      margin-top: 0;
+    }
+
+    .destacado {
+      background: #fff3cd;
+      padding: 15px;
+      border-left: 4px solid #ff9800;
+      border-radius: 5px;
+      margin: 20px 0;
+    }
+
+    .destacado strong {
+      color: #e65100;
+    }
+
+    footer {
+      background: #002b5c;
+      color: white;
+      text-align: center;
+      padding: 30px 5%;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: #4fc3f7;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .btn-imprimir {
+      background: #2e6b2e;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 600;
+      margin: 20px auto;
+      display: block;
+      transition: all 0.3s;
+    }
+
+    .btn-imprimir:hover {
+      background: #1b5e20;
+      transform: translateY(-2px);
+    }
+
+    @media print {
+      .btn-volver, .btn-imprimir, footer {
+        display: none;
+      }
+      
+      .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+
+      .titulo-principal {
+        font-size: 1.5em;
+      }
+
+      .card {
+        padding: 25px;
+      }
+
+      h2 {
+        font-size: 1.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="logo-section">
+      <img src="logo_sigaph1.png" alt="Logo SIGAPH" onerror="this.style.display='none'">
+      <h1>SIGAPH S.A.S.</h1>
+    </div>
+    <a href="index.html" class="btn-volver">← Volver al Inicio</a>
+  </div>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h1 class="titulo-principal">POLÍTICA DE TRATAMIENTO DE DATOS PERSONALES</h1>
+    <p class="subtitulo">Sistema Integral de Gestión Administrativa de la Propiedad Horizontal</p>
+
+    <div class="fecha-vigencia">
+      <p>📅 <strong>Fecha de entrada en vigencia:</strong> 11 de febrero de 2026</p>
+      <p>📍 <strong>Ciudad:</strong> Santiago de Cali, Colombia</p>
+    </div>
+
+    <!-- SECCIÓN 1 -->
+    <h2>1. IDENTIFICACIÓN DEL RESPONSABLE DEL TRATAMIENTO</h2>
+    
+    <p>
+      <strong>SIGAPH S.A.S.</strong>, sociedad legalmente constituida en Colombia, identificada con 
+      <strong>NIT 901860605</strong>, con domicilio principal en la ciudad de <strong>Santiago de Cali</strong>, 
+      República de Colombia, actuando como Responsable del Tratamiento de Datos Personales, adopta la presente 
+      Política en cumplimiento de la Ley 1581 de 2012 y sus decretos reglamentarios.
+    </p>
+
+    <div class="dato-empresa">
+      <p><strong>Razón Social:</strong> SIGAPH S.A.S.</p>
+      <p><strong>NIT:</strong> 901860605</p>
+      <p><strong>Domicilio:</strong> Santiago de Cali, Colombia</p>
+    </div>
+
+    <div class="contacto-box">
+      <h3>📞 Datos de contacto:</h3>
+      <p><strong>Teléfonos:</strong> 321 8511222 / 320 7663189 / 314 7318047</p>
+      <p><strong>Página web:</strong> <a href="https://sigaph-sas.github.io/SISTEMA-INTEGRAL-DE-GESTION-ADMINISTRATIVA-DE-LA-PH/" target="_blank">https://sigaph-sas.github.io/SISTEMA-INTEGRAL-DE-GESTION-ADMINISTRATIVA-DE-LA-PH/</a></p>
+    </div>
+
+    <!-- SECCIÓN 2 -->
+    <h2>2. MARCO LEGAL</h2>
+    
+    <p>La presente Política se desarrolla en cumplimiento de:</p>
+    <ul>
+      <li>Artículo 15 de la Constitución Política de Colombia</li>
+      <li>Ley 1581 de 2012</li>
+      <li>Decreto 1377 de 2013</li>
+      <li>Decreto 1074 de 2015</li>
+      <li>Demás normas concordantes y reglamentarias</li>
+    </ul>
+
+    <!-- SECCIÓN 3 -->
+    <h2>3. DEFINICIONES</h2>
+    
+    <p>Para efectos de la presente política se entenderá por:</p>
+
+    <p><strong>Dato personal:</strong> Cualquier información vinculada o que pueda asociarse a una persona natural determinada o determinable.</p>
+
+    <p><strong>Tratamiento:</strong> Cualquier operación o conjunto de operaciones sobre datos personales, tales como recolección, almacenamiento, uso, circulación o supresión.</p>
+
+    <p><strong>Titular:</strong> Persona natural cuyos datos personales son objeto de tratamiento.</p>
+
+    <p><strong>Autorización:</strong> Consentimiento previo, expreso e informado del titular para llevar a cabo el tratamiento de datos personales.</p>
+
+    <!-- SECCIÓN 4 -->
+    <h2>4. FINALIDAD DEL TRATAMIENTO DE DATOS</h2>
+    
+    <p>SIGAPH S.A.S. recolecta y trata datos personales para las siguientes finalidades:</p>
+    <ul>
+      <li>Atender consultas realizadas a través del Directorio, formularios web o canales digitales.</li>
+      <li>Dar respuesta a solicitudes técnicas, administrativas o comerciales.</li>
+      <li>Gestionar cotizaciones, visitas técnicas y diagnósticos presenciales.</li>
+      <li>Ofrecer servicios relacionados con la gestión integral de propiedad horizontal.</li>
+      <li>Enviar información institucional, técnica o comercial sobre servicios de SIGAPH S.A.S.</li>
+      <li>Realizar seguimiento a procesos contractuales o precontractuales.</li>
+      <li>Mantener comunicación con administradores, consejos de administración y copropiedades.</li>
+    </ul>
+
+    <div class="destacado">
+      <p><strong>⚠️ IMPORTANTE:</strong> En ningún caso los datos personales serán vendidos, cedidos o comercializados sin autorización previa del titular, salvo obligación legal.</p>
+    </div>
+
+    <!-- SECCIÓN 5 -->
+    <h2>5. DERECHOS DE LOS TITULARES</h2>
+    
+    <p>El titular de los datos personales tiene derecho a:</p>
+    <ul>
+      <li>Conocer, actualizar y rectificar sus datos personales.</li>
+      <li>Solicitar prueba de la autorización otorgada.</li>
+      <li>Ser informado sobre el uso que se ha dado a sus datos.</li>
+      <li>Presentar quejas ante la Superintendencia de Industria y Comercio.</li>
+      <li>Revocar la autorización y/o solicitar la supresión de sus datos cuando no se respeten los principios legales.</li>
+      <li>Acceder de forma gratuita a sus datos personales.</li>
+    </ul>
+
+    <!-- SECCIÓN 6 -->
+    <h2>6. PROCEDIMIENTO PARA EJERCER LOS DERECHOS</h2>
+    
+    <p>El titular podrá ejercer sus derechos mediante solicitud escrita enviada a través de los canales oficiales de SIGAPH S.A.S.</p>
+
+    <p>La solicitud deberá contener:</p>
+    <ul>
+      <li>Nombre completo del titular</li>
+      <li>Número de identificación</li>
+      <li>Descripción clara de la solicitud</li>
+      <li>Datos de contacto para respuesta</li>
+    </ul>
+
+    <p>SIGAPH S.A.S. dará respuesta dentro de los términos establecidos en la Ley 1581 de 2012.</p>
+
+    <!-- SECCIÓN 7 -->
+    <h2>7. SEGURIDAD DE LA INFORMACIÓN</h2>
+    
+    <p>
+      SIGAPH S.A.S. adopta medidas técnicas, administrativas y humanas razonables para proteger la información 
+      contra acceso no autorizado, pérdida, alteración, divulgación o uso indebido.
+    </p>
+
+    <p>La información será almacenada bajo estrictos criterios de confidencialidad y seguridad.</p>
+
+    <!-- SECCIÓN 8 -->
+    <h2>8. VIGENCIA</h2>
+    
+    <p>
+      La presente Política entra en vigencia a partir de su publicación en la página web oficial de SIGAPH S.A.S. 
+      y permanecerá vigente mientras la empresa realice tratamiento de datos personales.
+    </p>
+
+    <p>
+      SIGAPH S.A.S. podrá modificar esta política en cualquier momento, garantizando su publicación actualizada 
+      en el sitio web institucional.
+    </p>
+
+    <button class="btn-imprimir" onclick="window.print()">🖨️ Imprimir Política</button>
+
+  </div>
+</div>
+
+<footer>
+  <p><strong>SIGAPH S.A.S.</strong> - Sistema Integral de Gestión Administrativa de la Propiedad Horizontal</p>
+  <p>NIT: 901860605 | Santiago de Cali, Colombia</p>
+  <p>Teléfonos: 321 8511222 / 320 7663189 / 314 7318047</p>
+  <p style="margin-top: 15px;">
+    <a href="index.html">Inicio</a> | 
+    <a href="directorio.html">Directorio</a> | 
+    <a href="mailto:info@sigaph.com">Contacto</a>
+  </p>
+  <p style="margin-top: 10px; font-size: 0.9em; color: #aaa;">
+    © 2026 SIGAPH S.A.S. - Todos los derechos reservados
+  </p>
+</footer>
+
+</body>
+</html>
