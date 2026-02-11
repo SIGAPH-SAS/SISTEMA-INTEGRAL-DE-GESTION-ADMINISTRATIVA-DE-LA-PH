@@ -539,7 +539,10 @@
     const categoria = document.getElementById('categoria').value;
 
     let esValido = true;
-
+// Registrar que se abrió el modal
+if (window.sigaphTrack) {
+  window.sigaphTrack.modalAbierto(categoria);
+}
     // Limpiar errores previos
     document.querySelectorAll('.error-message').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('input, select').forEach(el => el.classList.remove('error'));
