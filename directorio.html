@@ -599,6 +599,13 @@
     esValido = false;
   }
 
+// Validar aceptación de política de datos
+  const aceptaPolitica = document.getElementById('aceptaPolitica');
+  if (aceptaPolitica && !aceptaPolitica.checked) {
+    document.getElementById('errorPolitica').classList.add('active');
+    esValido = false;
+  }
+    
   if (!esValido) return;
 
   // Mostrar loading
