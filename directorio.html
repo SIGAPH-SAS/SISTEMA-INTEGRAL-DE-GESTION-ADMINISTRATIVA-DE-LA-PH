@@ -712,19 +712,177 @@
   });
 
 </script>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SISTEMA DE TRACKING - SIGAPH
+     ═══════════════════════════════════════════════════════════════════════ -->
 <script>
-// ═══════════════════════════════════════════════════════════════════════
-// CONFIGURACIÓN - REEMPLAZA CON TU URL DE GOOGLE APPS SCRIPT
-// ═══════════════════════════════════════════════════════════════════════
-
+// CONFIGURACIÓN
 const ANALYTICS_CONFIG = {
+  // ⚠️ REEMPLAZA ESTA URL con la URL de tu Google Apps Script
   URL: 'https://script.google.com/macros/s/AKfycbwimNnD6Kef3irt8wkLFOTSy3SAqxwxcGclu7hwztSirpK-_-v167ib2sqx-lcsOtiZ5g/exec',
   ENABLED: true,
   DEBUG: true
 };
 
-... resto del código de tracking ...
+// Generar IDs
+const SESSION_ID = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
+function obtenerUserID() {
+  let userID = localStorage.getItem('sigaph_user_id');
+  if (!userID) {
+    userID = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('sigaph_user_id', userID);
+  }
+  return userID;
+}
+
+const USER_ID = obtenerUserID();
+
+// Obtener info del navegador
+function obtenerInfoNavegador() {
+  const ua = navigator.userAgent;
+  let dispositivo = 'Desktop';
+  if (/Mobile|Android|iPhone/i.test(ua)) dispositivo = 'Móvil';
+  else if (/Tablet|iPad/i.test(ua)) dispositivo = 'Tablet';
+  
+  let navegador = 'Otro';
+  if (ua.indexOf('Chrome') > -1) navegador = 'Chrome';
+  else if (ua.indexOf('Safari') > -1) navegador = 'Safari';
+  else if (ua.indexOf('Firefox') > -1) navegador = 'Firefox';
+  else if (ua.indexOf('Edge') > -1) navegador = 'Edge';
+  
+  return {
+    dispositivo: dispositivo,
+    navegador: navegador,
+    pantalla: window.screen.width + 'x' + window.screen.height
+  };
+}
+
+// Enviar evento
+async function enviarEvento(tipo, datos) {
+  if (!ANALYTICS_CONFIG.ENABLED) return;
+  
+  try {
+    const info = obtenerInfoNavegador();
+    const fecha = new Date();
+    const formData = new FormData();
+    
+    formData.append('tipo', 'analytics');
+    formData.append('tipoEvento', tipo);
+    formData.append('sessionId', SESSION_ID);
+    formData.append('userId', USER_ID);
+    formData.append('fecha', fecha.toLocaleDateString('es-CO'));
+    formData.append('hora', fecha.toLocaleTimeString('es-CO'));
+    formData.append('pagina', window.location.pathname);
+    formData.append('dispositivo', info.dispositivo);
+    formData.append('navegador', info.navegador);
+    formData.append('pantalla', info.pantalla);
+    
+    Object.keys(datos || {}).forEach(key => {
+      formData.append(key, datos[key]);
+    });
+    
+    fetch(ANALYTICS_CONFIG.URL, {
+      method: 'POST',
+      body: formData
+    }).catch(err => {
+      if (ANALYTICS_CONFIG.DEBUG) console.log('Error tracking:', err);
+    });
+    
+    if (ANALYTICS_CONFIG.DEBUG) {
+      console.log('📊 Evento:', tipo, datos || {});
+    }
+    
+  } catch (error) {
+    if (ANALYTICS_CONFIG.DEBUG) {
+      console.log('Error en tracking:', error);
+    }
+  }
+}
+
+// Marcar tiempo de inicio
+const TIEMPO_INICIO = Date.now();
+
+// Eventos automáticos
+window.addEventListener('load', function() {
+  enviarEvento('visita_pagina', {
+    titulo: document.title,
+    referrer: document.referrer || 'Directo'
+  });
+  
+  if (ANALYTICS_CONFIG.DEBUG) {
+    console.log('✅ Sistema de tracking SIGAPH cargado');
+    console.log('👤 User ID:', USER_ID);
+    console.log('📱 Session ID:', SESSION_ID);
+  }
+});
+
+window.addEventListener('beforeunload', function() {
+  const segundos = Math.round((Date.now() - TIEMPO_INICIO) / 1000);
+  const formData = new FormData();
+  formData.append('tipo', 'analytics');
+  formData.append('tipoEvento', 'salida_pagina');
+  formData.append('sessionId', SESSION_ID);
+  formData.append('userId', USER_ID);
+  formData.append('tiempo', segundos);
+  formData.append('dispositivo', obtenerInfoNavegador().dispositivo);
+  navigator.sendBeacon(ANALYTICS_CONFIG.URL, formData);
+});
+
+document.addEventListener('click', function(e) {
+  if (e.target.matches('nav a')) {
+    enviarEvento('click_menu', {
+      seccion: e.target.textContent.trim()
+    });
+  }
+  
+  if (e.target.matches('.btn, button')) {
+    enviarEvento('click_boton', {
+      texto: e.target.textContent.trim().substring(0, 50)
+    });
+  }
+});
+
+if (document.getElementById('categoria')) {
+  document.getElementById('categoria').addEventListener('change', function(e) {
+    if (e.target.value) {
+      enviarEvento('seleccion_categoria', {
+        categoria: e.target.value
+      });
+    }
+  });
+}
+
+// Scroll tracking
+let scrollMarcado = { '25': false, '50': false, '75': false, '100': false };
+window.addEventListener('scroll', function() {
+  const porcentaje = Math.round((window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+  
+  if (porcentaje >= 25 && !scrollMarcado['25']) {
+    scrollMarcado['25'] = true;
+    enviarEvento('scroll', { profundidad: '25%' });
+  } else if (porcentaje >= 50 && !scrollMarcado['50']) {
+    scrollMarcado['50'] = true;
+    enviarEvento('scroll', { profundidad: '50%' });
+  } else if (porcentaje >= 75 && !scrollMarcado['75']) {
+    scrollMarcado['75'] = true;
+    enviarEvento('scroll', { profundidad: '75%' });
+  } else if (porcentaje >= 95 && !scrollMarcado['100']) {
+    scrollMarcado['100'] = true;
+    enviarEvento('scroll', { profundidad: '100%' });
+  }
+});
+
+// Funciones globales
+window.sigaphTrack = {
+  modalAbierto: function(categoria) {
+    enviarEvento('modal_abierto', { categoria: categoria || 'Sin categoría' });
+  },
+  formularioEnviado: function(categoria) {
+    enviarEvento('formulario_enviado', { categoria: categoria || 'Sin categoría' });
+  },
+  evento: enviarEvento
+};
 </script>
 
 </body>
