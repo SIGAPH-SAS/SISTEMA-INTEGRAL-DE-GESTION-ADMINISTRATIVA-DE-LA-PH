@@ -582,7 +582,10 @@
     if (!esValido) {
       return;
     }
-
+// Registrar que se abrió el modal
+if (window.sigaphTrack) {
+  window.sigaphTrack.modalAbierto(categoria);
+}
     // Mostrar loading
     document.querySelector('.btn-submit').disabled = true;
     document.getElementById('loadingSpinner').classList.add('active');
@@ -598,6 +601,81 @@
     });
 
     if (exito) {
+      if (exito) {
+  // Registrar envío exitoso
+  if (window.sigaphTrack) {
+    window.sigaphTrack.formularioEnviado(categoria);
+  }
+  
+  document.getElementById('loadingSpinner').classList.remove('active');
+  document.getElementById('successMessage').classList.add('active');
+```
+
+---
+
+### **PASO 4: Guardar cambios**
+```
+1. Scroll hasta abajo
+2. Mensaje de commit: "Conectar formulario con Google Sheets"
+3. Click en "Commit changes"
+```
+
+---
+
+### **PASO 5: Probar el formulario**
+
+1. **Espera 2-3 minutos** (para que GitHub Pages actualice)
+
+2. **Limpia caché:**
+   - Ctrl + Shift + Delete
+   - Borra caché
+
+3. **Abre tu página:**
+```
+   https://sigaph-sas.github.io/SISTEMA-INTEGRADO-GESTION-ADMINISTRATIVA-DE-LA-PH/directorio.html
+```
+
+4. **Abre la consola (F12)**
+
+5. **Llena el formulario con datos de prueba:**
+   - Nombre: Test
+   - Apellido: Formulario
+   - Email: test@form.com
+   - Celular: 3001234567
+   - Categoría: Cualquiera
+   - Click en "Enviar"
+
+6. **Verifica en la consola:**
+   Deberías ver:
+```
+   📤 Enviando datos: {...}
+   ✅ Respuesta de Google: {"status":"success",...}
+   📊 Evento: formulario_enviado
+```
+
+7. **Verifica en Google Sheets:**
+   - Ve a tu Google Sheets
+   - Busca la pestaña **"Registros"** (debería crearse automáticamente)
+   - Deberías ver tu registro de prueba
+
+---
+
+## 🎯 RESULTADO FINAL:
+
+Cuando todo funcione, tendrás:
+
+### **Hoja "Analytics"** (YA FUNCIONA ✅)
+```
+Registra TODO el tráfico automáticamente
+```
+
+### **Hoja "Registros"** (LO QUE ESTAMOS CONFIGURANDO)
+```
+┌──────────────┬────────┬───────────┬─────────────────┬────────────┬──────────────┐
+│ Fecha y Hora │ Nombre │ Apellido  │ Email           │ Celular    │ Categoría    │
+├──────────────┼────────┼───────────┼─────────────────┼────────────┼──────────────┤
+│ 10/02 11:34  │ Test   │ Formulario│ test@form.com   │ 3001234567 │ Construcción │
+└──────────────┴────────┴───────────┴─────────────────┴────────────┴──────────────┘
       // ⬇️ AGREGAR ESTA LÍNEA
   if (window.sigaphTrack) window.sigaphTrack.formularioEnviado(categoria);
       
