@@ -379,7 +379,23 @@
         </select>
         <div class="error-message" id="errorCategoria">Por favor seleccione una categoría</div>
       </div>
-
+<!-- Aceptación de Política de Datos -->
+      <div class="form-group">
+        <div style="display: flex; align-items: start; gap: 10px; margin-top: 10px;">
+          <input 
+            type="checkbox" 
+            id="aceptaPolitica" 
+            style="width: auto; margin-top: 5px; min-width: 20px; height: 20px; cursor: pointer;">
+          <label for="aceptaPolitica" style="font-size: 0.95em; text-align: left; cursor: pointer; margin: 0;">
+            He leído y acepto la 
+            <a href="politica-datos.html" target="_blank" style="color: #2e6b2e; font-weight: 600; text-decoration: underline;">
+              Política de Tratamiento de Datos Personales
+            </a>
+            <span class="required">*</span>
+          </label>
+        </div>
+        <div class="error-message" id="errorPolitica">Debe aceptar la política de datos para continuar</div>
+      </div>
       <button type="submit" class="btn-submit" onclick="validarYEnviar()">
         Acceder al Directorio
       </button>
