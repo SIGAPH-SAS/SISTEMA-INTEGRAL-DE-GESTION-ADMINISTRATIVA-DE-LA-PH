@@ -531,172 +531,74 @@
   // VALIDAR Y ENVIAR FORMULARIO
   // ═══════════════════════════════════════════════════════════════
   async function validarYEnviar() {
-    // Obtener valores
-    const nombre = document.getElementById('nombre').value;
-    const apellido = document.getElementById('apellido').value;
-    const email = document.getElementById('email').value;
-    const celular = document.getElementById('celular').value;
-    const categoria = document.getElementById('categoria').value;
+  const nombre = document.getElementById('nombre').value;
+  const apellido = document.getElementById('apellido').value;
+  const email = document.getElementById('email').value;
+  const celular = document.getElementById('celular').value;
+  const categoria = document.getElementById('categoria').value;
 
-    let esValido = true;
-// Registrar que se abrió el modal
-if (window.sigaphTrack) {
-  window.sigaphTrack.modalAbierto(categoria);
-}
-    // Limpiar errores previos
-    document.querySelectorAll('.error-message').forEach(el => el.classList.remove('active'));
-    document.querySelectorAll('input, select').forEach(el => el.classList.remove('error'));
+  let esValido = true;
 
-    // Validar Nombre
-    if (!validarNombre(nombre) || esTextoGenerico(nombre)) {
-      document.getElementById('errorNombre').classList.add('active');
-      document.getElementById('nombre').classList.add('error');
-      esValido = false;
-    }
+  // Limpiar errores previos
+  document.querySelectorAll('.error-message').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('input, select').forEach(el => el.classList.remove('error'));
 
-    // Validar Apellido
-    if (!validarNombre(apellido) || esTextoGenerico(apellido)) {
-      document.getElementById('errorApellido').classList.add('active');
-      document.getElementById('apellido').classList.add('error');
-      esValido = false;
-    }
-
-    // Validar Email
-    if (!validarEmail(email)) {
-      document.getElementById('errorEmail').classList.add('active');
-      document.getElementById('email').classList.add('error');
-      esValido = false;
-    }
-
-    // Validar Celular
-    if (!validarCelular(celular)) {
-      document.getElementById('errorCelular').classList.add('active');
-      document.getElementById('celular').classList.add('error');
-      esValido = false;
-    }
-
-    // Validar Categoría
-    if (!categoria) {
-      document.getElementById('errorCategoria').classList.add('active');
-      document.getElementById('categoria').classList.add('error');
-      esValido = false;
-    }
-
-    if (!esValido) {
-      return;
-    }
-// Registrar que se abrió el modal
-if (window.sigaphTrack) {
-  window.sigaphTrack.modalAbierto(categoria);
-}
-    // Mostrar loading
-    document.querySelector('.btn-submit').disabled = true;
-    document.getElementById('loadingSpinner').classList.add('active');
-
-    // Enviar a Google Sheets
-    const exito = await enviarAGoogleSheets({
-      nombre,
-      apellido,
-      email,
-      celular,
-      categoria,
-      fecha: new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' })
-    });
-
-    if (exito) {
-      if (exito) {
-  // Registrar envío exitoso
-  if (window.sigaphTrack) {
-    window.sigaphTrack.formularioEnviado(categoria);
+  // Validaciones
+  if (!validarNombre(nombre) || esTextoGenerico(nombre)) {
+    document.getElementById('errorNombre').classList.add('active');
+    document.getElementById('nombre').classList.add('error');
+    esValido = false;
   }
-  
-  document.getElementById('loadingSpinner').classList.remove('active');
-  document.getElementById('successMessage').classList.add('active');
-```
-
----
-
-### **PASO 4: Guardar cambios**
-```
-1. Scroll hasta abajo
-2. Mensaje de commit: "Conectar formulario con Google Sheets"
-3. Click en "Commit changes"
-```
-
----
-
-### **PASO 5: Probar el formulario**
-
-1. **Espera 2-3 minutos** (para que GitHub Pages actualice)
-
-2. **Limpia caché:**
-   - Ctrl + Shift + Delete
-   - Borra caché
-
-3. **Abre tu página:**
-```
-   https://sigaph-sas.github.io/SISTEMA-INTEGRADO-GESTION-ADMINISTRATIVA-DE-LA-PH/directorio.html
-```
-
-4. **Abre la consola (F12)**
-
-5. **Llena el formulario con datos de prueba:**
-   - Nombre: Test
-   - Apellido: Formulario
-   - Email: test@form.com
-   - Celular: 3001234567
-   - Categoría: Cualquiera
-   - Click en "Enviar"
-
-6. **Verifica en la consola:**
-   Deberías ver:
-```
-   📤 Enviando datos: {...}
-   ✅ Respuesta de Google: {"status":"success",...}
-   📊 Evento: formulario_enviado
-```
-
-7. **Verifica en Google Sheets:**
-   - Ve a tu Google Sheets
-   - Busca la pestaña **"Registros"** (debería crearse automáticamente)
-   - Deberías ver tu registro de prueba
-
----
-
-## 🎯 RESULTADO FINAL:
-
-Cuando todo funcione, tendrás:
-
-### **Hoja "Analytics"** (YA FUNCIONA ✅)
-```
-Registra TODO el tráfico automáticamente
-```
-
-### **Hoja "Registros"** (LO QUE ESTAMOS CONFIGURANDO)
-```
-┌──────────────┬────────┬───────────┬─────────────────┬────────────┬──────────────┐
-│ Fecha y Hora │ Nombre │ Apellido  │ Email           │ Celular    │ Categoría    │
-├──────────────┼────────┼───────────┼─────────────────┼────────────┼──────────────┤
-│ 10/02 11:34  │ Test   │ Formulario│ test@form.com   │ 3001234567 │ Construcción │
-└──────────────┴────────┴───────────┴─────────────────┴────────────┴──────────────┘
-      // ⬇️ AGREGAR ESTA LÍNEA
-  if (window.sigaphTrack) window.sigaphTrack.formularioEnviado(categoria);
-      
-      document.getElementById('loadingSpinner').classList.remove('active');
-      document.getElementById('successMessage').classList.add('active');
-      
-      // Esperar 4 segundos y mostrar directorio
-      setTimeout(() => {
-        ocultarModal();
-        mostrarDirectorio(categoria);
-      }, 2000);
-    } else {
-      alert('Hubo un error al enviar los datos. Por favor intente nuevamente.');
-      document.querySelector('.btn-submit').disabled = false;
-      document.getElementById('loadingSpinner').classList.remove('active');
-    }
+  if (!validarNombre(apellido) || esTextoGenerico(apellido)) {
+    document.getElementById('errorApellido').classList.add('active');
+    document.getElementById('apellido').classList.add('error');
+    esValido = false;
+  }
+  if (!validarEmail(email)) {
+    document.getElementById('errorEmail').classList.add('active');
+    document.getElementById('email').classList.add('error');
+    esValido = false;
+  }
+  if (!validarCelular(celular)) {
+    document.getElementById('errorCelular').classList.add('active');
+    document.getElementById('celular').classList.add('error');
+    esValido = false;
+  }
+  if (!categoria) {
+    document.getElementById('errorCategoria').classList.add('active');
+    document.getElementById('categoria').classList.add('error');
+    esValido = false;
   }
 
+  if (!esValido) return;
+
+  // Mostrar loading
+  document.querySelector('.btn-submit').disabled = true;
+  document.getElementById('loadingSpinner').classList.add('active');
+
+  // Enviar a Google Sheets
+  const exito = await enviarAGoogleSheets({
+    nombre, apellido, email, celular, categoria,
+    fecha: new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' })
+  });
+
+  if (exito) {
+    // Registrar en Analytics
+    if (window.sigaphTrack) window.sigaphTrack.formularioEnviado(categoria);
+    
+    document.getElementById('loadingSpinner').classList.remove('active');
+    document.getElementById('successMessage').classList.add('active');
+    
+    setTimeout(() => {
+      ocultarModal();
+      mostrarDirectorio(categoria);
+    }, 2000);
+  } else {
+    alert('Error al enviar. Intente nuevamente.');
+    document.querySelector('.btn-submit').disabled = false;
+    document.getElementById('loadingSpinner').classList.remove('active');
+  }
+}
   // ═══════════════════════════════════════════════════════════════
   // ENVIAR A GOOGLE SHEETS
   // ═══════════════════════════════════════════════════════════════
