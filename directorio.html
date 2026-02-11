@@ -479,6 +479,9 @@
   // ═══════════════════════════════════════════════════════════════
   function mostrarModal() {
     document.getElementById('modalFormulario').classList.add('active');
+    // ⬇️ AGREGAR ESTAS DOS LÍNEAS
+  const categoria = document.getElementById('categoria').value;
+  if (window.sigaphTrack) window.sigaphTrack.modalAbierto(categoria);
   }
 
   function ocultarModal() {
@@ -595,10 +598,13 @@
     });
 
     if (exito) {
+      // ⬇️ AGREGAR ESTA LÍNEA
+  if (window.sigaphTrack) window.sigaphTrack.formularioEnviado(categoria);
+      
       document.getElementById('loadingSpinner').classList.remove('active');
       document.getElementById('successMessage').classList.add('active');
       
-      // Esperar 2 segundos y mostrar directorio
+      // Esperar 4 segundos y mostrar directorio
       setTimeout(() => {
         ocultarModal();
         mostrarDirectorio(categoria);
