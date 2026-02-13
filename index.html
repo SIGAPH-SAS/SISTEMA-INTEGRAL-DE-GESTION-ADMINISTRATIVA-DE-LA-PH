@@ -902,7 +902,7 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
     height: 100%;
     background-color: rgba(0, 0, 0, 0.75);
     z-index: 9998;
-    animation: fadeInOverlay 0.2s ease-in-out;
+    animation: fadeInOverlay 0.4s ease-in-out;
   }
 
   @keyframes fadeInOverlay {
@@ -925,18 +925,7 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
     z-index: 9999;
     overflow-y: auto;
-    animation: slideInPopup 0.2s ease-out;
-  }
-
-  .popup-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
-    z-index: 9998;
+    animation: slideInPopup 0.5s ease-out;
   }
 
   @keyframes slideInPopup {
@@ -1287,43 +1276,40 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
      ══════════════════════════════════════════════════════════════════ -->
 
   <!-- Contenido -->
-  <div class="popup-content">
-    <div class="popup-section">
-      <h3><span class="icon-section">📋</span> Información Importante</h3>
-      <p>Tenemos una plataforma especial con información relevante para ti.</p>
-    </div>
-
-    <div class="popup-section">
-      <h3><span class="icon-section">🏢</span> ¿Qué encontrarás?</h3>
-      <ul style="list-style: none; padding-left: 0;">
-        <li>✅ Herramientas de gestión</li>
-        <li>✅ Recursos útiles</li>
-        <li>✅ Información actualizada</li>
-      </ul>
-    </div>
-
-    <div style="text-align: center; margin-top: 25px; padding: 20px; background: #f0f8ff; border-radius: 10px; border: 2px solid #0a7b40;">
-      <p style="margin: 0 0 15px 0; font-size: 1.1em; font-weight: 600; color: #0a7b40;">
-        👉 Haz clic aquí para acceder:
-      </p>
-      <a href="https://sigaph-sas.github.io/2026/" 
-         target="_blank" 
-         class="btn-popup primary" 
-         onclick="cerrarPopup()"
-         style="display: inline-block; text-decoration: none;">
-        🔗 Ver Plataforma
-      </a>
+  <div class="popup-content" id="contenidoDinamico">
+    <div style="text-align: center; padding: 40px;">
+      <p>Cargando información...</p>
     </div>
   </div>
+
+  <script>
+  // Cargar contenido dinámico del popup
+  (function() {
+    const URL_CONTENIDO = 'https://sigaph-sas.github.io/2026/';
+    
+    fetch(URL_CONTENIDO)
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(html) {
+        document.getElementById('contenidoDinamico').innerHTML = html;
+      })
+      .catch(function(error) {
+        console.error('Error al cargar contenido del popup:', error);
+        document.getElementById('contenidoDinamico').innerHTML = 
+          '<div style="text-align:center;padding:40px;color:#666;"><p><strong>No se pudo cargar el contenido</strong></p><p>Por favor, recarga la página</p></div>';
+      });
+  })();
+  </script>
 
     <!-- Botones de acción -->
     <div class="popup-actions">
       <button class="btn-popup primary" onclick="abrirSolicitudVisita()">
         📅 Solicitar Diagnóstico Gratuito
       </button>
-      <a href="https://sigaph-sas.github.io/2026/" target="_blank" class="btn-popup primary" onclick="cerrarPopup()">
-  🔗 Ver más información
-</a>
+      <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="btn-popup secondary">
+        💬 Contactar por WhatsApp
+      </a>
     </div>
   </div>
 
@@ -1335,56 +1321,40 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
 
 <!-- JAVASCRIPT DEL POPUP -->
 <script>
-  // Mostrar popup automáticamente
-  window.onload = function() {
-    console.log('Página cargada, intentando mostrar popup...');
+  // Función para mostrar el popup después de 2 segundos
+  window.addEventListener('load', function() {
     setTimeout(function() {
-      var overlay = document.getElementById('popupOverlay');
-      var popup = document.getElementById('popupPublicitario');
-      
-      console.log('Overlay:', overlay);
-      console.log('Popup:', popup);
-      
-      if (overlay && popup) {
-        overlay.style.display = 'block';
-        overlay.style.opacity = '1';
-        popup.style.display = 'block';
-        popup.style.opacity = '1';
-        document.body.style.overflow = 'hidden';
-        console.log('Popup mostrado correctamente');
-      } else {
-        console.error('No se encontraron elementos del popup');
-      }
-    }, 1000);
-  };
+      mostrarPopup();
+    }, 5000); // 5000 = 5 segundos
+  });
+
+  function mostrarPopup() {
+    document.getElementById('popupOverlay').style.display = 'block';
+    document.getElementById('popupPublicitario').style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Evita scroll del body
+  }
 
   function cerrarPopup() {
-    console.log('Cerrando popup...');
-    var overlay = document.getElementById('popupOverlay');
-    var popup = document.getElementById('popupPublicitario');
-    
-    if (overlay && popup) {
-      overlay.style.display = 'none';
-      popup.style.display = 'none';
-      document.body.style.overflow = 'auto';
-      console.log('Popup cerrado');
-    }
+    document.getElementById('popupOverlay').style.display = 'none';
+    document.getElementById('popupPublicitario').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Restaura scroll del body
   }
 
   function abrirSolicitudVisita() {
     cerrarPopup();
-    if (typeof openModal === 'function') {
-      openModal('modal-visita');
-    }
+    // Abre el modal de solicitud de visita que ya existe en tu página
+    openModal('modal-visita');
   }
 
-  // Cerrar con ESC
+  // Cerrar popup con tecla ESC
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
       cerrarPopup();
     }
   });
 </script>
+
+<!-- 
 ═══════════════════════════════════════════════════════════════════════════════
   FIN DEL CÓDIGO DEL POPUP
   Recuerda: este código debe ir ANTES de la etiqueta </body> en tu index.html
@@ -1394,6 +1364,8 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
   
 </body>
 </html>
+
+
 
 
 
