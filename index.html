@@ -1332,53 +1332,43 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
 
 <!-- JAVASCRIPT DEL POPUP -->
 <script>
-  // POPUP ACTIVADO - Abre al cargar la página
-  window.addEventListener('load', function() {
+  window.onload = function() {
     setTimeout(function() {
-      mostrarPopup();
+      var overlay = document.getElementById('popupOverlay');
+      var popup = document.getElementById('popupPublicitario');
+      
+      if (overlay && popup) {
+        overlay.style.display = 'block';
+        popup.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+      }
     }, 1000);
-  });
+  };
 
- function mostrarPopup() {
+  function cerrarPopup() {
     var overlay = document.getElementById('popupOverlay');
     var popup = document.getElementById('popupPublicitario');
+    
     if (overlay && popup) {
-      overlay.style.display = 'block';
-      overlay.classList.add('visible');
-      popup.style.display = 'block';
-      popup.classList.add('visible');
-      document.body.style.overflow = 'hidden';
-    }
-  }
-
- function cerrarPopup() {
-    var overlay = document.getElementById('popupOverlay');
-    var popup = document.getElementById('popupPublicitario');
-    if (overlay && popup) {
-      overlay.classList.remove('visible');
-      popup.classList.remove('visible');
-      setTimeout(function() {
-        overlay.style.display = 'none';
-        popup.style.display = 'none';
-      }, 200);
+      overlay.style.display = 'none';
+      popup.style.display = 'none';
       document.body.style.overflow = 'auto';
     }
   }
 
   function abrirSolicitudVisita() {
     cerrarPopup();
-    // Abre el modal de solicitud de visita que ya existe en tu página
-    openModal('modal-visita');
+    if (typeof openModal === 'function') {
+      openModal('modal-visita');
+    }
   }
 
-  // Cerrar popup con tecla ESC
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
       cerrarPopup();
     }
   });
 </script>
-
 <!-- 
 ═══════════════════════════════════════════════════════════════════════════════
   FIN DEL CÓDIGO DEL POPUP
@@ -1389,6 +1379,7 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
   
 </body>
 </html>
+
 
 
 
