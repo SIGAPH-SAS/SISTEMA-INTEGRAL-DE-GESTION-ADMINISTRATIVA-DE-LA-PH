@@ -253,11 +253,11 @@
 <style>
 /* CAROUSEL DE HEXÁGONOS - ALIADOS */
 .aliados-carousel-section {
-  padding: 80px 0;
+  padding: 40px 0;
   background: linear-gradient(135deg, #7cb342 0%, #8bc34a 100%);
   position: relative;
   overflow: hidden;
-  margin: 50px 0;
+  margin: 30px 0;
 }
 
 .aliados-carousel-section::before {
@@ -274,14 +274,14 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .hexagon-carousel {
   display: flex;
-  gap: 20px;
-  animation: scroll-aliados 3s linear infinite;
-  padding: 30px 0;
+  gap: 12px;
+  animation: scroll-aliados 45s linear infinite;
+  padding: 15px 0;
   will-change: transform;
 }
 
@@ -295,48 +295,48 @@
 }
 
 .hexagon-aliado {
-  min-width: 130px;
-  width: 130px;
-  height: 150px;
+  min-width: 110px;
+  width: 110px;
+  height: 125px;
   position: relative;
   transition: all 0.4s ease;
   flex-shrink: 0;
 }
 
 .hexagon-aliado:hover {
-  transform: scale(1.2) translateY(-15px);
+  transform: scale(1.15) translateY(-10px);
   z-index: 10;
 }
 
 .hexagon-aliado-inner {
   width: 100%;
   height: 100%;
-  background: #1b5e20; /* Verde oscuro */
+  background: #1b5e20;
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-  transition: all 0.5s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  transition: all 0.4s ease;
   position: relative;
 }
 
 .hexagon-aliado:hover .hexagon-aliado-inner {
-  box-shadow: 0 15px 80px rgba(0, 0, 0, 0.4);
-  background: #2e7d32; /* Verde más claro al hover */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+  background: #2e7d32;
 }
 
 /* Círculo blanco dentro del hexágono */
 .hexagon-aliado-circle {
-  width: 90px;
-  height: 90px;
+  width: 75px;
+  height: 75px;
   background: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
 }
 
 .hexagon-aliado-circle img {
@@ -347,15 +347,108 @@
 
 @media (max-width: 768px) {
   .hexagon-aliado {
-    min-width: 160px;
-    width: 160px;
-    height: 180px;
+    min-width: 90px;
+    width: 90px;
+    height: 105px;
   }
   
   .hexagon-aliado-circle {
-    width: 120px;
-    height: 120px;
+    width: 62px;
+    height: 62px;
   }
+  
+  .aliados-carousel-section {
+    padding: 30px 0;
+  }
+}
+}
+  /* MODAL/POPUP - CSS FALTANTE */
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9998;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: white;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #0a7b40 0%, #064e2a 100%);
+  color: white;
+  padding: 25px;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.6em;
+  font-weight: 600;
+}
+
+.modal-header button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 24px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.modal-header button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+.modal-body {
+  padding: 30px 25px;
+  color: #333;
+}
+
+.modal-body h3 {
+  color: #0a7b40;
+  margin-bottom: 15px;
+  font-size: 1.3em;
+}
+
+.modal-body p, .modal-body ul {
+  line-height: 1.7;
+  margin-bottom: 15px;
 }
 </style>
 
@@ -1251,6 +1344,7 @@
   
 </body>
 </html>
+
 
 
 
