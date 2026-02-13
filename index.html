@@ -912,7 +912,7 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
 
   /* Contenedor del popup */
   .popup-container {
-    display: none !important;
+    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -928,12 +928,15 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
     animation: slideInPopup 0.2s ease-out;
   }
 
-  .popup-container.visible {
-    display: block !important;
-  }
-  
-  .popup-overlay.visible {
-    display: block !important;
+  .popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 9998;
   }
 
   @keyframes slideInPopup {
@@ -1332,20 +1335,31 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
 
 <!-- JAVASCRIPT DEL POPUP -->
 <script>
+  // Mostrar popup automáticamente
   window.onload = function() {
+    console.log('Página cargada, intentando mostrar popup...');
     setTimeout(function() {
       var overlay = document.getElementById('popupOverlay');
       var popup = document.getElementById('popupPublicitario');
       
+      console.log('Overlay:', overlay);
+      console.log('Popup:', popup);
+      
       if (overlay && popup) {
         overlay.style.display = 'block';
+        overlay.style.opacity = '1';
         popup.style.display = 'block';
+        popup.style.opacity = '1';
         document.body.style.overflow = 'hidden';
+        console.log('Popup mostrado correctamente');
+      } else {
+        console.error('No se encontraron elementos del popup');
       }
     }, 1000);
   };
 
   function cerrarPopup() {
+    console.log('Cerrando popup...');
     var overlay = document.getElementById('popupOverlay');
     var popup = document.getElementById('popupPublicitario');
     
@@ -1353,6 +1367,7 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
       overlay.style.display = 'none';
       popup.style.display = 'none';
       document.body.style.overflow = 'auto';
+      console.log('Popup cerrado');
     }
   }
 
@@ -1363,13 +1378,13 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
     }
   }
 
+  // Cerrar con ESC
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
       cerrarPopup();
     }
   });
 </script>
-<!-- 
 ═══════════════════════════════════════════════════════════════════════════════
   FIN DEL CÓDIGO DEL POPUP
   Recuerda: este código debe ir ANTES de la etiqueta </body> en tu index.html
@@ -1379,6 +1394,7 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
   
 </body>
 </html>
+
 
 
 
