@@ -253,7 +253,7 @@
 <style>
 /* CAROUSEL DE HEXÁGONOS - ALIADOS */
 .aliados-carousel-section {
-  padding: 25px 0;
+  padding: 15px 0;
   background: linear-gradient(135deg, #7cb342 0%, #8bc34a 100%);
   position: relative;
   overflow: hidden;
@@ -309,9 +309,9 @@
 
 .hexagon-carousel {
   display: flex;
-  gap: 12px;
+  gap: 6px;
   animation: scroll-aliados 30s linear infinite;
-  padding: 15px 0;
+  padding: 10px 0;
   will-change: transform;
 }
 
@@ -912,7 +912,7 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
 
   /* Contenedor del popup */
   .popup-container {
-    display: none;
+    display: none !important;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -926,6 +926,14 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
     z-index: 9999;
     overflow-y: auto;
     animation: slideInPopup 0.2s ease-out;
+  }
+
+  .popup-container.visible {
+    display: block !important;
+  }
+  
+  .popup-overlay.visible {
+    display: block !important;
   }
 
   @keyframes slideInPopup {
@@ -1324,26 +1332,37 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
 
 <!-- JAVASCRIPT DEL POPUP -->
 <script>
-  // Función para mostrar el popup después de 1 segundos
-  // POPUP PUBLICITARIO DESACTIVADO - Solo usar modal-diagnostico
-
-// POPUP PUBLICITARIO ACTIVADO - Abre al cargar la página
+  // POPUP ACTIVADO - Abre al cargar la página
   window.addEventListener('load', function() {
     setTimeout(function() {
       mostrarPopup();
     }, 1000);
   });
 
-  function mostrarPopup() {
-    document.getElementById('popupOverlay').style.display = 'block';
-    document.getElementById('popupPublicitario').style.display = 'block';
-    document.body.style.overflow = 'hidden';
+ function mostrarPopup() {
+    var overlay = document.getElementById('popupOverlay');
+    var popup = document.getElementById('popupPublicitario');
+    if (overlay && popup) {
+      overlay.style.display = 'block';
+      overlay.classList.add('visible');
+      popup.style.display = 'block';
+      popup.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    }
   }
 
-  function cerrarPopup() {
-    document.getElementById('popupOverlay').style.display = 'none';
-    document.getElementById('popupPublicitario').style.display = 'none';
-    document.body.style.overflow = 'auto'; // Restaura scroll del body
+ function cerrarPopup() {
+    var overlay = document.getElementById('popupOverlay');
+    var popup = document.getElementById('popupPublicitario');
+    if (overlay && popup) {
+      overlay.classList.remove('visible');
+      popup.classList.remove('visible');
+      setTimeout(function() {
+        overlay.style.display = 'none';
+        popup.style.display = 'none';
+      }, 200);
+      document.body.style.overflow = 'auto';
+    }
   }
 
   function abrirSolicitudVisita() {
@@ -1370,6 +1389,7 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
   
 </body>
 </html>
+
 
 
 
