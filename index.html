@@ -264,12 +264,34 @@
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: 
-    repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(255, 255, 255, 0.03) 50px, rgba(255, 255, 255, 0.03) 51px),
-    repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(255, 255, 255, 0.03) 50px, rgba(255, 255, 255, 0.03) 51px);
+  background-image: 
+    repeating-linear-gradient(120deg, transparent 0, transparent 70px, rgba(0, 0, 0, 0.05) 70px, rgba(0, 0, 0, 0.05) 72px),
+    repeating-linear-gradient(60deg, transparent 0, transparent 70px, rgba(0, 0, 0, 0.05) 70px, rgba(0, 0, 0, 0.05) 72px),
+    repeating-linear-gradient(0deg, transparent 0, transparent 70px, rgba(255, 255, 255, 0.08) 70px, rgba(255, 255, 255, 0.08) 72px);
+  background-size: 100% 100%, 100% 100%, 100% 100%;
+  opacity: 0.6;
   pointer-events: none;
 }
 
+  .aliados-carousel-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(139, 195, 74, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(124, 179, 66, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 50% 100%, rgba(104, 159, 56, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+  animation: pulse-bg 8s ease-in-out infinite;
+}
+
+@keyframes pulse-bg {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
 .hexagon-carousel-wrapper {
   position: relative;
   z-index: 1;
@@ -792,19 +814,15 @@
 
 <script>
   function openModal(id){document.getElementById(id).style.display='flex';}
-  function closeModal(id){document.getElementById(id).style.display='none';}
-  function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});closeModal(id);}
+function closeModal(id){document.getElementById(id).style.display='none';}
+function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});closeModal(id);}
 
-  // ✅ Diagnóstico
-  document.getElementById("formularioGoogle").addEventListener("load", () => {
-    setTimeout(() => {
-      try {
-        const iframe = document.getElementById("formularioGoogle");
-        const src = iframe.contentWindow.location.href;
-        if (src.includes("formResponse")) mostrarResultadoDiagnostico();
-      } catch {}
-    }, 4000);
-  });
+// Abrir popup automáticamente al cargar la página (después de 2 segundos)
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    openModal('modal-diagnostico');
+  }, 2000);
+});
 
   function mostrarResultadoDiagnostico() {
     const iframe = document.getElementById("formularioGoogle");
@@ -1344,6 +1362,7 @@
   
 </body>
 </html>
+
 
 
 
