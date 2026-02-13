@@ -825,10 +825,6 @@
 function closeModal(id){document.getElementById(id).style.display='none';}
 function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});closeModal(id);}
 
-// Abrir popup INMEDIATAMENTE al cargar la página
-window.addEventListener('DOMContentLoaded', function() {
-  openModal('modal-diagnostico');
-});
 
   function mostrarResultadoDiagnostico() {
     const iframe = document.getElementById("formularioGoogle");
@@ -1311,9 +1307,9 @@ window.addEventListener('DOMContentLoaded', function() {
       <button class="btn-popup primary" onclick="abrirSolicitudVisita()">
         📅 Solicitar Diagnóstico Gratuito
       </button>
-      <a href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" class="btn-popup secondary">
-        💬 Contactar por WhatsApp
-      </a>
+      <a href="https://sigaph-sas.github.io/2026/" target="_blank" class="btn-popup primary" onclick="cerrarPopup()">
+  🔗 Ver más información
+</a>
     </div>
   </div>
 
@@ -1327,6 +1323,19 @@ window.addEventListener('DOMContentLoaded', function() {
 <script>
   // Función para mostrar el popup después de 2 segundos
   // POPUP PUBLICITARIO DESACTIVADO - Solo usar modal-diagnostico
+
+// POPUP PUBLICITARIO ACTIVADO - Abre al cargar la página
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      mostrarPopup();
+    }, 1000);
+  });
+
+  function mostrarPopup() {
+    document.getElementById('popupOverlay').style.display = 'block';
+    document.getElementById('popupPublicitario').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
 
   function cerrarPopup() {
     document.getElementById('popupOverlay').style.display = 'none';
@@ -1358,6 +1367,7 @@ window.addEventListener('DOMContentLoaded', function() {
   
 </body>
 </html>
+
 
 
 
