@@ -1276,31 +1276,34 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
      ══════════════════════════════════════════════════════════════════ -->
 
   <!-- Contenido -->
-  <div class="popup-content" id="contenidoDinamico">
-    <div style="text-align: center; padding: 40px;">
-      <p>Cargando información...</p>
+  <div class="popup-content">
+    <div class="popup-section">
+      <h3><span class="icon-section">📋</span> Información Importante</h3>
+      <p>Tenemos una plataforma especial con información relevante para ti.</p>
+    </div>
+
+    <div class="popup-section">
+      <h3><span class="icon-section">🏢</span> ¿Qué encontrarás?</h3>
+      <ul style="list-style: none; padding-left: 0;">
+        <li>✅ Herramientas de gestión</li>
+        <li>✅ Recursos útiles</li>
+        <li>✅ Información actualizada</li>
+      </ul>
+    </div>
+
+    <div style="text-align: center; margin-top: 25px; padding: 20px; background: #f0f8ff; border-radius: 10px; border: 2px solid #0a7b40;">
+      <p style="margin: 0 0 15px 0; font-size: 1.1em; font-weight: 600; color: #0a7b40;">
+        👉 Haz clic aquí para acceder:
+      </p>
+      <a href="https://sigaph-sas.github.io/2026/" 
+         target="_blank" 
+         class="btn-popup primary" 
+         onclick="cerrarPopup()"
+         style="display: inline-block; text-decoration: none;">
+        🔗 Ver Plataforma
+      </a>
     </div>
   </div>
-
-  <script>
-  // Cargar contenido dinámico del popup
-  (function() {
-    const URL_CONTENIDO = 'https://sigaph-sas.github.io/2026/';
-    
-    fetch(URL_CONTENIDO)
-      .then(function(response) {
-        return response.text();
-      })
-      .then(function(html) {
-        document.getElementById('contenidoDinamico').innerHTML = html;
-      })
-      .catch(function(error) {
-        console.error('Error al cargar contenido del popup:', error);
-        document.getElementById('contenidoDinamico').innerHTML = 
-          '<div style="text-align:center;padding:40px;color:#666;"><p><strong>No se pudo cargar el contenido</strong></p><p>Por favor, recarga la página</p></div>';
-      });
-  })();
-  </script>
 
     <!-- Botones de acción -->
     <div class="popup-actions">
@@ -1321,7 +1324,7 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
 
 <!-- JAVASCRIPT DEL POPUP -->
 <script>
-  // Función para mostrar el popup después de 2 segundos
+  // Función para mostrar el popup después de 1 segundos
   // POPUP PUBLICITARIO DESACTIVADO - Solo usar modal-diagnostico
 
 // POPUP PUBLICITARIO ACTIVADO - Abre al cargar la página
@@ -1367,6 +1370,7 @@ function scrollToTopAndClose(id){window.scrollTo({top:0,behavior:'smooth'});clos
   
 </body>
 </html>
+
 
 
 
