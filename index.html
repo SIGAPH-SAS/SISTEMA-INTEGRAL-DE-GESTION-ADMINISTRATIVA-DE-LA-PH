@@ -254,7 +254,7 @@
 /* CAROUSEL DE HEXÁGONOS - ALIADOS */
 .aliados-carousel-section {
   padding: 80px 0;
-  background: linear-gradient(135deg, #7cb342 0%, #8bc34a 70%);
+  background: linear-gradient(135deg, #7cb342 0%, #8bc34a 100%);
   position: relative;
   overflow: hidden;
   margin: 50px 0;
@@ -273,21 +273,21 @@
 .hexagon-carousel-wrapper {
   position: relative;
   z-index: 1;
-  width: 90%;
-  overflow: visible;
+  width: 100%;
+  overflow: hidden;
 }
 
 .hexagon-carousel {
   display: flex;
   gap: 50px;
-  animation: scroll-aliados 4s linear infinite;
+  animation: scroll-aliados 40s linear infinite;
   padding: 30px 0;
   will-change: transform;
 }
 
 @keyframes scroll-aliados {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+  100% { transform: translateX(-50%); }
 }
 
 .hexagon-carousel:hover {
@@ -295,9 +295,9 @@
 }
 
 .hexagon-aliado {
-  min-width: 160px;
-  width: 160px;
-  height: 180px;
+  min-width: 220px;
+  width: 220px;
+  height: 240px;
   position: relative;
   transition: all 0.4s ease;
   flex-shrink: 0;
@@ -305,7 +305,7 @@
 
 .hexagon-aliado:hover {
   transform: scale(1.2) translateY(-15px);
-  z-index: 18;
+  z-index: 10;
 }
 
 .hexagon-aliado-inner {
@@ -318,19 +318,19 @@
   justify-content: center;
   padding: 0;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-  transition: all 0.2s ease;
+  transition: all 0.4s ease;
   position: relative;
 }
 
 .hexagon-aliado:hover .hexagon-aliado-inner {
-  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
   background: #2e7d32; /* Verde más claro al hover */
 }
 
 /* Círculo blanco dentro del hexágono */
 .hexagon-aliado-circle {
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   background: white;
   border-radius: 50%;
   display: flex;
@@ -340,8 +340,8 @@
 }
 
 .hexagon-aliado-circle img {
-  max-width: 50%;
-  max-height: 50%;
+  max-width: 85%;
+  max-height: 85%;
   object-fit: contain;
 }
 
@@ -361,15 +361,76 @@
 
 <!-- HTML - Reemplazar las líneas 247-257 con esto: -->
 
-  <section class="logos-section">
-  <h2>Nuestros Aliados de Confianza</h2>
-  <p>Red de empresas y profesionales certificados que garantizan excelencia en cada servicio</p>
-  
 <!-- CAROUSEL DE ALIADOS -->
 <section class="aliados-carousel-section">
   <div class="hexagon-carousel-wrapper">
     <div class="hexagon-carousel">
       <!-- Primera serie de hexágonos -->
+      <div class="hexagon-aliado">
+        <div class="hexagon-aliado-inner">
+          <div class="hexagon-aliado-circle">
+            <img src="aliado1.png" alt="Aliado 1" onerror="this.src='https://via.placeholder.com/140x140/1b5e20/ffffff?text=1'">
+          </div>
+        </div>
+      </div>
+      
+      <div class="hexagon-aliado">
+        <div class="hexagon-aliado-inner">
+          <div class="hexagon-aliado-circle">
+            <img src="aliado2.png" alt="Aliado 2" onerror="this.src='https://via.placeholder.com/140x140/1b5e20/ffffff?text=2'">
+          </div>
+        </div>
+      </div>
+      
+      <div class="hexagon-aliado">
+        <div class="hexagon-aliado-inner">
+          <div class="hexagon-aliado-circle">
+            <img src="aliado3.png" alt="Aliado 3" onerror="this.src='https://via.placeholder.com/140x140/1b5e20/ffffff?text=3'">
+          </div>
+        </div>
+      </div>
+      
+      <div class="hexagon-aliado">
+        <div class="hexagon-aliado-inner">
+          <div class="hexagon-aliado-circle">
+            <img src="aliado4.png" alt="Aliado 4" onerror="this.src='https://via.placeholder.com/140x140/1b5e20/ffffff?text=4'">
+          </div>
+        </div>
+      </div>
+      
+      <div class="hexagon-aliado">
+        <div class="hexagon-aliado-inner">
+          <div class="hexagon-aliado-circle">
+            <img src="aliado5.png" alt="Aliado 5" onerror="this.src='https://via.placeholder.com/140x140/1b5e20/ffffff?text=5'">
+          </div>
+        </div>
+      </div>
+      
+      <div class="hexagon-aliado">
+        <div class="hexagon-aliado-inner">
+          <div class="hexagon-aliado-circle">
+            <img src="aliado6.png" alt="Aliado 6" onerror="this.src='https://via.placeholder.com/140x140/1b5e20/ffffff?text=6'">
+          </div>
+        </div>
+      </div>
+      
+      <div class="hexagon-aliado">
+        <div class="hexagon-aliado-inner">
+          <div class="hexagon-aliado-circle">
+            <img src="aliado7.png" alt="Aliado 7" onerror="this.src='https://via.placeholder.com/140x140/1b5e20/ffffff?text=7'">
+          </div>
+        </div>
+      </div>
+      
+      <div class="hexagon-aliado">
+        <div class="hexagon-aliado-inner">
+          <div class="hexagon-aliado-circle">
+            <img src="aliado8.png" alt="Aliado 8" onerror="this.src='https://via.placeholder.com/140x140/1b5e20/ffffff?text=8'">
+          </div>
+        </div>
+      </div>
+      
+      <!-- Duplicados para efecto infinito -->
       <div class="hexagon-aliado">
         <div class="hexagon-aliado-inner">
           <div class="hexagon-aliado-circle">
@@ -1186,6 +1247,7 @@
   
 </body>
 </html>
+
 
 
 
