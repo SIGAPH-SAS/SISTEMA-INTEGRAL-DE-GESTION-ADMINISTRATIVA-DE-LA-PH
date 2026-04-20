@@ -702,18 +702,45 @@
     }
 
     .banners-laterales {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
 
-    .banner-asesoria-ph {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(10,123,64,0.15);
-      border: 3px solid var(--verde-claro);
-    }
+.banner-asesoria-ph {
+  background: white;
+  /* Mantenemos tus 12px o puedes usar los 20px 60px 40px 80px anteriores */
+  border-radius: 12px; 
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(10,123,64,0.15);
+  border: 3px solid var(--verde-claro);
+  
+  /* Alineación interna */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Esto centra el contenido horizontalmente */
+  text-align: center;
+}
+
+/* Ajuste para que la foto no se corte */
+.banner-asesoria-ph img {
+  width: 100%;
+  height: auto;    /* Evita que se deforme o se corte */
+  display: block;  /* Elimina espacios en blanco extra */
+  object-fit: contain; /* Asegura que la imagen se vea completa */
+}
+
+/* Si el texto superior es un div/span como el de la imagen */
+.banner-badge-superior {
+  width: 100%;
+  background-color: var(--verde-claro);
+  padding: 8px 0;
+  font-weight: bold;
+  /* El centrado lo hereda del padre o lo forzamos aquí */
+  display: flex;
+  justify-content: center;
+}
 
     .banner-transcripcion {
       background: white;
