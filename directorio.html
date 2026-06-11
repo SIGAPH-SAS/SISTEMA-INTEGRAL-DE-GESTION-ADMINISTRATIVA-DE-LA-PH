@@ -1029,7 +1029,7 @@ function bestRecord(recs){return recs.slice().sort((a,b)=>((b.email?2:0)+(b.dir?
 (function(){
   const track=document.getElementById('marquee-track');
   const items=[{label:'Todos',ico:'⭐',cat:'Todos'},...CATS_ALL.filter(c=>bycat[c]).map(c=>{const phones=new Set((bycat[c]||[]).map(p=>phoneKey(p)).filter(Boolean));return{label:c,ico:ICONS[c]||'🔧',cat:c,cnt:phones.size||bycat[c].length}})];
-  function buildSet(){items.forEach(item=>{const btn=document.createElement('button');btn.className='mchip';btn.dataset.cat=item.cat;btn.innerHTML=`<span class="mchip-ico">${item.ico}</span>${esc(item.label)}${item.cnt?` <span style="opacity:.55;font-size:9px">(${item.cnt})</span>`:''}`;btn.addEventListener('click',()=>{document.querySelectorAll('.mchip').forEach(c=>c.classList.toggle('active',c.dataset.cat===item.cat));setFilter(item.cat)});track.appendChild(btn)})}
+  function buildSet(){items.forEach(item=>{const btn=document.createElement('button');btn.className='mchip';btn.dataset.cat=item.cat;btn.innerHTML=`<span class="mchip-ico">${item.ico}</span>${esc(item.label)}${item.cnt?` <span style="opacity:.55;font-size:9px">(${item.cnt})</span>`:''}`;btn.addEventListener('click',()=>{if(!hasConsented())return;document.querySelectorAll('.mchip').forEach(c=>c.classList.toggle('active',c.dataset.cat===item.cat));setFilter(item.cat)});track.appendChild(btn)})}
   for(let i=0;i<3;i++) buildSet();
   const bar=document.getElementById('marquee-bar');
   bar.addEventListener('mouseenter',()=>track.classList.add('paused'));
@@ -1370,7 +1370,7 @@ function sendAccessRequest(){
 // ══ FILTER ══
 let activeFilter='Todos';
 function setFilter(cat){
-  if(!hasConsented()){requireConsent(()=>setFilter(cat));return;}
+  if(!hasConsented())return;  // Silent block — no modal popup
   activeFilter=cat;
   document.querySelectorAll('.mchip').forEach(c=>c.classList.toggle('active',c.dataset.cat===cat));
   applySearch();
