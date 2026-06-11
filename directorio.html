@@ -1081,15 +1081,15 @@ async function handleConsentAccept(){
   await registrarConsentimiento('desconocido', null);
   savingEl.style.display = 'none';
   sessionStorage.setItem(SESS_KEY,'1');
-  closeOverlay('welcome-overlay');
-  // If there was a pending action (e.g. clicked Administradores before consent)
+  // If there was a pending action (clicked something before consenting)
   if(_pendingAction){
     const action = _pendingAction;
     _pendingAction = null;
+    closeOverlay('welcome-overlay');
     setTimeout(action, 200);
   } else {
+    // Normal flow: go to S0 (admin/proveedor selection)
     goStep('s0');
-    openOverlay('welcome-overlay');
   }
 }
 
@@ -1566,15 +1566,12 @@ buildDirectory();renderStats();applySearch();
 setTimeout(function(){
   const alreadyConsented = localStorage.getItem('sigaph_consent_v11');
   if(!alreadyConsented){
-    // First time: show consent step
+    // First time ever: show consent step
     openOverlay('welcome-overlay');
     goStep('consent');
-  } else if(!getSavedAdmin()){
-    // Has consented before but not verified this session
-    openOverlay('welcome-overlay');
-    goStep('s0');
   }
-  // else: already verified this session — skip welcome entirely
+  // If already consented: DON'T show welcome automatically
+  // User can still access admin/proveedor verification via topbar links
 }, 120);
 </script>
 
