@@ -1026,8 +1026,9 @@ function starsLine(avg,sz){let h='';for(let i=1;i<=5;i++)h+=`<span class="cs${av
 function bestRecord(recs){return recs.slice().sort((a,b)=>((b.email?2:0)+(b.dir?1:0)+(b.web?1:0)+(b.obs?.length||0)/50)-((a.email?2:0)+(a.dir?1:0)+(a.web?1:0)+(a.obs?.length||0)/50))[0]}
 
 // ══ MARQUEE ══
-(function(){
+function rebuildMarquee(){
   const track=document.getElementById('marquee-track');
+  track.innerHTML=''; // clear existing chips
   const items=[{label:'Todos',ico:'⭐',cat:'Todos'},...CATS_ALL.filter(c=>bycat[c]).map(c=>{const phones=new Set((bycat[c]||[]).map(p=>phoneKey(p)).filter(Boolean));return{label:c,ico:ICONS[c]||'🔧',cat:c,cnt:phones.size||bycat[c].length}})];
   function buildSet(){items.forEach(item=>{const btn=document.createElement('button');btn.className='mchip';btn.dataset.cat=item.cat;btn.innerHTML=`<span class="mchip-ico">${item.ico}</span>${esc(item.label)}${item.cnt?` <span style="opacity:.55;font-size:9px">(${item.cnt})</span>`:''}`;btn.addEventListener('click',()=>{if(!hasConsented())return;document.querySelectorAll('.mchip').forEach(c=>c.classList.toggle('active',c.dataset.cat===item.cat));setFilter(item.cat)});track.appendChild(btn)})}
   for(let i=0;i<3;i++) buildSet();
@@ -1044,7 +1045,8 @@ function bestRecord(recs){return recs.slice().sort((a,b)=>((b.email?2:0)+(b.dir?
     document.head.appendChild(style);
     track.style.animation=`marquee ${dur}s linear infinite`;
   });
-})();
+}
+rebuildMarquee(); // build chips on load (inactive until consent)
 
 // ══ OVERLAY HELPERS ══
 function openOverlay(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden'}
@@ -1082,11 +1084,14 @@ async function handleConsentAccept(){
   savingEl.style.display = 'none';
   sessionStorage.setItem(SESS_KEY,'1');
   closeOverlay('welcome-overlay');
+  // Initialize the full directory now that consent is given
+  initDirectorio();
+  rebuildMarquee();
   // If there was a pending action run it now
   if(_pendingAction){
     const action = _pendingAction;
     _pendingAction = null;
-    setTimeout(action, 200);
+    setTimeout(action, 300);
   }
   // Consent accepted — directorio fully accessible, no further interruption
 }
@@ -1547,7 +1552,15 @@ function renderStats(){
 }
 
 // ══ INIT ══
-buildDirectory();renderStats();applySearch();
+function initDirectorio(){
+  buildDirectory();
+  renderStats();
+  applySearch();
+}
+// Only init if already consented (returning visitor)
+if(localStorage.getItem('sigaph_consent_v11')){
+  initDirectorio();
+}
 // Show welcome AFTER all init — always last, guaranteed
 setTimeout(function(){
   const alreadyConsented = localStorage.getItem('sigaph_consent_v11');
