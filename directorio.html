@@ -499,7 +499,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
           </button>
 
         </div>
-        <div class="wb-pdp"><strong>⚖️ Ley 1581/2012:</strong> Al ingresar acepta que los datos se usan exclusivamente para referenciación comercial en PH. Responsable: <strong>SIGAPH S.A.S.</strong> (NIT 901860605) · <a href="mailto:sigaph.s.a.s@gmail.com">sigaph.s.a.s@gmail.com</a> · <a href="https://sigaph-sas.github.io/SISTEMA-INTEGRAL-DE-GESTION-ADMINISTRATIVA-DE-LA-PH/politica-datos.html" target="_blank">Política de Datos</a></div>
+
       </div>
       <!-- ADM steps (same as before) -->
       <div class="wb-step" id="wb-adm1">
@@ -1273,9 +1273,10 @@ function hasConsented(){
 }
 function requireConsent(callback){
   if(hasConsented()){
+    // Already consented — run action directly, no modal
     callback();
   } else {
-    // Show consent modal first, then proceed after acceptance
+    // First time: show consent step, queue action for after acceptance
     _pendingAction = callback;
     openOverlay('welcome-overlay');
     goStep('consent');
