@@ -1081,7 +1081,16 @@ async function handleConsentAccept(){
   await registrarConsentimiento('desconocido', null);
   savingEl.style.display = 'none';
   sessionStorage.setItem(SESS_KEY,'1');
-  goStep('s0');
+  closeOverlay('welcome-overlay');
+  // If there was a pending action (e.g. clicked Administradores before consent)
+  if(_pendingAction){
+    const action = _pendingAction;
+    _pendingAction = null;
+    setTimeout(action, 200);
+  } else {
+    goStep('s0');
+    openOverlay('welcome-overlay');
+  }
 }
 
 function handleConsentReject(){
@@ -1258,7 +1267,27 @@ let _admFiltered=[...ADMINS].sort((a,b)=>a.nombre.localeCompare(b.nombre,'es'));
 const ADM_PER_PAGE=50;let _admPage=0;
 function maskCel(cel){const d=normD(cel||'');if(d.length<5)return cel;return d.slice(0,5)+'*'.repeat(Math.max(0,d.length-5))}
 function maskEmail(email){if(!email||!email.includes('@'))return email||'—';const[u,domain]=email.split('@');return u.slice(0,5)+'*****@'+domain}
+// ═══ CONSENT GUARD ═══
+function hasConsented(){
+  return !!localStorage.getItem('sigaph_consent_v11');
+}
+function requireConsent(callback){
+  if(hasConsented()){
+    callback();
+  } else {
+    // Show consent modal first, then proceed after acceptance
+    _pendingAction = callback;
+    openOverlay('welcome-overlay');
+    goStep('consent');
+  }
+}
+let _pendingAction = null;
+
+// Patch handleConsentAccept to also run pending action
+const _origHandleConsentAccept = handleConsentAccept;
+
 function openAdmModal(){
+  if(!hasConsented()){requireConsent(openAdmModal);return;}
   _admFiltered=[...ADMINS].sort((a,b)=>a.nombre.localeCompare(b.nombre,'es'));_admPage=0;
   document.getElementById('adm-list-search').value='';
   document.getElementById('adm-list-count').textContent=`${ADMINS.length.toLocaleString('es')} registros`;
@@ -1288,6 +1317,7 @@ function renderAdmList(){
 
 // ══ CAT MODAL ══
 function openCatModal(){
+  if(!hasConsented()){requireConsent(openCatModal);return;}
   const body=document.getElementById('cat-list-body');body.innerHTML='';
   const grid=document.createElement('div');grid.className='sm-cats-grid';
   CATS_ALL.forEach(cat=>{
@@ -1339,6 +1369,7 @@ function sendAccessRequest(){
 // ══ FILTER ══
 let activeFilter='Todos';
 function setFilter(cat){
+  if(!hasConsented()){requireConsent(()=>setFilter(cat));return;}
   activeFilter=cat;
   document.querySelectorAll('.mchip').forEach(c=>c.classList.toggle('active',c.dataset.cat===cat));
   applySearch();
@@ -1378,6 +1409,11 @@ const srchEl=document.getElementById('search'),clearBtn=document.getElementById(
 srchEl.addEventListener('input',function(){srchQ=norm(this.value.trim());clearBtn.classList.toggle('vis',!!srchQ);applySearch()});
 clearBtn.addEventListener('click',()=>{srchEl.value='';srchQ='';clearBtn.classList.remove('vis');applySearch();srchEl.focus()});
 function applySearch(){
+  // If searching and no consent yet, prompt consent
+  if(srchQ && !hasConsented()){
+    requireConsent(()=>applySearch());
+    return;
+  }
   const hasQ=!!srchQ;
   const srSection=document.getElementById('search-results-section');
   const dirSection=document.getElementById('directory-section');
@@ -1412,6 +1448,7 @@ function applySearch(){
 // ══ PROVIDER MODAL ══
 let curP=null,chosenStar=0;
 function openProv(p){
+  if(!hasConsented()){requireConsent(()=>openProv(p));return;}
   curP=p;chosenStar=0;
   const pk=phoneKey(p);const allRecs=pk?byPhone[pk]||[p]:[p];
   const allCats=[...new Set(allRecs.map(r=>r.cat).filter(Boolean))].sort();
@@ -1479,6 +1516,7 @@ document.getElementById('btn-rate').addEventListener('click',()=>{
 // ══ STATS MODAL ══
 const PER_PAGE=75;
 function openStatsModal(type){
+  if(!hasConsented()){requireConsent(()=>openStatsModal(type));return;}
   const body=document.getElementById('sm-body'),title=document.getElementById('sm-title');
   body.innerHTML='';
   if(type==='proveedores'){
