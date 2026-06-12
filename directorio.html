@@ -1077,23 +1077,31 @@ window.addEventListener('beforeunload',function(){
 });
 // welcome trigger moved to INIT block
 
-async function handleConsentAccept(){
-  const savingEl = document.getElementById('consent-saving');
-  savingEl.style.display = 'block';
-  await registrarConsentimiento('desconocido', null);
-  savingEl.style.display = 'none';
+function handleConsentAccept(){
+  // STEP 1: Save consent immediately (synchronous — no waiting)
+  localStorage.setItem('sigaph_consent_v11', JSON.stringify({
+    fecha: new Date().toISOString(),
+    acepto: true,
+    version: 'v11'
+  }));
   sessionStorage.setItem(SESS_KEY,'1');
+
+  // STEP 2: Close overlay and activate directory IMMEDIATELY
   closeOverlay('welcome-overlay');
-  // Initialize the full directory now that consent is given
   initDirectorio();
   rebuildMarquee();
-  // If there was a pending action run it now
+
+  // STEP 3: Run pending action if any
   if(_pendingAction){
     const action = _pendingAction;
     _pendingAction = null;
-    setTimeout(action, 300);
+    setTimeout(action, 100);
   }
-  // Consent accepted — directorio fully accessible, no further interruption
+
+  // STEP 4: Register in Supabase in background (non-blocking)
+  setTimeout(function(){
+    registrarConsentimiento('desconocido', null);
+  }, 500);
 }
 
 function handleConsentReject(){
