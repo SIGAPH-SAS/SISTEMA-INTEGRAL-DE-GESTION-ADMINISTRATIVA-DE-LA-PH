@@ -724,6 +724,124 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
           </select>
         </div>
         <div class="upd-field">
+          <label class="upd-label">Categoría 2</label>
+          <select class="upd-select" id="upd-categoria2" onchange="validateUpdate()">
+            <option value="">— Ninguna —</option>
+            <option>Abogado</option>
+<option>Acabados</option>
+<option>Acceso</option>
+<option>Acero Inoxidable</option>
+<option>Acristalamiento</option>
+<option>Aire Acondicionado</option>
+<option>Alarmas</option>
+<option>Alquiler de Equipos</option>
+<option>Aluminio</option>
+<option>Andamios</option>
+<option>Antideslizantes</option>
+<option>Artículos Ortopédicos</option>
+<option>Asambleas y Audiovisuales</option>
+<option>Ascensores</option>
+<option>Aseo y Limpieza</option>
+<option>Asesoría</option>
+<option>Asesoría en PH</option>
+<option>Avalúos</option>
+<option>CCTV</option>
+<option>Cantoneras</option>
+<option>Carpintería</option>
+<option>Carpintería Metálica</option>
+<option>Carros de Mercado</option>
+<option>Catering</option>
+<option>Cañerías</option>
+<option>Centro de Convenciones</option>
+<option>Cerrajería y Cerramientos</option>
+<option>Certificadora</option>
+<option>Citofonía Virtual</option>
+<option>Construcciones y Obras Civiles</option>
+<option>Consultoría</option>
+<option>Contabilidad</option>
+<option>Control de Plagas</option>
+<option>DAGMA</option>
+<option>Decoración y Carpas</option>
+<option>Destaponamientos</option>
+<option>Diseño Gráfico</option>
+<option>Dispensadoras</option>
+<option>Dotación</option>
+<option>Dron Fotografía Aérea</option>
+<option>Elementos y Redes Contra Incendio</option>
+<option>Eléctrico</option>
+<option>Encomiendas</option>
+<option>Energía Solar</option>
+<option>Equipos deportivos</option>
+<option>Estructuras metálicas</option>
+<option>Eventos</option>
+<option>Eventos Infantiles</option>
+<option>Ferretería</option>
+<option>Finanzas</option>
+<option>Floristerías</option>
+<option>Forja</option>
+<option>Fumigación</option>
+<option>Gas y Combustible</option>
+<option>Geófono</option>
+<option>Gimnasios</option>
+<option>Hidráulico</option>
+<option>Iluminación</option>
+<option>Impermeabilización</option>
+<option>Impresión y Litografía</option>
+<option>Impresoras</option>
+<option>Ingeniería</option>
+<option>Institución Pública</option>
+<option>Interventoría</option>
+<option>Jardinería</option>
+<option>Juegos Infantiles y Parques</option>
+<option>Legal</option>
+<option>Logística de Carga</option>
+<option>Madera</option>
+<option>Manillas</option>
+<option>Mantenimiento General</option>
+<option>Mantenimiento Transporte Vertical</option>
+<option>Mecánica</option>
+<option>Medio Ambiente</option>
+<option>Mensajería</option>
+<option>Mobiliario</option>
+<option>Música</option>
+<option>Otros Servicios</option>
+<option>Papelería</option>
+<option>Pasamanos</option>
+<option>Personal salvavidas para PH</option>
+<option>Pintura</option>
+<option>Piscinas</option>
+<option>Pisos</option>
+<option>Plomería</option>
+<option>Plásticos y Lonas</option>
+<option>Poda</option>
+<option>Publicidad</option>
+<option>Puertas Vehiculares</option>
+<option>Reciclaje y Residuos</option>
+<option>Rescatista</option>
+<option>Revisoría</option>
+<option>SG-SST</option>
+<option>Salud</option>
+<option>Salvavidas</option>
+<option>Seguridad Acuática</option>
+<option>Seguros</option>
+<option>Servicios Públicos</option>
+<option>Señalización</option>
+<option>Tanques de Agua</option>
+<option>Tapetes</option>
+<option>Tapicería</option>
+<option>Tecnología</option>
+<option>Topografía</option>
+<option>Transcripción de Actas</option>
+<option>Transformadores</option>
+<option>Transporte</option>
+<option>Transporte Privado</option>
+<option>Trasteos</option>
+<option>Trámites</option>
+<option>Vidrios</option>
+<option>Vigilancia y Seguridad</option>
+          </select>
+        </div>
+        <div class="upd-field">
           <label class="upd-label">Descripción de Servicios * <span id="upd-desc-count" class="upd-charcount">(0/50)</span></label>
           <textarea class="upd-textarea" id="upd-descripcion" placeholder="Breve descripción (máx. 50 caracteres)" maxlength="50" oninput="updateDescCount();validateUpdate()"></textarea>
         </div>
@@ -731,6 +849,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
           <label class="upd-label">Celular *</label>
           <input class="upd-input" id="upd-cel" placeholder="3XXXXXXXXX" maxlength="10" inputmode="numeric" oninput="validateUpdate()">
           <div class="upd-hint" id="upd-cel-hint">10 dígitos, inicia con 3</div>
+        </div>
+        <div class="upd-field">
+          <label class="upd-label">Ciudad (Si opera a nivel nacional, coloque Nacional) *</label>
+          <input class="upd-input" id="upd-ciudad-prov" placeholder="Ej: Cali, Bogotá, Nacional…" maxlength="30" oninput="validateUpdate()">
         </div>
         <div class="upd-field">
           <label class="upd-label">Correo electrónico *</label>
@@ -758,17 +880,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
           <div class="upd-hint" id="upd-adm-cel-hint">10 dígitos, inicia con 3</div>
         </div>
         <div class="upd-field">
+          <label class="upd-label">Ciudad (Si opera a nivel nacional, coloque Nacional)</label>
+          <input class="upd-input" id="upd-adm-ciudad" placeholder="Ej: Cali, Bogotá, Nacional…" maxlength="30" oninput="validateUpdate()">
+        </div>
+        <div class="upd-field">
           <label class="upd-label">Correo electrónico *</label>
           <input class="upd-input" id="upd-adm-email" placeholder="tucorreo@ejemplo.com" type="email" oninput="validateUpdate()">
           <div class="upd-hint" id="upd-adm-email-hint">Formato válido requerido</div>
         </div>
         <div class="upd-field">
-          <label class="upd-label">Ciudad</label>
-          <input class="upd-input" id="upd-adm-ciudad" placeholder="Tu ciudad" oninput="validateUpdate()">
+          <label class="upd-label">Conjunto 1 (Unidad que administra)</label>
+          <input class="upd-input" id="upd-adm-conjunto1" placeholder="Nombre del conjunto o empresa" maxlength="30" oninput="validateUpdate()">
         </div>
-        <div class="upd-field">
-          <label class="upd-label">Unidad Residencial / Empresa</label>
-          <input class="upd-input" id="upd-adm-unidad" placeholder="Nombre de la unidad o empresa" oninput="validateUpdate()">
+        <div class="upd-field" id="upd-adm-conjunto2-field" style="display:none">
+          <label class="upd-label">Conjunto 2 (Unidad adicional)</label>
+          <input class="upd-input" id="upd-adm-conjunto2" placeholder="Nombre del segundo conjunto" maxlength="30" oninput="validateUpdate()">
         </div>
       </div>
       <button class="upd-btn" id="upd-btn" onclick="sendUpdate()" disabled>
@@ -850,6 +976,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
         <label class="acc-label">Correo electrónico *</label>
         <input class="acc-input" id="acc-email" placeholder="tucorreo@ejemplo.com" type="email" oninput="validateAccess()">
         <div class="acc-hint" id="acc-email-hint">Formato válido requerido</div>
+      </div>
+      <div class="acc-field">
+        <label class="acc-label">Ciudad (Si opera a nivel nacional, coloque Nacional)</label>
+        <input class="acc-input" id="acc-ciudad" placeholder="Ej: Cali, Bogotá, Nacional…" maxlength="30" oninput="validateAccess()">
       </div>
       <button class="acc-btn" id="acc-btn" onclick="sendAccessRequest()" disabled>
         <span>💬</span> Enviar solicitud por WhatsApp
@@ -1186,19 +1316,23 @@ function openUpdateModal(prefill, type){
   // Show/hide fields
   document.getElementById('upd-prov-fields').style.display=_updType==='prov'?'block':'none';
   document.getElementById('upd-adm-fields').style.display=_updType==='adm'?'block':'none';
+  // Conjunto fields only shown for admin type (always visible in admin modal)
+  const conj2Field=document.getElementById('upd-adm-conjunto2-field');
+  if(conj2Field)conj2Field.style.display=_updType==='adm'?'block':'none';
   if(_updType==='prov'){
     document.getElementById('upd-title').textContent='✏️ Actualizar Datos del Proveedor';
     document.getElementById('upd-subtitle').textContent='Envío a SIGAPH SAS · 321 851 1222';
     if(prefill)document.getElementById('upd-nombre').value=prefill;
     else document.getElementById('upd-nombre').value='';
-    ['upd-contacto','upd-descripcion','upd-cel','upd-email'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+    ['upd-contacto','upd-descripcion','upd-cel','upd-ciudad-prov','upd-email'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
     document.getElementById('upd-categoria').value='';
+    document.getElementById('upd-categoria2').value='';
     document.getElementById('upd-alianza').value='';
     document.getElementById('upd-desc-count').textContent='(0/50)';
   }else{
-    document.getElementById('upd-title').textContent='✏️ Actualizar Datos del Administrador';
-    document.getElementById('upd-subtitle').textContent='Envío a SIGAPH SAS · 314 731 8047';
-    ['upd-adm-nombre','upd-adm-cel','upd-adm-email','upd-adm-ciudad','upd-adm-unidad'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+    document.getElementById('upd-title').textContent='📋 Solicitud de Acceso o Modificación de Datos';
+    document.getElementById('upd-subtitle').textContent='Solicitud de Acceso o Modificación de Datos — WA 314 731 8047';
+    ['upd-adm-nombre','upd-adm-cel','upd-adm-ciudad','upd-adm-email','upd-adm-conjunto1','upd-adm-conjunto2'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
     if(prefill)document.getElementById('upd-adm-nombre').value=prefill;
   }
   ['upd-cel','upd-email','upd-adm-cel','upd-adm-email'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('valid','invalid')});
@@ -1222,6 +1356,7 @@ function validateUpdate(){
     const cat=document.getElementById('upd-categoria').value;
     const desc=(document.getElementById('upd-descripcion').value||'').trim();
     const cel=normD(document.getElementById('upd-cel').value||'');
+    const ciudadProv=(document.getElementById('upd-ciudad-prov').value||'').trim();
     const email=(document.getElementById('upd-email').value||'').trim();
     const alianza=document.getElementById('upd-alianza').value;
     const celOk=cel.length===10&&cel.startsWith('3');
@@ -1230,7 +1365,7 @@ function validateUpdate(){
     setFieldState('upd-email',emailOk&&email.length>0,!emailOk&&email.length>0);
     document.getElementById('upd-cel-hint').classList.toggle('err',!celOk&&cel.length>0);
     document.getElementById('upd-email-hint').classList.toggle('err',!emailOk&&email.length>0);
-    ok=nombre.length>=2&&cat&&desc.length>=1&&celOk&&emailOk&&alianza;
+    ok=nombre.length>=2&&cat&&desc.length>=1&&celOk&&ciudadProv.length>=2&&emailOk&&alianza;
   }else{
     const nombre=(document.getElementById('upd-adm-nombre').value||'').trim();
     const cel=normD(document.getElementById('upd-adm-cel').value||'');
@@ -1253,19 +1388,22 @@ function sendUpdate(){
     const nombre=document.getElementById('upd-nombre').value.trim();
     const contacto=document.getElementById('upd-contacto').value.trim();
     const cat=document.getElementById('upd-categoria').value;
+    const cat2=document.getElementById('upd-categoria2').value;
     const desc=document.getElementById('upd-descripcion').value.trim();
     const cel=document.getElementById('upd-cel').value.replace(/\D/g,'');
+    const ciudadProv=document.getElementById('upd-ciudad-prov').value.trim();
     const email=document.getElementById('upd-email').value.trim();
     const alianza=document.getElementById('upd-alianza').value;
-    msg=`Solicitud de actualización de datos — Proveedor: ${nombre}. Contacto: ${contacto||'N/A'}. Categoría Principal: ${cat}. Descripción: ${desc}. Celular: ${cel}. Correo: ${email}. Solicito Alianza Comercial: ${alianza}. Acepto Política de Datos.`;
+    msg=`Solicitud de actualización de datos — Proveedor: ${nombre}. Contacto: ${contacto||'N/A'}. Categoría Principal: ${cat}.${cat2?' Categoría 2: '+cat2+'.':''} Descripción: ${desc}. Celular: ${cel}. Ciudad: ${ciudadProv}. Correo: ${email}. Solicito Alianza Comercial: ${alianza}. Acepto Política de Datos.`;
     waNum='573218511222';
   }else{
     const nombre=document.getElementById('upd-adm-nombre').value.trim();
     const cel=document.getElementById('upd-adm-cel').value.replace(/\D/g,'');
+    const ciudadAdm=document.getElementById('upd-adm-ciudad').value.trim();
     const email=document.getElementById('upd-adm-email').value.trim();
-    const ciudad=document.getElementById('upd-adm-ciudad').value.trim();
-    const unidad=document.getElementById('upd-adm-unidad').value.trim();
-    msg=`Solicitud de actualización de datos — Administrador: ${nombre}. Celular: ${cel}. Correo: ${email}.${ciudad?' Ciudad: '+ciudad+'.':''}${unidad?' Unidad/Empresa: '+unidad+'.':''} Acepto Política de Datos.`;
+    const conjunto1=document.getElementById('upd-adm-conjunto1').value.trim();
+    const conjunto2=document.getElementById('upd-adm-conjunto2').value.trim();
+    msg=`Solicitud de Acceso o Modificación de Datos — Administrador: ${nombre}. Celular: ${cel}.${ciudadAdm?' Ciudad: '+ciudadAdm+'.':''} Correo: ${email}.${conjunto1?' Conjunto 1: '+conjunto1+'.':''}${conjunto2?' Conjunto 2: '+conjunto2+'.':''} Acepto Política de Datos.`;
     waNum='573147318047';
   }
   window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`,'_blank');
@@ -1339,7 +1477,7 @@ let _accessTargetName='';
 function openAccessModal(name){
   _accessTargetName=name;
   document.getElementById('acc-target-name').textContent=name;
-  ['acc-nombre','acc-cel','acc-email'].forEach(id=>{const el=document.getElementById(id);if(el){el.value='';el.classList.remove('valid','invalid')}});
+  ['acc-nombre','acc-cel','acc-email','acc-ciudad'].forEach(id=>{const el=document.getElementById(id);if(el){el.value='';el.classList.remove('valid','invalid')}});
   document.getElementById('acc-tipo').value='';
   document.getElementById('acc-btn').disabled=true;
   openOverlay('access-overlay');
@@ -1363,7 +1501,8 @@ function sendAccessRequest(){
   const tipo=document.getElementById('acc-tipo').value;
   const cel=document.getElementById('acc-cel').value.replace(/\D/g,'');
   const email=document.getElementById('acc-email').value.trim();
-  const msg=`Solicito acceso a los datos del administrador: ${_accessTargetName}. Mis datos: Nombre: ${nombre}, Tipo: ${tipo}, Celular: ${cel}, Correo: ${email}. Acepto Política de Datos.`;
+  const ciudadAcc=(document.getElementById('acc-ciudad').value||'').trim();
+  const msg=`Solicito acceso a los datos del administrador: ${_accessTargetName}. Mis datos: Nombre: ${nombre}, Tipo: ${tipo}, Celular: ${cel}, Correo: ${email}${ciudadAcc?', Ciudad: '+ciudadAcc:''}. Acepto Política de Datos.`;
   window.open(`https://wa.me/573147318047?text=${encodeURIComponent(msg)}`,'_blank');
   toast('✅ Abriendo WhatsApp…');closeOverlay('access-overlay');
 }
