@@ -1580,16 +1580,25 @@ function panelSearchProv() {
   resetPanelTimeout();
   const q = document.getElementById('panel-prov-search').value.trim().toLowerCase();
   if(q.length < 2) { document.getElementById('panel-prov-results').innerHTML=''; return; }
-  const matches = DATA.filter(p=>(p.emp||'').toLowerCase().includes(q)||(p.cel||'').includes(q)).slice(0,10);
+  const qd = q.replace(/\D/g,''); // digits only for cel search
+  const matches = DATA.filter(p=>
+    (p.emp||'').toLowerCase().includes(q)||
+    (p.cont||'').toLowerCase().includes(q)||
+    (p.cel||'').replace(/\D/g,'').includes(qd)||
+    (p.wa||'').replace(/\D/g,'').includes(qd)
+  ).slice(0,10);
   if(!matches.length) { document.getElementById('panel-prov-results').innerHTML='<div class="panel-empty">Sin resultados</div>'; return; }
   document.getElementById('panel-prov-results').innerHTML = matches.map((p,i)=>{
     return `<div class="panel-item" style="cursor:pointer" onclick="panelEditProv(${JSON.stringify(p).replace(/"/g,'&quot;')})">
       <div class="panel-item-info"><div class="panel-item-title">🔧 ${p.emp}</div>
       <div class="panel-item-sub">${p.cat} · ${p.cel||'Sin cel'}</div></div>
-      <button class="panel-btn panel-btn-azul">✏️ Editar</button>
+      <button class="panel-btn panel-btn-azul" onclick="panelEditProvByIdx(${DATA.indexOf(p)})">✏️ Editar</button>
     </div>`;
   }).join('');
 }
+
+function panelEditProvByIdx(idx){ panelEditProv(DATA[idx]); }
+function panelEditAdmByIdx(idx){ panelEditAdm(ADMINS[idx]); }
 
 function panelEditProv(p) {
   _panelProvEdit = p;
@@ -1600,19 +1609,19 @@ function panelEditProv(p) {
       <div class="panel-edit-row"><span class="panel-edit-label">Contacto</span><input class="panel-edit-input" id="pe-cont" value="${(p.cont||'').replace(/"/g,'&quot;')}"></div>
       <div class="panel-edit-row"><span class="panel-edit-label">Categoría</span><input class="panel-edit-input" id="pe-cat" value="${(p.cat||'').replace(/"/g,'&quot;')}"></div>
       <div class="panel-edit-row"><span class="panel-edit-label">Celular</span><input class="panel-edit-input" id="pe-cel" value="${p.cel||''}"></div>
-      <div class="panel-edit-row"><span class="panel-edit-label">Ciudad</span><input class="panel-edit-input" id="pe-ciudad" value="${(p.ciudad||'').replace(/"/g,'&quot;')}"></div>
+      <div class="panel-edit-row"><span class="panel-edit-label">Ciudad</span><input class="panel-edit-input" id="pe-ciudad" value="${(p.ciu||p.ciudad||'').replace(/"/g,'&quot;')}"></div>
       <div class="panel-edit-row"><span class="panel-edit-label">Correo</span><input class="panel-edit-input" id="pe-email" value="${(p.email||'').replace(/"/g,'&quot;')}"></div>
       <div style="display:flex;gap:8px;margin-top:12px">
         <button class="panel-btn panel-btn-verde" onclick="guardarCambiosProv()">💾 Guardar cambios</button>
-        <button class="panel-btn panel-btn-gray" onclick="document.getElementById('panel-prov-results').innerHTML='';document.getElementById('panel-prov-search').value=''">✕ Cancelar</button>
+        <button class="panel-btn panel-btn-gray" onclick="document.getElementById('panel-prov-results').innerHTML='';document.getElementById('panel-prov-search').value='';_panelProvEdit=null;">✕ Cancelar</button>
       </div>
-      <div style="font-size:9.5px;color:#9ca3af;margin-top:8px">Los cambios quedan registrados en auditoría con tu PIN · Ley 1581/2012</div>
+      <div style="font-size:9.5px;color:#9ca3af;margin-top:8px">✏️ Edita los campos y presiona Guardar · Cambios registrados en auditoría · Ley 1581/2012</div>
     </div>`;
 }
 
 async function guardarCambiosProv() {
   if(!_panelProvEdit) return;
-  const campos = {emp:'pe-emp',cont:'pe-cont',cat:'pe-cat',cel:'pe-cel',ciudad:'pe-ciudad',email:'pe-email'};
+  const campos = {emp:'pe-emp',cont:'pe-cont',cat:'pe-cat',cel:'pe-cel',ciu:'pe-ciudad',email:'pe-email'};
   let cambios = 0;
   for(const [campo,elId] of Object.entries(campos)) {
     const nuevoVal = document.getElementById(elId)?.value.trim();
@@ -1639,10 +1648,15 @@ function panelSearchAdm() {
   resetPanelTimeout();
   const q = document.getElementById('panel-adm-search').value.trim().toLowerCase();
   if(q.length < 2) { document.getElementById('panel-adm-results').innerHTML=''; return; }
-  const matches = ADMINS.filter(a=>(a.nombre||'').toLowerCase().includes(q)||(a.cel||'').includes(q)).slice(0,10);
+  const qd = q.replace(/\D/g,'');
+  const matches = ADMINS.filter(a=>
+    (a.nombre||'').toLowerCase().includes(q)||
+    (a.cel||'').replace(/\D/g,'').includes(qd)||
+    (a.email||'').toLowerCase().includes(q)
+  ).slice(0,10);
   if(!matches.length) { document.getElementById('panel-adm-results').innerHTML='<div class="panel-empty">Sin resultados</div>'; return; }
   document.getElementById('panel-adm-results').innerHTML = matches.map(a=>{
-    return `<div class="panel-item" style="cursor:pointer" onclick="panelEditAdm(${JSON.stringify(a).replace(/"/g,'&quot;')})">
+    return `<div class="panel-item" style="cursor:pointer" onclick="panelEditAdmByIdx(${ADMINS.indexOf(a)})">
       <div class="panel-item-info"><div class="panel-item-title">🏢 ${a.nombre}</div>
       <div class="panel-item-sub">${a.cel||'Sin cel'} · ${a.email||'Sin email'} · ${a.ciudad||''}</div></div>
       <button class="panel-btn panel-btn-azul">✏️ Editar</button>
@@ -1651,7 +1665,8 @@ function panelSearchAdm() {
 }
 
 function panelEditAdm(a) {
-  _panelAdmEdit = a;
+  // Deep copy to avoid reference issues with JSON serialization in onclick
+  _panelAdmEdit = typeof a === 'string' ? JSON.parse(a) : JSON.parse(JSON.stringify(a));
   document.getElementById('panel-adm-results').innerHTML = `
     <div class="panel-edit-form">
       <div style="font-size:12px;font-weight:700;color:#001F5B;margin-bottom:12px">✏️ Editando: ${a.nombre}</div>
