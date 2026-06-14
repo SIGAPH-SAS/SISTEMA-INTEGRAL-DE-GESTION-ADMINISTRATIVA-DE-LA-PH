@@ -955,24 +955,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
           <input class="upd-input" id="upd-adm-conjunto1" placeholder="Nombre del conjunto o empresa" maxlength="30" oninput="validateUpdate()">
         </div>
         <div class="upd-field">
-          <label class="upd-label">Comuna (Conjunto 1)</label>
-          <input class="upd-input" id="upd-adm-comuna1" placeholder="Ej: Comuna 10, Ladera, Norte…" maxlength="30" oninput="validateUpdate()">
+          <label class="upd-label">Comuna</label>
+          <input class="upd-input" id="upd-adm-comuna1" placeholder="Número de comuna (1–22)" maxlength="30" oninput="validateUpdate()">
         </div>
         <div class="upd-field" id="upd-adm-conjunto2-field" style="display:none">
           <label class="upd-label">Conjunto 2 (Unidad adicional)</label>
           <input class="upd-input" id="upd-adm-conjunto2" placeholder="Nombre del segundo conjunto" maxlength="30" oninput="validateUpdate()">
         </div>
         <div class="upd-field" id="upd-adm-comuna2-field" style="display:none">
-          <label class="upd-label">Comuna (Conjunto 2)</label>
-          <input class="upd-input" id="upd-adm-comuna2" placeholder="Ej: Comuna 10, Ladera, Norte…" maxlength="30" oninput="validateUpdate()">
+          <label class="upd-label">Comuna</label>
+          <input class="upd-input" id="upd-adm-comuna2" placeholder="Número de comuna (1–22)" maxlength="30" oninput="validateUpdate()">
         </div>
         <div class="upd-field" id="upd-adm-conjunto3-field" style="display:none">
           <label class="upd-label">Conjunto 3 (Unidad adicional)</label>
           <input class="upd-input" id="upd-adm-conjunto3" placeholder="Nombre del tercer conjunto" maxlength="30" oninput="validateUpdate()">
         </div>
         <div class="upd-field" id="upd-adm-comuna3-field" style="display:none">
-          <label class="upd-label">Comuna (Conjunto 3)</label>
-          <input class="upd-input" id="upd-adm-comuna3" placeholder="Ej: Comuna 10, Ladera, Norte…" maxlength="30" oninput="validateUpdate()">
+          <label class="upd-label">Comuna</label>
+          <input class="upd-input" id="upd-adm-comuna3" placeholder="Número de comuna (1–22)" maxlength="30" oninput="validateUpdate()">
         </div>
       </div>
       <button class="upd-btn" id="upd-btn" onclick="sendUpdate()" disabled>
@@ -1765,20 +1765,85 @@ const CATS_ALL = ["Abogado", "Acabados", "Acceso", "Acero Inoxidable", "Acristal
 // ══ RATINGS — persistent, migrates all old keys ══
 const MASTER_KEY='sigaph_ratings';
 const OLD_KEYS=['sigaph_dir_v4','sigaph_dir_v6','sigaph_dir_v3','sigaph_dir_v5','sigaph_dir_v7','sigaph_dir_v8','sigaph_dir_v9'];
-function lR(){
-  try{
-    let m=JSON.parse(localStorage.getItem(MASTER_KEY)||'{}');
-    OLD_KEYS.forEach(k=>{try{const o=JSON.parse(localStorage.getItem(k)||'null');if(o&&typeof o==='object'){Object.entries(o).forEach(([pk,arr])=>{if(!m[pk])m[pk]=[];if(Array.isArray(arr))m[pk]=[...m[pk],...arr]});localStorage.removeItem(k)}}catch{}});
-    localStorage.setItem(MASTER_KEY,JSON.stringify(m));
-    return m;
-  }catch{return{}}
-}
-function sR(r){localStorage.setItem(MASTER_KEY,JSON.stringify(r))}
-let ratings=lR();
 function phoneKey(p){const d=(p.wa||p.cel||'').replace(/\D/g,'');return d.length>=10?d.slice(-10):d}
-function getAvg(p){const k=phoneKey(p);const a=ratings[k];if(!a||!a.length)return null;return a.reduce((s,v)=>s+v,0)/a.length}
-function getCnt(p){return(ratings[phoneKey(p)]||[]).length}
-function addR(p,v){const k=phoneKey(p);if(!k)return;if(!ratings[k])ratings[k]=[];ratings[k].push(v);sR(ratings)}
+
+// ── RATINGS: cache en memoria + Supabase ──
+const SB_URL='https://cufipenxydncbabbhwyq.supabase.co';
+const SB_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ';
+const SB_HEADERS={'Content-Type':'application/json','apikey':SB_ANON,'Authorization':'Bearer '+SB_ANON};
+
+// Cache: {phoneKey: {avg: float|null, cnt: int}}
+const _rCache={};
+
+async function _fetchRating(pk){
+  if(!pk)return{avg:null,cnt:0};
+  if(_rCache[pk]!==undefined)return _rCache[pk];
+  try{
+    const r=await fetch(`${SB_URL}/rest/v1/ratings_proveedores?phone_key=eq.${pk}&select=score`,{headers:SB_HEADERS});
+    if(!r.ok)throw new Error(r.status);
+    const rows=await r.json();
+    if(!rows.length){_rCache[pk]={avg:null,cnt:0};return _rCache[pk];}
+    const scores=rows.map(x=>x.score);
+    const avg=scores.reduce((s,v)=>s+v,0)/scores.length;
+    _rCache[pk]={avg,cnt:scores.length};
+    return _rCache[pk];
+  }catch{_rCache[pk]={avg:null,cnt:0};return _rCache[pk];}
+}
+
+function getAvg(p){const pk=phoneKey(p);const c=_rCache[pk];return(c&&c.cnt)?c.avg:null}
+function getCnt(p){const pk=phoneKey(p);const c=_rCache[pk];return c?c.cnt:0}
+
+async function preloadRatings(){
+  try{
+    const r=await fetch(`${SB_URL}/rest/v1/ratings_proveedores?select=phone_key,score`,{headers:SB_HEADERS});
+    if(!r.ok)return;
+    const rows=await r.json();
+    const tmp={};
+    rows.forEach(({phone_key:pk,score})=>{if(!tmp[pk])tmp[pk]=[];tmp[pk].push(score)});
+    Object.entries(tmp).forEach(([pk,scores])=>{
+      _rCache[pk]={avg:scores.reduce((s,v)=>s+v,0)/scores.length,cnt:scores.length};
+    });
+    // Migrar localStorage legado si existe
+    try{
+      const old=JSON.parse(localStorage.getItem(MASTER_KEY)||'{}');
+      const pending=[];
+      Object.entries(old).forEach(([pk,arr])=>{
+        if(!Array.isArray(arr)||!arr.length)return;
+        const alreadyCnt=_rCache[pk]?_rCache[pk].cnt:0;
+        if(alreadyCnt===0)arr.forEach(score=>pending.push({phone_key:pk,score,migrado:true}));
+      });
+      if(pending.length){
+        await fetch(`${SB_URL}/rest/v1/ratings_proveedores`,{
+          method:'POST',headers:{...SB_HEADERS,'Prefer':'resolution=ignore-duplicates'},
+          body:JSON.stringify(pending)
+        });
+        localStorage.removeItem(MASTER_KEY);
+        // Recargar cache tras migración
+        pending.forEach(({phone_key:pk,score})=>{
+          if(!_rCache[pk])_rCache[pk]={avg:score,cnt:1};
+        });
+      }
+    }catch{}
+  }catch{}
+}
+
+async function addR(p,v){
+  const pk=phoneKey(p);if(!pk)return;
+  try{
+    await fetch(`${SB_URL}/rest/v1/ratings_proveedores`,{
+      method:'POST',
+      headers:{...SB_HEADERS,'Prefer':'return=minimal'},
+      body:JSON.stringify({phone_key:pk,score:v,
+        user_agent:navigator.userAgent.slice(0,120),
+        fecha:new Date().toISOString()})
+    });
+  }catch{}
+  // Actualizar cache inmediatamente (optimistic)
+  const cur=_rCache[pk]||{avg:null,cnt:0};
+  const newCnt=cur.cnt+1;
+  const newAvg=cur.cnt===0?v:((cur.avg*cur.cnt)+v)/newCnt;
+  _rCache[pk]={avg:newAvg,cnt:newCnt};
+}
 
 // ══ INDEXES ══
 const byPhone={};RAW.forEach(p=>{const k=phoneKey(p);if(!k)return;if(!byPhone[k])byPhone[k]=[];byPhone[k].push(p)});
@@ -2446,7 +2511,7 @@ function openProv(p){
   else{nameEl.textContent=disp.emp||'—';document.getElementById('m-web-hint').style.display='none'}
   const catsEl=document.getElementById('m-cats-all');
   catsEl.innerHTML=allCats.map(c=>`<span class="modal-cat-tag">${ICONS[c]||'🔧'} ${esc(c)}</span>`).join('');catsEl.style.display='flex';
-  updRating(p);
+  updRating(p).then(()=>{});
   document.querySelectorAll('.si').forEach(s=>s.classList.remove('sel','hov'));
   document.getElementById('rate-ok').style.display='none';document.getElementById('btn-rate').style.display='inline-block';
   const info=document.getElementById('m-info');info.innerHTML='';
@@ -2470,9 +2535,11 @@ function openProv(p){
   openOverlay('prov-overlay');
 }
 function mBtn(ico,lbl,cls,dis,fn){const b=document.createElement('button');b.className='act-btn '+cls+(dis?' dis':'');b.innerHTML=`<span class="ai">${ico}</span>${lbl}`;if(!dis)b.onclick=fn;return b}
-function updRating(p){
+async function updRating(p){
+  const pk=phoneKey(p);
+  await _fetchRating(pk);
   const avg=getAvg(p),cnt=getCnt(p);
-  const pk=phoneKey(p);const allCats=pk?[...new Set((byPhone[pk]||[p]).map(r=>r.cat).filter(Boolean))]:[];
+  const allCats=pk?[...new Set((byPhone[pk]||[p]).map(r=>r.cat).filter(Boolean))]:[];
   document.getElementById('r-avg').textContent=avg!==null?avg.toFixed(1):'—';
   document.getElementById('r-meta').textContent=cnt?`${cnt} calificación${cnt>1?'es':''} · Promedio acumulado`:'Sin calificaciones aún';
   document.getElementById('r-sub').textContent=allCats.length>1?`Categorías: ${allCats.join(' · ')}`:allCats.length===1?`Categoría: ${allCats[0]}`:'';
@@ -2493,9 +2560,9 @@ starsInEl.querySelectorAll('.si').forEach(star=>{
   const pick=()=>{chosenStar=+star.dataset.v;starsInEl.querySelectorAll('.si').forEach(s=>s.classList.toggle('sel',+s.dataset.v<=chosenStar))};
   star.addEventListener('click',pick);star.addEventListener('touchstart',e=>{e.preventDefault();pick()},{passive:false});
 });
-document.getElementById('btn-rate').addEventListener('click',()=>{
+document.getElementById('btn-rate').addEventListener('click',async()=>{
   if(!chosenStar||!curP){toast('Elige una calificación primero');return}
-  addR(curP,chosenStar);updRating(curP);
+  await addR(curP,chosenStar);await updRating(curP);
   document.getElementById('rate-ok').style.display='inline';document.getElementById('btn-rate').style.display='none';
   toast(`⭐ ${chosenStar} estrella${chosenStar>1?'s':''} guardada`);
 });
@@ -2550,6 +2617,14 @@ function renderStats(){
 // ══ INIT ══
 function initDirectorio(){
   buildDirectory();
+  // Precargar ratings desde Supabase en background; al terminar actualizar tarjetas visibles
+  preloadRatings().then(()=>{
+    document.querySelectorAll('.card').forEach(card=>{
+      const p=RAW.find(r=>r.id===+card.dataset.id);
+      if(p)card.replaceWith(mkCard(p));
+    });
+    renderStats();
+  });
   renderStats();
   applySearch();
 }
