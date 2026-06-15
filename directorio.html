@@ -1780,13 +1780,10 @@ async function _fetchRating(pk){
   if(!pk)return{avg:null,cnt:0};
   if(_rCache[pk]!==undefined)return _rCache[pk];
   try{
-    const r=await fetch(`${SB_URL}/rest/v1/ratings_proveedores?phone_key=eq.${pk}&select=score`,{headers:SB_HEADERS});
+    const r=await fetch('https://cufipenxydncbabbhwyq.supabase.co/functions/v1/enviar-notificacion?phone_key='+encodeURIComponent(pk));
     if(!r.ok)throw new Error(r.status);
-    const rows=await r.json();
-    if(!rows.length){_rCache[pk]={avg:null,cnt:0};return _rCache[pk];}
-    const scores=rows.map(x=>x.score);
-    const avg=scores.reduce((s,v)=>s+v,0)/scores.length;
-    _rCache[pk]={avg,cnt:scores.length};
+    const d=await r.json();
+    _rCache[pk]={avg:d.avg,cnt:d.cnt};
     return _rCache[pk];
   }catch{_rCache[pk]={avg:null,cnt:0};return _rCache[pk];}
 }
@@ -1796,50 +1793,27 @@ function getCnt(p){const pk=phoneKey(p);const c=_rCache[pk];return c?c.cnt:0}
 
 async function preloadRatings(){
   try{
-    const r=await fetch(`${SB_URL}/rest/v1/ratings_proveedores?select=phone_key,score`,{headers:SB_HEADERS});
+    const r=await fetch('https://cufipenxydncbabbhwyq.supabase.co/functions/v1/enviar-notificacion?all=1');
     if(!r.ok)return;
-    const rows=await r.json();
+    const d=await r.json();
+    const rows=d.rows||[];
     const tmp={};
     rows.forEach(({phone_key:pk,score})=>{if(!tmp[pk])tmp[pk]=[];tmp[pk].push(score)});
     Object.entries(tmp).forEach(([pk,scores])=>{
       _rCache[pk]={avg:scores.reduce((s,v)=>s+v,0)/scores.length,cnt:scores.length};
     });
-    // Migrar localStorage legado si existe
-    try{
-      const old=JSON.parse(localStorage.getItem(MASTER_KEY)||'{}');
-      const pending=[];
-      Object.entries(old).forEach(([pk,arr])=>{
-        if(!Array.isArray(arr)||!arr.length)return;
-        const alreadyCnt=_rCache[pk]?_rCache[pk].cnt:0;
-        if(alreadyCnt===0)arr.forEach(score=>pending.push({phone_key:pk,score,migrado:true}));
-      });
-      if(pending.length){
-        await fetch(`${SB_URL}/rest/v1/ratings_proveedores`,{
-          method:'POST',headers:{...SB_HEADERS,'Prefer':'resolution=ignore-duplicates'},
-          body:JSON.stringify(pending)
-        });
-        localStorage.removeItem(MASTER_KEY);
-        // Recargar cache tras migración
-        pending.forEach(({phone_key:pk,score})=>{
-          if(!_rCache[pk])_rCache[pk]={avg:score,cnt:1};
-        });
-      }
-    }catch{}
   }catch{}
 }
 
 async function addR(p,v){
   const pk=phoneKey(p);if(!pk)return;
   try{
-    await fetch(`${SB_URL}/rest/v1/ratings_proveedores`,{
+    await fetch('https://cufipenxydncbabbhwyq.supabase.co/functions/v1/enviar-notificacion',{
       method:'POST',
-      headers:{...SB_HEADERS,'Prefer':'return=minimal'},
-      body:JSON.stringify({phone_key:pk,score:v,
-        user_agent:navigator.userAgent.slice(0,120),
-        fecha:new Date().toISOString()})
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({tipo:'rating',phone_key:pk,score:v,user_agent:navigator.userAgent.slice(0,120)})
     });
   }catch{}
-  // Actualizar cache inmediatamente (optimistic)
   const cur=_rCache[pk]||{avg:null,cnt:0};
   const newCnt=cur.cnt+1;
   const newAvg=cur.cnt===0?v:((cur.avg*cur.cnt)+v)/newCnt;
