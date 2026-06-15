@@ -1459,7 +1459,7 @@ async function registrarIngresoPanel() {
     const ip = await getIP().catch(()=>'desconocido');
     const r = await fetch('https://cufipenxydncbabbhwyq.supabase.co/rest/v1/sesiones_panel_sigaph', {
       method:'POST',
-      headers:{'Content-Type':'application/json','apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Prefer':'return=representation'},
+      headers:{'Content-Type':'application/json','apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ','Prefer':'return=representation'},
       body:JSON.stringify({
         operador_pin: _panelOperador,
         ip_aproximada: ip,
@@ -1478,7 +1478,7 @@ async function registrarSalidaPanel() {
     const durMin = _panelIngresoTime ? ((Date.now()-_panelIngresoTime)/60000).toFixed(2) : 0;
     await fetch(`https://cufipenxydncbabbhwyq.supabase.co/rest/v1/sesiones_panel_sigaph?id=eq.${_panelSessionId}`, {
       method:'PATCH',
-      headers:{'Content-Type':'application/json','apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ'},
+      headers:{'Content-Type':'application/json','apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ'},
       body:JSON.stringify({
         fecha_salida: new Date().toISOString(),
         duracion_min: durMin
@@ -1492,7 +1492,7 @@ async function registrarCambio(tipo, nombre, campo, valAnterior, valNuevo) {
     const ip = await getIP().catch(()=>'desconocido');
     await fetch('https://cufipenxydncbabbhwyq.supabase.co/rest/v1/auditoria_cambios', {
       method:'POST',
-      headers:{'Content-Type':'application/json','apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ'},
+      headers:{'Content-Type':'application/json','apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ'},
       body:JSON.stringify({
         operador_pin: _panelOperador,
         tipo_registro: tipo,
@@ -1525,7 +1525,7 @@ async function loadColaWA() {
   document.getElementById('cola-list').innerHTML='<div class="panel-loading">⏳ Cargando...</div>';
   try {
     const r = await fetch('https://cufipenxydncbabbhwyq.supabase.co/rest/v1/consultas_proveedores?order=fecha_hora.desc&limit=50', {
-      headers:{'apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ'}
+      headers:{'apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ'}
     });
     const rows = await r.json();
     const total = rows.length;
@@ -1553,7 +1553,7 @@ async function enviarWAYMarcar(id, waUrl) {
   try {
     await fetch(`https://cufipenxydncbabbhwyq.supabase.co/rest/v1/consultas_proveedores?id=eq.${id}`, {
       method:'PATCH',
-      headers:{'Content-Type':'application/json','apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ'},
+      headers:{'Content-Type':'application/json','apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ'},
       body:JSON.stringify({notificado:true})
     });
     toast('✅ Marcado como notificado');
@@ -1566,7 +1566,7 @@ async function loadSolicitudes() {
   document.getElementById('sol-list').innerHTML='<div class="panel-loading">⏳ Cargando...</div>';
   try {
     const r = await fetch('https://cufipenxydncbabbhwyq.supabase.co/rest/v1/solicitudes_acceso_admin?order=fecha_hora.desc&limit=50', {
-      headers:{'apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ'}
+      headers:{'apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ'}
     });
     const rows = await r.json();
     if(!rows.length) { document.getElementById('sol-list').innerHTML='<div class="panel-empty">Sin solicitudes registradas.</div>'; return; }
@@ -1726,8 +1726,8 @@ async function loadAuditoria() {
   document.getElementById('audit-list').innerHTML='<div class="panel-loading">⏳ Cargando...</div>';
   try {
     const [cambios, sesiones] = await Promise.all([
-      fetch('https://cufipenxydncbabbhwyq.supabase.co/rest/v1/auditoria_cambios?order=fecha_hora.desc&limit=30',{headers:{'apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ'}}).then(r=>r.json()),
-      fetch('https://cufipenxydncbabbhwyq.supabase.co/rest/v1/sesiones_panel_sigaph?order=fecha_ingreso.desc&limit=10',{headers:{'apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ'}}).then(r=>r.json())
+      fetch('https://cufipenxydncbabbhwyq.supabase.co/rest/v1/auditoria_cambios?order=fecha_hora.desc&limit=30',{headers:{'apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ'}}).then(r=>r.json()),
+      fetch('https://cufipenxydncbabbhwyq.supabase.co/rest/v1/sesiones_panel_sigaph?order=fecha_ingreso.desc&limit=10',{headers:{'apikey':'sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ'}}).then(r=>r.json())
     ]);
     let html = '<div style="font-size:12px;font-weight:700;color:#001F5B;margin-bottom:8px">📊 Últimas sesiones</div>';
     html += sesiones.map(s=>{
@@ -1769,8 +1769,9 @@ function phoneKey(p){const d=(p.wa||p.cel||'').replace(/\D/g,'');return d.length
 
 // ── RATINGS: cache en memoria + Supabase ──
 const SB_URL='https://cufipenxydncbabbhwyq.supabase.co';
-const SB_ANON='sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ';
-const SB_HEADERS={'Content-Type':'application/json','apikey':SB_ANON,'Authorization':'Bearer '+SB_ANON};
+const SB_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ';
+const SB_PUB='sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ';
+const SB_HEADERS={'Content-Type':'application/json','apikey':SB_PUB,'Authorization':'Bearer '+SB_ANON};
 
 // Cache: {phoneKey: {avg: float|null, cnt: int}}
 const _rCache={};
@@ -2003,7 +2004,7 @@ function showAdminResult(a){
     setTimeout(function(){
       fetch('https://cufipenxydncbabbhwyq.supabase.co/functions/v1/enviar-notificacion', {
         method:'POST',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ'},
+        headers:{'Content-Type':'application/json','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ'},
         body:JSON.stringify({tipo:'admin',nombre:a.nombre,email:a.email,ciudad:a.ciudad||''})
       }).catch(function(){});
     }, 1000);
@@ -2013,7 +2014,7 @@ function showAdminResult(a){
     getIP().then(function(ip){
       fetch('https://cufipenxydncbabbhwyq.supabase.co/functions/v1/enviar-notificacion', {
         method:'POST',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ'},
+        headers:{'Content-Type':'application/json','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ'},
         body:JSON.stringify({
           tipo:'alerta_sigaph',
           email:'notificaciones@sigaphsas.com',
@@ -2481,7 +2482,7 @@ function openProv(p){
     if(p.email && p.email.includes('@')) {
       fetch('https://cufipenxydncbabbhwyq.supabase.co/functions/v1/enviar-notificacion', {
         method:'POST',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ'},
+        headers:{'Content-Type':'application/json','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ'},
         body:JSON.stringify({tipo:'proveedor',empresa:p.emp,categoria:p.cat,email:p.email})
       }).catch(()=>{});
     }
@@ -2489,7 +2490,7 @@ function openProv(p){
     getIP().then(ip=>{
       fetch('https://cufipenxydncbabbhwyq.supabase.co/functions/v1/enviar-notificacion', {
         method:'POST',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer sb_publishable_2C4mIRmmvO6OXoIe2Er9tA_tJgDrBzVc7hmfJcFUQ'},
+        headers:{'Content-Type':'application/json','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ'},
         body:JSON.stringify({
           tipo:'alerta_sigaph',
           email:'notificaciones@sigaphsas.com',
