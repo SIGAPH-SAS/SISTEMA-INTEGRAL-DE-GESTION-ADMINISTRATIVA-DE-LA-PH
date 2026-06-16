@@ -380,6 +380,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
 .btn-no-acepto{width:100%;padding:9px;background:transparent;color:var(--muted);border:1.5px solid var(--border);border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
 .btn-no-acepto:hover{border-color:#ef4444;color:#ef4444}
 .consent-saving{text-align:center;font-size:10px;color:var(--muted);margin-top:6px;display:none}
+.verify-form{display:none;background:linear-gradient(135deg,#f0f7e0,#e8f5eb);border:2px solid var(--verde-vivo);border-radius:12px;padding:14px 16px;margin-bottom:12px;animation:slideDown .3s ease}
+@keyframes slideDown{from{opacity:0;max-height:0}to{opacity:1;max-height:400px}}
+.verify-title{font-size:13px;font-weight:800;color:var(--azul);margin-bottom:2px;text-align:center}
+.verify-sub{font-size:10px;color:var(--verde);text-align:center;margin-bottom:10px;font-weight:600;line-height:1.4}
+.verify-input{width:100%;padding:9px 12px;border:1.5px solid #c3d9a0;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;margin-bottom:0;box-sizing:border-box;outline:none;transition:border .2s}
+.verify-input:focus{border-color:var(--verde)}
+.verify-results{max-height:160px;overflow-y:auto;border:1px solid #c3d9a0;border-radius:8px;margin:6px 0 8px;background:#fff;display:none}
+.verify-result-item{padding:8px 12px;cursor:pointer;font-size:11px;border-bottom:1px solid #eee;line-height:1.4}
+.verify-result-item:last-child{border-bottom:none}
+.verify-result-item:hover{background:#f0f7e0}
+.verify-result-tipo{font-size:9px;color:var(--muted);font-weight:600;text-transform:uppercase;margin-right:4px}
+.btn-verify{width:100%;padding:11px;background:var(--azul);color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-bottom:6px}
+.btn-verify:hover{background:var(--verde);transform:translateY(-1px)}
+.verify-skip{text-align:center;font-size:10px;color:var(--muted);cursor:pointer;text-decoration:underline;margin-top:2px}
+.verify-skip:hover{color:var(--azul)}
 
 /* ═══ PANEL SIGAPH OPERADOR ═══ */
 #panel-sigaph-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:none;align-items:center;justify-content:center}
@@ -529,6 +544,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
       <!-- CONSENT STEP — Ley 1581/2012 -->
       <div class="wb-step active" id="wb-consent">
         <div class="consent-step">
+
+          <!-- Mini formulario de verificación — ARRIBA, aparece al aceptar -->
+          <div class="verify-form" id="verify-form">
+            <div class="verify-title">¿Estás en el Directorio SIGAPH?</div>
+            <div class="verify-sub">Escribe tu nombre o empresa y verifica si ya apareces — administradores y proveedores PH</div>
+            <input class="verify-input" id="verify-nombre" type="text" placeholder="Nombre o empresa (ej. María Torres, Constructora ABC...)" maxlength="80" autocomplete="off" oninput="buscarEnDirectorio(this.value)">
+            <div class="verify-results" id="verify-results"></div>
+            <input class="verify-input" id="verify-cel" type="tel" placeholder="Celular opcional (ej. 3001234567)" maxlength="15" style="margin-top:4px" autocomplete="tel" inputmode="numeric">
+            <button class="btn-verify" onclick="handleVerifyAndEnter()" style="margin-top:10px">
+              🔍 Verificar y entrar al Directorio
+            </button>
+            <div class="verify-skip" onclick="handleConsentAccept()">Continuar sin verificar →</div>
+          </div>
+
           <div class="consent-title">Política de Protección de Datos</div>
           <div class="consent-sub">Ley 1581 de 2012 · Habeas Data Colombia</div>
           <div class="consent-box">
@@ -539,7 +568,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
           <div class="consent-law">
             <strong>⚖️ Al hacer clic en ACEPTO usted otorga su consentimiento libre, previo, expreso e informado</strong> para el tratamiento de sus datos personales según la finalidad indicada. Este consentimiento quedará registrado con fecha, hora y datos técnicos del dispositivo como prueba de autorización.
           </div>
-          <button class="btn-acepto" onclick="handleConsentAccept()">
+          <button class="btn-acepto" id="btn-acepto-main" onclick="showVerifyForm()">
             ✅ ACEPTO la Política de Datos
           </button>
           <button class="btn-no-acepto" onclick="handleConsentReject()">
@@ -1237,7 +1266,7 @@ async function getIP(){
   }catch{return 'desconocido'}
 }
 
-async function registrarConsentimiento(tipoUsuario, celularHash){
+async function registrarConsentimiento(tipoUsuario, celularHash, nombreVisitante, celVisitante){
   try{
     const ip = await getIP();
     const payload = {
@@ -1247,7 +1276,9 @@ async function registrarConsentimiento(tipoUsuario, celularHash){
       tipo_usuario: tipoUsuario || 'desconocido',
       celular_hash: celularHash || null,
       acepto: true,
-      finalidad: 'Referenciación comercial PH — Ley 1581/2012'
+      finalidad: 'Referenciación comercial PH — Ley 1581/2012',
+      nombre_visitante: nombreVisitante || null,
+      cel_visitante: celVisitante || null
     };
     const resp = await fetch(SUPA_URL+'/rest/v1/consentimientos_directorio', {
       method: 'POST',
@@ -1886,7 +1917,89 @@ window.addEventListener('beforeunload',function(){
 });
 // welcome trigger moved to INIT block
 
-function handleConsentAccept(){
+function showVerifyForm(){
+  const vf = document.getElementById('verify-form');
+  const btn = document.getElementById('btn-acepto-main');
+  if(vf){ vf.style.display='block'; }
+  if(btn){ btn.style.display='none'; }
+  // Scroll al top: el formulario está arriba del modal, debe ser lo primero visible
+  const wb = document.querySelector('.welcome-box');
+  if(wb){ setTimeout(()=>{ wb.scrollTop = 0; }, 50); }
+  setTimeout(()=>{ const n=document.getElementById('verify-nombre'); if(n)n.focus(); }, 200);
+}
+
+function buscarEnDirectorio(val){
+  const cont = document.getElementById('verify-results');
+  if(!cont) return;
+  const q = (val||'').trim().toLowerCase();
+  if(q.length < 2){ cont.style.display='none'; cont.innerHTML=''; return; }
+
+  const resultados = [];
+
+  // Buscar en ADMINS
+  if(typeof ADMINS !== 'undefined'){
+    ADMINS.forEach(function(a){
+      const nombre = (a.nombre||'').toLowerCase();
+      const unidad = (a.unidad||'').toLowerCase();
+      if(nombre.includes(q) || unidad.includes(q)){
+        resultados.push({tipo:'admin', label: a.nombre, sub: a.unidad||a.ciudad||''});
+        if(resultados.length >= 8) return;
+      }
+    });
+  }
+
+  // Buscar en RAW (proveedores) — deduplicado por nombre de empresa
+  if(typeof RAW !== 'undefined' && resultados.length < 8){
+    const vistosEmp = {};
+    const provsFiltrados = [];
+    RAW.forEach(function(p){
+      const emp = (p.emp||'').trim();
+      const empLow = emp.toLowerCase();
+      if((empLow.includes(q) || (p.cat||'').toLowerCase().includes(q)) && !vistosEmp[empLow]){
+        vistosEmp[empLow] = true;
+        provsFiltrados.push({tipo:'prov', label: emp, sub: p.cat||''});
+      }
+    });
+    provsFiltrados.slice(0, 8 - resultados.length).forEach(function(r){
+      resultados.push(r);
+    });
+  }
+
+  if(resultados.length === 0){
+    cont.innerHTML = '<div class="verify-result-item" style="color:var(--muted);cursor:default">No encontrado — puedes entrar igual ✓</div>';
+    cont.style.display='block';
+    return;
+  }
+
+  cont.innerHTML = resultados.map(function(r){
+    const tipoLabel = r.tipo==='admin' ? '👤 Adm' : '🔧 Prov';
+    return '<div class="verify-result-item" onclick="seleccionarResultado(this,\''+escHTML(r.label)+'\')">'
+      +'<span class="verify-result-tipo">'+tipoLabel+'</span>'
+      +'<strong>'+escHTML(r.label)+'</strong>'
+      +(r.sub ? ' <span style="color:var(--muted);font-size:9px">— '+escHTML(r.sub)+'</span>' : '')
+      +'</div>';
+  }).join('');
+  cont.style.display='block';
+}
+
+function escHTML(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function seleccionarResultado(el, nombre){
+  const inp = document.getElementById('verify-nombre');
+  if(inp){ inp.value = nombre; inp.focus(); }
+  const cont = document.getElementById('verify-results');
+  if(cont){ cont.style.display='none'; }
+}
+
+function handleVerifyAndEnter(){
+  const nombre = (document.getElementById('verify-nombre').value||'').trim();
+  const cel = (document.getElementById('verify-cel').value||'').replace(/\D/g,'').trim();
+  if(nombre) sessionStorage.setItem('sigaph_visitante_nombre', nombre);
+  if(cel)    sessionStorage.setItem('sigaph_visitante_cel', cel);
+  handleConsentAccept(nombre, cel);
+}
+
+function handleConsentAccept(nombreVisitante, celVisitante){
   // STEP 1: Save consent immediately (synchronous — no waiting)
   localStorage.setItem('sigaph_consent_v11', JSON.stringify({
     fecha: new Date().toISOString(),
@@ -1909,7 +2022,7 @@ function handleConsentAccept(){
 
   // STEP 4: Register in Supabase in background (non-blocking)
   setTimeout(function(){
-    registrarConsentimiento('desconocido', null);
+    registrarConsentimiento('desconocido', null, nombreVisitante||sessionStorage.getItem('sigaph_visitante_nombre')||'', celVisitante||sessionStorage.getItem('sigaph_visitante_cel')||'');
   }, 500);
 }
 
@@ -1997,7 +2110,9 @@ function showAdminResult(a){
           ciudad: a.ciudad||'—',
           tiene_email: !!(a.email && a.email.includes('@')),
           ip_aproximada: ip,
-          hora: new Date().toLocaleString('es-CO',{timeZone:'America/Bogota'})
+          hora: new Date().toLocaleString('es-CO',{timeZone:'America/Bogota'}),
+          visitante_nombre: sessionStorage.getItem('sigaph_visitante_nombre')||'No registrado',
+          visitante_cel: sessionStorage.getItem('sigaph_visitante_cel')||'No registrado'
         })
       }).catch(function(){});
     }).catch(function(){});
@@ -2472,7 +2587,9 @@ function openProv(p){
           categoria: p.cat,
           tiene_email: !!(p.email && p.email.includes('@')),
           ip_aproximada: ip,
-          hora: new Date().toLocaleString('es-CO',{timeZone:'America/Bogota'})
+          hora: new Date().toLocaleString('es-CO',{timeZone:'America/Bogota'}),
+          visitante_nombre: sessionStorage.getItem('sigaph_visitante_nombre')||'No registrado',
+          visitante_cel: sessionStorage.getItem('sigaph_visitante_cel')||'No registrado'
         })
       }).catch(()=>{});
     }).catch(()=>{});
