@@ -1625,16 +1625,26 @@ async function loadSolicitudes() {
 let _panelProvEdit = null;
 function panelSearchProv() {
   resetPanelTimeout();
-  const q = document.getElementById('panel-prov-search').value.trim().toLowerCase();
-  if(q.length < 2) { document.getElementById('panel-prov-results').innerHTML=''; return; }
-  const qd = q.replace(/\D/g,''); // digits only for cel search
-  const matches = DATA.filter(p=>
-    (p.emp||'').toLowerCase().includes(q)||
-    (p.cont||'').toLowerCase().includes(q)||
-    (p.cel||'').replace(/\D/g,'').includes(qd)||
-    (p.wa||'').replace(/\D/g,'').includes(qd)
-  ).slice(0,10);
-  if(!matches.length) { document.getElementById('panel-prov-results').innerHTML='<div class="panel-empty">Sin resultados</div>'; return; }
+  const q = normStr(document.getElementById('panel-prov-search').value.trim());
+  if(q.length < 2) { document.getElementById('panel-prov-results').innerHTML='<div class="panel-empty" style="color:#9ca3af">Escribe al menos 2 caracteres para buscar</div>'; return; }
+  const qd = q.replace(/\D/g,'');
+  // Deduplicar por empresa
+  const vistos = {};
+  const matches = [];
+  DATA.forEach(p=>{
+    const empN = normStr(p.emp);
+    if(
+      empN.includes(q) ||
+      normStr(p.cont).includes(q) ||
+      normStr(p.cat).includes(q) ||
+      (qd && (p.cel||'').replace(/\D/g,'').includes(qd)) ||
+      (qd && (p.wa||'').replace(/\D/g,'').includes(qd))
+    ){
+      if(!vistos[empN]){ vistos[empN]=true; matches.push(p); }
+    }
+    if(matches.length >= 15) return;
+  });
+  if(!matches.length) { document.getElementById('panel-prov-results').innerHTML='<div class="panel-empty">Sin resultados para <strong>'+q+'</strong></div>'; return; }
   document.getElementById('panel-prov-results').innerHTML = matches.map((p,i)=>{
     return `<div class="panel-item" style="cursor:pointer" onclick="panelEditProv(${JSON.stringify(p).replace(/"/g,'&quot;')})">
       <div class="panel-item-info"><div class="panel-item-title">🔧 ${p.emp}</div>
@@ -1691,21 +1701,30 @@ async function guardarCambiosProv() {
 
 // ── TAB 4: Editar Admins ──
 let _panelAdmEdit = null;
+function normStr(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
 function panelSearchAdm() {
   resetPanelTimeout();
-  const q = document.getElementById('panel-adm-search').value.trim().toLowerCase();
-  if(q.length < 2) { document.getElementById('panel-adm-results').innerHTML=''; return; }
+  const q = normStr(document.getElementById('panel-adm-search').value.trim());
+  if(q.length < 2) { document.getElementById('panel-adm-results').innerHTML='<div class="panel-empty" style="color:#9ca3af">Escribe al menos 2 caracteres para buscar</div>'; return; }
   const qd = q.replace(/\D/g,'');
   const matches = ADMINS.filter(a=>
-    (a.nombre||'').toLowerCase().includes(q)||
-    (a.cel||'').replace(/\D/g,'').includes(qd)||
-    (a.email||'').toLowerCase().includes(q)
-  ).slice(0,10);
-  if(!matches.length) { document.getElementById('panel-adm-results').innerHTML='<div class="panel-empty">Sin resultados</div>'; return; }
+    normStr(a.nombre).includes(q) ||
+    normStr(a.unidad).includes(q) ||
+    (qd && (a.cel||'').replace(/\D/g,'').includes(qd)) ||
+    normStr(a.email).includes(q) ||
+    normStr(a.ciudad).includes(q)
+  ).slice(0,15);
+  if(!matches.length) {
+    document.getElementById('panel-adm-results').innerHTML='<div class="panel-empty">Sin resultados para <strong>'+q+'</strong></div>';
+    return;
+  }
   document.getElementById('panel-adm-results').innerHTML = matches.map(a=>{
     return `<div class="panel-item" style="cursor:pointer" onclick="panelEditAdmByIdx(${ADMINS.indexOf(a)})">
-      <div class="panel-item-info"><div class="panel-item-title">🏢 ${a.nombre}</div>
-      <div class="panel-item-sub">${a.cel||'Sin cel'} · ${a.email||'Sin email'} · ${a.ciudad||''}</div></div>
+      <div class="panel-item-info">
+        <div class="panel-item-title">🏢 ${a.nombre}</div>
+        <div class="panel-item-sub">${a.cel||'Sin cel'} · ${a.email||'Sin email'} · ${a.ciudad||''} ${a.unidad?'· '+a.unidad:''}</div>
+      </div>
       <button class="panel-btn panel-btn-azul">✏️ Editar</button>
     </div>`;
   }).join('');
@@ -2844,13 +2863,25 @@ document.addEventListener('keydown', function(e) {
 
       <!-- TAB: Proveedores -->
       <div class="panel-section" id="panel-proveedores">
-        <input class="panel-search" id="panel-prov-search" placeholder="🔍 Buscar proveedor por nombre o teléfono..." oninput="panelSearchProv()">
+        <div style="display:flex;gap:8px;margin-bottom:8px">
+          <input class="panel-search" id="panel-prov-search" placeholder="🔍 Nombre, categoría, teléfono..."
+            oninput="panelSearchProv()"
+            onkeydown="if(event.key==='Enter')panelSearchProv()"
+            style="flex:1;margin-bottom:0">
+          <button class="panel-btn panel-btn-azul" onclick="panelSearchProv()" style="white-space:nowrap">Buscar</button>
+        </div>
         <div id="panel-prov-results"></div>
       </div>
 
       <!-- TAB: Admins -->
       <div class="panel-section" id="panel-admins">
-        <input class="panel-search" id="panel-adm-search" placeholder="🔍 Buscar administrador por nombre o celular..." oninput="panelSearchAdm()">
+        <div style="display:flex;gap:8px;margin-bottom:8px">
+          <input class="panel-search" id="panel-adm-search" placeholder="🔍 Nombre, unidad, celular, ciudad..."
+            oninput="panelSearchAdm()"
+            onkeydown="if(event.key==='Enter')panelSearchAdm()"
+            style="flex:1;margin-bottom:0">
+          <button class="panel-btn panel-btn-azul" onclick="panelSearchAdm()" style="white-space:nowrap">Buscar</button>
+        </div>
         <div id="panel-adm-results"></div>
       </div>
 
