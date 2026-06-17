@@ -1809,6 +1809,7 @@ async function loadAuditoria() {
 function xorDec(e,k){const r=atob(e),kb=k.split('').map(c=>c.charCodeAt(0)),a=new Uint8Array(r.length);for(let i=0;i<r.length;i++)a[i]=r.charCodeAt(i)^kb[i%kb.length];return new TextDecoder().decode(a)}
 let RAW    = [];
 let ADMINS = [];
+let DATA   = []; // alias de RAW, para compatibilidad con funciones del panel
 
 async function loadDataFromSupabase() {
   const headers = {
@@ -1826,20 +1827,22 @@ async function loadDataFromSupabase() {
   const provData = await provRes.json();
   const admData  = await admRes.json();
 
-  // Mapear proveedores al formato que espera el resto del código
+  // Mapear proveedores al formato corto que espera el resto del código
   RAW = provData.map((p, i) => ({
-    id:      p.id || i + 1,
-    empresa: p.empresa || '',
-    cat:     p.categoria || 'Otros Servicios',
-    cel:     p.cel || '',
-    wa:      p.wa || p.cel || '',
-    email:   p.email || '',
-    web:     p.web || '',
-    dir:     p.direccion || '',
-    zona:    p.zona || '',
-    contact: p.contacto || '',
-    obs:     p.observaciones || ''
+    id:    p.id || i + 1,
+    emp:   p.empresa || '',
+    cat:   p.categoria || 'Otros Servicios',
+    cel:   p.cel || '',
+    wa:    p.wa || p.cel || '',
+    email: p.email || '',
+    web:   p.web || '',
+    dir:   p.direccion || '',
+    zona:  p.zona || '',
+    cont:  p.contacto || '',
+    obs:   p.observaciones || ''
   }));
+  // Alias DATA → RAW (usado en funciones del panel)
+  DATA = RAW;
 
   // Mapear admins al formato que espera searchAdmin / filterAdmList
   ADMINS = admData.map(a => ({
@@ -2775,6 +2778,7 @@ async function initDirectorio(){
   try {
     await loadDataFromSupabase();
     // Reconstruir bycat y uniquePhones con los datos frescos
+    DATA = RAW; // mantener alias sincronizado
     Object.keys(bycat).forEach(k => delete bycat[k]);
     uniquePhones.clear();
     RAW.forEach(p => {
