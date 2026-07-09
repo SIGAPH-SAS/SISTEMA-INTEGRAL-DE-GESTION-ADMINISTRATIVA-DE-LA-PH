@@ -525,10 +525,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
     <div class="footer-social">
       <a class="social-btn wa-btn" href="https://wa.me/message/WFIML24ZO7WFJ1" target="_blank" rel="noopener"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WA"></a>
       <a class="social-btn ig-btn" href="https://www.instagram.com/sigaphsas" target="_blank" rel="noopener"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="IG"></a>
-      <a class="social-btn mail-btn" href="mailto:sigaph.s.a.s@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"></a>
+      <a class="social-btn mail-btn" href="mailto:notificaciones@sigaphsas.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"></a>
     </div>
     <div class="footer-center">
-      <div class="footer-pdp"><strong>⚖️ Ley 1581/2012 · Protección de Datos:</strong> Datos para referenciación comercial en PH. Responsable: <strong>SIGAPH S.A.S.</strong> NIT 901860605 · <a href="mailto:sigaph.s.a.s@gmail.com">sigaph.s.a.s@gmail.com</a> · <a href="https://sigaph-sas.github.io/SISTEMA-INTEGRAL-DE-GESTION-ADMINISTRATIVA-DE-LA-PH/politica-datos.html" target="_blank">Política de Datos</a></div>
+      <div class="footer-pdp"><strong>⚖️ Ley 1581/2012 · Protección de Datos:</strong> Datos para referenciación comercial en PH. Responsable: <strong>SIGAPH S.A.S.</strong> NIT 901860605 · <a href="mailto:notificaciones@sigaphsas.com">notificaciones@sigaphsas.com</a> · <a href="https://sigaph-sas.github.io/SISTEMA-INTEGRAL-DE-GESTION-ADMINISTRATIVA-DE-LA-PH/politica-datos.html" target="_blank">Política de Datos</a></div>
       <div class="footer-copy">© 2024–2026 SIGAPH S.A.S. · NIT 901860605 · Santiago de Cali · 321 851 1222 / 314 731 8047</div>
     </div>
     <div class="footer-links">
@@ -568,7 +568,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
           <div class="consent-sub">Ley 1581 de 2012 · Habeas Data Colombia</div>
           <div class="consent-box">
             <p>En cumplimiento de la <strong>Ley 1581 de 2012</strong> y el <strong>Decreto 1377 de 2013</strong>, <strong>SIGAPH S.A.S.</strong> (NIT 901860605) le informa que los datos personales (nombre, teléfono y correo) contenidos en este directorio han sido recopilados con la <strong>finalidad exclusiva de referenciación comercial en el sector de Propiedad Horizontal</strong>.</p>
-            <p>Usted tiene los derechos de <strong>Acceso, Rectificación, Cancelación y Oposición (ARCO)</strong> sobre sus datos. Para ejercerlos: <a href="mailto:sigaph.s.a.s@gmail.com">sigaph.s.a.s@gmail.com</a></p>
+            <p>Usted tiene los derechos de <strong>Acceso, Rectificación, Cancelación y Oposición (ARCO)</strong> sobre sus datos. Para ejercerlos: <a href="mailto:notificaciones@sigaphsas.com">notificaciones@sigaphsas.com</a></p>
             <p>Consulte nuestra <a href="https://sigaph-sas.github.io/SISTEMA-INTEGRAL-DE-GESTION-ADMINISTRATIVA-DE-LA-PH/politica-datos.html" target="_blank">Política de Tratamiento de Datos</a> completa.</p>
           </div>
           <div class="consent-law">
@@ -620,7 +620,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);fon
         <div class="wb-result" id="adm-result-card"></div>
         <div id="adm-email-req" style="display:none">
           <div class="wb-label" style="color:#b45309;margin-top:7px">📧 Correo no registrado</div>
-          <div class="wb-hint">Envíanos tu correo a <a href="mailto:sigaph.s.a.s@gmail.com"><strong>sigaph.s.a.s@gmail.com</strong></a>.</div>
+          <div class="wb-hint">Envíanos tu correo a <a href="mailto:notificaciones@sigaphsas.com"><strong>notificaciones@sigaphsas.com</strong></a>.</div>
         </div>
         <button class="wb-btn" onclick="closeWelcome();openUpdateModal(_lastAdminName,'adm')" style="width:100%;flex-direction:row;gap:8px;justify-content:center;border-color:var(--verde-vivo);margin-bottom:8px;padding:9px 12px">
           <span style="font-size:15px">✏️</span>
@@ -1359,7 +1359,7 @@ async function registrarConsultaProveedor(p) {
   try {
     const ip = await getIP().catch(()=>'desconocido');
     const telHash = pk ? await sha256(pk) : null;
-    const waText = `Hola ${p.emp} 👋 Te escribimos desde SIGAPH S.A.S. Tu empresa fue consultada hoy en nuestro Directorio de Proveedores PH del Valle del Cauca por un administrador activo del sector 🏢 Esto significa que hay interés en tus servicios de ${p.cat}. ✅ Mantén tus datos actualizados para no perder oportunidades comerciales. 🔗 ${DIRECTORIO_URL} SIGAPH S.A.S · 📞 321 851 1222 · sigaph.s.a.s@gmail.com`;
+    const waText = `Hola ${p.emp} 👋 Te escribimos desde SIGAPH S.A.S. Tu empresa fue consultada hoy en nuestro Directorio de Proveedores PH del Valle del Cauca por un administrador activo del sector 🏢 Esto significa que hay interés en tus servicios de ${p.cat}. ✅ Mantén tus datos actualizados para no perder oportunidades comerciales. 🔗 ${DIRECTORIO_URL} SIGAPH S.A.S · 📞 321 851 1222 · notificaciones@sigaphsas.com`;
     const waTel = (p.cel||p.wa||'').replace(/\D/g,'').slice(-10);
     const waUrl = waTel ? `https://wa.me/57${waTel}?text=${encodeURIComponent(waText)}` : null;
     await fetch(SUPA_URL2+'/rest/v1/consultas_proveedores', {
@@ -2177,7 +2177,7 @@ function enviarInformeWA() {
   fetch('https://cufipenxydncbabbhwyq.supabase.co/functions/v1/enviar-notificacion',{
     method:'POST',
     headers:{'Content-Type':'application/json','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ'},
-    body:JSON.stringify({ tipo:'informe_wa_sesion', asunto:asunto, html:html, destinatario:'sigaph.s.a.s@gmail.com' })
+    body:JSON.stringify({ tipo:'informe_wa_sesion', asunto:asunto, html:html, destinatario:'notificaciones@sigaphsas.com' })
   }).catch(function(){});
 }
 
@@ -3078,7 +3078,7 @@ function enviarInformeSesion() {
   fetch('https://cufipenxydncbabbhwyq.supabase.co/functions/v1/enviar-notificacion',{
     method:'POST',
     headers:{'Content-Type':'application/json','Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN1ZmlwZW54eWRuY2JhYmJod3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDIxNTIsImV4cCI6MjA5NjcxODE1Mn0.dmSqFayMzZMStsfNzbjoZI1ypITuJzBLU5UNwUg-nFQ'},
-    body:JSON.stringify({ tipo:'informe_wa_sesion', asunto:asunto, html:htmlBody, destinatario:'sigaph.s.a.s@gmail.com' })
+    body:JSON.stringify({ tipo:'informe_wa_sesion', asunto:asunto, html:htmlBody, destinatario:'notificaciones@sigaphsas.com' })
   }).catch(function(){});
 }
 
@@ -3214,7 +3214,7 @@ window.addEventListener('beforeunload', function() {
       tipo:'informe_wa_sesion',
       asunto:asunto,
       html:'<p>El operador <strong>'+(_panelNombreUsuario||operador)+'</strong> ('+operador+') cerró la pestaña o navegó fuera del directorio con <strong>'+_waSessionLog.length+' contactos</strong> registrados en la sesión. Motivo: cierre de pestaña.</p>',
-      destinatario:'sigaph.s.a.s@gmail.com'
+      destinatario:'notificaciones@sigaphsas.com'
     });
     navigator.sendBeacon('https://cufipenxydncbabbhwyq.supabase.co/functions/v1/enviar-notificacion', new Blob([payload],{type:'application/json'}));
   }
